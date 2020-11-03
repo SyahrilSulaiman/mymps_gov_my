@@ -64,9 +64,13 @@ function Login(props){
             var myHeaders = new Headers();
             myHeaders.append("Cookie", "__cfduid=db6f29fff3ce79e0a3fe70a3990b3baeb1603864221; CORRAD_LANGUAGE=1; CORRAD_THEME=lavender; CORRAD_API_MYMPS=6nghhhcstuc4aad81r3m9qqp4b; MYMPS_API=jstp68stuf7siabrp233iff4pt");
             
+            var sha256 = require('js-sha256');
+
+            console.log(sha256(password.value));
+
             var formdata = new FormData();
             formdata.append("username", username.value);
-            formdata.append("password", password.value);
+            formdata.append("password", sha256(password.value));
 
             var requestOptions = {
                 method: 'POST',
@@ -75,17 +79,11 @@ function Login(props){
             };
 
             var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=api_login';
-            var urlAPI2 = 'https://api.corrad.my/api/API-login';
-            var urlAPI3 = 'https://apisim.mps.gov.my/api/mymps/akaunbyic?nokp=' + username.value;
 
             fetch(urlAPI1 , requestOptions)
             .then(response => response.json())
             .then(result => {
 
-                // for(var i = 0; i < result.length; i++){
-                //     console.log(result[i].NOAKAUN);
-                // }
-                //console.log(result.data[0]);
                 setLoading(false);
 
                 if(result.status == "unsuccess")
@@ -95,24 +93,9 @@ function Login(props){
                 }
                 else if(result.status == "success")
                 {
-                    setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"]);
-
-                    //swal("Bejaya!", "Login Berjaya!", "success");
+                    setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"]);
                     props.history.push('/home');
                 }
-                
-                // if(!result)
-                // {
-                //     console.log("Wrong credentials. Please try again!");
-                //     swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah", "error");
-                // }
-                // else if(result)
-                // {
-                //     setUserSession(btoa(result), result[0].NAMA_PEMILIK, username.value);
-
-                //     //swal("Bejaya!", "Login Berjaya!", "success");
-                //     props.history.push('/home');
-                // }
 
             })
             .catch(error => {

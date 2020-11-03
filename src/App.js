@@ -5,7 +5,7 @@ import axios from "axios";
 
 import PrivateRoute from "./Utils/PrivateRoute";
 import PublicRoute from "./Utils/PublicRoute";
-import { getToken, getNOKP, getUser, removeUserSession, setUserSession } from "./Utils/Common";
+import { getToken, getNOKP, getUser, getEmail, removeUserSession, setUserSession } from "./Utils/Common";
 
 import Login from "./Login";
 import Dashboard from "./Dashboard";
@@ -23,23 +23,38 @@ function App() {
   const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-    const nokp = getNOKP();
-    if (!nokp) {
-      return;
-    }
 
-    fetch(`https://apisim.mps.gov.my/api/mymps/akaunbyic?nokp=` + nokp)
-    .then(response => response.text())
-    .then((result) => {
-      //setUserSession(response.data[0].NOAKAUN, response.data[0].NAMA_PEMILIK);
-      setUserSession(btoa(result), result[0].NAMA_PEMILIK, nokp);
-      setAuthLoading(false);
-    })
-    .catch((error) => {
-      console.log(error)
-      removeUserSession();
-      setAuthLoading(false);
-    });
+    if(getEmail() && getEmail())
+    {
+        var formdata = new FormData();
+        formdata.append("nokp", getNOKP());
+        formdata.append("email", getEmail());
+
+        var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+        };
+
+        var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=check_session";
+
+        fetch(urlAPI, requestOptions)
+        .then(response => response.json())
+        .then((result) => {
+          
+          setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"]);
+          setAuthLoading(false);
+
+        })
+
+        .catch((error) => {
+          console.log(error)
+          removeUserSession();
+          setAuthLoading(false);
+
+        });
+    }
+    
   }, []);
 
   if (authLoading && getToken()) {

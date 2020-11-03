@@ -58,7 +58,7 @@ function Register(props) {
     }
     else if(password.value !== confpassword.value)
     {
-      swal("Opss!", "Sila pastikan .", "error");
+      swal("Opss!", "Sila pastikan kataluan dan sah kata laluan sama.", "error");
       return false;
     }
     else if(password.value.length < 6)
@@ -74,13 +74,35 @@ function Register(props) {
         formdata.append("username", username.value);
         formdata.append("password", password.value);
         formdata.append("email", email.value);
-        formdata.append("kadpengenalan", nokp.value);
+        formdata.append("nokp", nokp.value);
 
         var requestOptions = {
         method: 'POST',
         body: formdata,
         redirect: 'follow'
         };
+
+        var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=daftar_pengguna";
+
+        fetch(urlAPI, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+
+          if(result.status == "success"){
+
+            setLoading("false");
+            swal("Tahniah!","Pendaftaran sebagai pengguna MyMPS berjaya!","success");
+
+            setUserSession(btoa(formdata), username.value, nokp.value);
+            props.history.push("/home");
+
+          }else{
+            setLoading("false");
+            swal("Ralat!","Pendaftaran pengguna tidak berjaya!","error");
+            
+          }
+
+        })
 
       }
     }
@@ -157,13 +179,13 @@ function Register(props) {
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                      <label for="street_address" class="block text-sm font-medium leading-5 text-gray-700">NO KAD PENGENALAN</label>
+                      <label for="street_address" class="block text-sm font-medium leading-5 text-gray-700">KATA LALUAN</label>
                       <input {...password} id="password" placeholder="cth: 12345678" class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                      <label for="street_address" class="block text-sm font-medium leading-5 text-gray-700">SAH NO KAD PENGENALAN</label>
-                      <input confpassword id="conf_password" placeholder="cth: 12345678" class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                      <label for="street_address" class="block text-sm font-medium leading-5 text-gray-700">SAH KATA LALUAN</label>
+                      <input {...confpassword} id="conf_password" placeholder="cth: 12345678" class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
 
                     <div class="col-span-6">

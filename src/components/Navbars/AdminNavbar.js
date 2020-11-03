@@ -1,5 +1,5 @@
 import React from "react";
-
+import { getUser, getNOKP, getToken, removeUserSession } from "../../Utils/Common";
 import UserDropdown from "../Dropdowns/UserDropdown.js";
 
 export default function Navbar() {
@@ -14,7 +14,7 @@ export default function Navbar() {
             href="#pablo"
             onClick={(e) => e.preventDefault()}
           >
-            Dashboard
+            Selamat Datang, {getUser()}
           </a>
           {/* Form */}
           <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
