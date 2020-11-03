@@ -14,8 +14,7 @@ function Dashboard(props) {
   const user = getUser();
   const nokp = getNOKP();
 
-  console.log(atob(token));
-  // handle click event of logout button
+  
   const handleLogout = () => {
     removeUserSession();
     props.history.push("/login");

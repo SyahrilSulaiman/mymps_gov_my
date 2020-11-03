@@ -1,13 +1,12 @@
-// return the user data from the session storage
+
   export const getNOKP = () => {
-    const userStr = sessionStorage.getItem('nokp');
+    return sessionStorage.getItem('nokp');
   }
 
   export const getUser = () => {
-    const userStr = sessionStorage.getItem('username');
+    return sessionStorage.getItem('username');
   }
   
-  // return the token from the session storage
   export const getToken = () => {
     return sessionStorage.getItem('token');
   }

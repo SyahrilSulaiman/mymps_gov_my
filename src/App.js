@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
-import { BrowserRouter, Switch, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import axios from "axios";
 
 import PrivateRoute from "./Utils/PrivateRoute";
@@ -63,7 +63,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router>
         <div>
           <div className="content">
             <Switch>
@@ -76,7 +76,7 @@ function App() {
             </Switch>
           </div>
         </div>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
