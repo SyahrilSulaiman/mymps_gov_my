@@ -1,8 +1,86 @@
-import React from "react";
+import React, {useState} from "react";
+import swal from "sweetalert";
 
 // components
 
+const useFormInput = (initialValue) => {
+  const [value, setValue] = useState(initialValue);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  return {
+    value,
+    onChange: handleChange,
+  };
+};
+
 export default function CardSettings() {
+
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const username  = sessionStorage.getItem('username');
+  const email     = sessionStorage.getItem('email');
+  const nokp      = sessionStorage.getItem('nokp');
+
+  const handleUpdate = () => {
+
+    var username  = document.getElementById("username").value;
+    var email     = document.getElementById("email").value;
+
+    if(username == "")
+    {
+      swal("Opss!", "Kata nama tidak boleh dikosongkan.","error");
+      return false;
+    }
+    else if(email == "")
+    {
+      swal("Opss!", "Emel tidak boleh dikosongkan","error");
+      return false;
+    }
+    else
+    {
+
+      var formdata = new FormData();
+
+        formdata.append("username", username.trim());
+        formdata.append("email", email.trim());
+        formdata.append("nokp", nokp);
+
+        var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+        };
+
+        var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=update_profile";
+
+        fetch(urlAPI, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+
+          if(result.status == "success"){
+
+            setLoading("false");
+            swal("Berjaya!","Akaun profil anda sudah dikemaskini.","success");
+
+            sessionStorage.removeItem('username');
+            sessionStorage.setItem('username', result.data[0]["MPS_USERNAME"]);
+
+            sessionStorage.removeItem('email');
+            sessionStorage.setItem('email', result.data[0]['MPS_USEREMAIL']);
+
+          }
+          else
+          {
+            setLoading("false");
+            swal("Ralat!","Kemaskini tidak berjaya.","error");
+          }
+
+        })
+    }
+  }
+
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full h-full shadow-lg  bg-gray-300 border-0">
@@ -27,6 +105,8 @@ export default function CardSettings() {
                   </label>
                   <input
                     type="text"
+                    id="username"
+                    {...username}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                     defaultValue={sessionStorage.getItem("username")}
                   />
@@ -42,6 +122,8 @@ export default function CardSettings() {
                   </label>
                   <input
                     type="email"
+                    id="email"
+                    {...email}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                     defaultValue={sessionStorage.getItem("email")}
                   />
@@ -57,7 +139,9 @@ export default function CardSettings() {
                   </label>
                   <input
                     type="text"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                    {...nokp}
+                    readOnly
+                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-gray-200 rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                     defaultValue={sessionStorage.getItem("nokp")}
                   />
                 </div>
@@ -84,7 +168,7 @@ export default function CardSettings() {
             <div className="flex flex-wrap mt-6">
               <div className="w-full lg:w-12/12 px-4">
                 <div className="relative w-full mb-3">
-                  <button type="button" class="bg-green-500 hover:bg-green-700 text-white py-2 px-3 rounded float-right">
+                  <button type="button" onClick={handleUpdate} class="bg-green-500 hover:bg-green-700 text-white py-2 px-3 rounded float-right">
                     Kemaskini
                   </button>
                 </div>

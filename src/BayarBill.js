@@ -1,6 +1,6 @@
-import React from "react";
-import {Link} from "react-router-dom";
-import DataTable, { createTheme } from 'react-data-table-component';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import DataTable from "react-data-table-component";
 import Card from "@material-ui/core/Card";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 
@@ -9,43 +9,12 @@ import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import Information from "./components/Cards/CardSettings";
 import Footer from "./components/Footers/Footer";
+import { data } from "jquery";
 
 function Profile(props) {
-
   const token = getToken();
   const user = getUser();
   const nokp = getNOKP();
-
-  const data = () => {
-
-      var url = "https://apisim.mps.gov.my/api/mymps/akaunbyic?nokp="+nokp;
-      
-      fetch(url)
-      .then(result => result.json())
-      .then(response => {
-        //   console.log(response);
-        //   console.log(JSON.parse(response));
-      })
-  }
-
-  const columns = [
-    {
-      name: "Title",
-      selector: "title",
-      sortable: true
-    },
-    {
-      name: "Directior",
-      selector: "director",
-      sortable: true
-    },
-    {
-      name: "Runtime (m)",
-      selector: "runtime",
-      sortable: true,
-      right: true
-    }
-  ];
   
   const handleLogout = () => {
     removeUserSession();
@@ -55,16 +24,14 @@ function Profile(props) {
   return (
     <div>
       <Sidebar />
-      <div className="relative md:ml-64 bg-gray-400" style={{height: "100%"}}>
+      <div className="relative md:ml-64 bg-gray-400" style={{ height: "100%" }}>
         <Navbar />
         {/* Header */}
         <div className="relative bg-gray-600 md:pt-32 pb-16 pt-12">
           <div className="px-4 md:px-10 mx-auto w-full">
             <div>
-
               {/* Card stats */}
               <div className="flex flex-wrap">
-                
                 <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
                   <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                     <div className="flex-auto p-4">
@@ -83,7 +50,7 @@ function Profile(props) {
                           </div>
                         </div>
                       </div>
-                        {/* <p className="text-sm text-gray-500 mt-4">
+                      {/* <p className="text-sm text-gray-500 mt-4">
                         <span className="text-green-500 mr-2">
                           <i className="fas fa-arrow-up"></i> 3.48%
                         </span>
@@ -154,35 +121,23 @@ function Profile(props) {
                     </div>
                   </div>
                 </div>
-
               </div>
-
             </div>
           </div>
         </div>
         <div className="px-4 md:px-10 mx-auto w-full mt-16 mb-16">
-          <div className="flex flex-wrap">
-           
-          </div>
+          <div className="flex flex-wrap"></div>
           <div className="flex flex-wrap">
             <div className="w-full xl:w-12/12 mb-12 xl:mb-0 px-4">
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-2">
-              {/* <Information /> */}
-                      <Card>
-                      <DataTable
-                            title="Senarai Bil"
-                            columns={columns}
-                            data={data}
-                            theme="solarized"
-                        />
-                        </Card>
+                {/* <Information /> */}
+                
               </div>
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-2">
-              {/* <Information /> */}
-              Bayar Bill
+                {/* <Information /> */}
+                Bayar Bill
               </div>
             </div>
-            
           </div>
           <footer className="block mb-2">
             <div className="container mx-auto px-4">

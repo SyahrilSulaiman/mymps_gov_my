@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-do
 
 import PrivateRoute from "./Utils/PrivateRoute";
 import PublicRoute from "./Utils/PublicRoute";
+import GoogleRoute from "./Utils/GoogleRoute";
 import { getToken, getNOKP, getUser, getEmail, removeUserSession, setUserSession } from "./Utils/Common";
 
 import Login from "./Login";
@@ -12,6 +13,7 @@ import Bill from "./BayarBill";
 import Home from "./Home";
 import Register from "./Register";
 import ForgotPassword from "./ForgotPassword";
+import GoogleLogin from "./GoogleLogin";
 import NotFound from "./NotFound";
 
 //import "./main.css";
@@ -45,7 +47,6 @@ function App() {
           // window.location.href="/home";
 
         })
-
         .catch((error) => {
           console.log(error)
           removeUserSession();
@@ -69,6 +70,7 @@ function App() {
               <Route exact path="/" component={Home} />
               <PublicRoute path="/login" component={Login} />
               <PublicRoute path="/register" component={Register} />
+              <GoogleRoute path="/verifyuser" component={GoogleLogin} />
               <PublicRoute path="/forgotpassword" component={ForgotPassword} />
               <PrivateRoute path="/home" component={Dashboard} />
               <PrivateRoute path="/setting" component={Setting} />
