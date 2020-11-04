@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
-import axios from "axios";
 
 import PrivateRoute from "./Utils/PrivateRoute";
 import PublicRoute from "./Utils/PublicRoute";
@@ -14,14 +12,11 @@ import Bill from "./BayarBill";
 import Home from "./Home";
 import Register from "./Register";
 import ForgotPassword from "./ForgotPassword";
-import BayarCukai from "./BayarCukai";
 import NotFound from "./NotFound";
 
 //import "./main.css";
 
 function App() {
-
-  console.log(Cookies.get('__session'));
 
   const [authLoading, setAuthLoading] = useState(true);
 
@@ -76,7 +71,7 @@ function App() {
               <PublicRoute path="/register" component={Register} />
               <PublicRoute path="/forgotpassword" component={ForgotPassword} />
               <PrivateRoute path="/home" component={Dashboard} />
-              <PrivateRoute path="/setting" component={Setting}/>
+              <PrivateRoute path="/setting" component={Setting} />
               <PrivateRoute path="/bill" component={Bill} />
               <Route path="*" component={NotFound} />
             </Switch>

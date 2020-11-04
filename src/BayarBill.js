@@ -1,5 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import DataTable, { createTheme } from 'react-data-table-component';
+import Card from "@material-ui/core/Card";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 
 import MainDashboard from "./views/admin/Dashboard";
@@ -14,6 +16,36 @@ function Profile(props) {
   const user = getUser();
   const nokp = getNOKP();
 
+  const data = () => {
+
+      var url = "https://apisim.mps.gov.my/api/mymps/akaunbyic?nokp="+nokp;
+      
+      fetch(url)
+      .then(result => result.json())
+      .then(response => {
+        //   console.log(response);
+        //   console.log(JSON.parse(response));
+      })
+  }
+
+  const columns = [
+    {
+      name: "Title",
+      selector: "title",
+      sortable: true
+    },
+    {
+      name: "Directior",
+      selector: "director",
+      sortable: true
+    },
+    {
+      name: "Runtime (m)",
+      selector: "runtime",
+      sortable: true,
+      right: true
+    }
+  ];
   
   const handleLogout = () => {
     removeUserSession();
@@ -136,7 +168,14 @@ function Profile(props) {
             <div className="w-full xl:w-12/12 mb-12 xl:mb-0 px-4">
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-2">
               {/* <Information /> */}
-              Bayar Bill
+                      <Card>
+                      <DataTable
+                            title="Senarai Bil"
+                            columns={columns}
+                            data={data}
+                            theme="solarized"
+                        />
+                        </Card>
               </div>
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-2">
               {/* <Information /> */}
