@@ -44,6 +44,7 @@ function App() {
           
           setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"]);
           setAuthLoading(false);
+          // window.location.href="/home";
 
         })
 

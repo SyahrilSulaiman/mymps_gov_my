@@ -69,7 +69,7 @@ function Login(props){
             console.log(sha256(password.value));
 
             var formdata = new FormData();
-            formdata.append("username", username.value);
+            formdata.append("email", username.value);
             formdata.append("password", sha256(password.value));
 
             var requestOptions = {
@@ -137,10 +137,9 @@ function Login(props){
 
                 <div class="mt-6 flex items-center justify-between">
                     <div class="flex items-center">
-                    <input id="remember_me" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                    <label for="remember_me" class="ml-2 block text-sm leading-5 text-gray-300">
-                        Ingat saya
-                    </label>
+                    <a href="/register" class="text-sm text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
+                        Daftar Pengguna
+                    </a>
                     </div>
 
                     <div class="text-sm leading-5">
@@ -150,7 +149,7 @@ function Login(props){
                     </div>
                 </div>
 
-                <div class="mt-6">
+                <div class="mt-6 flex flex-wrap">
                     <GoogleLogin
                         clientId="438559173225-ub4mfh6vkmnd0qntmper0a48gqv18nn5.apps.googleusercontent.com"
                         onSuccess={responseGoogle}
