@@ -24,36 +24,6 @@ function Login(props){
         setError(null);
         setLoading(true);
 
-        // var formData = new FormData();
-        // formData.append("username", username.value)
-        // formData.append("password", password.value)
-        
-        // axios('https://api.corrad.my/api/API-login', {
-        //     method: 'POST',
-        //     mode: 'no-cors', 
-        //     headers: {
-        //         'Access-Control-Allow-Origin': '*',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     data : formData
-        // })
-        // .then(response => {
-
-        //     setLoading(false);
-        //     setUserSession(response.data[0].NOAKAUN, response.data[0].NAMA_PEMILIK);
-
-        //     console.log(response.data);
-        //     props.history.push('/dashboard');
-        // })
-        // .catch(error => {
-
-        //     setLoading(false);
-
-        //     console.log("Something went wrong. Plese try again!");
-        //     console.log(error.data)
-        //     setError(error.data);
-        // });
-
         if(username.value == "" || password.value == ""){
 
             swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah", "error");
@@ -143,7 +113,7 @@ function Login(props){
                     </div>
 
                     <div class="text-sm leading-5">
-                    <a href="#" class="font-medium text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
+                    <a href="/forgotpassword" class="font-medium text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
                         Terlupa kata laluan ?
                     </a>
                     </div>
@@ -155,6 +125,7 @@ function Login(props){
                         onSuccess={responseGoogle}
                         render={renderProps => (
                         <Button 
+                            type="button"
                             onClick={renderProps.onClick} 
                             disabled={renderProps.disabled}
                             class="mb-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-600 hover:bg-gray-500 hover:text-gray focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"

@@ -9,8 +9,11 @@ import { getToken, getNOKP, getUser, getEmail, removeUserSession, setUserSession
 
 import Login from "./Login";
 import Dashboard from "./Dashboard";
+import Setting from "./Profile";
+import Bill from "./BayarBill";
 import Home from "./Home";
 import Register from "./Register";
+import ForgotPassword from "./ForgotPassword";
 import BayarCukai from "./BayarCukai";
 import NotFound from "./NotFound";
 
@@ -71,8 +74,10 @@ function App() {
               <Route exact path="/" component={Home} />
               <PublicRoute path="/login" component={Login} />
               <PublicRoute path="/register" component={Register} />
-              <PublicRoute path="/paytax" component={BayarCukai} />
+              <PublicRoute path="/forgotpassword" component={ForgotPassword} />
               <PrivateRoute path="/home" component={Dashboard} />
+              <PrivateRoute path="/setting" component={Setting}/>
+              <PrivateRoute path="/bill" component={Bill} />
               <Route path="*" component={NotFound} />
             </Switch>
           </div>
