@@ -2,11 +2,16 @@ import react, {useState} from "react";
 import { setUserSession } from './Utils/Common';
 import { TextInputField, Heading, Button, BuildIcon } from "evergreen-ui";
 import logo1 from "./assets/img/logo1.png";
+import GoogleLogin from 'react-google-login';
 
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
-
+import ggl from "./assets/img/google-icon.svg";
 import swal from "sweetalert";
+
+const responseGoogle = (response) => {
+    console.log(response);
+}
 
 function Login(props){
 
@@ -73,40 +78,41 @@ function Login(props){
             var urlAPI2 = 'https://api.corrad.my/api/API-login';
             var urlAPI3 = 'https://apisim.mps.gov.my/api/mymps/akaunbyic?nokp=' + username.value;
 
-            fetch(urlAPI3)
+            fetch(urlAPI1 , requestOptions)
             .then(response => response.json())
             .then(result => {
 
-                for(var i = 0; i < result.length; i++){
-                    console.log(result[i].NOAKAUN);
-                }
+                // for(var i = 0; i < result.length; i++){
+                //     console.log(result[i].NOAKAUN);
+                // }
+                //console.log(result.data[0]);
                 setLoading(false);
 
-                // if(result.status == "unsuccess")
-                // {
-                //     console.log("Wrong credentials. Please try again!");
-                //     swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah", "error");
-                // }
-                // else if(result.status == "success")
-                // {
-                //     setUserSession(result.data[0].TOKEN, result.data[0].USERNAME);
-
-                //     //swal("Bejaya!", "Login Berjaya!", "success");
-                //     props.history.push('/dashboard');
-                // }
-                
-                if(!result)
+                if(result.status == "unsuccess")
                 {
                     console.log("Wrong credentials. Please try again!");
                     swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah", "error");
                 }
-                else if(result)
+                else if(result.status == "success")
                 {
-                    setUserSession(btoa(result), result[0].NAMA_PEMILIK, username.value);
+                    setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"]);
 
                     //swal("Bejaya!", "Login Berjaya!", "success");
-                    props.history.push('/dashboard');
+                    props.history.push('/home');
                 }
+                
+                // if(!result)
+                // {
+                //     console.log("Wrong credentials. Please try again!");
+                //     swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah", "error");
+                // }
+                // else if(result)
+                // {
+                //     setUserSession(btoa(result), result[0].NAMA_PEMILIK, username.value);
+
+                //     //swal("Bejaya!", "Login Berjaya!", "success");
+                //     props.history.push('/home');
+                // }
 
             })
             .catch(error => {
@@ -132,16 +138,15 @@ function Login(props){
                 <div>
                 <img class="mx-auto w-auto" src={logo1} alt="mymps" style={{height: "120px"}}/>
                 <h2 class="mt-6 text-center text-xl leading-9 font-extrabold text-white">
-                    Login Akaun
+                    Login
                 </h2>
                 </div>
                 <form class="mt-8">
                 <input type="hidden" name="remember" value="true" />
                 <div class="rounded-md shadow-sm">
                     <div>
-                    <input aria-label="Email" {...username} name="email" type="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kad Pengenalan" />
+                    <input aria-label="Email" {...username} name="email" type="email" required class="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kad Pengenalan" />
                     </div>
-                    <br />
                     <div class="-mt-px">
                     <input aria-label="Password" {...password} name="password" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kata Laluan" />
                     </div>
@@ -157,12 +162,31 @@ function Login(props){
 
                     <div class="text-sm leading-5">
                     <a href="#" class="font-medium text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
-                        Terlupa kata laluan?
+                        Terlupa kata laluan ?
                     </a>
                     </div>
                 </div>
 
                 <div class="mt-6">
+                    <GoogleLogin
+                        clientId="438559173225-ub4mfh6vkmnd0qntmper0a48gqv18nn5.apps.googleusercontent.com"
+                        onSuccess={responseGoogle}
+                        render={renderProps => (
+                        <Button 
+                            onClick={renderProps.onClick} 
+                            disabled={renderProps.disabled}
+                            class="mb-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-600 hover:bg-gray-500 hover:text-gray focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                            fullWidth
+                            variant="contained"
+                            style={{marginTop:"-10px"}}
+                        >
+                            <img src={ggl} style={{width: "15px", height: "15px", marginRight: "7px", marginTop: "2px"}} /> 
+                            Google
+                        </Button>
+                        )}
+                        buttonText="Login"
+                        cookiePolicy={'single_host_origin'}
+                    />
                     <button type="button" onClick={handleLogin} class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                         {loading ? 'Loading...' : 'Login'}
                     </button>

@@ -18,31 +18,22 @@ export default function Index() {
                 MyMPS - Sebuah aplikasi bayar cukai atas talian anda.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                Notus React is Free and Open Source. It does not change or add
-                any CSS to the already one from{" "}
-                <a
-                  href="https://tailwindcss.com/?ref=creativetim"
-                  className="text-gray-700"
-                  target="_blank"
-                >
-                  Tailwind CSS
-                </a>
-                . It features multiple HTML elements and it comes with dynamic
-                components for ReactJS, Vue and Angular.
+                MyMPS merupakan sebuah portal rasmi Majlis Perbandaran Selayang yang dibangunkan pada tahun ini. 
+                Sistem ini dibangunkan bertujuan untuk membantu pengguna membuat bayaran cukai taksiran atas talian.
               </p>
               <div className="mt-12">
                 <a
-                  href="/daftar"
+                  href="/register"
                   className="get-started text-white font-bold px-3 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blue-500 active:bg-blue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
                   Pendaftaran
                 </a>
-                <a
+                {/* <a
                   href="/bayarancukai"
                   className="github-star ml-1 text-white font-bold px-3 py-4 rounded outline-none focus:outline-none mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
                   Bayar Cukai Ekspress
-                </a>
+                </a> */}
               </div>
             </div>
           </div>
@@ -83,26 +74,16 @@ export default function Index() {
                   src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
                   className="w-full align-middle rounded-t-lg"
                 />
-                <blockquote className="relative p-8 mb-4">
-                  <svg
-                    preserveAspectRatio="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 583 95"
-                    className="absolute left-0 w-full block h-95-px -top-94-px"
-                  >
-                    <polygon
-                      points="-30,95 583,95 583,65"
-                      className="text-blue-600 fill-current"
-                    ></polygon>
-                  </svg>
+                <blockquote className="relative p-8">
+                  
                   <h4 className="text-xl font-bold text-white">
-                    Great for your awesome project
+                    Kemudahan untuk semua
                   </h4>
                   <p className="text-md font-light mt-2 text-white">
-                    Putting together a page has never been easier than matching
-                    together pre-made components. From landing pages
-                    presentation to login areas, you can easily customise and
-                    built your pages.
+                    Pembayaran atas talian secara tidak langsung 
+                    dapat meringankan beban orang ramai untuk membuat 
+                    pembayaran cukai taksiran atas talian di mana-mana sahaja
+                    pada bila-bila masa sahaja.
                   </p>
                 </blockquote>
               </div>
