@@ -22,15 +22,11 @@ export default function Sidebar() {
           {/* Brand */}
           <Link
             className="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
-            to="/"
           >
             Portal MyMPS
           </Link>
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
-            <li className="inline-block relative">
-              <NotificationDropdown />
-            </li>
             <li className="inline-block relative">
               <UserDropdown />
             </li>
@@ -102,7 +98,7 @@ export default function Sidebar() {
                         : "text-gray-400")
                     }
                   ></i>{" "}
-                  Dashboard
+                  Utama
                 </Link>
               </li>
 
@@ -114,7 +110,7 @@ export default function Sidebar() {
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  to="/admin/settings"
+                  to="/setting"
                 >
                   <i
                     className={
@@ -124,7 +120,7 @@ export default function Sidebar() {
                         : "text-gray-400")
                     }
                   ></i>{" "}
-                  Setting
+                  Profil
                 </Link>
               </li>
 
@@ -136,7 +132,7 @@ export default function Sidebar() {
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  to="/admin/tables"
+                  to="/bill"
                 >
                   <i
                     className={

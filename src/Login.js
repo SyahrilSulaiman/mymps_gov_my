@@ -24,36 +24,6 @@ function Login(props){
         setError(null);
         setLoading(true);
 
-        // var formData = new FormData();
-        // formData.append("username", username.value)
-        // formData.append("password", password.value)
-        
-        // axios('https://api.corrad.my/api/API-login', {
-        //     method: 'POST',
-        //     mode: 'no-cors', 
-        //     headers: {
-        //         'Access-Control-Allow-Origin': '*',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     data : formData
-        // })
-        // .then(response => {
-
-        //     setLoading(false);
-        //     setUserSession(response.data[0].NOAKAUN, response.data[0].NAMA_PEMILIK);
-
-        //     console.log(response.data);
-        //     props.history.push('/dashboard');
-        // })
-        // .catch(error => {
-
-        //     setLoading(false);
-
-        //     console.log("Something went wrong. Plese try again!");
-        //     console.log(error.data)
-        //     setError(error.data);
-        // });
-
         if(username.value == "" || password.value == ""){
 
             swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah", "error");
@@ -64,9 +34,13 @@ function Login(props){
             var myHeaders = new Headers();
             myHeaders.append("Cookie", "__cfduid=db6f29fff3ce79e0a3fe70a3990b3baeb1603864221; CORRAD_LANGUAGE=1; CORRAD_THEME=lavender; CORRAD_API_MYMPS=6nghhhcstuc4aad81r3m9qqp4b; MYMPS_API=jstp68stuf7siabrp233iff4pt");
             
+            var sha256 = require('js-sha256');
+
+            console.log(sha256(password.value));
+
             var formdata = new FormData();
-            formdata.append("username", username.value);
-            formdata.append("password", password.value);
+            formdata.append("email", username.value);
+            formdata.append("password", sha256(password.value));
 
             var requestOptions = {
                 method: 'POST',
@@ -75,17 +49,11 @@ function Login(props){
             };
 
             var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=api_login';
-            var urlAPI2 = 'https://api.corrad.my/api/API-login';
-            var urlAPI3 = 'https://apisim.mps.gov.my/api/mymps/akaunbyic?nokp=' + username.value;
 
             fetch(urlAPI1 , requestOptions)
             .then(response => response.json())
             .then(result => {
 
-                // for(var i = 0; i < result.length; i++){
-                //     console.log(result[i].NOAKAUN);
-                // }
-                //console.log(result.data[0]);
                 setLoading(false);
 
                 if(result.status == "unsuccess")
@@ -95,24 +63,9 @@ function Login(props){
                 }
                 else if(result.status == "success")
                 {
-                    setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"]);
-
-                    //swal("Bejaya!", "Login Berjaya!", "success");
+                    setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"]);
                     props.history.push('/home');
                 }
-                
-                // if(!result)
-                // {
-                //     console.log("Wrong credentials. Please try again!");
-                //     swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah", "error");
-                // }
-                // else if(result)
-                // {
-                //     setUserSession(btoa(result), result[0].NAMA_PEMILIK, username.value);
-
-                //     //swal("Bejaya!", "Login Berjaya!", "success");
-                //     props.history.push('/home');
-                // }
 
             })
             .catch(error => {
@@ -154,25 +107,25 @@ function Login(props){
 
                 <div class="mt-6 flex items-center justify-between">
                     <div class="flex items-center">
-                    <input id="remember_me" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                    <label for="remember_me" class="ml-2 block text-sm leading-5 text-gray-300">
-                        Ingat saya
-                    </label>
+                    <a href="/register" class="text-sm text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
+                        Daftar Pengguna
+                    </a>
                     </div>
 
                     <div class="text-sm leading-5">
-                    <a href="#" class="font-medium text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
+                    <a href="/forgotpassword" class="font-medium text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
                         Terlupa kata laluan ?
                     </a>
                     </div>
                 </div>
 
-                <div class="mt-6">
+                <div class="mt-6 flex flex-wrap">
                     <GoogleLogin
                         clientId="438559173225-ub4mfh6vkmnd0qntmper0a48gqv18nn5.apps.googleusercontent.com"
                         onSuccess={responseGoogle}
                         render={renderProps => (
                         <Button 
+                            type="button"
                             onClick={renderProps.onClick} 
                             disabled={renderProps.disabled}
                             class="mb-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-600 hover:bg-gray-500 hover:text-gray focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
