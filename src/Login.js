@@ -3,17 +3,63 @@ import { setUserSession } from './Utils/Common';
 import { TextInputField, Heading, Button, BuildIcon } from "evergreen-ui";
 import logo1 from "./assets/img/logo1.png";
 import GoogleLogin from 'react-google-login';
+import { setGoogleToken } from './Utils/Common';
 
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
 import ggl from "./assets/img/google-icon.svg";
 import swal from "sweetalert";
 
-const responseGoogle = (response) => {
-    console.log(response);
-}
-
 function Login(props){
+
+    sessionStorage.removeItem('GoogleToken');
+    sessionStorage.removeItem('GoogleEmail');
+    sessionStorage.removeItem('GoogleName');
+
+    const responseGoogle = (response) => {
+
+        console.log(response);
+
+        var formdata = new FormData();
+        formdata.append("email", response.profileObj.email);
+
+        var requestOptions = {
+            method: 'POST',
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=check_user';
+
+        fetch(urlAPI1 , requestOptions)
+        .then(response => response.json())
+        .then(result => {
+
+            setLoading(false);
+
+            if(result.status == "success")
+            {
+                console.log(result.data[0]);
+                setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"], result.data[0]["MPS_USERROLE"]);
+                props.history.push('/home');
+            }
+            else if(result.status == "unsuccess")
+            {
+                sessionStorage.setItem("GoogleEmail", response.tt.$t);
+                sessionStorage.setItem("GoogleToken", response.tokenId);
+                sessionStorage.setItem("GoogleName", response.profileObj.givenName);
+                props.history.push("./verifyuser");
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            swal("Opss!", "Something went wrong. Please contact your administrator!", "error")
+            .then((value) => {
+                //props.history.push('/');
+            })
+        });
+        
+    }
 
     const username = useFormInput("");
     const password = useFormInput("");
@@ -31,12 +77,7 @@ function Login(props){
 
         }else{
 
-            var myHeaders = new Headers();
-            myHeaders.append("Cookie", "__cfduid=db6f29fff3ce79e0a3fe70a3990b3baeb1603864221; CORRAD_LANGUAGE=1; CORRAD_THEME=lavender; CORRAD_API_MYMPS=6nghhhcstuc4aad81r3m9qqp4b; MYMPS_API=jstp68stuf7siabrp233iff4pt");
-            
             var sha256 = require('js-sha256');
-
-            console.log(sha256(password.value));
 
             var formdata = new FormData();
             formdata.append("email", username.value);

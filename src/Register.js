@@ -8,6 +8,11 @@ import Footer from "./components/Footers/Footer";
 import swal from "sweetalert";
 
 function Register(props) {
+
+  sessionStorage.removeItem('GoogleToken');
+  sessionStorage.removeItem('GoogleEmail');
+  sessionStorage.removeItem('GoogleName');
+
   const username = useFormInput("");
   const password = useFormInput("");
   const confpassword = useFormInput("");
@@ -93,7 +98,7 @@ function Register(props) {
             setLoading("false");
             swal("Tahniah!","Pendaftaran sebagai pengguna MyMPS berjaya!","success");
 
-            setUserSession(btoa(formdata), username.value, nokp.value);
+            setUserSession(btoa(formdata), username.value, nokp.value, email.value);
             props.history.push("/home");
 
           }else{
