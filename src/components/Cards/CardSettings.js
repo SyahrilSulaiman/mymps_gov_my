@@ -70,6 +70,8 @@ export default function CardSettings() {
             sessionStorage.removeItem('email');
             sessionStorage.setItem('email', result.data[0]['MPS_USEREMAIL']);
 
+            window.location.href = "./setting";
+
           }
           else
           {
