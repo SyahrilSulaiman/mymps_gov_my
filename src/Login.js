@@ -149,19 +149,19 @@ function Login(props){
                 <div class="mt-6 flex items-center justify-between">
                     <div class="flex items-center">
                     <a href="/register" class="text-sm text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
-                        Daftar Pengguna
+                        <i className="fas fa-user"></i> Daftar Pengguna
                     </a>
                     </div>
 
                     <div class="text-sm leading-5">
                     <a href="/forgotpassword" class="font-medium text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
-                        Terlupa kata laluan ?
+                        Terlupa kata laluan <i className="fas fa-key"></i> 
                     </a>
                     </div>
                 </div>
 
                 <div class="mt-6 flex flex-wrap">
-                    <GoogleLogin
+                    {/* <GoogleLogin
                         clientId="438559173225-ub4mfh6vkmnd0qntmper0a48gqv18nn5.apps.googleusercontent.com"
                         onSuccess={responseGoogle}
                         render={renderProps => (
@@ -180,7 +180,7 @@ function Login(props){
                         )}
                         buttonText="Login"
                         cookiePolicy={'single_host_origin'}
-                    />
+                    /> */}
                     <button type="button" onClick={handleLogin} class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                         {loading ? 'Loading...' : 'Login'}
                     </button>
@@ -189,67 +189,6 @@ function Login(props){
             </div>
         </div>
         </section>
-        {/* <section className="pb-16 bg-gray-300 relative pt-32">
-            <div className="container mx-auto">
-                <div className="flex flex-wrap justify-center bg-white shadow-2xl rounded-lg -mt-64 py-16 px-10 relative z-10">
-                    <div className="w-full text-center lg:w-8/12">
-                    <p className="text-center">
-                        <img className="mx-auto" src={logo1} style={{height:"150px", width:"150px"}}></img>
-                    </p>
-                    <Heading size={700} marginTop="default">Login MyMPS</Heading>
-                    <p className="text-gray-600 text-lg leading-relaxed mt-4 mb-4">
-                        Cause if you do, it can be yours now. Hit the buttons below to
-                        navigate to get the Free version for your next project. Build a
-                        new web app or give an old project a new look!
-                    </p>
-                    <div className="sm:block flex flex-col mt-10">
-                        <div className="text-left p-5">
-                        <TextInputField
-                            label="KATA NAMA / USERNAME"
-                            //hint="This is a hint."
-                            placeholder="cth: 203451057890"
-                            onKeyUp={handleNumber}
-                            {...username}
-                        />
-
-                        <TextInputField
-                            label="KATA LALUAN / PASSWORD"
-                            //hint="This is a hint."
-                            placeholder="cth: abcd1234@^"
-                            type="password" 
-                            {...password}
-                        />
-                        </div>
-                    
-                        <div className="top-29-px">
-
-                            <Button 
-                                marginRight={16} 
-                                appearance="primary" 
-                                intent="success"
-                                value={loading ? 'Loading...' : 'Login'} 
-                                onClick={handleLogin} 
-                                disabled={loading}
-                            >
-                                    Login
-                            </Button>
-
-                            <Button 
-                                marginRight={16} 
-                                appearance="primary" 
-                                intent="none"
-                                onClick={ () => window.location.href = "/daftar"}
-                            >
-                            Daftar
-                            </Button>
-
-                        </div>
-                    </div>
-                    <div className="text-center mt-16"></div>
-                    </div>
-                </div>
-            </div>
-        </section> */}
         <Footer />
         </div>
     )

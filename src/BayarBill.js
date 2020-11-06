@@ -10,16 +10,32 @@ import Navbar from "./components/Navbars/AdminNavbar";
 import Information from "./components/Cards/CardSettings";
 import Footer from "./components/Footers/Footer";
 import { data } from "jquery";
+import swal from "sweetalert";
+import { ResponsiveEmbed } from "react-bootstrap";
 
 function Profile(props) {
-  const token = getToken();
-  const user = getUser();
-  const nokp = getNOKP();
-  
-  const handleLogout = () => {
-    removeUserSession();
-    props.history.push("/login");
-  };
+
+  const token   = getToken();
+  const user    = getUser();
+  const nokp    = getNOKP();
+
+  const [dataset, setDataSet] = useState(null);
+
+  useEffect(async() => {
+
+    var url = "https://toyyibpay.com/api/getBankFPX";
+
+    const tarik   = await fetch(url);
+    const data    = await tarik.json();
+
+    for(var i = 0; i < data.length; i++){
+      const item  = data[i].CODE;
+      setDataSet(item);
+    }
+    
+  }, []);
+
+  console.log(dataset);
 
   return (
     <div>
@@ -129,13 +145,13 @@ function Profile(props) {
           <div className="flex flex-wrap"></div>
           <div className="flex flex-wrap">
             <div className="w-full xl:w-12/12 mb-12 xl:mb-0 px-4">
-              <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-2">
+              <div className="text-center relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-2">
                 {/* <Information /> */}
-                
+                Senarai Bill
               </div>
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded p-2">
                 {/* <Information /> */}
-                Bayar Bill
+                {dataset}
               </div>
             </div>
           </div>
