@@ -127,40 +127,40 @@ function Login(props){
         <div className="bg-gray">
             <IndexNavbar fixed />
         <section className="py-20 px-5 relative" style={{background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
-        <div class="min-h-screen flex items-center justify-center  px-4 sm:px-6">
-            <div class="max-w-md w-full" style={{marginTop: "-100px"}}>
+        <div className="min-h-screen flex items-center justify-center  px-4 sm:px-6">
+            <div className="max-w-md w-full" style={{marginTop: "-100px"}}>
                 <div>
-                <img class="mx-auto w-auto" src={logo1} alt="mymps" style={{height: "120px"}}/>
-                <h2 class="mt-6 text-center text-xl leading-9 font-extrabold text-white">
+                <img className="mx-auto w-auto" src={logo1} alt="mymps" style={{height: "120px"}}/>
+                <h2 className="mt-6 text-center text-xl leading-9 font-extrabold text-white">
                     Login
                 </h2>
                 </div>
-                <form class="mt-8">
+                <form className="mt-8">
                 <input type="hidden" name="remember" value="true" />
-                <div class="rounded-md shadow-sm">
+                <div className="rounded-md shadow-sm">
                     <div>
-                    <input aria-label="Email" {...username} name="email" type="email" required class="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kad Pengenalan" />
+                    <input aria-label="Email" {...username} name="email" type="email" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kad Pengenalan" />
                     </div>
-                    <div class="-mt-px">
-                    <input aria-label="Password" {...password} name="password" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kata Laluan" />
+                    <div className="-mt-px">
+                    <input aria-label="Password" {...password} name="password" type="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kata Laluan" />
                     </div>
                 </div>
 
-                <div class="mt-6 flex items-center justify-between">
-                    <div class="flex items-center">
-                    <a href="/register" class="text-sm text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
+                <div className="mt-6 flex items-center justify-between">
+                    <div className="flex items-center">
+                    <a href="/register" className="text-sm text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
                         <i className="fas fa-user"></i> Daftar Pengguna
                     </a>
                     </div>
 
-                    <div class="text-sm leading-5">
-                    <a href="/forgotpassword" class="font-medium text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
+                    <div className="text-sm leading-5">
+                    <a href="/forgotpassword" className="font-medium text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
                         Terlupa kata laluan <i className="fas fa-key"></i> 
                     </a>
                     </div>
                 </div>
 
-                <div class="mt-6 flex flex-wrap">
+                <div className="mt-6 flex flex-wrap">
                     {/* <GoogleLogin
                         clientId="438559173225-ub4mfh6vkmnd0qntmper0a48gqv18nn5.apps.googleusercontent.com"
                         onSuccess={responseGoogle}
@@ -169,7 +169,7 @@ function Login(props){
                             type="button"
                             onClick={renderProps.onClick} 
                             disabled={renderProps.disabled}
-                            class="mb-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-600 hover:bg-gray-500 hover:text-gray focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                            className="mb-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-600 hover:bg-gray-500 hover:text-gray focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
                             fullWidth
                             variant="contained"
                             style={{marginTop:"-10px"}}
@@ -181,7 +181,7 @@ function Login(props){
                         buttonText="Login"
                         cookiePolicy={'single_host_origin'}
                     /> */}
-                    <button type="button" onClick={handleLogin} class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                    <button type="button" onClick={handleLogin} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                         {loading ? 'Loading...' : 'Login'}
                     </button>
                 </div>

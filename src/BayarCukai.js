@@ -105,55 +105,55 @@ function Bayar() {
         <div className="bg-gray">
         <IndexNavbar fixed />
         <section className="py-20 px-5 relative" style={{background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
-        <div class="min-h-screen flex items-center justify-center  px-4 sm:px-6">
-            <div class="max-w-md w-full sm: mt-10" style={{marginTop: "-200px"}}>
+        <div className="min-h-screen flex items-center justify-center  px-4 sm:px-6">
+            <div className="max-w-md w-full sm: mt-10" style={{marginTop: "-200px"}}>
                 <div>
-                <img class="mx-auto w-auto" src={logo1} alt="mymps" style={{height: "120px"}}/>
-                <h2 class="mt-6 text-center text-xl leading-9 font-extrabold text-white">
+                <img className="mx-auto w-auto" src={logo1} alt="mymps" style={{height: "120px"}}/>
+                <h2 className="mt-6 text-center text-xl leading-9 font-extrabold text-white">
                     Laman Bayaran Cukai Ekpress
                 </h2>
                 </div>
-                <form class="mt-8">
+                <form className="mt-8">
                 <input type="hidden" name="remember" value="true" />
                 <p className="text-center text-white">No. Kad Pengenalan</p>
-                <div class="mx-auto rounded-md" style={{margin:"30px"}}>
-                    <div class="mb-6 text-center">
-                        <div id="otp" class="flex justify-center">
-                            <input class="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="first" maxLength="1" />
-                            <input class="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="second" maxLength="1" />
-                            <input class="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="third" maxLength="1" />
-                            <input class="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="fourth" maxLength="1" />
-                            <input class="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="fifth" maxLength="1" />
-                            <input class="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="sixth" maxLength="1" />
-                            <input class="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="seventh" maxLength="1" />
-                            <input class="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="eight" maxLength="1" />
-                            <input class="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="ninth" maxLength="1" />
-                            <input class="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="tenth" maxLength="1" />
-                            <input class="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="eleventh" maxLength="1" />
-                            <input class="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="twelveth" maxLength="1" />
+                <div className="mx-auto rounded-md" style={{margin:"30px"}}>
+                    <div className="mb-6 text-center">
+                        <div id="otp" className="flex justify-center">
+                            <input className="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="first" maxLength="1" />
+                            <input className="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="second" maxLength="1" />
+                            <input className="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="third" maxLength="1" />
+                            <input className="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="fourth" maxLength="1" />
+                            <input className="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="fifth" maxLength="1" />
+                            <input className="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="sixth" maxLength="1" />
+                            <input className="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="seventh" maxLength="1" />
+                            <input className="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="eight" maxLength="1" />
+                            <input className="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="ninth" maxLength="1" />
+                            <input className="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="tenth" maxLength="1" />
+                            <input className="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="eleventh" maxLength="1" />
+                            <input className="m-2 text-center form-control form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="twelveth" maxLength="1" />
                         </div>
 
                         <br />
                         
-                        <div id="otp2" class="flex justify-center">
-                            {/* <input class="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="first" maxlength="1" />
-                            <input class="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="second" maxlength="1" />
-                            <input class="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="third" maxlength="1" />
-                            <input class="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="fourth" maxlength="1" />
-                            <input class="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="fifth" maxlength="1" />
-                            <input class="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="sixth" maxlength="1" />
-                            <input class="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="seventh" maxlength="1" />
-                            <input class="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="eight" maxlength="1" />
-                            <input class="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="ninth" maxlength="1" />
-                            <input class="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="tenth" maxlength="1" />
-                            <input class="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="eleventh" maxlength="1" />
-                            <input class="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="twelveth" maxlength="1" /> */}
+                        <div id="otp2" className="flex justify-center">
+                            {/* <input className="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="first" maxlength="1" />
+                            <input className="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="second" maxlength="1" />
+                            <input className="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="third" maxlength="1" />
+                            <input className="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="fourth" maxlength="1" />
+                            <input className="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="fifth" maxlength="1" />
+                            <input className="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="sixth" maxlength="1" />
+                            <input className="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="seventh" maxlength="1" />
+                            <input className="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="eight" maxlength="1" />
+                            <input className="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="ninth" maxlength="1" />
+                            <input className="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="tenth" maxlength="1" />
+                            <input className="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="eleventh" maxlength="1" />
+                            <input className="m-2 text-center form-control2 form-control-solid rounded focus:border-blue-400 focus:shadow-outline" type="text" id="twelveth" maxlength="1" /> */}
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-6">
-                    <button type="button" onClick={handleSubmit} class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                <div className="mt-6">
+                    <button type="button" onClick={handleSubmit} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                         Semak Akaun
                     </button>
                 </div>

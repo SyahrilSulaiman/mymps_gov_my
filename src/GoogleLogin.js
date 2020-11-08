@@ -147,56 +147,56 @@ function Register(props) {
       <section className="py-20 relative" style={{background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
 
       {/* sample form */}
-      <div class=" sm:mt-0" style={{padding: "20px"}}>
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-          <div class="md:col-span-1 bg-gray-100" style={{padding: "20px", borderRadius: "10px"}}>
-            <div class="px-4 sm:px-0">
+      <div className=" sm:mt-0" style={{padding: "20px"}}>
+        <div className="md:grid md:grid-cols-3 md:gap-6">
+          <div className="md:col-span-1 bg-gray-100" style={{padding: "20px", borderRadius: "10px"}}>
+            <div className="px-4 sm:px-0">
               <img className="mx-auto" src={logo1} style={{width:"120px", height:"120px"}}/>
-              <h3 class="text-lg font-medium leading-6 text-gray-900 text-center" style={{marginTop: "30px"}}>Pengesahan Pengguna</h3>
-              <p class="mt-1 text-sm leading-5 text-gray-600" style={{marginTop: "30px"}}>
+              <h3 className="text-lg font-medium leading-6 text-gray-900 text-center" style={{marginTop: "30px"}}>Pengesahan Pengguna</h3>
+              <p className="mt-1 text-sm leading-5 text-gray-600" style={{marginTop: "30px"}}>
                 Selamat Datang ke laman pengesahan pengguna Majlis Perbandaran Selayang 2020. Sila pastikan setiap maklumat diisi lengkap untuk mengelakkan maklumat palsu.
               </p>
             </div>
           </div>
-          <div class="mt-5 md:mt-0 md:col-span-2">
+          <div className="mt-5 md:mt-0 md:col-span-2">
             <form>
-              <div class="shadow overflow-hidden sm:rounded-md">
-                <div class="px-4 py-5 bg-white sm:p-6">
-                  <div class="grid grid-cols-6 gap-6">
+              <div className="shadow overflow-hidden sm:rounded-md">
+                <div className="px-4 py-5 bg-white sm:p-6">
+                  <div className="grid grid-cols-6 gap-6">
 
-                    <div class="col-span-6 sm:col-span-3">
-                      <label for="first_name" class="block text-sm font-medium leading-5 text-gray-700">KATA PENGGUNA</label>
-                      <input {...username} value={sessionStorage.getItem('GoogleName')} id="name" placeholder="cth: adrian" class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    <div className="col-span-6 sm:col-span-3">
+                      <label for="first_name" className="block text-sm font-medium leading-5 text-gray-700">KATA PENGGUNA</label>
+                      <input {...username} value={sessionStorage.getItem('GoogleName')} id="name" placeholder="cth: adrian" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3">
-                      <label for="last_name" class="block text-sm font-medium leading-5 text-gray-700">NO KAD PENGENALAN</label>
-                      <input {...nokp} id="nokp" placeholder="cth: 923456061278" class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    <div className="col-span-6 sm:col-span-3">
+                      <label for="last_name" className="block text-sm font-medium leading-5 text-gray-700">NO KAD PENGENALAN</label>
+                      <input {...nokp} id="nokp" placeholder="cth: 923456061278" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3">
-                      <label for="email_address" class="block text-sm font-medium leading-5 text-gray-700">ALAMAT EMEL</label>
-                      <input {...email} value={sessionStorage.getItem('GoogleEmail')} id="email_address" placeholder="cth: malik@email.com" class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    <div className="col-span-6 sm:col-span-3">
+                      <label for="email_address" className="block text-sm font-medium leading-5 text-gray-700">ALAMAT EMEL</label>
+                      <input {...email} value={sessionStorage.getItem('GoogleEmail')} id="email_address" placeholder="cth: malik@email.com" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3">
-                      <label for="email_address" class="block text-sm font-medium leading-5 text-gray-700">SAH ALAMAT EMEL</label>
-                      <input {...confemail} id="conf_email_address" placeholder="cth: malik@email.com" class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    <div className="col-span-6 sm:col-span-3">
+                      <label for="email_address" className="block text-sm font-medium leading-5 text-gray-700">SAH ALAMAT EMEL</label>
+                      <input {...confemail} id="conf_email_address" placeholder="cth: malik@email.com" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3">
-                      <label for="street_address" class="block text-sm font-medium leading-5 text-gray-700">KATA LALUAN</label>
-                      <input {...password} id="password" placeholder="cth: 12345678" class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    <div className="col-span-6 sm:col-span-3">
+                      <label for="street_address" className="block text-sm font-medium leading-5 text-gray-700">KATA LALUAN</label>
+                      <input {...password} id="password" placeholder="cth: 12345678" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3">
-                      <label for="street_address" class="block text-sm font-medium leading-5 text-gray-700">SAH KATA LALUAN</label>
-                      <input {...confpassword} id="conf_password" placeholder="cth: 12345678" class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                    <div className="col-span-6 sm:col-span-3">
+                      <label for="street_address" className="block text-sm font-medium leading-5 text-gray-700">SAH KATA LALUAN</label>
+                      <input {...confpassword} id="conf_password" placeholder="cth: 12345678" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
                   </div>
                 </div>
-                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 bg-gray-300">
-                  <button onClick={handleRegister} type="button" class="py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 shadow-sm hover:bg-green-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out">
+                <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 bg-gray-300">
+                  <button onClick={handleRegister} type="button" className="py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 shadow-sm hover:bg-green-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out">
                     Daftar
                   </button>
                 </div>
