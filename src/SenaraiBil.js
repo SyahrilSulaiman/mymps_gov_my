@@ -69,11 +69,14 @@ export default function SenaraiBil(props){
                                     <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
                                         <span className="font-semibold text-lg text-gray-800">
                                             Status Bayaran
-                                        </span>	
+                                        </span>
+                                        <h5 className="uppercase font-medium text-xs text-green-400">
+                                            Telah Dibayar
+                                        </h5>
                                         <h5 className="uppercase font-medium text-xs text-gray-600">
-                                            True - PDF receipt
-                                            <br></br>
-                                            False - Add to pay list
+                                            <a href="https://mymps.corrad.my/rp/receipt.php" target="_blank" className="hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
+                                                <i className="fas fa-receipt"></i> Receipt
+                                            </a>
                                         </h5>
                                         <span className="font-semibold text-lg text-gray-800">
                                             {
