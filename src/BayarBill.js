@@ -10,7 +10,7 @@ import Footer from "./components/Footers/Footer";
 import { data } from "jquery";
 import swal from "sweetalert";
 import { ResponsiveEmbed } from "react-bootstrap";
-import { BrowserRouter as Router,Switch,	Route, Link, useParams,	useRouteMatch } from "react-router-dom";
+import { BrowserRouter as Router,Switch, Route, Link, useParams, useRouteMatch } from "react-router-dom";
 import SenaraiBil from './SenaraiBil';
 
 function Profile(props) {
@@ -30,7 +30,7 @@ function Profile(props) {
 		jenis: 'Cukai Taksiran',
 		akaun: 'A929181',
 		amaun:'RM 30.00',
-		tempoh:'Julai - Disember 2020',
+		tempoh:'Januari - Jun 2020',
 		status:'Telah dibayar'
 	});
 
@@ -99,7 +99,7 @@ function Profile(props) {
       <div className="relative md:ml-64 bg-gray-400" style={{ height: "100%" }}>
         <Navbar />
 				{/* Header */}
-				<div className="relative bg-green-400 md:pt-32 pt-4 pb-4" >
+				<div className="relative bg-gray-600 md:pt-32 pt-4 pb-4" style={{height: "90vh"}}>
 
 
 					<div className="px-4 md:px-10 mx-auto w-full" >
@@ -135,7 +135,7 @@ function Profile(props) {
 						// View bill state -> class jugak
 						// routing sikit
 					}
-					<div className="px-4 md:px-10 mx-auto w-full" onClick={handleViewBill}>
+					<div className="px-4 md:px-2 mx-auto w-full" onClick={handleViewBill}>
 						<div className="flex flex-wrap">
 							<div className="w-full px-4">
 								<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg">
@@ -173,7 +173,7 @@ function Profile(props) {
 						</div>
 					</div>
 
-				<div className="px-4 md:px-10 mx-auto w-full" onClick={handleViewBill}>
+				<div className="px-4 md:px-2 mx-auto w-full" onClick={handleViewBill}>
 					<div className="flex flex-wrap">
 						<div className="w-full px-4">
 							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg">
@@ -186,17 +186,17 @@ function Profile(props) {
 										</div>
 										<div className="relative w-auto pl-4 flex-initial">
 											<span className="font-semibold text-lg text-gray-800">
-											RM 30.00
+											RM 40.00
 											</span>	
 										</div>
 									</div>
 									<div className="flex flex-row pb-4">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
 											<span className="font-semibold text-lg text-gray-800">
-											A929181
+											A929739
 											</span>	
 											<h5 className="uppercase font-medium text-xs text-gray-600">
-											Tempoh Julai - disember 2020
+											Julai - disember 2020
 											</h5>
 										</div>
 										<div className="relative w-auto pl-4 flex-initial">
@@ -210,6 +210,7 @@ function Profile(props) {
 						</div>
 					</div>
 				</div>
+				
 			</div>
 
 		

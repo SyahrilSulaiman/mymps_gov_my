@@ -100,7 +100,7 @@ function Login(props){
                 if(result.status == "unsuccess")
                 {
                     console.log("Wrong credentials. Please try again!");
-                    swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah", "error");
+                    swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah.", "error");
                 }
                 else if(result.status == "success")
                 {

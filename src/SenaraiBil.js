@@ -14,7 +14,7 @@ export default function SenaraiBil(props){
             <Sidebar/>
             <div className="relative md:ml-64 bg-gray-400">
                 <Navbar />
-                <div className="relative bg-green-400 md:pt-32 pt-4 pb-4">
+                <div className="relative bg-gray-600 md:pt-32 pt-4 pb-4" style={{height: "90vh"}}>
                 <div className="px-4 md:px-10 mx-auto w-full">
                 <div className="flex flex-wrap">
                     <div className="w-full px-4">

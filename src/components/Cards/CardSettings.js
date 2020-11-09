@@ -88,13 +88,13 @@ export default function CardSettings() {
       <div className="relative flex flex-col min-w-0 break-words w-full h-full shadow-lg  bg-gray-300 border-0">
         <div className="rounded-t bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
-            <h6 className="text-gray-800 text-xl font-bold">Akaun Peribadi</h6>
+            <h6 className="text-gray-800 text-xl font-bold">Akaun myMPS</h6>
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
           <form>
             <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
-              Maklumat Peribadi
+              
             </h6>
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 px-4">
@@ -103,7 +103,7 @@ export default function CardSettings() {
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Username
+                    Nama Penuh
                   </label>
                   <input
                     type="text"
@@ -120,7 +120,7 @@ export default function CardSettings() {
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Email address
+                    Alamat Emel
                   </label>
                   <input
                     type="email"

@@ -15,11 +15,10 @@ export default function Index() {
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
               <h2 className="font-semibold text-4xl text-gray-700">
-                MyMPS - Sebuah aplikasi bayar cukai atas talian anda.
+                Selamat Datang ke myMPS
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                MyMPS merupakan sebuah portal rasmi Majlis Perbandaran Selayang yang dibangunkan pada tahun ini. 
-                Sistem ini dibangunkan bertujuan untuk membantu pengguna membuat bayaran cukai taksiran atas talian.
+                MyMPS merupakan sebuah gerbang pembayaran pelbagai bil <br></br><span className="text-bold text-gray-700">Majlis Perbandaran Selayang.</span>
               </p>
               <div className="mt-12">
                 <a
@@ -28,12 +27,12 @@ export default function Index() {
                 >
                   Pendaftaran
                 </a>
-                {/* <a
-                  href="/bayarancukai"
+                <a
+                  href="/login"
                   className="github-star ml-1 text-white font-bold px-3 py-4 rounded outline-none focus:outline-none mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
-                  Bayar Cukai Ekspress
-                </a> */}
+                  log masuk
+                </a>
               </div>
             </div>
           </div>
