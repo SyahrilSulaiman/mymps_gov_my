@@ -41,7 +41,7 @@ function Login(props){
             {
                 console.log(result.data[0]);
                 setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"], result.data[0]["MPS_USERROLE"]);
-                props.history.push('/home');
+                props.history.push('/bill');
             }
             else if(result.status == "unsuccess")
             {
@@ -105,7 +105,7 @@ function Login(props){
                 else if(result.status == "success")
                 {
                     setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"]);
-                    props.history.push('/home');
+                    props.history.push('/bill');
                 }
 
             })
