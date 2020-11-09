@@ -87,7 +87,7 @@ export default function Navbar(props) {
                   type="button"
                   onClick={() => window.location.href = "/login"}
                 >
-                  <i className="fas fa-user"></i> Login
+                  <i className="fas fa-user"></i> Log Masuk
                 </button>
               </li>
             </ul>

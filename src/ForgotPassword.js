@@ -104,7 +104,7 @@ function ForgetPassword(props){
                 <div className="mt-6 flex items-center justify-between">
                     <div className="flex items-center">
                     <a href="/login" className="text-sm text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
-                        Login
+                        Log Masuk
                     </a>
                     </div>
 

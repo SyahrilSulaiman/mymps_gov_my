@@ -132,7 +132,7 @@ function Login(props){
                 <div>
                 <img className="mx-auto w-auto" src={logo1} alt="mymps" style={{height: "120px"}}/>
                 <h2 className="mt-6 text-center text-xl leading-9 font-extrabold text-white">
-                    Login
+                    Log Masuk
                 </h2>
                 </div>
                 <form className="mt-8">
