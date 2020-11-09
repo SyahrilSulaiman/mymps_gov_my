@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 
 export default function Carian(props){
 
+    
+
     return (
         <div>
             <div className="relative bg-orange-400 md:pt-32 pt-4 pb-4">
