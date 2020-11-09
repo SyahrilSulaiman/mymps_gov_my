@@ -15,6 +15,7 @@ import Register from "./Register";
 import ForgotPassword from "./ForgotPassword";
 import GoogleLogin from "./GoogleLogin";
 import NotFound from "./NotFound";
+import SenaraiBil from "./SenaraiBil";
 
 //import "./main.css";
 
@@ -75,6 +76,7 @@ function App() {
               <PrivateRoute path="/home" component={Dashboard} />
               <PrivateRoute path="/setting" component={Setting} />
               <PrivateRoute path="/bill" component={Bill} />
+              <PrivateRoute path="/senaraibill" component={SenaraiBil} />
               <Route path="*" component={NotFound} />
             </Switch>
           </div>

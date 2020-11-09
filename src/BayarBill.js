@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import Card from "@material-ui/core/Card";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
@@ -11,6 +10,8 @@ import Footer from "./components/Footers/Footer";
 import { data } from "jquery";
 import swal from "sweetalert";
 import { ResponsiveEmbed } from "react-bootstrap";
+import { BrowserRouter as Router,Switch,	Route, Link, useParams,	useRouteMatch } from "react-router-dom";
+import SenaraiBil from './SenaraiBil';
 
 function Profile(props) {
 
@@ -19,7 +20,29 @@ function Profile(props) {
   const nokp    = getNOKP();
 
   const [include,isInclude] = useState(false);
-	const [dataset, setDataSet] = useState(null);
+	const [dataset, setDataSet] = useState(		{
+		// jenis:'',
+		// akaun:'',
+		// amaun:'',
+		// tempoh:'',
+		// status:''
+
+		jenis: 'Cukai Taksiran',
+		akaun: 'A929181',
+		amaun:'RM 30.00',
+		tempoh:'Julai - Disember 2020',
+		status:'Telah dibayar'
+	});
+
+
+		// setDataset({
+		// 	...dataset,
+		// 	jenis: 'Cukai Taksiran',
+		// 	akaun: 'A929181',
+		// 	amaun:'RM 30.00',
+		// 	tempoh:'Julai - Disember 2020',
+		// 	status:'Telah dibayar'
+		// });
 
   // useEffect(async() => {
 
@@ -34,6 +57,9 @@ function Profile(props) {
   //   }
     
 	// }, []);
+
+	// bil > {bawak state} > bil detail
+	
 	
 	const handleReceipt= (e) =>{
 		// let url = 
@@ -55,6 +81,7 @@ function Profile(props) {
   const handleViewBill = (e) => {
 		// set=[e.target.id]
 		console.log('View');
+		// window.open("/senaraibill");
 	}
 	
 	const handleAddBill = (e) => {
@@ -62,10 +89,12 @@ function Profile(props) {
 		console.log('Add Bill');
   }
 
+  let { path, url } = useRouteMatch;
+
   // console.log(dataset);
 
   return (
-    <div>
+	<div>
       <Sidebar />
       <div className="relative md:ml-64 bg-gray-400" style={{ height: "100%" }}>
         <Navbar />
@@ -114,27 +143,27 @@ function Profile(props) {
 										<div className="flex flex-row pt-4">
 											<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
 												<span className="font-semibold text-lg text-gray-800">
-												Cukai Taksiran
+												{dataset.jenis}
 												</span>	
 											</div>
 											<div className="relative w-auto pl-4 flex-initial">
 												<span className="font-semibold text-lg text-gray-800">
-												RM 30.00
+												{dataset.amaun}
 												</span>	
 											</div>
 										</div>
 										<div className="flex flex-row pb-4">
 											<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
 												<span className="font-semibold text-lg text-gray-800">
-												A929181
+												{dataset.akaun}
 												</span>	
 												<h5 className="uppercase font-medium text-xs text-gray-600">
-												Tempoh Julai - disember 2020
+												{dataset.tempoh}
 												</h5>
 											</div>
 											<div className="relative w-auto pl-4 flex-initial">
 												<h5 className="uppercase font-medium text-xs text-green-600">
-												Telah Dibayar
+												{dataset.status}
 												</h5>
 											</div>
 										</div>
