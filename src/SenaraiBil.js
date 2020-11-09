@@ -11,9 +11,7 @@ export default function SenaraiBil(props){
 
     return (
         <div>
-            <Sidebar/>
-            <div className="relative md:ml-64 bg-gray-400">
-                <Navbar />
+
                 <div className="relative bg-green-400 md:pt-32 pt-4 pb-4">
                 <div className="px-4 md:px-10 mx-auto w-full">
                 <div className="flex flex-wrap">
@@ -92,9 +90,6 @@ export default function SenaraiBil(props){
                 </div>
             </div>
                 </div>
-
-            <Footer/>
-            </div>
         </div>
     );
 }

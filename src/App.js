@@ -76,7 +76,6 @@ function App() {
               <PrivateRoute path="/home" component={Dashboard} />
               <PrivateRoute path="/setting" component={Setting} />
               <PrivateRoute path="/bill" component={Bill} />
-              <PrivateRoute path="/senaraibill" component={SenaraiBil} />
               <Route path="*" component={NotFound} />
             </Switch>
           </div>

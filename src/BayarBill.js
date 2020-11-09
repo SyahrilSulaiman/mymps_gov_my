@@ -212,7 +212,7 @@ function Profile(props) {
 				</div>
 			</div>
 
-		
+		<SenaraiBil />
         <Footer />
       </div>
     </div>
