@@ -81,12 +81,17 @@ function Profile(props) {
   const handleViewBill = (e) => {
 		// set=[e.target.id]
 		console.log('View');
-		// window.open("/senaraibill");
+		window.location.href = "/senaraibill";
 	}
 	
 	const handleAddBill = (e) => {
 		// set=[e.target.id]
 		console.log('Add Bill');
+  }
+
+  const handleBayar = () => {
+	  console.log('Bayar');
+	  window.location.href = '/payment';
   }
 
   let { path, url } = useRouteMatch;
@@ -173,7 +178,7 @@ function Profile(props) {
 						</div>
 					</div>
 
-				<div className="px-4 md:px-2 mx-auto w-full" onClick={handleViewBill}>
+				<div className="px-4 md:px-2 mx-auto w-full" onClick={handleBayar}>
 					<div className="flex flex-wrap">
 						<div className="w-full px-4">
 							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg">
