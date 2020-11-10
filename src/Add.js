@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Footer from "./components/Footers/Footer";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
+import axios from "axios";
 
 
 export default function Carian({props}){
@@ -14,17 +15,15 @@ export default function Carian({props}){
         });
     }
 
+    let id = useFormInput("");
+
     const handleSearch = (e) => {
-        console.log(search.search);
-
-        setSearch({
-            ...search,
-            [e.target.id]: e.target.value,
-        });
-
-
+        e.preventDefault();
         // + something something something
-        // 
+        //
+        axios.post('https://jsonplaceholder.typicode.com/todos')
+        .then(response=>{console.log(response)})
+        .catch('No Data');
     }
 
     // const [dataset, setDataSet] = useState({
@@ -95,7 +94,7 @@ export default function Carian({props}){
                                 <div className="w-full px-4">
                                     <div className="relative flex flex-col min-w-0 break-words rounded mb-6">
                                             <div>
-                                                <input aria-label="search" id="search" onChange={(e) => handleSearch(e)} name="id" type="text" required className="mb-2 bg-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" 
+                                                <input aria-label="id" id="id" {...id} name="id" type="text" required className="mb-2 bg-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" 
                                                 placeholder= {
                                                     search.type == 'akaun' ? ('No Akaun') 
                                                     : search.type == 'ssm' ? ('No SSM Pendaftaran Syarikat') 
@@ -108,7 +107,7 @@ export default function Carian({props}){
                                 </div>
                             </div>
                             <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                                <button id="type" type="button" className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
+                                <button id="type" type="submit" className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
                                             Add
                                 </button>
                             </div>
@@ -116,8 +115,20 @@ export default function Carian({props}){
                     </form>
                 </div>
                 </div>
+                
                 <Footer/>
             </div>
         );
+    }
+}
+
+const useFormInput = initialValue => {
+    const [value, setValue] = useState(initialValue);
+    const handleChange = e => {
+      setValue(e.target.value);
+    }
+    return {
+      value,
+      onChange: handleChange
     }
 }
