@@ -110,7 +110,7 @@ function Pay(){
                         No. Cukai
                         </dt>
                         <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                        A929739
+                        {atob(atob(sessionStorage.getItem("cukai")))}
                         </dd>
                     </div>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -126,7 +126,7 @@ function Pay(){
                         Jumlah Tunggakan (RM)
                         </dt>
                         <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                        40.00
+                        {atob(atob(sessionStorage.getItem("amaun")))}
                         </dd>
                     </div>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -218,8 +218,8 @@ function Pay(){
                         <input type="hidden" name="channel" id="channel" value="01"/>
                         <input type="hidden" name="web_return_address" value="https://mymps.corrad.my"/>
                         <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php"/>
-                        <input type="hidden" name="payment_amount" id="payment_amount" value="40.00"/>
-                        <input type="hidden" name="payment_description" value={"Cukai Taksiran A929739"}/>
+                        <input type="hidden" name="payment_amount" id="payment_amount" value={atob(atob(sessionStorage.getItem("amaun")))}/>
+                        <input type="hidden" name="payment_description" value={"Cukai Taksiran " + atob(atob(sessionStorage.getItem("cukai")))}/>
                         <input type="hidden" name="email" value={sessionStorage.getItem("email")}/>
                     </form>
                 </div>

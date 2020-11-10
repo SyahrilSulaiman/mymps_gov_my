@@ -41,6 +41,7 @@
     sessionStorage.removeItem('GoogleEmail');
     sessionStorage.removeItem('GoogleName');
     sessionStorage.removeItem('role');
+    sessionStorage.removeItem('cukai');
   }
   
   // set the token and user from the session storage

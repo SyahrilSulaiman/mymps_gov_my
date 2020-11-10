@@ -3,6 +3,8 @@ import axios from 'axios';
 
 export default function BillList(){
 
+	sessionStorage.removeItem("cukai");
+
     const handleViewBill = (e) => {
 		// set=[e.target.id]
 		// return (
@@ -12,9 +14,11 @@ export default function BillList(){
         
     }
     
-    const handleBayar = (e) => {
-        console.log('Bayar');
-        window.location.href = '/payment';
+    const handleBayar = (e,a) => {
+		console.log('Bayar');
+		sessionStorage.setItem("cukai", btoa(btoa(e)));
+		sessionStorage.setItem("amaun", btoa(btoa(a)));
+        window.location.href = '/payment?Cukai='+e;
     }
     
     const [dataset, setDataSet] = useState({
@@ -40,7 +44,7 @@ export default function BillList(){
                 <div className="px-4 md:px-2 mx-auto w-full"
                  onClick={
                      //condition xbetul
-                     (bill.status.toUpperCase() == 'TERTUNGGAK') ? (handleBayar):(handleViewBill)
+                     (bill.status.toUpperCase() == 'TERTUNGGAK' || bill.status.toUpperCase() == 'Tertunggak') ? (() => handleBayar(bill.code, bill.amaun)):(handleViewBill)
                     }
                 key = {bill.id}>
                     <div className="flex flex-wrap">
