@@ -3,7 +3,7 @@ import Footer from "./components/Footers/Footer";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import axios from "axios";
-
+import swal from 'sweetalert';
 
 export default function Carian({props}){
     const [search,setSearch] = useState({type:'',search:''});
@@ -22,8 +22,14 @@ export default function Carian({props}){
         // + something something something
         //
         axios.post('https://jsonplaceholder.typicode.com/todos')
-        .then(response=>{console.log(response)})
-        .catch('No Data');
+        .then(response=>{
+            console.log(response.status)
+            swal('Berjaya Tambah','Berjaya tambah akaun untuk pembayaran','success')
+            window.location.href = '/bill';
+        })
+        // .catch(err => {errors: err.response});
+
+        // ada bill masuk bill list xde error
     }
 
     // const [dataset, setDataSet] = useState({
@@ -84,38 +90,36 @@ export default function Carian({props}){
         return (
             <div>
             <Sidebar />
-            <div className="relative md:ml-64 bg-gray-400" style={{ height: "100%" }}>
-                <Navbar />
-                {/* Header */}
-                <div className="relative bg-gray-600 md:pt-32 pt-4 pb-4">
-                    <form onSubmit={(e) => handleSearch(e)}>
-                        <div className="px-4 md:px-10 mx-auto w-full">
-                            <div className="flex flex-wrap">
-                                <div className="w-full px-4">
-                                    <div className="relative flex flex-col min-w-0 break-words rounded mb-6">
-                                            <div>
-                                                <input aria-label="id" id="id" {...id} name="id" type="text" required className="mb-2 bg-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" 
-                                                placeholder= {
-                                                    search.type == 'akaun' ? ('No Akaun') 
-                                                    : search.type == 'ssm' ? ('No SSM Pendaftaran Syarikat') 
-                                                    : search.type == 'nokp' ? ('No Kad Pengenalan') 
-                                                    : ('Carian...')
-                                                } />
+                <div className="relative md:ml-64 bg-gray-400" style={{ height: "100%" }}>
+                    <Navbar />
+                    {/* Header */}
+                        <div className="relative bg-gray-600 md:pt-32 pt-4 pb-4">
+                            <form onSubmit={(e) => handleSearch(e)}>
+                                <div className="px-4 md:px-10 mx-auto w-full">
+                                    <div className="flex flex-wrap">
+                                        <div className="w-full px-4">
+                                            <div className="relative flex flex-col min-w-0 break-words rounded mb-6">
+                                                    <div>
+                                                        <input aria-label="id" id="id" {...id} name="id" type="text" required className="mb-2 bg-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" 
+                                                        placeholder= {
+                                                            search.type == 'akaun' ? ('No Akaun') 
+                                                            : search.type == 'ssm' ? ('No SSM Pendaftaran Syarikat') 
+                                                            : search.type == 'nokp' ? ('No Kad Pengenalan') 
+                                                            : ('Carian...')
+                                                        } />
+                                                    </div>
                                             </div>
+                                        </div>
                                     </div>
-                                    
+                                    <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
+                                        <button id="type" type="submit" className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
+                                                    Add
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                                <button id="type" type="submit" className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
-                                            Add
-                                </button>
-                            </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-                </div>
-                
+                    </div>
                 <Footer/>
             </div>
         );
