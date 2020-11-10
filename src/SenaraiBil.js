@@ -2,18 +2,15 @@ import React, {useState, useEffect} from 'react'
 // import { Link } from "react-router-dom";
 // import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 // import MainDashboard from "./views/admin/Dashboard";
+// import Footer from "./components/Footers/Footer";
+// import Sidebar from "./Sidebar";
+// import Navbar from "./components/Navbars/AdminNavbar";
 
-import Footer from "./components/Footers/Footer";
-import Sidebar from "./Sidebar";
-import Navbar from "./components/Navbars/AdminNavbar";
 
 export default function SenaraiBil(props){
 
     return (
         <div>
-            <Sidebar/>
-            <div className="relative md:ml-64 bg-gray-400">
-                <Navbar />
                 <div className="relative bg-gray-600 md:pt-32 pt-4 pb-4" style={{height: "90vh"}}>
                 <div className="px-4 md:px-10 mx-auto w-full">
                 <div className="flex flex-wrap">
@@ -74,7 +71,7 @@ export default function SenaraiBil(props){
                                             Telah Dibayar
                                         </h5>
                                         <h5 className="uppercase font-medium text-xs text-gray-600">
-                                            <a href="https://mymps.corrad.my/rp/receipt.php" target="_blank" className="hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
+                                            <a href="https://mymps.corrad.my/rp/resit.php" target="_blank" className="hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
                                                 <i className="fas fa-receipt"></i> Resit
                                             </a>
                                         </h5>
@@ -92,7 +89,6 @@ export default function SenaraiBil(props){
                 </div>
             </div>
         </div>
-    </div>
     </div>
     );
 }
