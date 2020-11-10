@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import Footer from "./components/Footers/Footer";
 import axios from 'axios';
 
+import ABB0223 from "./assets/img/ABB0233.png";
+
 function Pay(){
 
     const [data, setData] = useState([{"CODE":"BIMB1234","NAME":"BANK ISLAM"}]);
@@ -12,15 +14,14 @@ function Pay(){
         await fetch('https://toyyibpay.com/api/getBankFPX')
         .then(response => response.json())
         .then(result => {
-            console.log(result);
             setData(result);
         })
     }, [])
 
     //console.log("Data : " + (data[0].NAME));
     for(var i = 0; i < data.length; i++){
-        console.log(data[i].CODE);
-        All.push(<div className="bg-gray-300 text-gray-700 text-center" style={{padding:"10px", margin:"5px"}} onClick={() => alert(data[i].CODE)}>{data[i].NAME}</div>);
+        All.push(<div key={data[i].CODE} className="bg-gray-300 text-gray-700 text-center mx-center" style={{padding:"10px", margin:"5px"}} data-bankcode={data[i].CODE}>
+            <img className="mx-auto" src={"./assets/img/"+data[i].CODE+".png"}/> <br /> {data[i].NAME}</div>);
     }
 
     return (
@@ -98,6 +99,7 @@ function Pay(){
                     </p>
                 </div>
                 <div>
+                    <form action="https://epstaging.mps.gov.my/fpx/sd.php" method="post">
                     <dl>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm leading-5 font-medium text-gray-500">
@@ -115,7 +117,7 @@ function Pay(){
                         </dt>
                         <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                         <div>
-                            <input aria-label="emel"  name="emel" type="email" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: admin@gmail.com" />
+                            <input aria-label="emel"  name="email" type="email" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: admin@gmail.com" />
                         </div>
                         </dd>
                     </div>
@@ -131,15 +133,31 @@ function Pay(){
                     </div>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm leading-5 font-medium text-gray-500">
-                        {/* Status Cukai */}
+                        Senarai Bank
                         </dt>
                         <dd className="flex flex-wrap mt-1 text-sm leading-5 text-gray-500 sm:col-span-2">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                            <div className="grid gap-1 grid-cols-2 xl:grid-cols-5">
                                 {All}
                             </div>
                         </dd>
+                        <dt className="text-sm leading-5 font-medium text-gray-500">
+                        
+                        </dt>
+
+                        <input type="hidden" name="payment_ref_no" value={"MYM"+Date.now()}/>
+                        <input type="hidden" name="bank" value="TEST0021"/>
+                        <input type="hidden" name="channel" value="01"/>
+                        <input type="hidden" name="web_return_address" value="https://mymps.corrad.my"/>
+                        <input type="hidden" name="web_return_service_address" value="https://mymps.corrad.my"/>
+                        <input type="hidden" name="payment_amount" value="40.00"/>
+                        <input type="hidden" name="payment_description" value={"Cukai Taksiran A929739"}/>
+
+                        <dd className="flex flex-wrap mt-1 text-sm leading-5 text-gray-500 sm:col-span-2">
+                            <button className="text-white bg-green-500 py-3 px-5 rounded-lg float-right">Bayar</button>
+                        </dd>
                     </div>
                     </dl>
+                    </form>
                 </div>
             </div>
 
