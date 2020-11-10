@@ -71,7 +71,7 @@ export default function SenaraiBil(props){
                                             Telah Dibayar
                                         </h5>
                                         <h5 className="uppercase font-medium text-xs text-gray-600">
-                                            <a href="https://mymps.corrad.my/rp/receipt.php" target="_blank" className="hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
+                                            <a href="https://mymps.corrad.my/rp/resit.php" target="_blank" className="hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
                                                 <i className="fas fa-receipt"></i> Resit
                                             </a>
                                         </h5>
