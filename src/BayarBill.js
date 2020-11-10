@@ -78,46 +78,17 @@ function Bill(props) {
 		console.log('View');
 		window.location.href = "/senaraibill";
 	}
-	
-	const handleAddBill = (e) => {
-		setPage({
-			page:'addBill'
-		});
-		console.log('Add Bill');
-  }
+
+  const handleAddBill = () => {
+	console.log('Add Bil');
+	window.location.href = '/add';
+}
 
   const handleBayar = () => {
 	  console.log('Bayar');
 	  window.location.href = '/payment';
   }
 
-  const [view,setPage] = useState({
-	  page:''
-  });
-
-  const handlePage = (e) => {
-	  console.log(e.target.value);
-	  setPage({
-		  ...view,
-		  [e.target.id]:e.target.value
-	  });
-  }
-  
-  if(view.page == 'add'){
-		return (
-			<div>
-	<Sidebar />
-		<div className="relative md:ml-64 bg-gray-400" style={{ height: "100%" }}>
-			<Navbar />
-			{/* Header */}
-			<Carian/>
-			</div>
-			<Footer />
-		</div>
-		);
-	}
-
-  if(view.page == ""){
 
   return (
 	<div>
@@ -143,8 +114,8 @@ function Bill(props) {
 														//  create function
 														// form input?
 													}
-													<div  className="relative w-auto pl-4 flex-initial" >
-														<button id='page' value="add" className="font-semibold text-lg text-white border-2" onClick={handlePage}>
+													<div  className="relative w-auto pl-4 flex-initial" onClick={handleAddBill} >
+														<button className="font-semibold text-lg text-white ">
 															+ Tambah
 														</button>	
 													</div>
@@ -238,7 +209,6 @@ function Bill(props) {
 			<Footer />
 		</div>
 	);
-	}
 }
 
 export default Bill;

@@ -109,7 +109,7 @@ export default function Carian({props}){
                             </div>
                             <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
                                 <button id="type" type="button" className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
-                                            Cari
+                                            Add
                                 </button>
                             </div>
                         </div>

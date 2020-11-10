@@ -17,6 +17,8 @@ import GoogleLogin from "./GoogleLogin";
 import NotFound from "./NotFound";
 import SenaraiBil from "./SenaraiBil";
 import Payment from "./Payment";
+import Add from "./Add";
+
 
 //import "./main.css";
 
@@ -79,6 +81,7 @@ function App() {
               <PrivateRoute path="/bill" component={Bill} />
               <PrivateRoute path="/senaraibill" component={SenaraiBil} />
               <PrivateRoute path="/payment" component={Payment} />
+              <PrivateRoute path="/add" component={Add} />
               <Route path="*" component={NotFound} />
             </Switch>
           </div>
