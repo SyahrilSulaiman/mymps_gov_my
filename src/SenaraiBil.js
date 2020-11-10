@@ -91,10 +91,8 @@ export default function SenaraiBil(props){
                     </div>
                 </div>
             </div>
-                </div>
-
-            <Footer/>
-            </div>
         </div>
+    </div>
+    </div>
     );
 }

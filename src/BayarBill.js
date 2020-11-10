@@ -12,8 +12,9 @@ import swal from "sweetalert";
 import { ResponsiveEmbed } from "react-bootstrap";
 import { BrowserRouter as Router,Switch, Route, Link, useParams, useRouteMatch } from "react-router-dom";
 import SenaraiBil from './SenaraiBil';
+import Carian from './Carian';
 
-function Profile(props) {
+function Bill(props) {
 
   const token   = getToken();
   const user    = getUser();
@@ -33,7 +34,6 @@ function Profile(props) {
 		tempoh:'Januari - Jun 2020',
 		status:'Telah dibayar'
 	});
-
 
 		// setDataset({
 		// 	...dataset,
@@ -80,6 +80,8 @@ function Profile(props) {
   
   const handleViewBill = (e) => {
 		// set=[e.target.id]
+		// return (
+		// 	 senarai = <Senarai />
 		console.log('View');
 		window.location.href = "/senaraibill";
 	}
@@ -217,12 +219,14 @@ function Profile(props) {
 				</div>
 				
 			</div>
+				
+				<Carian />
+				<SenaraiBil />
 
-		
         <Footer />
       </div>
     </div>
   );
 }
 
-export default Profile;
+export default Bill;
