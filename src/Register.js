@@ -29,8 +29,8 @@ function Register(props) {
   const [error, setError]     = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleRegisterIndividu = () => {
-    
+  const handleRegisterIndividu = (e) => {
+    e.preventDefault();
     setError(null);
     setLoading(true);
 
@@ -119,8 +119,9 @@ function Register(props) {
     }
   };
 
-  const handleRegisterSyarikat = () => {
+  const handleRegisterSyarikat = (e) => {
 
+    e.preventDefault();
     setError(null);
     setLoading(true);
 
@@ -270,7 +271,7 @@ function Register(props) {
                           <div className="flex-auto">
                             <div className="tab-content tab-space">
                               <div className={openTab === 1 ? "block" : "hidden"} id="link1">
-
+<form onSubmit={ (e) => handleRegisterIndividu(e)}>
                                 <div className="col-span-6 sm:col-span-3 p-2" style={{marginTop: "30px"}}>
                                   <label for="first_name" className="block text-sm font-medium leading-5 text-gray-700">Nama Penuh</label>
                                   <input {...username} id="name" placeholder="cth: adrian" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
@@ -307,15 +308,15 @@ function Register(props) {
                                 </div>
 
                                 <button
-                                    type="button"
-                                    onClick={handleRegisterIndividu}
+                                    type="submit"
+                                    
                                     class="w-full text-center rounded bg-green-500 text-white hover:bg-green-600 focus:outline-none my-5 p-2"
                                 >Daftar Pengguna
                                 </button>
-
+</form>
                               </div>
                               <div className={openTab === 2 ? "block" : "hidden"} id="link2">
-                                
+<form onSubmit={ (e) => handleRegisterSyarikat(e)}>
                                 <div className="col-span-6 sm:col-span-3 p-2" style={{marginTop: "30px"}}>
                                   <label for="first_name" className="block text-sm font-medium leading-5 text-gray-700">Nama Penuh</label>
                                   <input {...username} id="name" placeholder="cth: adrian" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
@@ -352,11 +353,11 @@ function Register(props) {
                                 </div>
 
                                 <button
-                                    type="button"
-                                    onClick={handleRegisterSyarikat}
+                                    type="submit"
                                     class="w-full text-center rounded bg-green-500 text-white hover:bg-green-600 focus:outline-none my-5 p-2"
                                 >Daftar Pengguna
                                 </button>
+</form>
                               </div>
                             </div>
                           </div>

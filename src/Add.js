@@ -20,12 +20,19 @@ export default function Carian({props}){
     const handleSearch = (e) => {
         e.preventDefault();
         // + something something something
-        //
-        axios.post('https://jsonplaceholder.typicode.com/todos')
+        let formdata = new FormData();
+        formdata.append('id',id.value)
+        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill',formdata)
         .then(response=>{
-            console.log(response.status)
-            swal('Berjaya Tambah','Berjaya tambah akaun untuk pembayaran','success')
-            window.location.href = '/bill';
+
+            if(response.status == "success"){
+                console.log(response.status)
+                swal('Berjaya Tambah','Berjaya tambah akaun untuk pembayaran','success')
+                window.location.href = '/bill';
+            }
+            else{
+                swal('Tidak Berjaya','No Akaun tidak dijumpai','error')
+            }
         })
         // .catch(err => {errors: err.response});
 

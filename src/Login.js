@@ -66,7 +66,8 @@ function Login(props){
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const handleLogin = () => {
+    const handleLogin = (e) => {
+        e.preventDefault();
         setError(null);
         setLoading(true);
 
@@ -135,11 +136,11 @@ function Login(props){
                     Log Masuk
                 </h2>
                 </div>
-                <form className="mt-8">
+                <form className="mt-8"  onSubmit={ (e) => handleLogin(e)}>
                 <input type="hidden" name="remember" value="true" />
                 <div className="rounded-md shadow-sm">
                     <div>
-                    <input aria-label="Email" {...username} name="email" type="email" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kad Pengenalan" />
+                    <input aria-label="Email" {...username} name="email" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kad Pengenalan" />
                     </div>
                     <div className="-mt-px">
                     <input aria-label="Password" {...password} name="password" type="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kata Laluan" />
@@ -181,7 +182,7 @@ function Login(props){
                         buttonText="Login"
                         cookiePolicy={'single_host_origin'}
                     /> */}
-                    <button type="button" onClick={handleLogin} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                    <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                         {loading ? 'Memuatkan...' : 'Log Masuk'}
                     </button>
                 </div>
