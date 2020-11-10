@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+} from "react-router-dom";
 
 import PrivateRoute from "./Utils/PrivateRoute";
 import PublicRoute from "./Utils/PublicRoute";
 import GoogleRoute from "./Utils/GoogleRoute";
-import { getToken, getNOKP, getUser, getEmail, removeUserSession, setUserSession } from "./Utils/Common";
+import {
+  getToken,
+  getNOKP,
+  getUser,
+  getEmail,
+  removeUserSession,
+  setUserSession,
+} from "./Utils/Common";
 
 import Login from "./Login";
 import Dashboard from "./Dashboard";
@@ -19,50 +31,58 @@ import SenaraiBil from "./SenaraiBil";
 import Payment from "./Payment";
 import Add from "./Add";
 
+import { useLoading, Audio } from "@agney/react-loading";
 
 //import "./main.css";
 
 function App() {
-
   const [authLoading, setAuthLoading] = useState(true);
+  const { containerProps, indicatorEl } = useLoading({
+    loading: true,
+    indicator: <Audio width="50" />,
+  });
 
   useEffect(() => {
+    if (getEmail() && getEmail()) {
+      var formdata = new FormData();
+      formdata.append("nokp", getNOKP());
+      formdata.append("email", getEmail());
 
-    if(getEmail() && getEmail())
-    {
-        var formdata = new FormData();
-        formdata.append("nokp", getNOKP());
-        formdata.append("email", getEmail());
-
-        var requestOptions = {
-        method: 'POST',
+      var requestOptions = {
+        method: "POST",
         body: formdata,
-        redirect: 'follow'
-        };
+        redirect: "follow",
+      };
 
-        var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=check_session";
+      var urlAPI =
+        "https://mymps.corrad.my/int/api_generator.php?api_name=check_session";
 
-        fetch(urlAPI, requestOptions)
-        .then(response => response.json())
+      fetch(urlAPI, requestOptions)
+        .then((response) => response.json())
         .then((result) => {
-          
-          setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"]);
+          setUserSession(
+            btoa(result.data[0]),
+            result.data[0]["MPS_USERNAME"],
+            result.data[0]["MPS_USERIC"],
+            result.data[0]["MPS_USEREMAIL"]
+          );
           setAuthLoading(false);
           // window.location.href="/home";
-
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error);
           removeUserSession();
           setAuthLoading(false);
-
         });
     }
-    
   }, []);
 
   if (authLoading && getToken()) {
-    return <div className="content">Checking Authentication...</div>;
+    return (
+      <section {...containerProps} style={{position:'absolute',top:0,left:0,right:0,bottom:0,}}>
+        {indicatorEl} {/* renders only while loading */}
+      </section>
+    );
   }
 
   return (
