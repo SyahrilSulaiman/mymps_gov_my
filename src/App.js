@@ -99,6 +99,7 @@ function App() {
               <PrivateRoute path="/home" component={Dashboard} />
               <PrivateRoute path="/setting" component={Setting} />
               <PrivateRoute path="/bill" component={Bill} />
+              <PrivateRoute path="/senaraibill" component={SenaraiBil} />
               <PrivateRoute path="/payment" component={Payment} />
               <PrivateRoute path="/add" component={Add} />
               <Route path="*" component={NotFound} />

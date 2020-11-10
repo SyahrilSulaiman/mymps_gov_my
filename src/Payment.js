@@ -1,17 +1,15 @@
 import React, {useState, useEffect} from "react";
 import Footer from "./components/Footers/Footer";
 import axios from 'axios';
+import swal from "sweetalert";
 
-import ABB0223 from "./assets/img/ABB0233.png";
 
 function Pay(){
 
     const [data, setData] = useState([{"CODE":"BIMB1234","NAME":"BANK ISLAM"}]);
-    var All = [];
+    const [bankCode, setBankCode] = useState("");
 
-    const handleClick = (e) => {
-        alert(e.target.attributes.getNamedItem("data-bankcode").value);
-    }
+    var All = [];
 
     useEffect(async () => {
 
@@ -22,10 +20,36 @@ function Pay(){
         })
     }, [])
 
+    const handleClick = (bankcode) => {
+        console.log(bankcode);
+        setBankCode(bankcode);
+        document.getElementById("inputBank").value = bankcode;
+    }
+
+    const handleBayar = () => {
+        var name = document.getElementById("nama").value;
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+        var bank = document.getElementById("inputBank").value;
+
+        if(name == ""){
+            swal("Ralat!", "Sila lengkapkan maklumat nama pembayar sebelum membuat pembayaran.","error");
+        }else if(email == ""){
+            swal("Ralat!", "Sila lengkapkan maklumat emel pembayar sebelum membuat pembayaran.","error");
+        }else if(phone == ""){
+            swal("Ralat!", "Sila lengkapkan maklumat nombor telefon pembayar sebelum membuat pembayaran.","error");
+        }else if(bank == ""){
+            swal("Ralat!", "Sila membuat pilihan bank sebelum membuat pembayaran.","error");
+        }else{
+            document.getElementById("bayar").submit();
+        }
+        
+    }
+
     //console.log("Data : " + (data[0].NAME));
     for(var i = 0; i < data.length; i++){
-        All.push(<div key={data[i].CODE} className="bg-gray-300 text-gray-700 text-center mx-center" style={{padding:"4px", margin:"2px"}} data-bankcode={data[i].CODE} onClick={(e) => handleClick(data[i].CODE)}>
-            <img className="mx-auto" style={{height:"40px", width:"40px"}} src={"https://dev1.toyyibpay.com/asset/img/logobank/"+data[i].CODE+".png"}/> <br /> {data[i].NAME}</div>);
+        All.push(<button type="button" key={i} className="bg-gray-300 text-gray-700 text-center mx-center" style={{padding:"4px", margin:"2px"}} value={data[i].CODE} onClick={ e => handleClick(e.target.value)}>
+            <img className="mx-auto" style={{height:"40px", width:"40px"}} src={"https://dev1.toyyibpay.com/asset/img/logobank/"+data[i].CODE+".png"}/> <br /> {data[i].NAME}</button>);
     }
 
     return (
@@ -103,7 +127,7 @@ function Pay(){
                     </p>
                 </div>
                 <div>
-                    <form action="https://epstaging.mps.gov.my/fpx/sd.php" method="post">
+                    <form action="" method="post">
                     <dl>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm leading-5 font-medium text-gray-500">
@@ -111,7 +135,7 @@ function Pay(){
                         </dt>
                         <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                         <div>
-                            <input aria-label="nama"  name="nama" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: Kassim" />
+                            <input value={sessionStorage.getItem("username")} aria-label="nama" name="nama" id="nama" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: Kassim" />
                         </div>
                         </dd>
                     </div>
@@ -121,7 +145,7 @@ function Pay(){
                         </dt>
                         <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                         <div>
-                            <input aria-label="emel"  name="email" type="email" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: admin@gmail.com" />
+                            <input value={sessionStorage.getItem("email")} aria-label="emel"  name="email" id="email" type="email" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: admin@gmail.com" />
                         </div>
                         </dd>
                     </div>
@@ -131,12 +155,12 @@ function Pay(){
                         </dt>
                         <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                         <div>
-                            <input aria-label="phone"  name="phone" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: admin@gmail.com" />
+                            <input value={sessionStorage.getItem("notel")} aria-label="phone" name="phone" id="phone" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: admin@gmail.com" />
                         </div>
                         </dd>
                     </div>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt className="text-sm leading-5 font-medium text-gray-500">
+                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
+                        <dt className="text-sm leading-5 font-medium text-gray-500 ">
                         Senarai Bank
                         </dt>
                         <dd className="flex flex-wrap mt-1 text-sm leading-5 text-gray-500 sm:col-span-2">
@@ -148,19 +172,31 @@ function Pay(){
                         
                         </dt>
 
-                        <input type="hidden" name="payment_ref_no" value={"MYM"+Date.now()}/>
-                        <input type="hidden" name="bank" value="TEST0021"/>
-                        <input type="hidden" name="channel" value="01"/>
-                        <input type="hidden" name="web_return_address" value="https://mymps.corrad.my"/>
-                        <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php"/>
-                        <input type="hidden" name="payment_amount" value="40.00"/>
-                        <input type="hidden" name="payment_description" value={"Cukai Taksiran A929739"}/>
+                        <dd className="flex flex-wrap mt-1 text-sm leading-5 text-gray-500 sm:col-span-2">
+                            <p className="flex flex-wrap mt-5 text-md text-red-500">*Sila pastikan semua maklumat lengkap dan betul sebelum membuat pembayaran. Anda akan diubah hala ke halaman bank untuk membuat pembayaran.</p>
+                        </dd>
+                        <dt className="text-sm leading-5 font-medium text-gray-500">
+                        
+                        </dt>
 
                         <dd className="flex flex-wrap mt-1 text-sm leading-5 text-gray-500 sm:col-span-2">
-                            <button className="text-white bg-green-500 py-3 px-5 rounded-lg w-auto inline-block">Bayar</button>
+                            <button type="button" className="text-white bg-green-500 py-3 px-5 rounded-lg w-full inline-block mt-5" onClick={() => handleBayar()}>Bayar</button>
                         </dd>
                     </div>
                     </dl>
+                    </form>
+                </div>
+                
+                <div>
+                    <form action="https://epstaging.mps.gov.my/fpx/sd.php" method="post" id="bayar">
+                        <input type="hidden" name="payment_ref_no" value={"MYM"+Date.now()}/>
+                        <input type="hidden" name="bank" id="inputBank"/>
+                        <input type="hidden" name="channel" value="01"/>
+                        <input type="hidden" name="web_return_address" value="https://www.google.com"/>
+                        <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php"/>
+                        <input type="hidden" name="payment_amount" value="40.00"/>
+                        <input type="hidden" name="payment_description" value={"Cukai Taksiran A929739"}/>
+                        <input type="hidden" name="email" value={sessionStorage.getItem("email")}/>
                     </form>
                 </div>
             </div>

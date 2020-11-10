@@ -188,6 +188,7 @@ function Login(props){
                 </form>
             </div>
         </div>
+        
         </section>
         <Footer />
         </div>

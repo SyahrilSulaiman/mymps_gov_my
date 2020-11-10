@@ -80,8 +80,9 @@ export default function Carian({props}){
                         </div>
                     </div>
                 </div>
-                </div>
                 <Footer />
+                </div>
+                
             </div>
             );
     }
