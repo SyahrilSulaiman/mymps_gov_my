@@ -80,7 +80,7 @@ export default function BillList(){
                                             </h5>
                                         </div>
                                         <div className="relative w-auto pl-4 flex-initial">
-                                            <h5 className="uppercase font-medium text-xs text-green-600">
+                                            <h5 className="uppercase font-medium text-xs text-red-600">
                                             {
                                             // dataset.status
                                             bill.status

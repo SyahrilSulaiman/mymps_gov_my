@@ -41,7 +41,30 @@ function Pay(){
         }else if(bank == ""){
             swal("Ralat!", "Sila membuat pilihan bank sebelum membuat pembayaran.","error");
         }else{
-            document.getElementById("bayar").submit();
+
+            var formdata = new FormData();
+            formdata.append("accountId", document.getElementById("account_no").value);
+            formdata.append("amount", document.getElementById("payment_amount").value);
+            formdata.append("invoiceNo", document.getElementById("payment_ref_no").value);
+
+            var requestOptions = {
+                method: 'POST',
+                body: formdata,
+                redirect: 'follow'
+            };
+
+            var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=register_payment';
+
+            fetch(urlAPI1 , requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                if(result.status == "success"){
+                    document.getElementById("bayar").submit();
+                }else{
+                    swal("Ralat", "Sila lengkapkan maklumat pembayar dan pastikan maklumat adalah benar dah sah sebelum mebuat pembayaran cukai.","error");
+                }
+            })
+                
         }
         
     }
@@ -49,7 +72,7 @@ function Pay(){
     //console.log("Data : " + (data[0].NAME));
     for(var i = 0; i < data.length; i++){
         All.push(<button type="button" key={i} className="bg-gray-300 text-gray-700 text-center mx-center" style={{padding:"4px", margin:"2px"}} value={data[i].CODE} onClick={ e => handleClick(e.target.value)}>
-            <img className="mx-auto" style={{height:"40px", width:"40px"}} src={"https://dev1.toyyibpay.com/asset/img/logobank/"+data[i].CODE+".png"}/> <br /> {data[i].NAME}</button>);
+            <img className="mx-auto" style={{height:"40px", width:"40px"}} src={"https://dev1.toyyibpay.com/asset/img/logobank/"+data[i].CODE+".png"} /> <br /> {data[i].NAME}</button>);
     }
 
     return (
@@ -155,7 +178,7 @@ function Pay(){
                         </dt>
                         <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                         <div>
-                            <input value={sessionStorage.getItem("notel")} aria-label="phone" name="phone" id="phone" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: admin@gmail.com" />
+                            <input value={sessionStorage.getItem("notel")} aria-label="phone" name="phone" id="phone" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: 0123456789" />
                         </div>
                         </dd>
                     </div>
@@ -189,12 +212,13 @@ function Pay(){
                 
                 <div>
                     <form action="https://epstaging.mps.gov.my/fpx/sd.php" method="post" id="bayar">
-                        <input type="hidden" name="payment_ref_no" value={"MYM"+Date.now()}/>
+                        <input type="hidden" name="account_no" id="account_no" value="A929739" />
+                        <input type="hidden" name="payment_ref_no" id="payment_ref_no" value={"MYM"+Date.now()}/>
                         <input type="hidden" name="bank" id="inputBank"/>
-                        <input type="hidden" name="channel" value="01"/>
-                        <input type="hidden" name="web_return_address" value="https://www.google.com"/>
+                        <input type="hidden" name="channel" id="channel" value="01"/>
+                        <input type="hidden" name="web_return_address" value="https://mymps.corrad.my"/>
                         <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php"/>
-                        <input type="hidden" name="payment_amount" value="40.00"/>
+                        <input type="hidden" name="payment_amount" id="payment_amount" value="40.00"/>
                         <input type="hidden" name="payment_description" value={"Cukai Taksiran A929739"}/>
                         <input type="hidden" name="email" value={sessionStorage.getItem("email")}/>
                     </form>
