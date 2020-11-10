@@ -57,9 +57,10 @@ export default function BillList(){
                                             </span>	
                                         </div>
                                         <div className="relative w-auto pl-4 flex-initial">
-                                            <span className="font-semibold text-lg text-gray-800">
+                                            <span className="font-semibold text-lg text-gray-800">RM&nbsp;
                                             {
                                                 //dataset.amaun
+                                                bill.amaun
                                             }
                                             </span>	
                                         </div>
