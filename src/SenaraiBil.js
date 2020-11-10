@@ -2,18 +2,15 @@ import React, {useState, useEffect} from 'react'
 // import { Link } from "react-router-dom";
 // import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 // import MainDashboard from "./views/admin/Dashboard";
+// import Footer from "./components/Footers/Footer";
+// import Sidebar from "./Sidebar";
+// import Navbar from "./components/Navbars/AdminNavbar";
 
-import Footer from "./components/Footers/Footer";
-import Sidebar from "./Sidebar";
-import Navbar from "./components/Navbars/AdminNavbar";
 
 export default function SenaraiBil(props){
 
     return (
         <div>
-            <Sidebar/>
-            <div className="relative md:ml-64 bg-gray-400">
-                <Navbar />
                 <div className="relative bg-gray-600 md:pt-32 pt-4 pb-4" style={{height: "90vh"}}>
                 <div className="px-4 md:px-10 mx-auto w-full">
                 <div className="flex flex-wrap">
@@ -92,9 +89,6 @@ export default function SenaraiBil(props){
                 </div>
             </div>
                 </div>
-
-            <Footer/>
-            </div>
         </div>
     );
 }
