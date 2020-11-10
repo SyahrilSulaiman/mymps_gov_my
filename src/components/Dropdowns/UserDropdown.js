@@ -65,7 +65,7 @@ const UserDropdown = () => {
           }
           onClick={handleLogout}
         >
-          Logout
+          Log Keluar
         </a>
       </div>
     </>

@@ -12,8 +12,9 @@ import swal from "sweetalert";
 import { ResponsiveEmbed } from "react-bootstrap";
 import { BrowserRouter as Router,Switch, Route, Link, useParams, useRouteMatch } from "react-router-dom";
 import SenaraiBil from './SenaraiBil';
+import Carian from "./Carian";
 
-function Profile(props) {
+function Bill(props) {
 
   const token   = getToken();
   const user    = getUser();
@@ -104,6 +105,7 @@ function Profile(props) {
       <div className="relative md:ml-64 bg-gray-400" style={{ height: "100%" }}>
         <Navbar />
 				{/* Header */}
+				<Carian />
 				<div className="relative bg-gray-600 md:pt-32 pt-4 pb-4" style={{height: "90vh"}}>
 
 
@@ -225,4 +227,4 @@ function Profile(props) {
   );
 }
 
-export default Profile;
+export default Bill;
