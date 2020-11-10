@@ -9,9 +9,13 @@ function Pay(){
     const [data, setData] = useState([{"CODE":"BIMB1234","NAME":"BANK ISLAM"}]);
     var All = [];
 
+    const handleClick = (e) => {
+        alert(e.target.attributes.getNamedItem("data-bankcode").value);
+    }
+
     useEffect(async () => {
 
-        await fetch('https://toyyibpay.com/api/getBankFPX')
+        await fetch('https://dev.toyyibpay.com/api/getBankFPX')
         .then(response => response.json())
         .then(result => {
             setData(result);
@@ -20,8 +24,8 @@ function Pay(){
 
     //console.log("Data : " + (data[0].NAME));
     for(var i = 0; i < data.length; i++){
-        All.push(<div key={data[i].CODE} className="bg-gray-300 text-gray-700 text-center mx-center" style={{padding:"10px", margin:"5px"}} data-bankcode={data[i].CODE}>
-            <img className="mx-auto" src={"./assets/img/"+data[i].CODE+".png"}/> <br /> {data[i].NAME}</div>);
+        All.push(<div key={data[i].CODE} className="bg-gray-300 text-gray-700 text-center mx-center" style={{padding:"4px", margin:"2px"}} data-bankcode={data[i].CODE} onClick={(e) => handleClick(data[i].CODE)}>
+            <img className="mx-auto" style={{height:"40px", width:"40px"}} src={"https://dev1.toyyibpay.com/asset/img/logobank/"+data[i].CODE+".png"}/> <br /> {data[i].NAME}</div>);
     }
 
     return (
@@ -148,12 +152,12 @@ function Pay(){
                         <input type="hidden" name="bank" value="TEST0021"/>
                         <input type="hidden" name="channel" value="01"/>
                         <input type="hidden" name="web_return_address" value="https://mymps.corrad.my"/>
-                        <input type="hidden" name="web_return_service_address" value="https://mymps.corrad.my"/>
+                        <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php"/>
                         <input type="hidden" name="payment_amount" value="40.00"/>
                         <input type="hidden" name="payment_description" value={"Cukai Taksiran A929739"}/>
 
                         <dd className="flex flex-wrap mt-1 text-sm leading-5 text-gray-500 sm:col-span-2">
-                            <button className="text-white bg-green-500 py-3 px-5 rounded-lg float-right">Bayar</button>
+                            <button className="text-white bg-green-500 py-3 px-5 rounded-lg w-auto inline-block">Bayar</button>
                         </dd>
                     </div>
                     </dl>
