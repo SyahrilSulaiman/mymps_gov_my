@@ -14,7 +14,7 @@ import { BrowserRouter as Router,Switch,	Route, Link, useParams,	useRouteMatch }
 import SenaraiBil from './SenaraiBil';
 import Carian from './Carian';
 
-function Profile(props) {
+function Bill(props) {
 
   const token   = getToken();
   const user    = getUser();
@@ -223,4 +223,4 @@ function Profile(props) {
   );
 }
 
-export default Profile;
+export default Bill;
