@@ -106,7 +106,14 @@ function Login(props){
                 else if(result.status == "success")
                 {
                     setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"]);
-                    props.history.push('/bill');
+                    sessionStorage.setItem("role", result.data[0]["MPS_USERROLE"]);
+
+                    if(result.data[0]['MPS_USERROLE'] == "Admin"){
+                        props.history.push('/admin/dashboard');
+                    }else{
+                        props.history.push('/bill');
+                    }
+                    
                 }
 
             })

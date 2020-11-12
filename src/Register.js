@@ -105,7 +105,7 @@ function Register(props) {
             setLoading("false");
             swal("Tahniah!","Pendaftaran sebagai pengguna MyMPS berjaya! Sila sahkan akaun anda sebagai pengguna melalui klik pada pautan di emel anda.","success");
 
-            //setUserSession(btoa(formdata), username.value, nokp.value, email.value);
+            setUserSession(btoa(formdata), username.value, nokp.value, email.value);
             props.history.push("/login");
 
           }else{

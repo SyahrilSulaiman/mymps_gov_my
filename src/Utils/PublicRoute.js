@@ -4,12 +4,26 @@ import { getToken } from './Common';
 
 // handle the public routes
 function PublicRoute({ component: Component, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={(props) => !getToken() ? <Component {...props} /> : <Redirect to={{ pathname: '/home' }} />}
-    />
-  )
+  if(sessionStorage.getItem("role") == "Admin"){
+
+    return (
+      <Route
+        {...rest}
+        render={(props) => !getToken() ? <Component {...props} /> : <Redirect to={{ pathname: '/admin/dashboard' }} />}
+      />
+    )
+
+  }else{
+
+    return (
+      <Route
+        {...rest}
+        render={(props) => !getToken() ? <Component {...props} /> : <Redirect to={{ pathname: '/home' }} />}
+      />
+    )
+
+  }
+  
 }
 
 export default PublicRoute;

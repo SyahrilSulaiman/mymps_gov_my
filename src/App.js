@@ -31,6 +31,8 @@ import SenaraiBil from "./SenaraiBil";
 import Payment from "./Payment";
 import Add from "./Add";
 
+import Admin_Dashboard from "./admin/Dashboard_Admin";
+
 import { useLoading, Audio } from "@agney/react-loading";
 
 //import "./main.css";
@@ -66,6 +68,10 @@ function App() {
             result.data[0]["MPS_USERIC"],
             result.data[0]["MPS_USEREMAIL"]
           );
+          sessionStorage.setItem("role", result.data[0]["MPS_USERROLE"]);
+          if (result.data[0]["MPS_USERROLE"] == "Admin") {
+            //window.location.href = "/admin/dashboard";
+          }
           setAuthLoading(false);
           // window.location.href="/home";
         })
@@ -79,36 +85,101 @@ function App() {
 
   if (authLoading && getToken()) {
     return (
-      <section {...containerProps} style={{position:'absolute',top:0,left:0,right:0,bottom:0,}}>
+      <section
+        {...containerProps}
+        style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+      >
         {indicatorEl} {/* renders only while loading */}
       </section>
     );
   }
 
-  return (
-    <div className="App">
-      <Router>
-        <div>
-          <div className="content">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <PublicRoute path="/login" component={Login} />
-              <PublicRoute path="/register" component={Register} />
-              <GoogleRoute path="/verifyuser" component={GoogleLogin} />
-              <PublicRoute path="/forgotpassword" component={ForgotPassword} />
-              <PrivateRoute path="/home" component={Dashboard} />
-              <PrivateRoute path="/setting" component={Setting} />
-              <PrivateRoute path="/bill" component={Bill} />
-              <PrivateRoute path="/senaraibill" component={SenaraiBil} />
-              <PrivateRoute path="/payment" component={Payment} />
-              <PrivateRoute path="/add" component={Add} />
-              <Route path="*" component={NotFound} />
-            </Switch>
+  if (sessionStorage.getItem("role") == "Admin") {
+    return (
+      <div className="App">
+        <Router>
+          <div>
+            <div className="content">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <PublicRoute path="/login" component={Login} />
+                <PublicRoute path="/register" component={Register} />
+                <PublicRoute
+                  path="/forgotpassword"
+                  component={ForgotPassword}
+                />
+                <PrivateRoute
+                  path="/admin/dashboard"
+                  component={Admin_Dashboard}
+                />
+                <Route path="*" component={NotFound} />
+              </Switch>
+            </div>
           </div>
-        </div>
-      </Router>
-    </div>
-  );
+        </Router>
+      </div>
+    );
+  } else if (sessionStorage.getItem("role") == "User") {
+    return (
+      <div className="App">
+        <Router>
+          <div>
+            <div className="content">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <PublicRoute path="/login" component={Login} />
+                <PublicRoute path="/register" component={Register} />
+                <GoogleRoute path="/verifyuser" component={GoogleLogin} />
+                <PublicRoute
+                  path="/forgotpassword"
+                  component={ForgotPassword}
+                />
+                <PrivateRoute path="/home" component={Dashboard} />
+                <PrivateRoute path="/setting" component={Setting} />
+                <PrivateRoute path="/bill" component={Bill} />
+                <PrivateRoute path="/senaraibill" component={SenaraiBil} />
+                <PrivateRoute path="/payment" component={Payment} />
+                <PrivateRoute path="/add" component={Add} />
+                <Route path="*" component={NotFound} />
+              </Switch>
+            </div>
+          </div>
+        </Router>
+      </div>
+    );
+  } else {
+    return (
+      <div className="App">
+        <Router>
+          <div>
+            <div className="content">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <PublicRoute path="/login" component={Login} />
+                <PublicRoute path="/register" component={Register} />
+                <PrivateRoute path="/home" component={Dashboard} />
+                <PrivateRoute path="/setting" component={Setting} />
+                <PrivateRoute path="/bill" component={Bill} />
+                <PrivateRoute path="/senaraibill" component={SenaraiBil} />
+                <PrivateRoute path="/payment" component={Payment} />
+                <PrivateRoute path="/add" component={Add} />
+                <PublicRoute
+                  path="/forgotpassword"
+                  component={ForgotPassword}
+                />
+                <PrivateRoute
+                  path="/admin/dashboard"
+                  component={Admin_Dashboard}
+                />
+                <PrivateRoute path="/home" component={Dashboard} />
+                <Route path="*" component={NotFound} />
+              </Switch>
+            </div>
+          </div>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
