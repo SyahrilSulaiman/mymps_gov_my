@@ -106,7 +106,14 @@ function Login(props){
                 else if(result.status == "success")
                 {
                     setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"]);
-                    props.history.push('/bill');
+                    sessionStorage.setItem("role", result.data[0]["MPS_USERROLE"]);
+
+                    if(result.data[0]['MPS_USERROLE'] == "Admin"){
+                        props.history.push('/admin/dashboard');
+                    }else{
+                        props.history.push('/bill');
+                    }
+                    
                 }
 
             })
@@ -140,7 +147,7 @@ function Login(props){
                 <input type="hidden" name="remember" value="true" />
                 <div className="rounded-md shadow-sm">
                     <div>
-                    <input aria-label="Email" {...username} name="email" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kad Pengenalan" />
+                    <input aria-label="Email" {...username} name="email" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kad Pengenalan / No. Syarikat" />
                     </div>
                     <div className="-mt-px">
                     <input aria-label="Password" {...password} name="password" type="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kata Laluan" />

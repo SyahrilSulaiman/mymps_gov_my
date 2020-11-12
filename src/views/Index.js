@@ -165,7 +165,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="pb-16 bg-gray-300 relative pt-32">
+      {/* <section className="pb-16 bg-gray-300 relative pt-32">
         <div
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
           style={{ transform: "translateZ(0)" }}
@@ -217,7 +217,7 @@ export default function Index() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       <Footer />
     </>
   );

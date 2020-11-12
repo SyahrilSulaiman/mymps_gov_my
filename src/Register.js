@@ -86,6 +86,7 @@ function Register(props) {
         formdata.append("email", email.value);
         formdata.append("nokp", nokp.value);
         formdata.append("notel", notel.value);
+        formdata.append("type","individu");
 
         var requestOptions = {
         method: 'POST',
@@ -104,7 +105,7 @@ function Register(props) {
             setLoading("false");
             swal("Tahniah!","Pendaftaran sebagai pengguna MyMPS berjaya! Sila sahkan akaun anda sebagai pengguna melalui klik pada pautan di emel anda.","success");
 
-            //setUserSession(btoa(formdata), username.value, nokp.value, email.value);
+            setUserSession(btoa(formdata), username.value, nokp.value, email.value);
             props.history.push("/login");
 
           }else{
@@ -169,6 +170,7 @@ function Register(props) {
         formdata.append("email", email.value);
         formdata.append("nokp", ssm.value);
         formdata.append("notel", notel.value);
+        formdata.append("type","syarikat");
 
         var requestOptions = {
         method: 'POST',
