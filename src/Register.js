@@ -86,6 +86,7 @@ function Register(props) {
         formdata.append("email", email.value);
         formdata.append("nokp", nokp.value);
         formdata.append("notel", notel.value);
+        formdata.append("type","individu");
 
         var requestOptions = {
         method: 'POST',
@@ -169,6 +170,7 @@ function Register(props) {
         formdata.append("email", email.value);
         formdata.append("nokp", ssm.value);
         formdata.append("notel", notel.value);
+        formdata.append("type","syarikat");
 
         var requestOptions = {
         method: 'POST',

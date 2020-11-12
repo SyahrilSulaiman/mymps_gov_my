@@ -30,9 +30,7 @@ function Dashboard(props) {
           <div className="px-4 md:px-10 mx-auto w-full">
             <div>
 
-              {/* Card stats */}
               <div className="flex flex-wrap">
-                
                 <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
                   <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                     <div className="flex-auto p-4">
@@ -111,14 +109,6 @@ function Dashboard(props) {
                           </div>
                         </div>
                       </div>
-                      {/* <p className="text-sm text-gray-500 mt-4">
-                        <span className="text-orange-500 mr-2">
-                          <i className="fas fa-arrow-down"></i> 1.10%
-                        </span>
-                        <span className="whitespace-no-wrap">
-                          Since yesterday
-                        </span>
-                      </p> */}
                     </div>
                   </div>
                 </div>
