@@ -70,15 +70,15 @@ export default function Carian({bill, display}){
                                             {
                                             // dataset.jenis
                                             // bill.type
-                                            bill.noakaun
+                                                bill.nokp
                                             }
                                             </span>	
                                         </div>
                                         <div className="relative w-auto pl-4 flex-initial">
-                                            <span className="font-semibold uppercase text-lg text-gray-800">
+                                            <span className="font-semibold uppercase text-lg text-gray-800">Akaun :&nbsp;
                                             {
                                                 //dataset.amaun
-                                                // bill.amaun
+                                                bill.noakaun
                                             }
                                             </span>	
                                         </div>
@@ -96,14 +96,7 @@ export default function Carian({bill, display}){
                                             {
                                             // dataset.tempoh
                                             // bill.description
-                                            }
-                                            </h5>
-                                        </div>
-                                        <div className="relative w-auto pl-4 flex-initial">
-                                            <h5 className="uppercase font-medium text-xs text-red-600">
-                                            {
-                                            // dataset.status
-                                            // bill.status
+                                            bill.add_harta
                                             }
                                             </h5>
                                         </div>
