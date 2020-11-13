@@ -24,7 +24,7 @@ function ForgetPassword(props){
 
         if(username.value == ""){
 
-            swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah", "error");
+            swal("Opss!", "Emel tidak boleh dikosongkan.", "error");
             setLoading(false);
 
         }else{
@@ -49,7 +49,7 @@ function ForgetPassword(props){
                 if(result.status == "unsuccess")
                 {
                     console.log(result);
-                    swal("Opss!", "Sila pastikan emel atau kad pengenalan anda sah", "error");
+                    swal("Opss!", "Sila pastikan emel anda telah diisi dan sah.", "error");
                     return false;
                 }
                 else if(result.status == "pending"){
