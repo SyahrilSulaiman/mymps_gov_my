@@ -1,10 +1,13 @@
 import React, {Component, useState, useEffect} from 'react';
 import axios from 'axios';
+import {getNOKP} from './Utils/Common';
+import swal from 'sweetalert';
 
 export default function BillList(){
 
-	sessionStorage.removeItem("cukai");
-
+    sessionStorage.removeItem("cukai");
+    const nokp = getNOKP();
+    const displayKP = '<h5 className="uppercase font-medium text-xs text-gray-600">No Kad Pengenalan </h5>'
     const handleViewBill = (e) => {
 		// set=[e.target.id]
 		// return (
@@ -22,74 +25,73 @@ export default function BillList(){
     }
     
     const [dataset, setDataSet] = useState({
-        datas: []
+        data: []
     });
 
     
     useEffect (() => {
-        axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=getBill')
+        const formData = new FormData();
+        formData.append('nokp',nokp);
+        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=showBill',formData)
         .then(res => {
-            console.log(res.data.data)
-            setDataSet({
-                datas:res.data.data
+            console.log(res.data)
+            if(res.data.status === 'success'){
+                // swal('jadi','x','success');
+                setDataSet({
+                    data:res.data.data
                 })
             }
-        )
+            else{
+                swal('Tiada Akaun Didaftarkan','Sila menambah akaun untuk dibayar','info');
+            }
+
+        })
+        .catch(err => {
+            console.log(err);
+            swal('Ralat','Sila hubungi pentadbir sistem!','error');
+        })
 
     },[])
+    const emptyHandler = () => {
+        console.log('Test Handler');
+    }
 
-    const bills = dataset.datas.length ? (
-        dataset.datas.map(bill => {
+    const bills = dataset.data.length ? (
+        dataset.data.map(bill => {
             return (
                 <div className="px-4 md:px-2 mx-auto w-full"
                  onClick={
-                     //condition xbetul
-                     (bill.status.toUpperCase() == 'TERTUNGGAK' || bill.status.toUpperCase() == 'Tertunggak') ? (() => handleBayar(bill.code, bill.amaun)):(handleViewBill)
+                     //betulkan status***
+                     (bill.STATUS === 'TERTUNGGAK' || bill.status == 'TERTUNGGAK') ? (() => handleBayar(bill.code, bill.amaun)):(handleViewBill)
                     }
-                key = {bill.id}>
+                key = {bill.NOAKAUN}>
                     <div className="flex flex-wrap">
                         <div className="w-full px-4">
                             <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg">
                                 <div className="flex-auto p-4">
                                     <div className="flex flex-row pt-4">
                                         <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                            <span className="font-semibold text-lg text-gray-800">
-                                            {
-                                            // dataset.jenis
-                                            bill.type
-                                            }
-                                            </span>	
-                                        </div>
-                                        <div className="relative w-auto pl-4 flex-initial">
-                                            <span className="font-semibold text-lg text-gray-800">RM&nbsp;
-                                            {
-                                                //dataset.amaun
-                                                bill.amaun
-                                            }
-                                            </span>	
+                                            <h5 className="uppercase font-medium text-xs text-gray-600">No Kad Pengenalan: <span className="font-semibold text-sm text-gray-800">{ (bill.NOKP === null) ? '-' : bill.NOKP }</span></h5>
                                         </div>
                                     </div>
                                     <div className="flex flex-row pb-4">
                                         <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                            <span className="font-semibold text-lg text-gray-800">
-                                            {
-                                            // dataset.akaun
-                                            bill.code
-                                            }
-                                            </span>	
-                                            <h5 className="uppercase font-medium text-xs text-gray-600">
-                                            {
-                                            // dataset.tempoh
-                                            bill.description
-                                            }
-                                            </h5>
+                                            <h5 className="uppercase font-medium text-xs text-gray-600">No Akaun: <span className="font-semibold text-sm text-gray-800">{ bill.NOAKAUN }</span></h5>
                                         </div>
-                                        <div className="relative w-auto pl-4 flex-initial">
-                                            <h5 className="uppercase font-medium text-xs text-red-600">
-                                            {
-                                            // dataset.status
-                                            bill.status
-                                            }
+                                    </div>
+                                    <div className="flex flex-row pb-4">
+                                        <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
+                                            <h5 className="uppercase font-medium text-xs text-gray-600">Nama Pemilik: <span className="font-semibold text-sm text-gray-800">{ bill.NAMA_PEMILIK }</span></h5>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-row pb-4">
+                                        <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
+                                            <h5 className="uppercase font-medium text-xs text-gray-600">Alamat Harta</h5>
+                                            <span className="font-semibold text-xs text-gray-800">{ bill.ADDRHARTA }</span>	
+                                        </div>
+                                        <div className="relative w-auto pl-4 flex-initial" >
+                                            <h5 
+                                                className={"uppercase font-medium text-xs"+(bill.STATUS === 'TERTUNGGAK' ? " text-red-600" : " text-green-600")}>{bill.STATUS}
                                             </h5>
                                         </div>
                                     </div>
