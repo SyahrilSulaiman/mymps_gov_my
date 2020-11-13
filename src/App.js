@@ -32,6 +32,9 @@ import Payment from "./Payment";
 import Add from "./Add";
 
 import Admin_Dashboard from "./admin/Dashboard_Admin";
+import Admin_Setting from "./admin/Setting_Admin";
+import Admin_UserManagement from "./admin/UserManagement_Admin";
+import Admin_Report from "./admin/Report_Admin";
 
 import { useLoading, Audio } from "@agney/react-loading";
 
@@ -69,6 +72,8 @@ function App() {
             result.data[0]["MPS_USEREMAIL"]
           );
           sessionStorage.setItem("role", result.data[0]["MPS_USERROLE"]);
+          sessionStorage.setItem("notel", result.data[0]["MPS_USERPHONE"]);
+          
           if (result.data[0]["MPS_USERROLE"] == "Admin") {
             //window.location.href = "/admin/dashboard";
           }
@@ -111,6 +116,18 @@ function App() {
                 <PrivateRoute
                   path="/admin/dashboard"
                   component={Admin_Dashboard}
+                />
+                <PrivateRoute
+                  path="/admin/setting"
+                  component={Admin_Setting}
+                />
+                <PrivateRoute
+                  path="/admin/usermanagement"
+                  component={Admin_UserManagement}
+                />
+                <PrivateRoute
+                  path="/admin/report"
+                  component={Admin_Report}
                 />
                 <Route path="*" component={NotFound} />
               </Switch>
@@ -171,7 +188,18 @@ function App() {
                   path="/admin/dashboard"
                   component={Admin_Dashboard}
                 />
-                <PrivateRoute path="/home" component={Dashboard} />
+                <PrivateRoute
+                  path="/admin/setting"
+                  component={Admin_Setting}
+                />
+                <PrivateRoute
+                  path="/admin/usermanagement"
+                  component={Admin_UserManagement}
+                />
+                <PrivateRoute
+                  path="/admin/report"
+                  component={Admin_Report}
+                />
                 <Route path="*" component={NotFound} />
               </Switch>
             </div>

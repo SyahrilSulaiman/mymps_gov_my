@@ -24,7 +24,7 @@ function ForgetPassword(props){
 
         if(username.value == ""){
 
-            swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah", "error");
+            swal("Opss!", "Emel tidak boleh dikosongkan.", "error");
             setLoading(false);
 
         }else{
@@ -49,7 +49,7 @@ function ForgetPassword(props){
                 if(result.status == "unsuccess")
                 {
                     console.log(result);
-                    swal("Opss!", "Sila pastikan emel atau kad pengenalan anda sah", "error");
+                    swal("Opss!", "Sila pastikan emel anda telah diisi dan sah.", "error");
                     return false;
                 }
                 else if(result.status == "pending"){
@@ -88,21 +88,21 @@ function ForgetPassword(props){
                 <div>
                 <img className="mx-auto w-auto" src={logo1} alt="mymps" style={{height: "120px"}}/>
                 <h2 className="mt-6 text-center text-xl leading-9 font-extrabold text-white">
-                    Tukar Kata Laluan
+                    Set Semula Kata Laluan
                 </h2>
                 </div>
                 <form className="mt-8">
                 <input type="hidden" name="remember" value="true" />
                 <div className="rounded-md shadow-sm">
                     <div>
-                    <input aria-label="username" {...username} name="username" type="username" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kad Pengenalan" />
+                    <input aria-label="username" {...username} name="username" type="username" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Alamat emel" />
                     </div>
                 </div>
 
                 
 
                 <div className="mt-6 flex items-center justify-between">
-                    <div className="flex items-center">
+                    {/* <div className="flex items-center">
                     <a href="/login" className="text-sm text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
                         Log Masuk
                     </a>
@@ -112,12 +112,15 @@ function ForgetPassword(props){
                     <a href="/register" className="font-medium text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
                         Daftar Pengguna ?
                     </a>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="mt-6 flex flex-wrap">
-                    <button type="button" onClick={handleForgetPassword} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                        {loading ? 'Loading...' : 'Hantar'}
+                    <button onClick={() => window.location.href = "/login"} type="button" className="group relative w-1/2 flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                        Kembali
+                    </button>
+                    <button type="button" onClick={handleForgetPassword} className="group relative w-1/2 flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                        {loading ? 'Memuatkan...' : 'Hantar'}
                     </button>
                 </div>
                 </form>
