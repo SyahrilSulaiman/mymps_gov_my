@@ -12,7 +12,8 @@ export default function BillList(){
 		// set=[e.target.id]
 		// return (
 		// 	 senarai = <Senarai />
-		console.log('View');
+        console.log('View');
+        sessionStorage.setItem("noakaun", btoa(btoa(e)));
         window.location.href = "/senaraibill";
         
     }
@@ -62,7 +63,7 @@ export default function BillList(){
                 <div className="px-4 md:px-2 mx-auto w-full"
                  onClick={
                      //betulkan status***
-                     (bill.STATUS === 'TERTUNGGAK' || bill.status == 'TERTUNGGAK') ? (() => handleBayar(bill.code, bill.amaun)):(handleViewBill)
+                     (bill.STATUS === 'TERTUNGGAK' || bill.status == 'TERTUNGGAK') ? (() => handleBayar(bill.code, bill.amaun)):(() => handleViewBill(bill.NOAKAUN))
                     }
                 key = {bill.NOAKAUN}>
                     <div className="flex flex-wrap">

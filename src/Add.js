@@ -9,7 +9,9 @@ import Search from './Search';
 
 export default function Add({props}){
     const [type,setType] = useState('');
-
+    const handleBack = () => {
+        window.location.href = "/bill";
+    }
 
         return (
             <div>
@@ -20,6 +22,9 @@ export default function Add({props}){
                 <div className="relative bg-gray-600 md:pt-32 pt-4 pb-4">
                     <div className="px-4 md:px-10 mx-auto w-full">
                         <div className="flex flex-wrap">
+                            <button onClick={handleBack} className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+                                KEMBALI
+                            </button>
                             <div className="w-full px-4">
                                 <div className="relative flex flex-col min-w-0 break-words rounded mb-6">
                                     <div className="flex-auto p-4">
