@@ -31,6 +31,31 @@ export default function BillList(){
 
     
     useEffect (() => {
+        // let mounted = true;
+        // const formData = new FormData();
+        // formData.append('nokp',nokp);
+
+        // const loadData = async () =>{
+        //     const res = await axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=showBill',formData);
+        //     if(mounted){
+        //         console.log(res.data)
+        //         if(res.data.status === 'success'){
+        //             // swal('jadi','x','success');
+        //             setDataSet({
+        //                 data:res.data.data
+        //             })
+        //         }
+        //         else{
+        //             swal('Tiada Akaun Didaftarkan','Sila menambah akaun untuk dibayar','info');
+        //         }
+        //     }
+        // }
+        // loadData();
+        // return () => {
+        //     mounted = false;
+        // }
+
+
         const formData = new FormData();
         formData.append('nokp',nokp);
         axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=showBill',formData)
@@ -53,6 +78,8 @@ export default function BillList(){
         })
 
     },[])
+
+
     const emptyHandler = () => {
         console.log('Test Handler');
     }
