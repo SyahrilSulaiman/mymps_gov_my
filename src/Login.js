@@ -16,51 +16,6 @@ function Login(props){
     sessionStorage.removeItem('GoogleEmail');
     sessionStorage.removeItem('GoogleName');
 
-    const responseGoogle = (response) => {
-
-        console.log(response);
-
-        var formdata = new FormData();
-        formdata.append("email", response.profileObj.email);
-
-        var requestOptions = {
-            method: 'POST',
-            body: formdata,
-            redirect: 'follow'
-        };
-
-        var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=check_user';
-
-        fetch(urlAPI1 , requestOptions)
-        .then(response => response.json())
-        .then(result => {
-
-            setLoading(false);
-
-            if(result.status == "success")
-            {
-                console.log(result.data[0]);
-                setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"], result.data[0]["MPS_USERROLE"]);
-                props.history.push('/bill');
-            }
-            else if(result.status == "unsuccess")
-            {
-                sessionStorage.setItem("GoogleEmail", response.tt.$t);
-                sessionStorage.setItem("GoogleToken", response.tokenId);
-                sessionStorage.setItem("GoogleName", response.profileObj.givenName);
-                props.history.push("./verifyuser");
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            swal("Opss!", "Something went wrong. Please contact your administrator!", "error")
-            .then((value) => {
-                //props.history.push('/');
-            })
-        });
-        
-    }
-
     const username = useFormInput("");
     const password = useFormInput("");
     const [error, setError] = useState(null);
@@ -107,6 +62,7 @@ function Login(props){
                 {
                     setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"]);
                     sessionStorage.setItem("role", result.data[0]["MPS_USERROLE"]);
+                    sessionStorage.setItem("notel", result.data[0]["MPS_USERPHONE"]);
 
                     if(result.data[0]['MPS_USERROLE'] == "Admin"){
                         props.history.push('/admin/dashboard');
@@ -140,14 +96,14 @@ function Login(props){
                 <div>
                 <img className="mx-auto w-auto" src={logo1} alt="mymps" style={{height: "120px"}}/>
                 <h2 className="mt-6 text-center text-xl leading-9 font-extrabold text-white">
-                    Log Masuk
+                    Log Masuk Akaun myMPS
                 </h2>
                 </div>
                 <form className="mt-8"  onSubmit={ (e) => handleLogin(e)}>
                 <input type="hidden" name="remember" value="true" />
                 <div className="rounded-md shadow-sm">
                     <div>
-                    <input aria-label="Email" {...username} name="email" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kad Pengenalan / No. Syarikat" />
+                    <input aria-label="Email" {...username} name="email" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="No KP / No ROC/ROB" />
                     </div>
                     <div className="-mt-px">
                     <input aria-label="Password" {...password} name="password" type="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kata Laluan" />
@@ -163,12 +119,12 @@ function Login(props){
 
                     <div className="text-sm leading-5">
                     <a href="/forgotpassword" className="font-medium text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
-                        Terlupa kata laluan <i className="fas fa-key"></i> 
+                        Terlupa kata laluan ? 
                     </a>
                     </div>
                 </div>
 
-                <div className="mt-6 flex flex-wrap">
+                <div className="mt-6 flex flex-wrap p-2">
                     {/* <GoogleLogin
                         clientId="438559173225-ub4mfh6vkmnd0qntmper0a48gqv18nn5.apps.googleusercontent.com"
                         onSuccess={responseGoogle}
@@ -189,7 +145,10 @@ function Login(props){
                         buttonText="Login"
                         cookiePolicy={'single_host_origin'}
                     /> */}
-                    <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                    <button onClick={() => window.location.href = "/"} type="button" className="group relative w-1/2 flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                        Kembali
+                    </button>
+                    <button type="submit" className="group relative w-1/2 flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                         {loading ? 'Memuatkan...' : 'Log Masuk'}
                     </button>
                 </div>

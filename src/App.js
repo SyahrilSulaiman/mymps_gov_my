@@ -72,6 +72,8 @@ function App() {
             result.data[0]["MPS_USEREMAIL"]
           );
           sessionStorage.setItem("role", result.data[0]["MPS_USERROLE"]);
+          sessionStorage.setItem("notel", result.data[0]["MPS_USERPHONE"]);
+          
           if (result.data[0]["MPS_USERROLE"] == "Admin") {
             //window.location.href = "/admin/dashboard";
           }

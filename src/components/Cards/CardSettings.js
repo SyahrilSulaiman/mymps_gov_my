@@ -15,7 +15,9 @@ const useFormInput = (initialValue) => {
   };
 };
 
-export default function CardSettings() {
+export default function CardSettings({notel=""}) {
+
+  console.log(notel);
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -27,6 +29,7 @@ export default function CardSettings() {
 
     var username  = document.getElementById("username").value;
     var email     = document.getElementById("email").value;
+    var notel     = document.getElementById("notel").value;
 
     if(username == "")
     {
@@ -38,6 +41,11 @@ export default function CardSettings() {
       swal("Opss!", "Emel tidak boleh dikosongkan","error");
       return false;
     }
+    else if(notel == "")
+    { 
+      swal("Opss!", "Nombor telefon tidak boleh dikosongkan","error");
+      return false;
+    }
     else
     {
 
@@ -46,6 +54,7 @@ export default function CardSettings() {
         formdata.append("username", username.trim());
         formdata.append("email", email.trim());
         formdata.append("nokp", nokp);
+        formdata.append("notel", notel.trim());
 
         var requestOptions = {
         method: 'POST',
@@ -97,13 +106,14 @@ export default function CardSettings() {
               
             </h6>
             <div className="flex flex-wrap">
+
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Nama Penuh
+                    Nama Penuh 
                   </label>
                   <input
                     type="text"
@@ -114,6 +124,7 @@ export default function CardSettings() {
                   />
                 </div>
               </div>
+
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
                   <label
@@ -131,13 +142,14 @@ export default function CardSettings() {
                   />
                 </div>
               </div>
+
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    NO KAD PENGENALAN
+                    NOMBOR KAD PENGENALAN
                   </label>
                   <input
                     type="text"
@@ -148,21 +160,24 @@ export default function CardSettings() {
                   />
                 </div>
               </div>
-              {/* <div className="w-full lg:w-6/12 px-4">
+
+              <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Last Name
+                    NOMBOR TELEFON
                   </label>
                   <input
                     type="text"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="Jesse"
+                    id="notel"
+                    className="px-3 py-3 placeholder-gray-400 text-gray-700 rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                    defaultValue={notel}
                   />
                 </div>
-              </div> */}
+              </div>
+
             </div>
 
             <hr className="mt-6 border-b-1 border-gray-400" />
@@ -176,71 +191,7 @@ export default function CardSettings() {
                 </div>
               </div>
             </div>
-            {/* <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
-              Contact Information
-            </h6>
-            <div className="flex flex-wrap">
-              <div className="w-full lg:w-12/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                  />
-                </div>
-              </div>
-              <div className="w-full lg:w-4/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    City
-                  </label>
-                  <input
-                    type="email"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="New York"
-                  />
-                </div>
-              </div>
-              <div className="w-full lg:w-4/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Country
-                  </label>
-                  <input
-                    type="text"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="United States"
-                  />
-                </div>
-              </div>
-              <div className="w-full lg:w-4/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Postal Code
-                  </label>
-                  <input
-                    type="text"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="Postal Code"
-                  />
-                </div>
-              </div>
-            </div> */}
+            
           </form>
         </div>
       </div>
