@@ -1,64 +1,117 @@
+import Axios from 'axios';
 import React, {useState, useEffect} from 'react'
+import swal from 'sweetalert'
+import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 
-export default function Carian(props){
+export default function Carian({bill, display}){
 
+    const [loading,setLoading] = useState(false);
+    const nokp    = getNOKP();
+    let accountType = "";
+
+        useEffect(() =>{
+            console.log('bill ',bill);
+            if(bill.type === 'nokp')
+            accountType = 'No Kad Pengenalan';
+            if(bill.type === 'akaun')
+            accountType = 'Akaun';
+            if(bill.type === 'ssm')
+            accountType = 'No SSM';
+        },[bill]);
+
+        const handleAdd = (e) => {
+            setLoading(true);
+            const formData = new FormData();
+            formData.append('nokp',nokp);
+            formData.append('account',bill.noakaun);
+            console.log(nokp);
+            console.log(bill.noakaun);
+            Axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill',formData)
+            .then(res => {
+
+                console.log('Response : ',res.data)
+                if(res.data.status === "success"){
+                    swal('Berjaya Tambah','Berjaya tambah akaun untuk pembayaran','success');
+                    window.location.href = '/bill';
+                }
+                else if(res.data.status === "failure"){
+                    swal("Tidak Berjaya",accountType+" ini telah didaftarkan ke akaun anda.","error");
+                }
+                else{
+                    console.log(res.status);
+                    swal('Ralat','Operasi tidak dapat diselesaikan','error');
+                }
+
+                setLoading(false);
+            })
+            .catch(err =>{
+                console.log('error',err)
+                swal('Ralat','Sila hubungi pentadbir sistem!','error');
+            });
+        }
     
-
-    return (
-        <div>
-            <div className="relative bg-orange-400 md:pt-32 pt-4 pb-4">
-                <div className="px-4 md:px-10 mx-auto w-full">
-                    <div className="flex flex-wrap">
-                        <div className="w-full px-4">
-                            <div className="relative flex flex-col min-w-0 break-words rounded mb-6">
-                                <div className="flex-auto p-4">
-
-                                <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                                    <button type="button" className="text-black bg-white text-center flex-row-reverse border-solid border-2 border-gray-300 rounded-md w-full h-12">
-                                                No Kad Pengenalan
-                                    </button>
-                                </div>
-
-                                <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                                    <button type="button" className="text-black bg-white text-center flex-row-reverse border-solid border-2 border-gray-300 rounded-md w-full h-12">
-                                                No SSM Pendaftaran Syarikat
-                                    </button>
-                                </div>
-
-                                <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                                    <button type="button" className="text-black bg-white text-center flex-row-reverse border-solid border-2 border-gray-300 rounded-md w-full h-12">
-                                                No Akaun
-                                    </button>
-                                </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    if(!display){
+        return (
+            <div>
             </div>
-
-            <div className="relative bg-orange-400 pt-4 pb-4">
-                <div className="px-4 md:px-10 mx-auto w-full">
+        );
+    }
+    else{
+        return (
+            <div>
+                <div className="px-4 md:px-2 mx-auto w-full">
                     <div className="flex flex-wrap">
                         <div className="w-full px-4">
-                            <div className="relative flex flex-col min-w-0 break-words rounded mb-6">
-                                <form >
-                                    <div>
-                                        <input aria-label="Email" name="email" type="email" required className="mb-2 bg-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kad Pengenalan" />
+                            <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg">
+                                <div className="flex-auto p-4">
+                                    <div className="flex flex-row pt-4">
+                                        <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
+                                            <span className="font-semibold uppercase text-lg text-gray-800">
+                                            {
+                                            // dataset.jenis
+                                            // bill.type
+                                                bill.nokp
+                                            }
+                                            </span>	
+                                        </div>
+                                        <div className="relative w-auto pl-4 flex-initial">
+                                            <span className="font-semibold uppercase text-lg text-gray-800">Akaun :&nbsp;
+                                            {
+                                                //dataset.amaun
+                                                bill.noakaun
+                                            }
+                                            </span>	
+                                        </div>
                                     </div>
-                                </form>
+                                    <div className="flex flex-row pb-4">
+                                        <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
+                                            <span className="font-semibold uppercase text-lg text-gray-800">
+                                            {
+                                            // dataset.akaun
+                                            // bill.code
+                                            bill.nama_pemilik
+                                            }
+                                            </span>	
+                                            <h5 className="uppercase font-medium text-xs text-gray-600">
+                                            {
+                                            // dataset.tempoh
+                                            // bill.description
+                                            bill.add_harta
+                                            }
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            
                         </div>
                     </div>
                     <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                        <button type="button" className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
-                                    Cari
+                        <button id="type" type="button" onClick={handleAdd} className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
+                                    {loading?'Menambah..':'Tambah'}
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }

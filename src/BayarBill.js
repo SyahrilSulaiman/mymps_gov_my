@@ -11,8 +11,8 @@ import { data } from "jquery";
 import swal from "sweetalert";
 import { ResponsiveEmbed } from "react-bootstrap";
 import { BrowserRouter as Router,Switch, Route, Link, useParams, useRouteMatch } from "react-router-dom";
-import SenaraiBil from './SenaraiBil';
-import Carian from './Carian';
+// import SenaraiBil from './SenaraiBil';
+// import Carian from './Carian';
 import BillList from './BillList';
 
 function Bill(props) {
