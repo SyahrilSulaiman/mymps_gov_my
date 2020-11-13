@@ -33,7 +33,7 @@ function Profile(props) {
               {/* Card stats */}
               <div className="flex flex-wrap">
                 
-                <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
+                {/* <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
                   <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                     <div className="flex-auto p-4">
                       <div className="flex flex-wrap">
@@ -51,19 +51,19 @@ function Profile(props) {
                           </div>
                         </div>
                       </div>
-                        {/* <p className="text-sm text-gray-500 mt-4">
+                        <p className="text-sm text-gray-500 mt-4">
                         <span className="text-green-500 mr-2">
                           <i className="fas fa-arrow-up"></i> 3.48%
                         </span>
                         <span className="whitespace-no-wrap">
                           Since last month
                         </span>
-                      </p> */}
+                      </p>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
-                <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
+                {/* <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
                   <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                     <div className="flex-auto p-4">
                       <div className="flex flex-wrap">
@@ -81,19 +81,19 @@ function Profile(props) {
                           </div>
                         </div>
                       </div>
-                      {/* <p className="text-sm text-gray-500 mt-4">
+                      <p className="text-sm text-gray-500 mt-4">
                         <span className="text-red-500 mr-2">
                           <i className="fas fa-arrow-down"></i> 3.48%
                         </span>
                         <span className="whitespace-no-wrap">
                           Since last week
                         </span>
-                      </p> */}
+                      </p>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
-                <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
+                {/* <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
                   <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                     <div className="flex-auto p-4">
                       <div className="flex flex-wrap">
@@ -111,17 +111,17 @@ function Profile(props) {
                           </div>
                         </div>
                       </div>
-                      {/* <p className="text-sm text-gray-500 mt-4">
+                      <p className="text-sm text-gray-500 mt-4">
                         <span className="text-orange-500 mr-2">
                           <i className="fas fa-arrow-down"></i> 1.10%
                         </span>
                         <span className="whitespace-no-wrap">
                           Since yesterday
                         </span>
-                      </p> */}
+                      </p>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
               </div>
 
