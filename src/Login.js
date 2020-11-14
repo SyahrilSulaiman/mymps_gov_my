@@ -60,11 +60,11 @@ function Login(props){
                 }
                 else if(result.status == "success")
                 {
-                    setUserSession(btoa(result.data[0]), result.data[0]["MPS_USERNAME"], result.data[0]["MPS_USERIC"], result.data[0]["MPS_USEREMAIL"]);
-                    sessionStorage.setItem("role", result.data[0]["MPS_USERROLE"]);
-                    sessionStorage.setItem("notel", result.data[0]["MPS_USERPHONE"]);
+                    setUserSession(btoa(result.data[0]), result.data[0]["U_USERNAME"], result.data[0]["U_USERIC"], result.data[0]["U_USEREMAIL"]);
+                    sessionStorage.setItem("role", result.data[0]["U_USERROLE"]);
+                    sessionStorage.setItem("notel", result.data[0]["U_USERPHONE"]);
 
-                    if(result.data[0]['MPS_USERROLE'] == "Admin"){
+                    if(result.data[0]['U_USERROLE'] == "Admin"){
                         props.history.push('/admin/dashboard');
                     }else{
                         props.history.push('/bill');

@@ -74,10 +74,10 @@ export default function CardSettings({notel=""}) {
             swal("Berjaya!","Akaun profil anda sudah dikemaskini.","success");
 
             sessionStorage.removeItem('username');
-            sessionStorage.setItem('username', result.data[0]["MPS_USERNAME"]);
+            sessionStorage.setItem('username', result.data[0]["U_USERNAME"]);
 
             sessionStorage.removeItem('email');
-            sessionStorage.setItem('email', result.data[0]['MPS_USEREMAIL']);
+            sessionStorage.setItem('email', result.data[0]['U_USEREMAIL']);
 
             window.location.href = "./setting";
 
