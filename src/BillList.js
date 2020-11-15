@@ -119,7 +119,10 @@ export default function BillList(){
                                         </div>
                                         <div className="relative w-auto pl-4 flex-initial" >
                                             <h5 
-                                                className={"uppercase font-medium text-xs"+(bill.STATUS === 'TERTUNGGAK' ? " text-red-600" : " text-green-600")}>{bill.STATUS}
+                                                className={"uppercase font-medium text-xs"+(bill.STATUS === 'TERTUNGGAK' ? " text-red-600" : " text-green-600")}>
+                                                {
+                                                    bill.STATUS === 'PAID' ? 'Telah dibayar' : 'tertunggak'
+                                                }
                                             </h5>
                                         </div>
                                     </div>

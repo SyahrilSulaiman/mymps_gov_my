@@ -31,6 +31,7 @@ export default function Carian({bill, display}){
 
                 console.log('Response : ',res.data)
                 if(res.data.status === "success"){
+                    console.log(res);
                     swal('Berjaya Tambah','Berjaya tambah akaun untuk pembayaran','success');
                     window.location.href = '/bill';
                 }

@@ -35,38 +35,82 @@ export default function Search({type}){
             }
         })
         .then(res => {
-            if(type === 'nokp')
+            if(type === 'nokp'){
                 searchType = 'No Kad Pengenalan';
-            if(type === 'akaun')
-                searchType = 'Akaun';
-            if(type === 'ssm')
-                searchType = 'No SSM';
 
-            console.log(res);
-            if(res.data.status == 'FAILED'){
-                setDisplay(false);
-                swal('Tidak ditemui',searchType+' tidak ditemui','error');
+                if(res.data.status === 'FAILED'){
+                    setDisplay(false);
+                    swal('Tidak ditemui',searchType+' tidak ditemui','error');
+                }
+                else{
+                    setDisplay(true);
+                    setBill({
+                        ...bill,
+                        nama_pemilik:res.data[0].NAMA_PEMILIK,
+                        noakaun:res.data[0].NOAKAUN,
+                        nokp:res.data[0].NOKP,
+                        add_harta:res.data[0].ADDRHARTA,
+                        type
+                    });
+                }}
+
+            if(type === 'akaun'){
+                searchType = 'Akaun';
+
+                if(res.data.status === 'FAILED'){
+                    setDisplay(false);
+                    swal('Tidak ditemui',searchType+' tidak ditemui','error');
+                }
+                else{
+                    setDisplay(true);
+                    setBill({
+                        ...bill,
+                        nama_pemilik:res.data[0].NAMA_PEMILIK,
+                        noakaun:res.data[0].NOAKAUN,
+                        nokp:res.data[0].NOKP,
+                        add_harta:res.data[0].ADDRHARTA,
+                        type
+                    });
+                }
             }
-            else{
-                setDisplay(true);
-                setBill({
-                    ...bill,
-                    nama_pemilik:res.data[0].NAMA_PEMILIK,
-                    noakaun:res.data[0].NOAKAUN,
-                    nokp:res.data[0].NOKP,
-                    add_harta:res.data[0].ADDRHARTA,
-                    type
-                });
+
+            if(type === 'ssm'){
+                searchType = 'No SSM';
+                res = JSON.parse(res.data);
+                console.log(res[0]);
+                
+                if(res.status === 'FAILED'){
+                    setDisplay(false);
+                    swal('Tidak ditemui',searchType+' tidak ditemui','error');
+                }
+                else{
+                    setDisplay(true);
+                    setBill({
+                        ...bill,
+                        nama_pemilik:res[0].NAMA_PEMILIK,
+                        noakaun:res[0].NOAKAUN,
+                        nokp:res[0].NOKP,
+                        add_harta:res[0].ADDRHARTA,
+                        type
+                    });
+                }
             }
             setLoading(false);
         })
         
     }
 
+    if(type === '') {
+        return (
+            <div className=""></div>
+        );
+    }
+    else{
+
     return (
         <div>
                 {/* Header */}
-            <div className="relative bg-gray-600 md:pt-32 pt-4 pb-4">
+            <div className="relative bg-gray-600 pt-4 pb-4">
                 <form onSubmit= {(e) => handleSubmit(e)}>
                     <div className="px-4 md:px-10 mx-auto w-full">
                         <div className="flex flex-wrap">
@@ -95,4 +139,5 @@ export default function Search({type}){
             </div>
         </div>
     );
+}
 }
