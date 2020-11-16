@@ -1,70 +1,96 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getUser, getNOKP, getToken, removeUserSession } from "../Utils/Common";
-import { DataGrid } from "@material-ui/data-grid";
+import BootstrapTable from 'react-bootstrap-table-next';
 
 import Sidebar from "./Sidebar_Admin";
 import Navbar from "../components/Navbars/AdminNavbar";
 import Footer from "../components/Footers/Footer";
+import { sha256 } from "js-sha256";
 
 function Dashboard(props) {
+
+  const [getUserList , setUserList] = useState();
+
   const token = getToken();
   const user = getUser();
   const nokp = getNOKP();
+
+  const columns = [{
+    dataField: 'U_USERNAME',
+    text: 'Product ID'
+  }, {
+    dataField: 'U_USERIC',
+    text: 'Product Name'
+  }, {
+    dataField: 'U_USERPHONE',
+    text: 'Product Price'
+  }];
+
+  useEffect(()=> {
+
+    var formdata = new FormData();
+    formdata.append("secretKey",  sha256(btoa(sessionStorage.getItem("role"))));
+
+    var requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow'
+    };
+
+    var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=get_ListUser';
+
+    fetch(urlAPI1, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      //console.log(result.data);
+      setUserList(result.data);
+    });
+
+  }, []);
+
+
+  console.log(getUserList);
 
   const handleLogout = () => {
     removeUserSession();
     props.history.push("/login");
   };
 
-  const columns = [
-    { field: "id", headerName: "ID" },
-    { field: "firstName", headerName: "First name" },
-    { field: "lastName", headerName: "Last name" },
-    { field: "age", headerName: "Age", type: "number"},
-  ];
-
-  const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: 40 },
-    { id: 6, lastName: "Melisandre", firstName: "Hello", age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  ];
-
-  return (
-    <div>
-      <Sidebar />
-      <div className="relative md:ml-64 bg-blue-600" style={{ height: "100%" }}>
-        <Navbar />
-        {/* Header */}
-        <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12">
-          <div className="px-4 md:px-10 mx-auto w-full">
-            <div className="flex flex-wrap">
-              Header
-            </div>
-            <div className="flex flex-wrap">
-              <div style={{ height: 400, width: "100%" }}>
-                <DataGrid
-                  rows={rows}
-                  columns={columns}
-                  pageSize={5}
-                  width="100%"
-                  checkboxSelection
-                  className="bg-white"
-                />
-              </div>
+  if(getUserList){
+    return (
+      <div>
+        <Sidebar />
+        <div className="relative md:ml-64 bg-blue-600" style={{ height: "100%" }}>
+          <Navbar />
+          {/* Header */}
+          <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12">
+            <div className="px-4 md:px-10 mx-auto w-full">
+            <BootstrapTable keyField='id' data = { getUserList } columns={ columns }  style={{background: "White"}}/>
             </div>
           </div>
+          <div className="px-4 md:px-10 mx-auto w-full m-24"></div>
+          <Footer />
         </div>
-        <div className="px-4 md:px-10 mx-auto w-full m-24"></div>
-        <Footer />
       </div>
-    </div>
-  );
+    );
+  }else{
+    return (
+      <div>
+        <Sidebar />
+        <div className="relative md:ml-64 bg-blue-600" style={{ height: "100%" }}>
+          <Navbar />
+          {/* Header */}
+          <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12">
+            <div className="px-4 md:px-10 mx-auto w-full">
+            </div>
+          </div>
+          <div className="px-4 md:px-10 mx-auto w-full m-24"></div>
+          <Footer />
+        </div>
+      </div>
+    );
+  }
+  
 }
 
 export default Dashboard;
