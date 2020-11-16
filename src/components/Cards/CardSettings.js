@@ -97,7 +97,7 @@ export default function CardSettings({notel=""}) {
       <div className="relative flex flex-col min-w-0 break-words w-full h-full shadow-lg  bg-gray-300 border-0">
         <div className="rounded-t bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
-            <h6 className="text-gray-800 text-xl font-bold">Akaun myMPS</h6>
+            <h6 className="text-gray-800 text-xl font-bold">Akaun mymps</h6>
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -131,24 +131,6 @@ export default function CardSettings({notel=""}) {
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Alamat Emel
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    {...email}
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue={sessionStorage.getItem("email")}
-                  />
-                </div>
-              </div>
-
-              <div className="w-full lg:w-6/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
                     NOMBOR KAD PENGENALAN
                   </label>
                   <input
@@ -160,6 +142,24 @@ export default function CardSettings({notel=""}) {
                   />
                 </div>
               </div>
+
+              <div className="w-full lg:w-6/12 px-4">
+              <div className="relative w-full mb-3">
+                <label
+                  className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                  htmlFor="grid-password"
+                >
+                  Alamat Emel
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  {...email}
+                  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                  defaultValue={sessionStorage.getItem("email")}
+                />
+              </div>
+            </div>
 
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">

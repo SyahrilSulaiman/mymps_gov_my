@@ -22,12 +22,13 @@ export default function Sidebar() {
           {/* Brand */}
           <Link
             className="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
-            to="/home"
+            to="/bill"
           >
             Portal MyMPS
           </Link>
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
+          <i className="fas fa-user"></i>
             <li className="inline-block relative">
               <UserDropdown />
             </li>
@@ -45,7 +46,7 @@ export default function Sidebar() {
                 <div className="w-6/12">
                   <Link
                     className="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
-                    to="/home"
+                    to="/bill"
                   >
                     Portal MyMPS
                   </Link>
@@ -61,19 +62,21 @@ export default function Sidebar() {
                 </div>
               </div>
             </div>
-            {/* Form */}
-            <form className="mt-6 mb-4 md:hidden">
-              <div className="mb-3 pt-0">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="px-3 py-2 h-12 border border-solid  border-gray-600 placeholder-gray-400 text-gray-700 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
-                />
-              </div>
-            </form>
+            {/* Form */
+            // <form className="mt-6 mb-4 md:hidden">
+            //   <div className="mb-3 pt-0">
+            //     <input
+            //       type="text"
+            //       placeholder="Search"
+            //       className="px-3 py-2 h-12 border border-solid  border-gray-600 placeholder-gray-400 text-gray-700 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
+            //     />
+            //   </div>
+            // </form>
+            }
 
-            {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
+            {/* Divider */
+            // <hr className="my-4 md:min-w-full" />
+            }
             {/* Heading */}
             <h6 className="md:min-w-full text-gray-600 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               Menu Utama

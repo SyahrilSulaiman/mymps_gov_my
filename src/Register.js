@@ -369,8 +369,7 @@ function Register(props) {
                     </div>
 
                     <div class="text-center text-sm text-grey-dark mt-4">
-                        Dengan mendaftar ini, anda bersetuju dengan <a class="no-underline border-grey-dark text-grey-dark"> Terma & Syarat </a> dan 
-                        <a class="no-underline border-grey-dark text-grey-dark"> Polisi Privasi </a> kami.
+                        Dengan mendaftar, anda bersetuju pada <a class="no-underline border-grey-dark text-grey-dark"> Terma dan Syarat </a> MPS 
                     </div>
 
                     <div class="text-center text-grey-dark mt-6">
@@ -457,7 +456,6 @@ function Register(props) {
         
       </section> */}
 
-      <Footer />
     </div>
   );
 }
