@@ -17,8 +17,32 @@ export default function SenaraiBil(props){
         window.location.href = "/bill";
     }
 
+    const handleBill = () => {
+        console.log('Bil');
+        const formData = new FormData;
+        formData.append('noakaun',atob(atob(sessionStorage.noakaun)));
+        // formData.append('noakaun',1001);
+        formData.append('nokp',nokp);
+        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=export_pdf',formData)
+        .then(res =>{
+            console.log(res);
+
+            if(res.data.status === 'success'){
+                console.log('success');
+                window.open('https://mymps.corrad.my/rp/bil_cukai_taksiran.php?token='+res.data.token);
+            }
+            else{
+                swal('Resit tak dijumpai','Sila hubungi pentadbir system','error');
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            swal('Ralat','Sila hubungi pentadbir system','error');
+        })
+    }
+
     const handleReceipt = () => {
-        console.log('Resit');
+        console.log('Bil');
         const formData = new FormData;
         formData.append('noakaun',atob(atob(sessionStorage.noakaun)));
         // formData.append('noakaun',1001);
@@ -212,8 +236,8 @@ export default function SenaraiBil(props){
                                             Telah Dibayar
                                         </h5>
                                         <h5 className="uppercase font-medium text-xs text-gray-600">
-                                            <button onClick ={handleReceipt} className="hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
-                                                <i className="fas fa-receipt"></i> Resit
+                                            <button onClick ={handleBill} className="hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
+                                                <i className="fas fa-receipt"></i> Lihat Bil
                                             </button>
                                         </h5>
                                         <span className="font-semibold text-lg text-gray-800">
