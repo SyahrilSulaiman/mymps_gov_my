@@ -95,7 +95,7 @@ function ForgetPassword(props){
                 <input type="hidden" name="remember" value="true" />
                 <div className="rounded-md shadow-sm">
                     <div>
-                    <input aria-label="username" {...username} name="username" type="username" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Alamat emel" />
+                    <input aria-label="username" {...username} name="username" type="username" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Sila masukkan alamat emel anda" />
                     </div>
                 </div>
 

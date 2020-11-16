@@ -68,7 +68,7 @@ export default function BillList(){
                 })
             }
             else{
-                swal('Tiada Akaun Didaftarkan','Sila menambah akaun untuk dibayar','info');
+                swal('Tiada bil didaftarkan','Sila tambah bil anda dengan klik pada + Tambah','info');
             }
 
         })

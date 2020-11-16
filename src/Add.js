@@ -30,19 +30,19 @@ export default function Add({props}){
                                     <div className="flex-auto p-4">
 
                                     <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                                        <button onClick={() => setType('nokp')} className="text-black bg-white text-center flex-row-reverse border-solid border-2 border-gray-300 rounded-md w-full h-12">
+                                        <button onClick={() => setType('nokp')} className={"text-black  text-center flex-row-reverse border-solid border-2 border-gray-300 rounded-md w-full h-12"+ (type === 'nokp' ? ' bg-blue-200 border-blue-300 ' : ' bg-white border-gray-300 ')}>
                                                     No Kad Pengenalan
                                         </button>
                                     </div>
 
                                     <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                                        <button onClick={() => setType('ssm')} className="text-black bg-white text-center flex-row-reverse border-solid border-2 border-gray-300 rounded-md w-full h-12">
-                                                    No SSM Pendaftaran Syarikat
+                                        <button onClick={() => setType('ssm')} className={"text-black  text-center flex-row-reverse border-solid border-2 border-gray-300 rounded-md w-full h-12"+ (type === 'ssm' ? ' bg-blue-200 border-blue-300 ' : ' bg-white border-gray-300 ')}>
+                                                    No ROC / ROB Syarikat
                                         </button>
                                     </div>
 
                                     <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                                        <button onClick={() => setType('akaun')}className="text-black bg-white text-center flex-row-reverse border-solid border-2 border-gray-300 rounded-md w-full h-12">
+                                        <button onClick={() => setType('akaun')} className={"text-black  text-center flex-row-reverse border-solid border-2 border-gray-300 rounded-md w-full h-12"+ (type === 'akaun' ? ' bg-blue-200 border-blue-300 ' : ' bg-white border-gray-300 ')}>
                                                     No Akaun
                                         </button>
                                     </div>
