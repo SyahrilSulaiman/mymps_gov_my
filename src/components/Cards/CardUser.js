@@ -81,7 +81,7 @@ export default function CardUser() {
                                     </span>
                             </div>
                             <div className="relative w-4/12 lg:w-2/12 pr-4 flex-initial">
-                                <span className="font-semibold uppercase text-xs text-green-700">
+                                <span className={"font-semibold uppercase text-xs "+ (data.U_USERSTATUS === 'Active' ? 'text-green-600' : data.U_USERSTATUS === 'Pending' ? 'text-yellow-600' : 'text-red-600')}>
                                 {
                                     data.U_USERSTATUS
 
