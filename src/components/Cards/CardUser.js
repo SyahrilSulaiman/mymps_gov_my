@@ -60,7 +60,7 @@ export default function CardUser() {
                             <div className="relative w-4/12 lg:w-3/12 pr-4 flex-grow">
                                     <span className="font-semibold uppercase text-sm text-gray-700">
                                     {
-                                        data.U_USERIC
+                                        data.U_USERIC === null ? data.U_USERNAME : data.U_USERIC
                                     }
                                     </span>
                             </div>
