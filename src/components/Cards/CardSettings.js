@@ -108,17 +108,33 @@ export default function CardSettings({
       console.log(password);
       console.log(new_password);
       console.log(conf_password);
-      swal({
-        title: "Set Semula Kata Laluan",
-        text: "Anda pasti untuk set semula kata laluan akaun anda?",
-        button: true,
-        dangerMode: true,
-      }).then((change) => {
-        if (change) {
-          swal("Kata laluan akaun anda sudah dikemaskini!");
-        } else {
-
+      
+      swal("Anda pasti untuk set semula kata laluan anda?", {
+        buttons: {
+          tidak: {
+            text:"Tidak",
+            value:"cancel",
+            className:"bg-red-500"
+          },
+          teruskan: {
+            text:"Teruskan",
+            value:"pasti",
+            className:"bg-green-500 hover:bg-green-400 focus:bg-green-400"
+          }
         }
+      })
+      .then((value) => {
+        switch(value) {
+          case "pasti":
+            swal("Tukar Kata Laluan");
+            break;
+          
+          case "cancel":
+            break;
+
+          default:
+        }
+        
       })
     }
   }
@@ -233,15 +249,49 @@ export default function CardSettings({
                 </div>
                 <div className={openTab === 2 ? "block" : "hidden"} id="link2">
                   <p>
-                  <Pane display="flex" padding={10} background="#636e72" borderRadius={5}>
+                  <Pane display="flex" padding={10} background="#dfe6e9" borderRadius={5}>
                     <Pane flex={1} alignItems="center" display="flex">
-                      <Text size={600} color="white">Set Kata Laluan</Text>
+                      <Text size={600}>Set Kata Laluan</Text>
                     </Pane>
                   </Pane>
 
-                  <Pane display="flex" padding={16} background="tint3" borderRadius={3}>
-                    
-                  </Pane>
+                  <Pane padding={3} background="tint3" borderRadius={3} marginTop="30px">
+                      <TextInputField
+                        label="KATA LALUAN TERKINI"
+                        width="100%"
+                        placeholder="Sila isi kata laluan terkini"
+                        required={true}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+
+                      <TextInputField
+                        label="KATA LALUAN BARU"
+                        width="100%"
+                        placeholder="Sila isi kata laluan baru"
+                        required={true}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                      />
+
+                      <TextInputField
+                        label="SAH KATA LALUAN BARU"
+                        width="100%"
+                        placeholder="Sila sahkan kata laluan baru"
+                        required={true}
+                        onChange={(e) => setConformPassword(e.target.value)}
+                      />
+                    </Pane>
+
+                    <Pane>
+                      <Button
+                        className="float-right"
+                        appearance="primary"
+                        intent="success"
+                        type="button"
+                        onClick={handleChangePassword}
+                      >
+                        Kemaskini
+                      </Button>
+                    </Pane>
                   </p>
                 </div>
               </div>
@@ -249,201 +299,6 @@ export default function CardSettings({
           </div>
       </div>
 
-
-
-      {/* <div className="w-full lg:w-6/12 shadow-lg bg-gray-400 rounded-2xl mb-5 h-full">
-        <div className="rounded-t-2xl bg-white mb-0 px-6 py-6">
-          <div className="text-center flex justify-between">
-            <Heading size={600}>Akaun myMPS</Heading>
-          </div>
-        </div>
-        <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-          <form>
-            <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
-
-            </h6>
-            <div className="flex flex-wrap">
-
-              <div className="w-full  px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Nama Penuh
-                  </label>
-                  <input
-                    type="text"
-                    id="username"
-                    {...username}
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue={sessionStorage.getItem("username")}
-                  />
-                </div>
-              </div>
-
-              <div className="w-full  px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    NOMBOR KAD PENGENALAN
-                  </label>
-                  <input
-                    type="text"
-                    {...nokp}
-                    readOnly
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-gray-200 rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue={sessionStorage.getItem("nokp")}
-                  />
-                </div>
-              </div>
-
-              <div className="w-full  px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Alamat Emel
-                </label>
-                  <input
-                    type="email"
-                    id="email"
-                    {...email}
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue={sessionStorage.getItem("email")}
-                  />
-                </div>
-              </div>
-
-              <div className="w-full px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    NOMBOR TELEFON
-                  </label>
-                  <input
-                    type="text"
-                    id="notel"
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue={notel}
-                  />
-                </div>
-              </div>
-
-            </div>
-
-            <hr className="mt-6 border-b-1 border-gray-400" />
-
-            <div className="flex flex-wrap mt-6">
-              <div className="w-full lg:w-12/12 px-4">
-                <div className="relative w-full mb-3">
-                  <Button
-                    className="float-right"
-                    appearance="primary"
-                    intent="success"
-                    type="button"
-                    onClick={handleUpdate}
-                  >
-                    Kemaskini
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-          </form>
-        </div>
-      </div>
-
-      <div className=" w-full lg:w-6/12 shadow-lg  bg-gray-300 rounded-xl" style={{marginBottom:"500px"}}>
-        <div className="rounded-t-xl bg-white mb-0 px-6 py-6">
-          <div className="text-center flex justify-between">
-          <Heading size={600}>Set semula kata laluan</Heading>
-          </div>
-        </div>
-        <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-          <form>
-            <h6 className="text-blue-500 text-sm mt-3 mb-6 font-bold uppercase">
-
-            </h6>
-            <div className="flex flex-wrap">
-
-              <div className="w-full px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Kata Laluan Sekarang
-                  </label>
-                  <input
-                    type="text"
-                    id="username"
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                  />
-                </div>
-              </div>
-
-              <div className="w-full px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Kata Laluan Baru
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                  />
-                </div>
-              </div>
-
-              <div className="w-full px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Pengesahan Kata Laluan
-                  </label>
-                  <input
-                    type="text"
-                    onChange={(e) => setConformPassword(e.target.value)}
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                  />
-                </div>
-              </div>
-
-            </div>
-
-            <hr className="mt-6 border-b-1 border-gray-400" />
-
-            <div className="flex flex-wrap mt-6">
-              <div className="w-full lg:w-12/12 px-4">
-                <div className="relative w-full mb-3">
-                  <Button 
-                  className="float-right"
-                  type="button"
-                  intent="success"
-                  appearance="primary"
-                  onClick={handleChangePassword}
-                  >Kemaskini
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-          </form>
-        </div>
-      </div> */}
     </>
   );
 }

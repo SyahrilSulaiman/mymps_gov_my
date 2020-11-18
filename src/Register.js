@@ -310,12 +310,20 @@ function Register(props) {
                               Daftar Pengguna
                             </Button>
                             </div>
-                            {/* <button
-                              type="submit"
-
-                              class="w-full text-center rounded bg-green-500 text-white hover:bg-green-600 focus:outline-none my-5 p-2"
-                            >Daftar Pengguna
-                                </button> */}
+                            <div className="col-span-6 sm:col-span-3 p-2">
+                            <Button
+                              type="button"
+                              appearance="primary"
+                              intent="danger"
+                              display="flex"
+                              top={20}
+                              justifyContent="center"
+                              width="100%"
+                              onClick={() => window.location.href = "/"}
+                            >
+                              Kembali
+                            </Button>
+                            </div>
                           </form>
                         </div>
                         <div className={openTab === 2 ? "block" : "hidden"} id="link2">
@@ -368,11 +376,20 @@ function Register(props) {
                               Daftar Pengguna
                             </Button>
                             </div>
-                            {/* <button
-                              type="submit"
-                              class="w-full text-center rounded bg-green-500 text-white hover:bg-green-600 focus:outline-none my-5 p-2"
-                            >Daftar Pengguna
-                                </button> */}
+                            <div className="col-span-6 sm:col-span-3 p-2">
+                            <Button
+                              type="button"
+                              appearance="primary"
+                              intent="danger"
+                              display="flex"
+                              top={20}
+                              justifyContent="center"
+                              width="100%"
+                              onClick={() => window.location.href = "/"}
+                            >
+                              Kembali
+                            </Button>
+                            </div>
                           </form>
                         </div>
                       </div>
