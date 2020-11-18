@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Heading } from "evergreen-ui";
+import { Pane, Button, Heading, TextInputField, Text } from "evergreen-ui";
 import swal from "sweetalert";
 
 // components
@@ -16,33 +16,36 @@ const useFormInput = (initialValue) => {
   };
 };
 
-export default function CardSettings({ notel = "" }) {
+export default function CardSettings({ 
+  nama = "",
+  nokp = "",
+  email = "",
+  notel = "",
+  color = "blue",
+}) {
 
-  const [error, setError]                   = useState(null);
-  const [loading, setLoading]               = useState(false);
-  const [password, setPassword]             = useState("");
-  const [new_password, setNewPassword]      = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [namapenuh, setUsername] = useState(nama);
+  const [kadpengenalan, setIC] = useState(nokp);
+  const [emel, setEmail] = useState(email);
+  const [telefon, setTelephone] = useState(notel);           
+  const [password, setPassword] = useState("");
+  const [new_password, setNewPassword] = useState("");
   const [conf_password, setConformPassword] = useState("");
-
-  const username = sessionStorage.getItem('username');
-  const email = sessionStorage.getItem('email');
-  const nokp = sessionStorage.getItem('nokp');
+  const [openTab, setOpenTab] = useState(1);
 
   const handleUpdate = () => {
 
-    var username  = document.getElementById("username").value;
-    var email     = document.getElementById("email").value;
-    var notel     = document.getElementById("notel").value;
-
-    if (username == "") {
+    if (namapenuh == "") {
       swal("Opss!", "Kata nama tidak boleh dikosongkan.", "error");
       return false;
     }
-    else if (email == "") {
+    else if (emel == "") {
       swal("Opss!", "Emel tidak boleh dikosongkan", "error");
       return false;
     }
-    else if (notel == "") {
+    else if (telefon == "") {
       swal("Opss!", "Nombor telefon tidak boleh dikosongkan", "error");
       return false;
     }
@@ -50,10 +53,10 @@ export default function CardSettings({ notel = "" }) {
 
       var formdata = new FormData();
 
-      formdata.append("username", username.trim());
-      formdata.append("email", email.trim());
-      formdata.append("nokp", nokp);
-      formdata.append("notel", notel.trim());
+      formdata.append("username", namapenuh.trim());
+      formdata.append("email", emel.trim());
+      formdata.append("nokp", kadpengenalan);
+      formdata.append("notel", telefon.trim());
 
       var requestOptions = {
         method: 'POST',
@@ -92,41 +95,166 @@ export default function CardSettings({ notel = "" }) {
 
   const handleChangePassword = () => {
 
-    if(password == ""){
-      swal("Opss","Sila isi kata laluan terkini.","error");
-    }else if(new_password == ""){
-      swal("Opss","Sila isi kata laluan yang baru.","error")
-    }else if(conf_password == ""){
-      swal("Opss","Sila isi pengesahan kata laluan yang baru.","error")
-    }else if(new_password !== conf_password){
-      swal("Opss","Kata laluan anda tidak sah","error")
-    }else{
+    if (password == "") {
+      swal("Opss", "Sila isi kata laluan terkini.", "error");
+    } else if (new_password == "") {
+      swal("Opss", "Sila isi kata laluan yang baru.", "error")
+    } else if (conf_password == "") {
+      swal("Opss", "Sila isi pengesahan kata laluan yang baru.", "error")
+    } else if (new_password !== conf_password) {
+      swal("Opss", "Kata laluan anda tidak sah", "error")
+    } else {
 
       console.log(password);
       console.log(new_password);
       console.log(conf_password);
       swal({
-        title:"Set Semula Kata Laluan",
-        text:"Anda pasti untuk set semula kata laluan akaun anda?",
-        button:true,
-        dangerMode:true,
+        title: "Set Semula Kata Laluan",
+        text: "Anda pasti untuk set semula kata laluan akaun anda?",
+        button: true,
+        dangerMode: true,
       }).then((change) => {
-        if(change){
+        if (change) {
           swal("Kata laluan akaun anda sudah dikemaskini!");
-        }else{
-          
+        } else {
+
         }
       })
     }
   }
 
   return (
-    <div className="flex flex-wrap">
-      <div className="w-full lg:w-6/12 h-full shadow-lg bg-gray-300 rounded-2xl">
+    <>
+
+      <div className="w-full">
+        <ul className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row justify-center" role="tablist">
+          <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+            <a
+              className={
+                "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                (openTab === 1
+                  ? "text-white bg-" + color + "-600"
+                  : "text-" + color + "-600 bg-white")
+              }
+              onClick={e => {
+                e.preventDefault();
+                setOpenTab(1);
+              }}
+              data-toggle="tab"
+              href="#link1"
+              role="tablist"
+            >
+              Profil
+              </a>
+          </li>
+          <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+            <a
+              className={
+                "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                (openTab === 2
+                  ? "text-white bg-" + color + "-600"
+                  : "text-" + color + "-600 bg-white")
+              }
+              onClick={e => {
+                e.preventDefault();
+                setOpenTab(2);
+              }}
+              data-toggle="tab"
+              href="#link2"
+              role="tablist"
+            >
+              Kata Laluan
+              </a>
+          </li>
+        </ul>
+
+        <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+            <div className="px-4 py-5 flex-auto">
+              <div className="tab-content tab-space">
+                <div className={openTab === 1 ? "block" : "hidden"} id="link1">
+                  <p>
+                  <Pane display="flex" padding={10} background="#dfe6e9" borderRadius={5}>
+                    <Pane flex={1} alignItems="center" display="flex">
+                      <Text size={600}>Profil Akaun myMPS</Text>
+                    </Pane>
+                  </Pane>
+
+                  <Pane display="flex" padding={3} background="tint3" borderRadius={3} marginTop="30px">
+                    <Pane flex={1} alignItems="center">
+                      <TextInputField
+                        label="NAMA PENUH"
+                        width="100%"
+                        placeholder="Sila isi nama penuh anda"
+                        required={true}
+                        defaultValue={namapenuh}
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+
+                      <TextInputField
+                        label="NOMBOR KAD PENGENALAN"
+                        width="100%"
+                        placeholder="Sila isi nombor kad pengenalan anda"
+                        required={true}
+                        disabled
+                        defaultValue={kadpengenalan}
+                      />
+
+                      <TextInputField
+                        label="ALAMAT EMEL"
+                        width="100%"
+                        placeholder="Sila isi alamat emel anda"
+                        required={true}
+                        defaultValue={emel}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+
+                      <TextInputField
+                        label="NOMBOR TELEFON"
+                        width="100%"
+                        placeholder="Sila isi nombor telefon anda"
+                        required={true}
+                        defaultValue={telefon}
+                        onChange={(e) => setTelephone(e.target.value)}
+                      />
+                    </Pane>
+                  </Pane>
+                  <Pane>
+                    <Button
+                      className="float-right"
+                      appearance="primary"
+                      intent="success"
+                      type="button"
+                      onClick={handleUpdate}
+                    >
+                      Kemaskini
+                    </Button>
+                  </Pane>
+                  </p>
+                </div>
+                <div className={openTab === 2 ? "block" : "hidden"} id="link2">
+                  <p>
+                  <Pane display="flex" padding={10} background="#636e72" borderRadius={5}>
+                    <Pane flex={1} alignItems="center" display="flex">
+                      <Text size={600} color="white">Set Kata Laluan</Text>
+                    </Pane>
+                  </Pane>
+
+                  <Pane display="flex" padding={16} background="tint3" borderRadius={3}>
+                    
+                  </Pane>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+
+
+      {/* <div className="w-full lg:w-6/12 shadow-lg bg-gray-400 rounded-2xl mb-5 h-full">
         <div className="rounded-t-2xl bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
             <Heading size={600}>Akaun myMPS</Heading>
-            {/* <h6 className="text-gray-800 text-xl font-bold">Akaun mymps</h6> */}
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -223,9 +351,6 @@ export default function CardSettings({ notel = "" }) {
                   >
                     Kemaskini
                   </Button>
-                  {/* <button type="button" onClick={handleUpdate} class="bg-green-500 hover:bg-green-700 text-white py-2 px-3 rounded float-right">
-                    Kemaskini
-                  </button> */}
                 </div>
               </div>
             </div>
@@ -234,11 +359,10 @@ export default function CardSettings({ notel = "" }) {
         </div>
       </div>
 
-      <div className=" w-full lg:w-6/12 h-full shadow-lg  bg-gray-300 rounded-xl">
+      <div className=" w-full lg:w-6/12 shadow-lg  bg-gray-300 rounded-xl" style={{marginBottom:"500px"}}>
         <div className="rounded-t-xl bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
           <Heading size={600}>Set semula kata laluan</Heading>
-            {/* <h6 className="text-gray-800 text-xl font-bold">Tukar Kata Laluan</h6> */}
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -313,16 +437,13 @@ export default function CardSettings({ notel = "" }) {
                   onClick={handleChangePassword}
                   >Kemaskini
                   </Button>
-                  {/* <button type="button" onClick={handleChangePassword} class="bg-green-500 hover:bg-green-700 text-white py-2 px-3 rounded float-right">
-                    Kemaskini
-                  </button> */}
                 </div>
               </div>
             </div>
 
           </form>
         </div>
-      </div>
-    </div>
+      </div> */}
+    </>
   );
 }

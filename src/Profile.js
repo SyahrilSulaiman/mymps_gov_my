@@ -21,20 +21,25 @@ function Profile(props) {
   return (
     <div>
       <Sidebar />
-      <div className="relative md:ml-64 bg-gray-400" style={{ height: "100%" }}>
+      <div className="relative md:ml-64 bg-gray-400" style={{ height: "100vh" }}>
         <Navbar />
         {/* Header */}
-        <div className="relative bg-gray-600 md:pt-32 pb-16 pt-12">
+        <div className="relative bg-gray-600 h-full md:pt-32 pt-12">
           <div className="px-4 md:px-10 mx-auto w-full">
             <div>
               {/* Card stats */}
               <div className="flex flex-wrap">
-                <Information  notel={sessionStorage.getItem('notel')}/>
+                <Information  
+                  nama={sessionStorage.getItem('username')}
+                  nokp={sessionStorage.getItem('nokp')}
+                  email={sessionStorage.getItem('email')}
+                  notel={sessionStorage.getItem('notel')}
+                />
               </div>
             </div>
           </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );
