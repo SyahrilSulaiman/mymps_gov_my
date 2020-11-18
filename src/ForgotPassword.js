@@ -2,7 +2,7 @@ import react, {useState} from "react";
 import { setUserSession } from './Utils/Common';
 import logo1 from "./assets/img/logo1.png";
 import ReCAPTCHA from "react-google-recaptcha";
-
+import noScroll from "no-scroll";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
 import swal from "sweetalert";
@@ -12,6 +12,8 @@ function onChange(value) {
 }
 
 function ForgetPassword(props){
+
+    noScroll.on();
 
     const username = useFormInput("");
 
@@ -82,7 +84,7 @@ function ForgetPassword(props){
     return (
         <div className="bg-gray">
             <IndexNavbar fixed />
-        <section className="py-20 px-5 relative" style={{background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
+        <section className="py-15 px-5 relative" style={{background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
         <div className="min-h-screen flex items-center justify-center  px-4 sm:px-6">
             <div className="max-w-md w-full" style={{marginTop: "-100px"}}>
                 <div>
@@ -127,7 +129,7 @@ function ForgetPassword(props){
             </div>
         </div>
         </section>
-        <Footer />
+        {/* <Footer /> */}
         </div>
     )
     
