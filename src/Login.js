@@ -1,11 +1,11 @@
-import react, { useState } from "react";
+import React, { useState } from "react";
 import { setUserSession } from './Utils/Common';
 import logo1 from "./assets/img/logo1.png";
-import { setGoogleToken } from './Utils/Common';
 import noScroll from "no-scroll";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
 import swal from "sweetalert";
+import { Button, Heading, Pane, ArrowLeftIcon, LogInIcon } from "evergreen-ui";
 
 function Login(props) {
 
@@ -92,9 +92,18 @@ function Login(props) {
                     <div className="max-w-md w-full" style={{ marginTop: "-100px" }}>
                         <div>
                             <img className="mx-auto w-auto" src={logo1} alt="mymps" style={{ height: "120px" }} />
-                            <h2 className="mt-6 text-center text-xl leading-9 font-extrabold text-white">
+
+                            <Pane marginTop={20}>
+                            <Heading
+                            textAlign="center"
+                            size={600}
+                            color="#E4E7EB"
+                            >Log Masuk Akaun mymps
+                            </Heading>
+                            </Pane>
+                            {/* <h2 className="mt-6 text-center text-xl leading-9 font-extrabold text-white">
                                 Log Masuk Akaun mymps
-                </h2>
+                </h2> */}
                         </div>
                         <form className="mt-8" onSubmit={(e) => handleLogin(e)}>
                             <input type="hidden" name="remember" value="true" />
@@ -111,44 +120,39 @@ function Login(props) {
                                 <div className="flex items-center">
                                     <a href="/register" className="text-sm text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
                                         <i className="fas fa-user"></i> Daftar Pengguna
-                    </a>
+                                    </a>
                                 </div>
 
                                 <div className="text-sm leading-5">
                                     <a href="/forgotpassword" className="font-medium text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
                                         Terlupa kata laluan ?
-                    </a>
+                                    </a>
                                 </div>
                             </div>
 
-                            <div className="mt-6 flex flex-wrap p-2">
-                                {/* <GoogleLogin
-                        clientId="438559173225-ub4mfh6vkmnd0qntmper0a48gqv18nn5.apps.googleusercontent.com"
-                        onSuccess={responseGoogle}
-                        render={renderProps => (
-                        <Button 
-                            type="button"
-                            onClick={renderProps.onClick} 
-                            disabled={renderProps.disabled}
-                            className="mb-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-600 hover:bg-gray-500 hover:text-gray focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
-                            fullWidth
-                            variant="contained"
-                            style={{marginTop:"-10px"}}
-                        >
-                            <img src={ggl} style={{width: "15px", height: "15px", marginRight: "7px", marginTop: "2px"}} /> 
-                            Google
-                        </Button>
-                        )}
-                        buttonText="Login"
-                        cookiePolicy={'single_host_origin'}
-                    /> */}
+                            <div className="flex flex-wrap" style={{marginTop:"30px"}}>
+                                <div className="w-full lg:w-6/12 px-1">
+                                    <div className="relative w-full mb-3">
+                                    <Button iconBefore={ArrowLeftIcon} onClick={() => window.location.href = "/"} type="button" appearance="primary" intent="danger" display="flex" justifyContent="center" width="100%">Kembali</Button>
+                                    </div>
+                                </div>
+                                <div className="w-full lg:w-6/12 px-1">
+                                    <div className="relative w-full mb-3">
+                                    <Button iconBefore={LogInIcon} type="submit" appearance="primary" intent="success" display="flex" justifyContent="center" width="100%">{loading ? 'Memuatkan...' : 'Log Masuk'}</Button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* <div className="mt-6 flex flex-wrap p-2">
+
                                 <button onClick={() => window.location.href = "/"} type="button" className="group relative w-1/2 flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                                     Kembali
-                    </button>
+                                </button>
                                 <button type="submit" className="group relative w-1/2 flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                                     {loading ? 'Memuatkan...' : 'Log Masuk'}
                                 </button>
-                            </div>
+                            </div> */}
+
                         </form>
                     </div>
                 </div>
