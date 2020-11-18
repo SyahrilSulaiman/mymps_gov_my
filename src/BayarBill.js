@@ -95,7 +95,7 @@ function Bill(props) {
   return (
 	<div>
       <Sidebar />
-		<div className="relative md:ml-64 bg-gray-400" style={{ height: "100%" }}>
+		<div className="relative md:ml-64 bg-gray-400" style={{ height: "100vh" }}>
 			<Navbar />
 			{/* Header */}
 						<div className="relative bg-gray-600 md:pt-32 pt-4 pb-4" style={{height: "100%"}}>
@@ -134,7 +134,7 @@ function Bill(props) {
 							}
 							<BillList />
 					</div>
-					<Footer />
+					{/* <Footer /> */}
 			</div>
         
       </div>
