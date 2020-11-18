@@ -40,7 +40,7 @@ const UserDropdown = () => {
               src={require("../../assets/img/team-1-800x800.jpg")}
             />
           </span> */}
-          <i class="fas fa-bars"></i>
+          <i className="fas fa-bars"></i>
         </div>
       </a>
       <div
