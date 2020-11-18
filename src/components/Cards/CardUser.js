@@ -30,6 +30,10 @@ export default function CardUser({users,loading,currentPage, userPerPage}) {
   }
   const handleEdit = (e) => {
       console.log('Edit');
+    //   history.push("/login");
+    window.location.href = '/admin/update';
+
+
   }
 
   if(loading){

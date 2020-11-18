@@ -1,4 +1,3 @@
-import { paginationReducer } from '@material-ui/data-grid';
 import React from 'react'
 
  export const Pagination = ({usersPerPage, totalUsers, paginate}) => {

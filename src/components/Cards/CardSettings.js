@@ -185,7 +185,7 @@ export default function CardSettings({notel=""}) {
             <div className="flex flex-wrap mt-6">
               <div className="w-full lg:w-12/12 px-4">
                 <div className="relative w-full mb-3">
-                  <button type="button" onClick={handleUpdate} class="bg-green-500 hover:bg-green-700 text-white py-2 px-3 rounded float-right">
+                  <button type="button" onClick={handleUpdate} className="bg-green-500 hover:bg-green-700 text-white py-2 px-3 rounded float-right">
                     Kemaskini
                   </button>
                 </div>
