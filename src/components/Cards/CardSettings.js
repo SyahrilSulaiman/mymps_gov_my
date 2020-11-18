@@ -73,7 +73,6 @@ export default function CardSettings({
           if (result.status == "success") {
 
             setLoading("false");
-            swal("Berjaya!", "Akaun profil anda sudah dikemaskini.", "success");
 
             sessionStorage.removeItem('username');
             sessionStorage.setItem('username', result.data[0]["U_USERNAME"]);
@@ -81,7 +80,11 @@ export default function CardSettings({
             sessionStorage.removeItem('email');
             sessionStorage.setItem('email', result.data[0]['U_USEREMAIL']);
 
-            window.location.href = "./setting";
+            swal("Berjaya","Akaun profil anda sudah dikemaskini.","success")
+            .then(() => {
+              window.location.href = "/setting";
+            });
+
 
           }
           else {
@@ -111,22 +114,57 @@ export default function CardSettings({
       
       swal("Anda pasti untuk set semula kata laluan anda?", {
         buttons: {
-          tidak: {
-            text:"Tidak",
-            value:"cancel",
-            className:"bg-red-500"
-          },
+          cancel: "Tidak",
           teruskan: {
             text:"Teruskan",
             value:"pasti",
-            className:"bg-green-500 hover:bg-green-400 focus:bg-green-400"
           }
         }
       })
       .then((value) => {
         switch(value) {
           case "pasti":
-            swal("Tukar Kata Laluan");
+
+            var formdata = new FormData();
+            formdata.append("old_password", password);
+            formdata.append("new_password", new_password);
+            formdata.append("conf_password", conf_password);
+            formdata.append("userid", sessionStorage.getItem("nokp"));
+
+            var requestOptions = {
+              method: 'POST',
+              body: formdata,
+              redirect: 'follow'
+            };
+
+            fetch("https://mymps.corrad.my/int/api_generator.php?api_name=update_password", requestOptions)
+              .then(response => response.json())
+              .then(result => {
+                console.log(result);
+                if(result.status == "pending"){
+                  swal("Maaf","Anda perlu tunggu 10 minit sebelum membuat penukaran kata laluan semula.","error")
+                  .then(() => {
+                    window.location.href = "/setting";
+                  });
+                }
+                else if(result.status == "success"){
+                  swal("Berjaya","Kata laluan akaun telah berjaya ditukar","success")
+                  .then(() => {
+                    window.location.href = "/setting";
+                  });
+                }else{
+                  swal("Maaf","Kata laluan akaun tidak berjaya ditukar","error")
+                  .then(() => {
+                    window.location.href = "/setting";
+                  });
+                }
+              }
+              )
+              .catch(error => 
+                console.log('error', error)
+              );
+
+            
             break;
           
           case "cancel":
