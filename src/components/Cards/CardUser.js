@@ -15,7 +15,7 @@ import axios from "axios";
 //   };
 // };
 
-export default function CardUser({users,loading}) {
+export default function CardUser({users,loading,currentPage, userPerPage}) {
 
   const handleDelete = (e) => {
     //   console.log('Delete');
@@ -46,7 +46,7 @@ return (
                     <div className="flex flex-row border-b border-gray-400">
                         <div className="relative w-2/12 md:w-1/12 pr-4">
                             <span className="font-semibold uppercase text-sm text-gray-700">
-                            {index+1}
+                            {index+1+((currentPage-1)*userPerPage)}
                             </span>
                         </div>
                         <div className="relative w-4/12 lg:w-3/12 pr-4 flex-grow">

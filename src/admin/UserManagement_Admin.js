@@ -16,7 +16,7 @@ function Dashboard(props) {
   const [users,setUser] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [userPerPage, setUserPerPage] = useState(10);
+  const [userPerPage, setUserPerPage] = useState(5);
 
   useEffect(() =>{
     const fetchUsers = async () =>{
@@ -102,7 +102,7 @@ function Dashboard(props) {
                               </div>
                           </div>
                       </div>
-                        <CardUser users={currentUsers} loading={loading}/>
+                        <CardUser users={currentUsers} loading={loading} currentPage={currentPage} userPerPage={userPerPage}/>
                         <Pagination usersPerPage={userPerPage} totalUsers={users.length} paginate={paginate}/>
                   </div>
               </div>
