@@ -8,13 +8,7 @@ export default function Search({type}){
     const [search,setSearch] = useState('');
     const [loading,setLoading] = useState(false);
     const [display,setDisplay] = useState(false);
-    const [bill,setBill] = useState({
-        noakaun:'',
-        nama_pemilik: '',
-        nokp: '',
-        add_harta: '',
-        type:''
-    });
+    const [bill,setBill] = useState([]);
 
     useEffect(() =>{
         console.log(type)
@@ -30,7 +24,7 @@ export default function Search({type}){
         e.preventDefault();
         axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=searchBill',{
             params: {
-                search:search,
+                search:search.trim(),
                 type:type
             }
         })
@@ -43,15 +37,9 @@ export default function Search({type}){
                     swal('Tidak ditemui',searchType+' tidak ditemui','error');
                 }
                 else{
+                    console.log(res.data);
                     setDisplay(true);
-                    setBill({
-                        ...bill,
-                        nama_pemilik:res.data[0].NAMA_PEMILIK,
-                        noakaun:res.data[0].NOAKAUN,
-                        nokp:res.data[0].NOKP,
-                        add_harta:res.data[0].ADDRHARTA,
-                        type
-                    });
+                    setBill(res.data);
                 }}
 
             if(type === 'akaun'){
@@ -63,14 +51,7 @@ export default function Search({type}){
                 }
                 else{
                     setDisplay(true);
-                    setBill({
-                        ...bill,
-                        nama_pemilik:res.data[0].NAMA_PEMILIK,
-                        noakaun:res.data[0].NOAKAUN,
-                        nokp:res.data[0].NOKP,
-                        add_harta:res.data[0].ADDRHARTA,
-                        type
-                    });
+                    setBill(res.data);
                 }
             }
 
@@ -85,14 +66,7 @@ export default function Search({type}){
                 }
                 else{
                     setDisplay(true);
-                    setBill({
-                        ...bill,
-                        nama_pemilik:res[0].NAMA_PEMILIK,
-                        noakaun:res[0].NOAKAUN,
-                        nokp:res[0].NOKP,
-                        add_harta:res[0].ADDRHARTA,
-                        type
-                    });
+                    setBill(res.data);
                 }
             }
             setLoading(false);

@@ -35,6 +35,7 @@ import Admin_Dashboard from "./admin/Dashboard_Admin";
 import Admin_Setting from "./admin/Setting_Admin";
 import Admin_UserManagement from "./admin/UserManagement_Admin";
 import Admin_Report from "./admin/Report_Admin";
+import Admin_UpdateUser from "./admin/UpdateUser_Admin";
 
 import { useLoading, Audio } from "@agney/react-loading";
 
@@ -89,13 +90,18 @@ function App() {
   }, []);
 
   if (authLoading && getToken()) {
-    return (
-      <section
-        {...containerProps}
-        style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
-      >
-        {indicatorEl} {/* renders only while loading */}
-      </section>
+
+    // Loading indicator
+    // return (
+    //   <section
+    //     {...containerProps}
+    //     style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+    //   >
+    //     {indicatorEl} {/* renders only while loading */}
+    //   </section>
+    // );
+    return(
+      <div></div>
     );
   }
 
@@ -128,6 +134,10 @@ function App() {
                 <PrivateRoute
                   path="/admin/report"
                   component={Admin_Report}
+                />
+                <PrivateRoute
+                  path="/admin/update"
+                  component={Admin_UpdateUser}
                 />
                 <Route path="*" component={NotFound} />
               </Switch>

@@ -33,7 +33,7 @@ export default function Carian({bill, display}){
                 if(res.data.status === "success"){
                     console.log(res);
                     swal('Berjaya Tambah','Berjaya tambah akaun untuk pembayaran','success');
-                    window.location.href = '/bill';
+                    // window.location.href = '/bill';
                 }
                 else if(res.data.status === "failure"){
                     swal("Tidak Berjaya",accountType+" ini telah didaftarkan ke akaun anda.","error");
@@ -58,9 +58,13 @@ export default function Carian({bill, display}){
         );
     }
     else{
+        // Loop array mapping
         return (
             <div>
-                <div className="px-4 md:px-2 mx-auto w-full">
+
+            {
+                bill.map(bills => (
+                    <div key={bills.NOAKAUN} className="px-4 md:px-2 mx-auto w-full">
                     <div className="flex flex-wrap">
                         <div className="w-full px-4">
                             <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg">
@@ -71,7 +75,7 @@ export default function Carian({bill, display}){
                                             {
                                             // dataset.jenis
                                             // bill.type
-                                                bill.nokp
+                                                bills.NOKP
                                             }
                                             </span>	
                                         </div>
@@ -79,7 +83,7 @@ export default function Carian({bill, display}){
                                             <span className="font-semibold uppercase text-lg text-gray-800">Akaun :&nbsp;
                                             {
                                                 //dataset.amaun
-                                                bill.noakaun
+                                                bills.NOAKAUN
                                             }
                                             </span>	
                                         </div>
@@ -90,28 +94,31 @@ export default function Carian({bill, display}){
                                             {
                                             // dataset.akaun
                                             // bill.code
-                                            bill.nama_pemilik
+                                            bills.NAMA_PEMILIK
                                             }
                                             </span>	
                                             <h5 className="uppercase font-medium text-xs text-gray-600">
                                             {
                                             // dataset.tempoh
                                             // bill.description
-                                            bill.add_harta
+                                            bills.ADDRHARTA
                                             }
                                             </h5>
                                         </div>
                                     </div>
                                 </div>
+                                <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
+                                    <button id="type" type="button" onClick={handleAdd} className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
+                                                {loading?'Menambah..':'Tambah'}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                        <button id="type" type="button" onClick={handleAdd} className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
-                                    {loading?'Menambah..':'Tambah'}
-                        </button>
-                    </div>
                 </div>
+                )
+            )
+        }
             </div>
         );
     }
