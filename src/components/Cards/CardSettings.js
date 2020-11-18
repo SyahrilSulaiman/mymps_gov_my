@@ -121,8 +121,8 @@ export default function CardSettings({ notel = "" }) {
   }
 
   return (
-    <>
-      <div className="relative flex flex-col min-w-0 break-words w-full h-full shadow-lg  bg-gray-300 border-0 rounded-2xl">
+    <div className="flex flex-wrap">
+      <div className="w-full lg:w-6/12 h-full shadow-lg bg-gray-300 rounded-2xl">
         <div className="rounded-t-2xl bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
             <Heading size={600}>Akaun myMPS</Heading>
@@ -234,7 +234,7 @@ export default function CardSettings({ notel = "" }) {
         </div>
       </div>
 
-      <div className="relative flex flex-col min-w-0 break-words w-full h-full shadow-lg  bg-gray-300 rounded-xl" style={{marginTop:"80px"}}>
+      <div className=" w-full lg:w-6/12 h-full shadow-lg  bg-gray-300 rounded-xl">
         <div className="rounded-t-xl bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
           <Heading size={600}>Set semula kata laluan</Heading>
@@ -323,6 +323,6 @@ export default function CardSettings({ notel = "" }) {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
