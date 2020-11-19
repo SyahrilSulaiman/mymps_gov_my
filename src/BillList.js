@@ -93,7 +93,6 @@ export default function BillList() {
   const bills = dataset.data.length ? (
     dataset.data.map((bill) => {
       return (
-          <div>
         <div
           className="px-4 md:px-2 mx-auto w-full"
           onClick={
@@ -167,20 +166,12 @@ export default function BillList() {
             </div>
           </div>
         </div>
-        </div>
       );
     })
   ) : (
     <div className="w-full">
-      <div className="flex flex-wrap ">
-        <Pane
-          background="white"
-          className="p-64 xl:mx-4 xl:rounded-md"
-          position="relative"
-          width="100%"
-        >
-    
-        </Pane>
+      <div className="flex flex-wrap bg-white p-64">
+        
       </div>
     </div>
   );

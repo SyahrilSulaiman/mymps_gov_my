@@ -1,7 +1,8 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios';
-import swal from 'sweetalert'
-import Carian from './Carian'
+import swal from 'sweetalert';
+import Carian from './Carian';
+import {Pane, TextInputField, Button, SearchIcon, ArrowLeftIcon} from "evergreen-ui";
 
 export default function Search({type}){
 
@@ -80,9 +81,9 @@ export default function Search({type}){
         
     }
 
-    if(type === '') {
+    if(type === '' || type === null || type == 'tiada') {
         return (
-            <div className=""></div>
+            <div></div>
         );
     }
     else{
@@ -90,12 +91,58 @@ export default function Search({type}){
     return (
         <div>
                 {/* Header */}
-            <div className="relative bg-gray-600 pt-4 pb-4">
+            <div className="relative pb-4">
                 <form onSubmit= {(e) => handleSubmit(e)}>
-                    <div className="px-4 md:px-10 mx-auto w-full">
                         <div className="flex flex-wrap">
-                            <div className="w-full px-4">
-                                <div className="relative flex flex-col min-w-0 break-words rounded mb-6">
+                            <div className="w-full">
+                                <Pane display="flex">
+                                <TextInputField
+                                    width="100%"
+                                    required
+                                    onChange={(e) => handleChange(e)}
+                                    label={
+                                            type === 'akaun' ? ('Nombor Akaun') 
+                                        :   type === 'ssm' ? ('Nombor ROC/ROB Syarikat') 
+                                        :   type === 'nokp' ? ('Nombor Kad Pengenalan') 
+                                        : ('Carian...')
+                                    }
+                                    description={
+                                            type === 'akaun' ? ('Lengkapkan maklumat nombor akaun dibawah.') 
+                                        :   type === 'ssm' ? ('Lengkapkan nombor ROC/ROB syarikat dibawah.') 
+                                        :   type === 'nokp' ? ('Lengkapkan nombor kad pengenalan dibawah') 
+                                        : ('Carian...')
+                                    } 
+                                    placeholder={
+                                            type === 'akaun' ? ('Sila isi nombor akaun') 
+                                        :   type === 'ssm' ? ('Sila isi nombor ROC/ROB Syarikat') 
+                                        :   type === 'nokp' ? ('Sila isi nombor kad pengenalan') 
+                                        : ('Carian...')
+                                    }
+                                />
+                                </Pane>
+                                <Pane>
+                                    <Button
+                                    type="submit"
+                                    iconBefore={SearchIcon}
+                                    appearance="primary"
+                                    intent="success"
+                                    className="float-right"
+                                    >
+                                        {loading?'Mencari..':'Cari'}
+                                    </Button>
+
+                                    <Button
+                                    type="button"
+                                    iconBefore={ArrowLeftIcon}
+                                    appearance="primary"
+                                    intent="danger"
+                                    className="float-right mr-1"
+                                    onClick={() => window.history.back()}
+                                    >
+                                        Kembali
+                                    </Button>
+                                </Pane>
+                                {/* <div className="relative flex flex-col min-w-0 break-words rounded mb-6">
                                         <div>
                                             <input aria-label="search" id="search" name="search" onChange={(e) => handleChange(e)} type="text" required className="mb-2 bg-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" 
                                             placeholder= {
@@ -105,15 +152,14 @@ export default function Search({type}){
                                                 : ('Carian...')
                                             } />
                                         </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
-                        <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
+                        {/* <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
                             <button id="type" type="submit" className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
                                         {loading?'Mencari..':'Cari'}
                             </button>
-                        </div>
-                    </div>
+                        </div> */}
                 </form>
                 {
                     <Carian bill={bill} type={type} display={display}/>

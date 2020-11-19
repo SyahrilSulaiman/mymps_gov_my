@@ -3,9 +3,9 @@ import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import { Pane, Heading, Text, Button, Icon, AddIcon, ArrowLeftIcon, SortNumericalIcon } from "evergreen-ui";
-// import SenaraiBil from './SenaraiBil';
-// import Carian from './Carian';
 import BillList from './BillList';
+import swal from "sweetalert2";
+import Swal from "sweetalert2";
 
 function Bill(props) {
 
@@ -65,7 +65,19 @@ function Bill(props) {
 								appearance="primary"
 								iconBefore={SortNumericalIcon}
 								className="xs:ml-5 ml-1"
-								onClick={handleAddBill}
+								onClick=
+								{() => 
+									Swal.fire({
+									icon:'question',
+									title: 'Anda pasti untuk membuat pembayaran keseluruhan bil anda?',
+									showCancelButton: true,
+									confirmButtonText: '<i class="fa fa-check"></i> Pasti',
+								  }).then((result) => {
+									if (result.isConfirmed) {
+									  Swal.fire('Page Bayar', '', 'success')
+									} 
+								  })
+								}
 							>
 								Bayar Semua
 							</Button>
