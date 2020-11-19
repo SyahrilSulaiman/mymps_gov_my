@@ -166,9 +166,9 @@ function App() {
                 }
                 <PrivateRoute path="/setting" component={Setting} />
                 <PrivateRoute path="/bill" component={Bill} />
-                <PrivateRoute path="/senaraibill" component={SenaraiBil} />
+                <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
-                <PrivateRoute path="/add" component={Add} />
+                <PrivateRoute path="/add_cukai_taksiran" component={Add} />
                 <Route path="*" component={NotFound} />
               </Switch>
             </div>
@@ -189,9 +189,9 @@ function App() {
                 <PrivateRoute path="/home" component={Dashboard} />
                 <PrivateRoute path="/setting" component={Setting} />
                 <PrivateRoute path="/bill" component={Bill} />
-                <PrivateRoute path="/senaraibill" component={SenaraiBil} />
+                <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
-                <PrivateRoute path="/add" component={Add} />
+                <PrivateRoute path="/add_cukai_taksiran" component={Add} />
                 <PublicRoute
                   path="/forgotpassword"
                   component={ForgotPassword}

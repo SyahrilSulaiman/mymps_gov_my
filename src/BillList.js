@@ -14,7 +14,7 @@ export default function BillList(){
 		// 	 senarai = <Senarai />
         console.log('View');
         sessionStorage.setItem("noakaun", btoa(btoa(e)));
-        window.location.href = "/senaraibill";
+        window.location.href = "/bill_cukai_taksiran";
         
     }
     
