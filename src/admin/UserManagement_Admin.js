@@ -8,6 +8,7 @@ import Footer from "../components/Footers/Footer";
 import CardUser from "../components/Cards/CardUser";
 import Pagination from "../components/Pagination/Pagination"
 import UserDetail from "./UpdateUser_Admin";
+import { Button, Pane } from 'evergreen-ui'
 // import UserDetail from "../components/Cards/CardSettings"
 
 function Dashboard(props) {
@@ -45,18 +46,25 @@ function Dashboard(props) {
     props.history.push("/login");
   };
 
+  const handleAdd = () => {
+    window.location.href = "./add_user"
+  }
+
   if(!showDetail){
     return (
       <div className="">
         <Sidebar />
         <div className="relative md:ml-64 bg-blue-600" style={{ height: "100%" }}>
           <Navbar />
-          <div className="relative bg-blue-600 pb-32 pt-12">
+          <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12">
 
             <div className="px-4 md:my-4 md:px-2 mx-auto w-full">
               <div className="flex flex-wrap">
                 <div className="w-full px-4">
                   <div className="relative flex flex-col min-w-0 break-words bg-blue-100 border-b border-gray-400 shadow-lg rounded-lg">
+                  <Pane padding={3}>
+                  <Button height={40} appearance="primary" intent="success" onClick={handleAdd}>Tambah Pengguna</Button>
+                  </Pane>
                     <div className="flex-auto p-4">
                       <div className="flex flex-row border-b border-gray-600">
                         <div className="relative w-2/12 md:w-1/12 pr-4 flex-initial">
