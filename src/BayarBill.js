@@ -134,14 +134,7 @@ function Bill(props) {
 							}
 							<BillList />
 					</div>
-<<<<<<< HEAD
 					{/* <Footer /> */}
-=======
-					{
-						// Footer
-					// <Footer />
-				}
->>>>>>> a8b95fa42efb374caf5ae162812bf5bbfbed645f
 			</div>
         
       </div>
