@@ -229,7 +229,7 @@ export default function CardSettings({
                   <p>
                   <Pane display="flex" padding={10} background="#dfe6e9" borderRadius={5}>
                     <Pane flex={1} alignItems="center" display="flex">
-                      <Text size={600}>Profil Akaun myMPS</Text>
+                      <Text size={600}>Profil Akaun mymps</Text>
                     </Pane>
                   </Pane>
 

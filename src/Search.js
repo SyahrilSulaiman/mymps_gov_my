@@ -11,7 +11,7 @@ export default function Search({type}){
     const [bill,setBill] = useState([]);
 
     useEffect(() =>{
-        console.log(type)
+        // console.log(type)
     },[type]);
     
     const handleChange = (e) => {
@@ -37,36 +37,42 @@ export default function Search({type}){
                     swal('Tidak ditemui',searchType+' tidak ditemui','error');
                 }
                 else{
-                    console.log(res.data);
-                    setDisplay(true);
                     setBill(res.data);
-                }}
+                    // console.log('Search NOKP',res.data);
+                    setDisplay(true);
+                }
+            }
 
             if(type === 'akaun'){
                 searchType = 'Akaun';
+                // res = res.data;
+                // console.log(res);
 
                 if(res.data.status === 'FAILED'){
                     setDisplay(false);
                     swal('Tidak ditemui',searchType+' tidak ditemui','error');
                 }
                 else{
-                    setDisplay(true);
                     setBill(res.data);
+                    // console.log('Search Account ',res.data);
+                    // console.log('Bill Akaun',bill);
+                    setDisplay(true);
                 }
             }
 
             if(type === 'ssm'){
                 searchType = 'No SSM';
-                res = JSON.parse(res.data);
-                console.log(res[0]);
+                res = res.data;
+                // console.log(res);
                 
                 if(res.status === 'FAILED'){
                     setDisplay(false);
                     swal('Tidak ditemui',searchType+' tidak ditemui','error');
                 }
                 else{
+                    // console.log('Search SSM: ',res)
+                    setBill(res);
                     setDisplay(true);
-                    setBill(res.data);
                 }
             }
             setLoading(false);
@@ -109,7 +115,9 @@ export default function Search({type}){
                         </div>
                     </div>
                 </form>
-                <Carian bill={bill} display={display}/>
+                {
+                    <Carian bill={bill} type={type} display={display}/>
+                }
             </div>
         </div>
     );

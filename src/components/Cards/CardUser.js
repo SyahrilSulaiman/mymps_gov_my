@@ -31,9 +31,9 @@ export default function CardUser({users,loading,currentPage, userPerPage}) {
   const handleEdit = (e) => {
       console.log('Edit');
     //   history.push("/login");
+    sessionStorage.setItem("user",btoa(e));
+    console.log(e);
     window.location.href = '/admin/update';
-
-
   }
 
   if(loading){

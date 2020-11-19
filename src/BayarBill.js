@@ -78,12 +78,12 @@ function Bill(props) {
 		// return (
 		// 	 senarai = <Senarai />
 		console.log('View');
-		window.location.href = "/senaraibill";
+		window.location.href = "/bill_cukai_taksiran";
 	}
 
   const handleAddBill = () => {
 	console.log('Add Bil');
-	window.location.href = '/add';
+	window.location.href = '/add_cukai_taksiran';
 }
 
   const handleBayar = () => {
@@ -107,7 +107,7 @@ function Bill(props) {
 												<div className="flex flex-row ">
 													<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
 														<span className="font-semibold text-xl text-white">
-														Bil Saya
+														Bil Cukai Taksiran
 														</span>	
 													</div>
 													{
@@ -134,7 +134,14 @@ function Bill(props) {
 							}
 							<BillList />
 					</div>
+<<<<<<< HEAD
 					{/* <Footer /> */}
+=======
+					{
+						// Footer
+					// <Footer />
+				}
+>>>>>>> a8b95fa42efb374caf5ae162812bf5bbfbed645f
 			</div>
         
       </div>
