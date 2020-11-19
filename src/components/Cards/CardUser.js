@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import swal from "sweetalert";
 import axios from "axios";
+import {Link} from 'react-router-dom';
 // components
 
 // const useFormInput = (initialValue) => {
@@ -15,7 +16,7 @@ import axios from "axios";
 //   };
 // };
 
-export default function CardUser({users,loading,currentPage, userPerPage}) {
+export default function CardUser({users,loading,currentPage, userPerPage, showUser, display}) {
 
   const handleDelete = (e) => {
     //   console.log('Delete');
@@ -28,12 +29,13 @@ export default function CardUser({users,loading,currentPage, userPerPage}) {
           }
         })
   }
-  const handleEdit = (e) => {
-      console.log('Edit');
+  const handleShow = (e) => {
+      console.log('Show');
     //   history.push("/login");
-    sessionStorage.setItem("user",btoa(e));
     console.log(e);
-    window.location.href = '/admin/update';
+    showUser(e);
+    display(true);
+    // window.location.href = '/admin/update';
   }
 
   if(loading){
@@ -84,14 +86,26 @@ return (
                             }
                             </span>
                         </div>
+                        {
                         <div className="relative w-1/12 w-auto pl-4 flex-initial">
-                            <button onClick={(e) => handleEdit(data.U_USERIC)}>
+                            <button onClick={(e) => handleShow(data)}>
                                 <i className="fas fa-edit" style={{color:"green"}}></i>
                             </button>
-                            <button onClick={(e) => handleDelete(data.U_USERIC)}>
-                                <i className="far fa-trash-alt" style={{color:"red"}}></i>
-                            </button>
                         </div>
+                        }
+                        {
+                        // <Link to={{
+                        //     pathname: './update_user',
+                        //     state: {data}
+                        // }}>
+                        //     <div className="relative w-1/12 w-auto pl-4 flex-initial">
+                        //         <button>
+                        //             <i className="fas fa-edit" style={{color:"green"}}></i>
+                        //         </button>
+                        //     </div>
+                        // </Link>
+                        }
+
                     </div>
                 </div>
             </div>

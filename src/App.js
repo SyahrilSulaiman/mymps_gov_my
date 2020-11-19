@@ -35,7 +35,7 @@ import Admin_Dashboard from "./admin/Dashboard_Admin";
 import Admin_Setting from "./admin/Setting_Admin";
 import Admin_UserManagement from "./admin/UserManagement_Admin";
 import Admin_Report from "./admin/Report_Admin";
-import Admin_UpdateUser from "./admin/UpdateUser_Admin";
+import UserDetail from "./admin/UpdateUser_Admin";
 
 import { useLoading, Audio } from "@agney/react-loading";
 
@@ -136,8 +136,8 @@ function App() {
                   component={Admin_Report}
                 />
                 <PrivateRoute
-                  path="/admin/update"
-                  component={Admin_UpdateUser}
+                  path="/admin/update_user"
+                  component={UserDetail}
                 />
                 <Route path="*" component={NotFound} />
               </Switch>

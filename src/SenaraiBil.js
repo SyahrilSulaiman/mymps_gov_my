@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import { Link } from "react-router-dom";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
-// import MainDashboard from "./views/admin/Dashboard";
-// import Footer from "./components/Footers/Footer";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import axios from 'axios';
@@ -68,27 +65,6 @@ export default function SenaraiBil(props) {
     }
 
     useEffect(() => {
-        // let source = axios.CancelToken.source();
-
-        // const loadData = async () => {
-        //     try{
-        //         const response = await axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun='+sessionStorage.noakaun,{cancelToken:source.token});
-        //         console.log(response.data);
-        //         setBill(response.data);
-        //     }
-        //     catch(error){
-        //         if(axios.isCancel(error)){
-        //             console.log('Caught cancel');
-        //         }
-        //         else{
-        //             throw error;
-        //         }
-        //     }}
-        // loadData();
-
-        // return () => {
-        //     source.cancel();
-        // }
         axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun=' + sessionStorage.noakaun)
             .then(res => {
                 console.log(res.data)
