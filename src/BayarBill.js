@@ -62,6 +62,17 @@ function Bill(props) {
 						<Pane background="#2c3e50" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
 							<Heading size={400} color="white"><Icon icon={ArrowLeftIcon} size={12} onClick={() => window.history.back()} /> Bil / Senarai Bil</Heading>
 						</Pane>
+						<Pane className="py-5 xl:mx-4 xl:rounded-md" position="relative" width="100%">
+							<Button
+								appearance="primary"
+								intent="success"
+								iconBefore={AddIcon}
+								className="xs:ml-5"
+								onClick={handleAddBill}
+							>
+								Tambah Bil
+							</Button>
+						</Pane>
 						<div className="w-full">
                                 <div className="flex-auto mt-6 " style={{height:"80vh"}}>
 									<BillList />
