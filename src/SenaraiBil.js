@@ -65,9 +65,9 @@ export default function SenaraiBil(props) {
     }
 
     useEffect(() => {
-        axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun=' + sessionStorage.noakaun)
+        axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun=' + sessionStorage.getItem('noakaun'))
             .then(res => {
-                console.log(res.data)
+                console.log(res.data.data[0])
                 if (res.data.status == 'success') {
                     setBill({
                         bill: res.data
@@ -85,10 +85,13 @@ export default function SenaraiBil(props) {
         return (
             <div>
                 <Sidebar />
-                <div className="relative bg-gray-500 md:ml-64" style={{ height: "100vh" }}>
+                <div className="relative bg-gray-400 md:ml-64" style={{ height: "100vh" }}>
                     <Navbar />
                     <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
                         <div className="flex flex-wrap">
+                        <Pane background="#2c3e50" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
+                            <Heading size={400} color="white"><Icon icon={ArrowLeftIcon} size={12} onClick={() => window.history.back()} /> Bil / Maklumat Bil</Heading>
+                        </Pane>
                             <div className="w-full px-4 mt-3">
                                 <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">
                                     <div className="flex-auto p-4 mt-6">
@@ -117,7 +120,7 @@ export default function SenaraiBil(props) {
     return (
         <div>
             <Sidebar />
-            <div className="relative bg-gray-500 md:ml-64" style={{ height: "100vh" }}>
+            <div className="relative bg-gray-400 md:ml-64" style={{ height: "100vh" }}>
                 <Navbar />
                 <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
                     <div className="flex flex-wrap">
@@ -130,7 +133,7 @@ export default function SenaraiBil(props) {
 
                                     <Heading
                                         is="h1"
-                                        size={600}
+                                        size={500}
                                         marginBottom={majorScale(2)}
                                         textTransform="uppercase"
                                         letterSpacing="2px"
@@ -157,22 +160,22 @@ export default function SenaraiBil(props) {
                                                 <Text fontWeight={700}>Jenis:</Text> Cukai Taksiran
                                             </ListItem>
                                             <ListItem icon="heart">
-                                                <Text fontWeight={700}>No Akaun:</Text> {bills.bill.data[0].NOAKAUN ? bills.bill.data[0].NOAKAUN : "Tiada"}
+                                                <Text fontWeight={700}>No Akaun:</Text> {bills.bill.data[0][0].NOAKAUN ? bills.bill.data[0][0].NOAKAUN : "Tiada"}
                                             </ListItem>
                                             <ListItem icon="predictive-analysis">
-                                                <Text fontWeight={700}>Nama Pemilik:</Text> {bills.bill.data[0].NAMA_PEMILIK ? bills.bill.data[0].NAMA_PEMILIK : "Tiada"}
+                                                <Text fontWeight={700}>Nama Pemilik:</Text> {bills.bill.data[0][0].NAMA_PEMILIK ? bills.bill.data[0][0].NAMA_PEMILIK : "Tiada"}
                                             </ListItem>
                                             <ListItem icon="tint">
-                                                <Text fontWeight={700}>Alamat Harta:</Text> {bills.bill.data[0].ADDRHARTA ? bills.bill.data[0].ADDRHARTA : "Tiada"}
+                                                <Text fontWeight={700}>Alamat Harta:</Text> {bills.bill.data[0][0].ADDRHARTA ? bills.bill.data[0][0].ADDRHARTA : "Tiada"}
                                             </ListItem>
                                             <ListItem icon="tint">
-                                                <Text fontWeight={700}>Mukim:</Text> {bills.bill.data[0].MUKIM ? bills.bill.data[0].MUKIM : "Tiada"}
+                                                <Text fontWeight={700}>Mukim:</Text> {bills.bill.data[0][0].MUKIM ? bills.bill.data[0][0].MUKIM : "Tiada"}
                                             </ListItem>
                                             <ListItem icon="tint">
-                                                <Text fontWeight={700}>Tempoh Cukai:</Text> {bills.bill.data[0].TEMPOH_CUKAI ? bills.bill.data[0].TEMPOH_CUKAI : "Tiada"}
+                                                <Text fontWeight={700}>Tempoh Cukai:</Text> {bills.bill.data[0][0].TEMPOH_CUKAI ? bills.bill.data[0][0].TEMPOH_CUKAI : "Tiada"}
                                             </ListItem>
                                             <ListItem icon="tint">
-                                                <Text fontWeight={700}>Tempoh Bayaran:</Text> {bills.bill.data[0].TEMPOH_BAYARAN ? bills.bill.data[0].TEMPOH_BAYARAN : "Tiada"}
+                                                <Text fontWeight={700}>Tempoh Bayaran:</Text> {bills.bill.data[0][0].TEMPOH_BAYARAN ? bills.bill.data[0][0].TEMPOH_BAYARAN : "Tiada"}
                                             </ListItem>
                                         </UnorderedList>
                                     </Card>
@@ -268,7 +271,7 @@ export default function SenaraiBil(props) {
                                     <div className="flex flex-col pt-4">
                                         <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
                                             <span className="font-semibold text-sm text-gray-800">
-                                                Status Bayaran : { bills.bill.data[0].STATUS == "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>) }
+                                                Status Bayaran : { bills.bill.data[0][0].STATUS == "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>) }
                                             </span>
                                             {/* <h5 className="uppercase font-medium text-xs text-green-400">
                                                 {bills.bill.data[0].STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK"}
