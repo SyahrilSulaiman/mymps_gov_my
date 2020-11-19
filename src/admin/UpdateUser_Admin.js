@@ -45,7 +45,11 @@ export default function UserDetail({showUser,display}) {
             text:'Pengguna telah disahkan',
             icon:'warning',
             'timer': 3000
-          }).then(display(false))
+          })
+          .then(res => {
+            window.location.href = "./usermanagement"
+            }
+          )
         }).catch(err=>{console.log(err)})
       
       }
@@ -95,7 +99,11 @@ export default function UserDetail({showUser,display}) {
             text:'Pengguna telah dihapuskan',
             icon:'warning',
             'timer': 3000
-          }).then(display(false))
+          })
+          .then(res => {
+            window.location.href = "./usermanagement"
+            }
+          )
         }).catch(err=>{console.log(err)})
       
       }
