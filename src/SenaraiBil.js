@@ -133,7 +133,7 @@ export default function SenaraiBil(props) {
 
                                     <Heading
                                         is="h1"
-                                        size={600}
+                                        size={500}
                                         marginBottom={majorScale(2)}
                                         textTransform="uppercase"
                                         letterSpacing="2px"

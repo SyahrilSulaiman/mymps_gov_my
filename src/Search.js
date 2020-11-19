@@ -136,7 +136,6 @@ export default function Search({type}){
                                     iconBefore={ArrowLeftIcon}
                                     appearance="primary"
                                     intent="danger"
-                                    className="float-right mr-1"
                                     onClick={() => window.history.back()}
                                     >
                                         Kembali

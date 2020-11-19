@@ -3,6 +3,7 @@ import axios from "axios";
 import { getNOKP } from "./Utils/Common";
 import swal from "sweetalert";
 import NoScroll from "no-scroll";
+import BayarCukai from "./BayarCukai";
 import {Pane, Heading, Icon, ArrowLeftIcon} from "evergreen-ui";
 
 export default function BillList() {
@@ -22,11 +23,12 @@ export default function BillList() {
     window.location.href = "/bill_cukai_taksiran";
   };
 
-  const handleBayar = (e, a) => {
+  const handleBayar = (cukai, amount, penama) => {
     console.log("Bayar");
-    sessionStorage.setItem("cukai", btoa(btoa(e)));
-    sessionStorage.setItem("amaun", btoa(btoa(a)));
-    window.location.href = "/payment?Cukai=" + e;
+    sessionStorage.setItem("cukai", btoa(btoa(cukai)));
+    sessionStorage.setItem("amaun", btoa(btoa(amount)));
+    sessionStorage.setItem("penama", btoa(btoa(penama)));
+    window.location.href = "/payment?Cukai=" + cukai;
   };
 
   const [dataset, setDataSet] = useState({
@@ -97,16 +99,15 @@ export default function BillList() {
           className="px-4 md:px-2 mx-auto w-full"
           onClick={
             //betulkan status***
-            bill.STATUS === "TERTUNGGAK"
-              ? () => handleBayar(bill.code, bill.amaun)
-              : () => handleViewBill(bill.NOAKAUN)
+            bill.STATUS !== "PAID" ? () => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK) : () => handleViewBill(bill.NOAKAUN)
           }
           key={bill.NOAKAUN}
         >
           <div className="flex flex-wrap">
             <div className="w-full px-2">
-              <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-md">
+              <div className="relative flex flex-col min-w-0 break-words bg-white shadow-md border">
                 <div className="flex-auto p-3">
+
                   <div className="flex flex-row pt-4">
                     <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
                       <h5 className="uppercase font-medium text-xs text-gray-600">
@@ -117,6 +118,7 @@ export default function BillList() {
                       </h5>
                     </div>
                   </div>
+
                   <div className="flex flex-row pb-4">
                     <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
                       <h5 className="uppercase font-medium text-xs text-gray-600">
@@ -127,6 +129,7 @@ export default function BillList() {
                       </h5>
                     </div>
                   </div>
+
                   <div className="flex flex-row pb-4">
                     <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
                       <h5 className="uppercase font-medium text-xs text-gray-600">
@@ -137,6 +140,7 @@ export default function BillList() {
                       </h5>
                     </div>
                   </div>
+
                   <div className="flex flex-row pb-4">
                     <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
                       <h5 className="uppercase font-medium text-xs text-gray-600">
@@ -161,6 +165,7 @@ export default function BillList() {
                       </h5>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
