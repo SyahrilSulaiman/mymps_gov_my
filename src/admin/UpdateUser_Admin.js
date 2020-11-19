@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, {useState, useEffect} from "react";
 // import swal from "sweetalert";
-import swal from "sweetalert2";
+import swal from "sweetalert";
 import Sidebar from "../admin/Sidebar_Admin";
 import Navbar from "../components/Navbars/AdminNavbar";
 import Footer from "../components/Footers/Footer";
@@ -9,21 +9,6 @@ import { get } from "jquery";
 import { Pane, Button, Heading, TextInputField, Text } from "evergreen-ui";
 import axios from 'axios'
 import { getUser, getNOKP, getToken, removeUserSession } from "../Utils/Common";
-
-
-// components
-
-// const useFormInput = (initialValue) => {
-//   const [value, setValue] = useState(initialValue);
-
-//   const handleChange = (e) => {
-//     setValue(e.target.value);
-//   };
-//   return {
-//     value,
-//     onChange: handleChange,
-//   };
-// };
 
 export default function UserDetail({showUser,display}) {
   const admin = getNOKP();
