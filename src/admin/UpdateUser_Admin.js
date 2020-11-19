@@ -13,6 +13,7 @@ import { getUser, getNOKP, getToken, removeUserSession } from "../Utils/Common";
 export default function UserDetail({showUser,display}) {
   const admin = getNOKP();
   const user = showUser.U_USERIC;
+  const user_email = showUser.U_USEREMAIL;
   const formData = new FormData();
   formData.append('user',user);
   formData.append('admin',admin);
@@ -68,12 +69,25 @@ export default function UserDetail({showUser,display}) {
       cancelButtonText: 'Batal'
     }).then((result) => {
       if (result.isConfirmed) {
-        swal.fire(
-          'Kemaskini berjaya',
-          'Kata laluan pengguna telah ditetapkan semula',
-          'success'
-        )
-        axios.post().then(res=>{}).catch(err=>{})
+        formData.append('username',user_email);
+        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=change_password',formData)
+        .then(res=>{
+          console.log(res);
+          if (res.data.status == "unsuccess") {
+            console.log(res);
+            swal.fire("Opss!", "Sila pastikan emel anda telah diisi dan sah.", "error");
+            return false;
+        }
+        else if (res.data.status == "pending") {
+            console.log(res);
+            swal.fire("Harap Maaf!", "Akaun ini mesti menunggu 10 minit sebelum ingin menukar kata laluan yang baru.", "error");
+        }
+        else if (res.data.status == "success") {
+            console.log(res);
+            swal.fire("Berjaya", "Sila semak emel anda untuk mendapatkan kata laluan yang baharu.", "success");
+            window.location.href = "./usermanagement"
+        }
+        }).catch(err=>{})
       }
     })
   }
