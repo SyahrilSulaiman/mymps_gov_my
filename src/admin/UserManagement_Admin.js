@@ -1,328 +1,140 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getUser, getNOKP, getToken, removeUserSession } from "../Utils/Common";
-import BootstrapTable from "react-bootstrap-table-next";
-
+import { DataGrid } from "@material-ui/data-grid";
+import axios from 'axios'
 import Sidebar from "./Sidebar_Admin";
 import Navbar from "../components/Navbars/AdminNavbar";
 import Footer from "../components/Footers/Footer";
-import { sha256 } from "js-sha256";
-
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import CardUser from "../components/Cards/CardUser";
+import Pagination from "../components/Pagination/Pagination"
+import UserDetail from "./UpdateUser_Admin";
+// import UserDetail from "../components/Cards/CardSettings"
 
 function Dashboard(props) {
-  const [getUserList, setUserList] = useState();
-
   const token = getToken();
   const user = getUser();
   const nokp = getNOKP();
 
-  const columns = [
-    {
-      dataField: "U_USERNAME",
-      text: "Product ID",
-    },
-    {
-      dataField: "U_USERIC",
-      text: "Product Name",
-    },
-    {
-      dataField: "U_USERPHONE",
-      text: "Product Price",
-    },
-  ];
+  const [users, setUser] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [userPerPage, setUserPerPage] = useState(5);
+
+  const [showDetail,setShowDetail] = useState(false);
+  const [userDetail,setUserDetail] = useState([]);
 
   useEffect(() => {
-    var formdata = new FormData();
-    formdata.append("secretKey", sha256(btoa(sessionStorage.getItem("role"))));
-
-    var requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    };
-
-    var urlAPI1 =
-      "https://mymps.corrad.my/int/api_generator.php?api_name=get_ListUser";
-
-    fetch(urlAPI1, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        //console.log(result.data);
-        setUserList(result.data);
-      });
+    const fetchUsers = async () => {
+      setLoading(true);
+      const res = await axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=user_list');
+      setUser(JSON.parse(res.data.data));
+      setLoading(false);
+    }
+    fetchUsers();
   }, []);
 
-  console.log(getUserList);
+  const indexOfLastUser = currentPage * userPerPage;
+  const indexOfFirstUser = indexOfLastUser - userPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const showUser = (user) => setUserDetail(user);
 
   const handleLogout = () => {
     removeUserSession();
     props.history.push("/login");
   };
 
-  if (getUserList) {
+  if(!showDetail){
     return (
-      <div>
+      <div className="">
         <Sidebar />
-        <div
-          className="relative md:ml-64 bg-blue-600"
-          style={{ height: "100%" }}
-        >
+        <div className="relative md:ml-64 bg-blue-600" style={{ height: "100%" }}>
           <Navbar />
-          {/* Header */}
-          <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12">
-            <div className="px-4 md:px-10 mx-auto w-full">
-              <div className="jumbotron bg-gray-100 p-3 rounded-lg">
-                <h2 class="text-2xl font-semibold text-gray-600">Users</h2>
-              </div>
-              <div class="my-2 flex sm:flex-row flex-col">
-                <div class="flex flex-row mb-1 sm:mb-0">
-                  <div class="relative">
-                    <select class="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                      <option>5</option>
-                      <option>10</option>
-                      <option>20</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                      <svg
-                        class="fill-current h-4 w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                      </svg>
+          <div className="relative bg-blue-600 pb-32 pt-12">
+
+            <div className="px-4 md:my-4 md:px-2 mx-auto w-full">
+              <div className="flex flex-wrap">
+                <div className="w-full px-4">
+                  <div className="relative flex flex-col min-w-0 break-words bg-blue-100 border-b border-gray-400 shadow-lg rounded-lg">
+                    <div className="flex-auto p-4">
+                      <div className="flex flex-row border-b border-gray-600">
+                        <div className="relative w-2/12 md:w-1/12 pr-4 flex-initial">
+                          <h5 className="uppercase font-medium text-xs text-gray-600">
+                            {
+                              // dataset.tempoh
+                              // bill.description
+                              // bill.add_harta
+                            }Bil
+                                    </h5>
+                        </div>
+                        <div className="relative w-4/12 lg:w-3/12 pr-4 flex-grow">
+                          <h5 className="uppercase font-medium text-xs text-gray-600">
+                            {
+                              // dataset.tempoh
+                              // bill.description
+                              // bill.add_harta
+                            }No Kad Pengenalan
+                                        </h5>
+                        </div>
+                        <div className="relative lg:w-6/12 pr-4 flex-grow hidden lg:block">
+                          <h5 className="uppercase font-medium text-xs text-gray-600">
+                            {
+                              // dataset.tempoh
+                              // bill.description
+                              // bill.add_harta
+                            }Nama
+                                        </h5>
+                        </div>
+                        <div className="relative lg:w-2/12 pr-4 flex-grow hidden lg:block">
+                          <h5 className="uppercase font-medium text-xs text-gray-600">
+                            {
+                              // dataset.tempoh
+                              // bill.description
+                              // bill.add_harta
+                            }Telefon
+                                        </h5>
+                        </div>
+                        <div className="relative w-4/12 lg:w-2/12 pr-4 flex-initial">
+                          <h5 className="uppercase font-medium text-xs text-gray-600">
+                            {
+                              // dataset.tempoh
+                              // bill.description
+                              // bill.add_harta
+                            }Status
+                                    </h5>
+                        </div>
+                        <div className="relative w-1/12 w-auto pl-4 flex-initial invisible">
+                          <i className="far fa-trash-alt" style={{ color: "red" }}></i>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="relative">
-                    <select class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
-                      <option>All</option>
-                      <option>Active</option>
-                      <option>Inactive</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                      <svg
-                        class="fill-current h-4 w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="block relative">
-                  <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
-                    <svg
-                      viewBox="0 0 24 24"
-                      class="h-4 w-4 fill-current text-gray-500"
-                    >
-                      <path d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z"></path>
-                    </svg>
-                  </span>
-                  <input
-                    placeholder="Search"
-                    class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
-                  />
-                </div>
-              </div>
-              <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-                <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                  <table class="min-w-full leading-normal">
-                    <thead>
-                      <tr>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                          User
-                        </th>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                          Rol
-                        </th>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                          Created at
-                        </th>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                          Status
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <div class="flex items-center">
-                            <div class="flex-shrink-0 w-10 h-10">
-                              <img
-                                class="w-full h-full rounded-full"
-                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                                alt=""
-                              />
-                            </div>
-                            <div class="ml-3">
-                              <p class="text-gray-900 whitespace-no-wrap">
-                                Vera Carpenter
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <p class="text-gray-900 whitespace-no-wrap">Admin</p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <p class="text-gray-900 whitespace-no-wrap">
-                            Jan 21, 2020
-                          </p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                            <span
-                              aria-hidden
-                              class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                            ></span>
-                            <span class="relative">Activo</span>
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <div class="flex items-center">
-                            <div class="flex-shrink-0 w-10 h-10">
-                              <img
-                                class="w-full h-full rounded-full"
-                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                                alt=""
-                              />
-                            </div>
-                            <div class="ml-3">
-                              <p class="text-gray-900 whitespace-no-wrap">
-                                Blake Bowman
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <p class="text-gray-900 whitespace-no-wrap">Editor</p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <p class="text-gray-900 whitespace-no-wrap">
-                            Jan 01, 2020
-                          </p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                            <span
-                              aria-hidden
-                              class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                            ></span>
-                            <span class="relative">Activo</span>
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <div class="flex items-center">
-                            <div class="flex-shrink-0 w-10 h-10">
-                              <img
-                                class="w-full h-full rounded-full"
-                                src="https://images.unsplash.com/photo-1540845511934-7721dd7adec3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                                alt=""
-                              />
-                            </div>
-                            <div class="ml-3">
-                              <p class="text-gray-900 whitespace-no-wrap">
-                                Dana Moore
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <p class="text-gray-900 whitespace-no-wrap">Editor</p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <p class="text-gray-900 whitespace-no-wrap">
-                            Jan 10, 2020
-                          </p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
-                            <span
-                              aria-hidden
-                              class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"
-                            ></span>
-                            <span class="relative">Suspended</span>
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="px-5 py-5 bg-white text-sm">
-                          <div class="flex items-center">
-                            <div class="flex-shrink-0 w-10 h-10">
-                              <img
-                                class="w-full h-full rounded-full"
-                                src="https://images.unsplash.com/photo-1522609925277-66fea332c575?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&h=160&w=160&q=80"
-                                alt=""
-                              />
-                            </div>
-                            <div class="ml-3">
-                              <p class="text-gray-900 whitespace-no-wrap">
-                                Alonzo Cox
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="px-5 py-5 bg-white text-sm">
-                          <p class="text-gray-900 whitespace-no-wrap">Admin</p>
-                        </td>
-                        <td class="px-5 py-5 bg-white text-sm">
-                          <p class="text-gray-900 whitespace-no-wrap">
-                            Jan 18, 2020
-                          </p>
-                        </td>
-                        <td class="px-5 py-5 bg-white text-sm">
-                          <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                            <span
-                              aria-hidden
-                              class="absolute inset-0 bg-red-200 opacity-50 rounded-full"
-                            ></span>
-                            <span class="relative">Inactive</span>
-                          </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
-                    <span class="text-xs xs:text-sm text-gray-900">
-                      Showing 1 to 4 of 50 Entries
-                    </span>
-                    <div class="inline-flex mt-2 xs:mt-0">
-                      <button class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l">
-                        Prev
-                      </button>
-                      <button class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r">
-                        Next
-                      </button>
-                    </div>
+                    <CardUser users={currentUsers} loading={loading} currentPage={currentPage} userPerPage={userPerPage} showUser={showUser} display={setShowDetail}/>
+                    <Pagination usersPerPage={userPerPage} totalUsers={users.length} paginate={paginate} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="px-4 md:px-10 mx-auto w-full m-24"></div>
           <Footer />
         </div>
       </div>
     );
-  } else {
+  }
+  else{
     return (
-      <div>
+      <div className="">
         <Sidebar />
-        <div
-          className="relative md:ml-64 bg-blue-600"
-          style={{ height: "100%" }}
-        >
+        <div className="relative md:ml-64 bg-blue-600" style={{ height: "100%" }}>
           <Navbar />
-          {/* Header */}
-          <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12">
-            <div className="px-4 md:px-10 mx-auto w-full"></div>
+          <div className="relative bg-blue-600 pb-32 pt-12">
+
+          <UserDetail showUser={userDetail} display={setShowDetail}/>
+
           </div>
-          <div className="px-4 md:px-10 mx-auto w-full m-24"></div>
-          <Footer />
+          { 
+          //  <Footer />
+          }
         </div>
       </div>
     );

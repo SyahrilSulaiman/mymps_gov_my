@@ -10,21 +10,6 @@ import { Pane, Button, Heading, TextInputField, Text } from "evergreen-ui";
 import axios from 'axios'
 import { getUser, getNOKP, getToken, removeUserSession } from "../Utils/Common";
 
-
-// components
-
-// const useFormInput = (initialValue) => {
-//   const [value, setValue] = useState(initialValue);
-
-//   const handleChange = (e) => {
-//     setValue(e.target.value);
-//   };
-//   return {
-//     value,
-//     onChange: handleChange,
-//   };
-// };
-
 export default function UserDetail({showUser,display}) {
   const admin = getNOKP();
   const user = showUser.U_USERIC;
