@@ -4,12 +4,13 @@ import { getNOKP } from "./Utils/Common";
 import swal from "sweetalert";
 import NoScroll from "no-scroll";
 import BayarCukai from "./BayarCukai";
-import {Pane, Heading, Icon, ArrowLeftIcon} from "evergreen-ui";
+import { Pane, Spinner, Heading, Strong, Icon, ArrowLeftIcon } from "evergreen-ui";
+import iconBill from "./assets/img/bill.png";
 
 export default function BillList() {
 
-    NoScroll.on();
-    
+  NoScroll.on();
+
   sessionStorage.removeItem("cukai");
   const nokp = getNOKP();
   const displayKP =
@@ -96,7 +97,7 @@ export default function BillList() {
     dataset.data.map((bill) => {
       return (
         <div
-          className="px-4 md:px-2 mx-auto w-full"
+          className=" w-full"
           onClick={
             //betulkan status***
             bill.STATUS !== "PAID" ? () => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK) : () => handleViewBill(bill.NOAKAUN)
@@ -104,8 +105,38 @@ export default function BillList() {
           key={bill.NOAKAUN}
         >
           <div className="flex flex-wrap">
-            <div className="w-full px-2">
-              <div className="relative flex flex-col min-w-0 break-words bg-white shadow-md border">
+            <div className="w-full px-2 border-white">
+              <Pane
+              borderColor="white"
+              display="flex"
+              width="100%"
+              background="#dfe6e9"
+              className="p-2 border">
+                <Pane>
+                  <img src={iconBill} style={{width:"50px", height:"50px"}}/>
+                </Pane>
+                <Pane>
+                  <table className="text-left overflow-x-scroll">
+                    <tr>
+                      <th><Heading size={200}>No. Kad Pengenalan </Heading></th>
+                      <td><Strong size={400}> : {bill.NOKP === null ? "-" : bill.NOKP}</Strong ></td>
+                    </tr>
+                    <tr>
+                      <th><Heading size={200}>No. Akaun </Heading></th>
+                      <td><Strong size={400}> : {bill.NOAKAUN === null ? "-" : bill.NOAKAUN}</Strong></td>
+                    </tr>
+                    <tr>
+                      <th><Heading size={200}>Nama Pemilik </Heading></th>
+                      <td><Strong size={400}> : {bill.NAMA_PEMILIK === null ? "-" : bill.NAMA_PEMILIK.slice(0, 10).trim()}{bill.NAMA_PEMILIK.length>10?'...':''}</Strong></td>
+                    </tr>
+                    <tr>
+                      <th><Heading size={200}>Status </Heading></th>
+                      <td><Strong size={400} color={bill.STATUS === "PAID" ? "#47B881" : "#EC4C47"}> : {bill.NAMA_PEMILIK === null ? "-" : bill.STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK"}</Strong></td>
+                    </tr>
+                  </table>
+                </Pane>
+              </Pane>
+              {/* <div className="relative flex flex-col min-w-0 break-words bg-white shadow-md border">
                 <div className="flex-auto p-3">
 
                   <div className="flex flex-row pt-4">
@@ -165,21 +196,20 @@ export default function BillList() {
                       </h5>
                     </div>
                   </div>
-
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       );
     })
   ) : (
-    <div className="w-full">
-      <div className="flex flex-wrap bg-white p-64">
-        
+      <div className="w-full bg-white">
+          <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
+            <Spinner />
+          </Pane>
       </div>
-    </div>
-  );
+    );
 
   return <div className="">{bills}</div>;
 }

@@ -84,7 +84,7 @@ function Bill(props) {
 						</Pane>
 						<div className="w-full">
 							{/* <Pane background="gray" className="p-3">Header</Pane> */}
-                            <div className="flex-auto mt-6 overflow-y-scroll px-3" style={{height:"65vh"}}>
+                            <div className="flex-auto mt-6 overflow-y-scroll" style={{height:"45vh"}}>
 								<BillList />
 							</div>
 						</div>
