@@ -46,14 +46,14 @@ export default function Search({type}){
             if(type === 'akaun'){
                 searchType = 'Akaun';
                 // res = res.data;
-                // console.log(res);
+                // console.log('Search Response : ',res.data[0]);
 
                 if(res.data.status === 'FAILED'){
                     setDisplay(false);
                     swal('Tidak ditemui',searchType+' tidak ditemui','error');
                 }
                 else{
-                    setBill(res.data);
+                    setBill(res.data[0]);
                     // console.log('Search Account ',res.data);
                     // console.log('Bill Akaun',bill);
                     setDisplay(true);
