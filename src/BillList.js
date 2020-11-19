@@ -67,7 +67,11 @@ export default function BillList(){
                     data:res.data.data
                 })
             }
-            else{
+            else if(res.data.status === 'pending'){
+                swal('Alamat emel belum disahkan','Sila sahkan alamat emel anda','info');
+                sessionStorage.setItem('status','pending');
+            }
+            else {
                 swal('Tiada bil didaftarkan','Sila tambah bil anda dengan klik pada + Tambah','info');
             }
 
