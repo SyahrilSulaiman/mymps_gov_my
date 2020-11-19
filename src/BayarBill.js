@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
-import DataTable from "react-data-table-component";
-import Card from "@material-ui/core/Card";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
-import MainDashboard from "./views/admin/Dashboard";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
-import Information from "./components/Cards/CardSettings";
 import Footer from "./components/Footers/Footer";
-import { data } from "jquery";
 import swal from "sweetalert";
-import { ResponsiveEmbed } from "react-bootstrap";
-import { BrowserRouter as Router,Switch, Route, Link, useParams, useRouteMatch } from "react-router-dom";
+import {Pane, Heading, Text, Button,Icon, AddIcon, ArrowLeftIcon} from "evergreen-ui";
 // import SenaraiBil from './SenaraiBil';
 // import Carian from './Carian';
 import BillList from './BillList';
@@ -93,6 +87,9 @@ function Bill(props) {
       <Sidebar />
 		<div className="relative md:ml-64 bg-gray-400" style={{ height: "100vh" }}>
 			<Navbar />
+			<Pane background="#2c3e50" className="p-3" position="relative">
+				 <Heading size={400} color="white">{/*<Icon icon={ArrowLeftIcon} size={12} onClick={() => window.history.back()}/>*/} Bil / Senarai Cukai</Heading> 
+			</Pane>
 			{/* Header */}
 						<div className="relative bg-gray-500 md:pt-32 pt-4 pb-4" style={{height: "100%"}}>
 							<div className="px-4 md:px-10 mx-auto w-full" >
@@ -102,25 +99,32 @@ function Bill(props) {
 											<div className="flex-auto p-4">
 												<div className="flex flex-row ">
 													<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-														<span className="font-semibold text-xl text-white">
-														Bil Cukai Taksiran
-														</span>	
+														{/* <Pane background="#2c3e50" className="p-3 rounded-md">
+															<Heading size={400} color="white">Bil Cukai Taksiran</Heading>
+														</Pane> */}
 													</div>
-													{
-														//  Function Add bill
-														//  function xhold apa2 state boleh terus jadi function
-														//  create function
-														// form input?
-													}
 													<div  className="relative w-auto pl-4 flex-initial" onClick={handleAddBill} >
-														<button className="font-semibold text-lg text-white ">
-															+ Tambah
-														</button>	
+														<Button
+														appearance="primary"
+														intent="success"
+														iconBefore={AddIcon}
+														>
+															Tambah
+														</Button>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+
+									<div className="w-full p-2 overflow-y-scroll" style={{height:"450px"}}>
+										<div className="relative flex flex-col min-w-0 break-words" height={50}>
+											<div className="flex-auto" height={50}>
+												<BillList height={50}/>
+											</div>
+										</div>
+									</div>
+
 								</div>
 							</div>
 							{
@@ -128,7 +132,7 @@ function Bill(props) {
 								// View bill state -> class jugak
 								// routing sikit
 							}
-							<BillList />
+							{/* <BillList /> */}
 					</div>
 					{/* <Footer /> */}
 			</div>
