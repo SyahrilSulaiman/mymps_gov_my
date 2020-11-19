@@ -21,8 +21,6 @@ function Bill(props) {
 	const user    = getUser();
 	const nokp    = getNOKP();
 
-	const status = sessionStorage.status;
-
 	const [include,isInclude] = useState(false);
 	const [dataset, setDataSet] = useState({
 		jenis: 'Cukai Taksiran',
@@ -75,9 +73,9 @@ function Bill(props) {
 		window.open('https://mymps.corrad.my/rp/receipt.php?'+url);
   }
   
-  const handleStatus = (e) => {
-		swal('Alamat emel belum disahkan','Sila sahkan alamat emel anda','info');
-	}
+//   const handleStatus = (e) => {
+// 		swal('Alamat emel belum disahkan','Sila sahkan alamat emel anda','info');
+// 	}
 
   const handleAddBill = () => {
 	console.log('Add Bil');
@@ -114,7 +112,7 @@ function Bill(props) {
 														//  create function
 														// form input?
 													}
-													<div  className="relative w-auto pl-4 flex-initial" onClick={status === 'pending' ?handleStatus :handleAddBill} >
+													<div  className="relative w-auto pl-4 flex-initial" onClick={handleAddBill} >
 														<button className="font-semibold text-lg text-white ">
 															+ Tambah
 														</button>	
