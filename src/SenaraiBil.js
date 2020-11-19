@@ -141,7 +141,7 @@ export default function SenaraiBil(props) {
     return (
         <div>
             <Sidebar />
-            <div className="relative bg-gray-500 md:ml-64" style={{ height: "100vh" }}>
+            <div className="relative bg-gray-400 md:ml-64" style={{ height: "100vh" }}>
                 <Navbar />
                 <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
                     <div className="flex flex-wrap">
