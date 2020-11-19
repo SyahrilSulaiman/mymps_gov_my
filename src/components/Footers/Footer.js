@@ -26,34 +26,24 @@ export default function Footer() {
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap text-center lg:text-left">
             <div className="w-full lg:w-6/12 px-4">
-              <h4 className="text-3xl font-semibold">Portal Rasmi MyMPS</h4>
+              <h4 className="text-3xl font-semibold">Portal mymps</h4>
               <h5 className="text-lg mt-0 mb-2 text-gray-700">
-                Kami sedia membantu anda untuk menguruskan dan memudahkan bayaran cukai anda setiap hari.
+              Kami sedia membantu anda untuk menguruskan dan memudahkan bayaran bil anda setiap hari.
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
                 <button
                   className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
+                  onClick={ () => window.location.href = "https://twitter.com/mpselayang"}
                 >
                   <i className="fab fa-twitter"></i>
                 </button>
                 <button
                   className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
+                  onClick={() => window.location.href = "https://www.facebook.com/mpselayang"}
                 >
                   <i className="fab fa-facebook-square"></i>
-                </button>
-                <button
-                  className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  <i className="fab fa-dribbble"></i>
-                </button>
-                <button
-                  className="bg-white text-gray-900 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  <i className="fab fa-github"></i>
                 </button>
               </div>
             </div>
@@ -69,48 +59,19 @@ export default function Footer() {
                       <a
                         className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
                       >
-                        Tentang MyMPS
+                        Tentang mymps
                       </a>
                     </li>
                     <li>
                       <a
                         className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
                       >
-                        Perbadanan MPS
+                        Cara Penggunaan mymps
                       </a>
                     </li>
                     <li>
                       <a
                         className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                      >
-                        Tutorial
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                      >
-                        Cukai Taksiran
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div className="w-full lg:w-4/12 px-4">
-                  <span className="block uppercase text-gray-600 text-sm font-semibold mb-2">
-                    Sumber Lain
-                  </span>
-                  <ul className="list-unstyled">
-                    <li>
-                      <a
-                        className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                      >
-                        Perlesenan
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                        href="https://creative-tim.com/terms?ref=nr-footer"
                       >
                         Terma & Syarat
                       </a>
@@ -122,6 +83,13 @@ export default function Footer() {
                         Polisi Privasi
                       </a>
                     </li>
+                  </ul>
+                </div>
+                <div className="w-full lg:w-4/12 px-4">
+                  <span className="block uppercase text-gray-300 text-sm font-semibold mb-2">
+                    Lanjut
+                  </span>
+                  <ul className="list-unstyled">
                     <li>
                       <a
                         className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"

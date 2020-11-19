@@ -35,6 +35,7 @@ import Admin_Dashboard from "./admin/Dashboard_Admin";
 import Admin_Setting from "./admin/Setting_Admin";
 import Admin_UserManagement from "./admin/UserManagement_Admin";
 import Admin_Report from "./admin/Report_Admin";
+import UserDetail from "./admin/UpdateUser_Admin";
 
 import { useLoading, Audio } from "@agney/react-loading";
 
@@ -89,13 +90,18 @@ function App() {
   }, []);
 
   if (authLoading && getToken()) {
-    return (
-      <section
-        {...containerProps}
-        style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
-      >
-        {indicatorEl} {/* renders only while loading */}
-      </section>
+
+    // Loading indicator
+    // return (
+    //   <section
+    //     {...containerProps}
+    //     style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+    //   >
+    //     {indicatorEl} {/* renders only while loading */}
+    //   </section>
+    // );
+    return(
+      <div></div>
     );
   }
 
@@ -129,6 +135,10 @@ function App() {
                   path="/admin/report"
                   component={Admin_Report}
                 />
+                <PrivateRoute
+                  path="/admin/update_user"
+                  component={UserDetail}
+                />
                 <Route path="*" component={NotFound} />
               </Switch>
             </div>
@@ -156,9 +166,9 @@ function App() {
                 }
                 <PrivateRoute path="/setting" component={Setting} />
                 <PrivateRoute path="/bill" component={Bill} />
-                <PrivateRoute path="/senaraibill" component={SenaraiBil} />
+                <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
-                <PrivateRoute path="/add" component={Add} />
+                <PrivateRoute path="/add_cukai_taksiran" component={Add} />
                 <Route path="*" component={NotFound} />
               </Switch>
             </div>
@@ -179,9 +189,9 @@ function App() {
                 <PrivateRoute path="/home" component={Dashboard} />
                 <PrivateRoute path="/setting" component={Setting} />
                 <PrivateRoute path="/bill" component={Bill} />
-                <PrivateRoute path="/senaraibill" component={SenaraiBil} />
+                <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
-                <PrivateRoute path="/add" component={Add} />
+                <PrivateRoute path="/add_cukai_taksiran" component={Add} />
                 <PublicRoute
                   path="/forgotpassword"
                   component={ForgotPassword}

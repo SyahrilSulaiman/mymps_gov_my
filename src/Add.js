@@ -54,7 +54,10 @@ export default function Add({props}){
                     </div>
                 </div>
                 <Search type={type}/>
-                <Footer />
+                {
+                    // Footer
+                    <Footer />
+                }
                 </div>
                 
             </div>

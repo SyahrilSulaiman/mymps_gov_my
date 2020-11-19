@@ -14,7 +14,7 @@ export default function BillList(){
 		// 	 senarai = <Senarai />
         console.log('View');
         sessionStorage.setItem("noakaun", btoa(btoa(e)));
-        window.location.href = "/senaraibill";
+        window.location.href = "/bill_cukai_taksiran";
         
     }
     
@@ -90,13 +90,13 @@ export default function BillList(){
                 <div className="px-4 md:px-2 mx-auto w-full"
                  onClick={
                      //betulkan status***
-                     (bill.STATUS === 'TERTUNGGAK' || bill.status == 'TERTUNGGAK') ? (() => handleBayar(bill.code, bill.amaun)):(() => handleViewBill(bill.NOAKAUN))
+                     (bill.STATUS === 'TERTUNGGAK') ? (() => handleBayar(bill.code, bill.amaun)):(() => handleViewBill(bill.NOAKAUN))
                     }
                 key = {bill.NOAKAUN}>
                     <div className="flex flex-wrap">
-                        <div className="w-full px-4">
-                            <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg">
-                                <div className="flex-auto p-4">
+                        <div className="w-full px-2">
+                            <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-md">
+                                <div className="flex-auto p-3">
                                     <div className="flex flex-row pt-4">
                                         <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
                                             <h5 className="uppercase font-medium text-xs text-gray-600">No Kad Pengenalan: <span className="font-semibold text-sm text-gray-800">{ (bill.NOKP === null) ? '-' : bill.NOKP }</span></h5>

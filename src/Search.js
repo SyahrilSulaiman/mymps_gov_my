@@ -8,16 +8,10 @@ export default function Search({type}){
     const [search,setSearch] = useState('');
     const [loading,setLoading] = useState(false);
     const [display,setDisplay] = useState(false);
-    const [bill,setBill] = useState({
-        noakaun:'',
-        nama_pemilik: '',
-        nokp: '',
-        add_harta: '',
-        type:''
-    });
+    const [bill,setBill] = useState([]);
 
     useEffect(() =>{
-        console.log(type)
+        // console.log(type)
     },[type]);
     
     const handleChange = (e) => {
@@ -30,7 +24,7 @@ export default function Search({type}){
         e.preventDefault();
         axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=searchBill',{
             params: {
-                search:search,
+                search:search.trim(),
                 type:type
             }
         })
@@ -43,56 +37,42 @@ export default function Search({type}){
                     swal('Tidak ditemui',searchType+' tidak ditemui','error');
                 }
                 else{
+                    setBill(res.data);
+                    // console.log('Search NOKP',res.data);
                     setDisplay(true);
-                    setBill({
-                        ...bill,
-                        nama_pemilik:res.data[0].NAMA_PEMILIK,
-                        noakaun:res.data[0].NOAKAUN,
-                        nokp:res.data[0].NOKP,
-                        add_harta:res.data[0].ADDRHARTA,
-                        type
-                    });
-                }}
+                }
+            }
 
             if(type === 'akaun'){
                 searchType = 'Akaun';
+                // res = res.data;
+                // console.log(res);
 
                 if(res.data.status === 'FAILED'){
                     setDisplay(false);
                     swal('Tidak ditemui',searchType+' tidak ditemui','error');
                 }
                 else{
+                    setBill(res.data);
+                    // console.log('Search Account ',res.data);
+                    // console.log('Bill Akaun',bill);
                     setDisplay(true);
-                    setBill({
-                        ...bill,
-                        nama_pemilik:res.data[0].NAMA_PEMILIK,
-                        noakaun:res.data[0].NOAKAUN,
-                        nokp:res.data[0].NOKP,
-                        add_harta:res.data[0].ADDRHARTA,
-                        type
-                    });
                 }
             }
 
             if(type === 'ssm'){
                 searchType = 'No SSM';
-                res = JSON.parse(res.data);
-                console.log(res[0]);
+                res = res.data;
+                // console.log(res);
                 
                 if(res.status === 'FAILED'){
                     setDisplay(false);
                     swal('Tidak ditemui',searchType+' tidak ditemui','error');
                 }
                 else{
+                    // console.log('Search SSM: ',res)
+                    setBill(res);
                     setDisplay(true);
-                    setBill({
-                        ...bill,
-                        nama_pemilik:res[0].NAMA_PEMILIK,
-                        noakaun:res[0].NOAKAUN,
-                        nokp:res[0].NOKP,
-                        add_harta:res[0].ADDRHARTA,
-                        type
-                    });
                 }
             }
             setLoading(false);
@@ -135,7 +115,9 @@ export default function Search({type}){
                         </div>
                     </div>
                 </form>
-                <Carian bill={bill} display={display}/>
+                {
+                    <Carian bill={bill} type={type} display={display}/>
+                }
             </div>
         </div>
     );

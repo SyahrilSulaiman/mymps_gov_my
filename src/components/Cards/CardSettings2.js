@@ -92,10 +92,27 @@ export default function CardSettings({notel=""}) {
     }
   }
 
+  const handleChangePassword = () => {
+
+    swal({
+      title:"Set Semula Kata Laluan",
+      text:"Anda pasti untuk set semula kata laluan akaun anda?",
+      button:true,
+      dangerMode:true,
+    }).then((change) => {
+      if(change){
+        swal("Kata laluan akaun anda sudah dikemaskini!");
+      }else{
+        
+      }
+    })
+    
+  }
+
   return (
     <>
-      <div className="relative flex flex-col min-w-0 break-words w-full h-full shadow-lg  bg-gray-300 border-0">
-        <div className="rounded-t bg-white mb-0 px-6 py-6">
+      <div className="relative flex flex-col min-w-0 break-words w-full h-full shadow-lg bg-gray-300 rounded-xl">
+        <div className="rounded-t-xl bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
             <h6 className="text-gray-800 text-xl font-bold">Akaun myMPS</h6>
           </div>
@@ -186,6 +203,87 @@ export default function CardSettings({notel=""}) {
               <div className="w-full lg:w-12/12 px-4">
                 <div className="relative w-full mb-3">
                   <button type="button" onClick={handleUpdate} class="bg-green-500 hover:bg-green-700 text-white py-2 px-3 rounded float-right">
+                    Kemaskini
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+
+      <div className="relative flex flex-col min-w-0 break-words w-full h-full shadow-lg  bg-gray-300 rounded-xl mt-5">
+        <div className="rounded-t-xl bg-white mb-0 px-6 py-6">
+          <div className="text-center flex justify-between">
+            <h6 className="text-gray-800 text-xl font-bold">Tukar Kata Laluan</h6>
+          </div>
+        </div>
+        <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+          <form>
+            <h6 className="text-blue-500 text-sm mt-3 mb-6 font-bold uppercase">
+              
+            </h6>
+            <div className="flex flex-wrap">
+
+              <div className="w-full px-4">
+                <div className="relative w-full mb-3">
+                  <label
+                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    Kata Laluan Sekarang 
+                  </label>
+                  <input
+                    type="text"
+                    id="username"
+                    {...username}
+                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                  />
+                </div>
+              </div>
+
+              <div className="w-full px-4">
+                <div className="relative w-full mb-3">
+                  <label
+                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    Kata Laluan Baru
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    {...email}
+                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                  />
+                </div>
+              </div>
+
+              <div className="w-full px-4">
+                <div className="relative w-full mb-3">
+                  <label
+                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    Pengesahan Kata Laluan
+                  </label>
+                  <input
+                    type="text"
+                    {...nokp}
+                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                  />
+                </div>
+              </div>
+
+            </div>
+
+            <hr className="mt-6 border-b-1 border-gray-400" />
+
+            <div className="flex flex-wrap mt-6">
+              <div className="w-full lg:w-12/12 px-4">
+                <div className="relative w-full mb-3">
+                  <button type="button" onClick={handleChangePassword} class="bg-green-500 hover:bg-green-700 text-white py-2 px-3 rounded float-right">
                     Kemaskini
                   </button>
                 </div>
