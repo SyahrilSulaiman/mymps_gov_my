@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, {useState, useEffect} from "react";
 // import swal from "sweetalert";
-import swal from "sweetalert";
+import swal from "sweetalert2";
 import Sidebar from "../admin/Sidebar_Admin";
 import Navbar from "../components/Navbars/AdminNavbar";
 import Footer from "../components/Footers/Footer";
