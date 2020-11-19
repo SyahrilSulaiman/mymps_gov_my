@@ -1,11 +1,15 @@
 import Axios from "axios";
 import React, {useState, useEffect} from "react";
-import swal from "sweetalert";
+// import swal from "sweetalert";
+import swal from "sweetalert2";
 import Sidebar from "../admin/Sidebar_Admin";
 import Navbar from "../components/Navbars/AdminNavbar";
 import Footer from "../components/Footers/Footer";
 import { get } from "jquery";
 import { Pane, Button, Heading, TextInputField, Text } from "evergreen-ui";
+import axios from 'axios'
+import { getUser, getNOKP, getToken, removeUserSession } from "../Utils/Common";
+
 
 // components
 
@@ -22,6 +26,11 @@ import { Pane, Button, Heading, TextInputField, Text } from "evergreen-ui";
 // };
 
 export default function UserDetail({showUser,display}) {
+  const admin = getNOKP();
+  const user = showUser.U_USERIC;
+  const formData = new FormData();
+  formData.append('user',user);
+  formData.append('admin',admin);
 
   const handleBack = (e) => {
     // window.location.href = "./usermanagement";
@@ -29,12 +38,83 @@ export default function UserDetail({showUser,display}) {
   }
   const handleApprove = (e) => {
     console.log('Approve');
+    console.log(admin);
+    console.log(user);
+    swal.fire({
+      title: 'Adakah anda pasti?',
+      text: "Mengesahkan Pengguna",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sahkan Pengguna',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        formData.append('mode','approve');
+        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=update_user',formData)
+        .then(res=>{
+          console.log(res);
+          swal.fire({
+            title:'',
+            text:'Pengguna telah disahkan',
+            icon:'warning',
+            'timer': 3000
+          }).then(display(false))
+        }).catch(err=>{console.log(err)})
+      
+      }
+    })
   }
   const handleUpdate = (e) => {
     console.log('Update');
+    swal.fire({
+      title: 'Adakah anda pasti?',
+      text: "Menetapkan semula kata laluan pengguna",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Kemaskini',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swal.fire(
+          'Kemaskini berjaya',
+          'Kata laluan pengguna telah ditetapkan semula',
+          'success'
+        )
+        axios.post().then(res=>{}).catch(err=>{})
+      }
+    })
   }
   const handleRemove = (e) => {
     console.log("Remove");
+    swal.fire({
+      title: 'Adakah anda pasti?',
+      text: "Anda tidak akan dapat membalikkan tindakan ini!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Pasti',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        formData.append('mode','remove');
+        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=update_user',formData)
+        .then(res=>{
+          console.log(res);
+          swal.fire({
+            title:'',
+            text:'Pengguna telah dihapuskan',
+            icon:'warning',
+            'timer': 3000
+          }).then(display(false))
+        }).catch(err=>{console.log(err)})
+      
+      }
+    })
   }
   console.log(showUser);
   return (
@@ -63,7 +143,7 @@ export default function UserDetail({showUser,display}) {
                     </Pane>
                   </Pane>
 
-                  <Pane display="flex" padding={3} background="tint3" borderRadius={3} marginTop="30px">
+                  <Pane display="flex" padding={3} background="tint3" borderRadius={3} marginTop="10px">
                     <Pane flex={1} alignItems="center">
                       <TextInputField
                         label="NAMA PENUH"
@@ -117,10 +197,9 @@ export default function UserDetail({showUser,display}) {
                     </Pane>
                   </Pane>
 
-                  <Pane display="flex" padding={10}>
+                  <Pane display="flex" padding={3}>
                   {showUser.U_USERSTATUS === 'Pending' ? 
-                    <Pane flex={1} alignItems="left" display="flex">
-                          <Pane>
+                    <Pane flex={1} display="flex">
                             <Button
                               className="float-left"
                               appearance="primary"
@@ -130,35 +209,36 @@ export default function UserDetail({showUser,display}) {
                             >
                               Sahkan
                             </Button>
-                          </Pane> 
                       </Pane>
                       : '' }
 
-                      <Pane flex={1} alignItems="right" display="flex">
-                          <Pane>
-                            <Button
-                              className="float-left"
-                              appearance="primary"
-                              intent="danger"
-                              type="button"
-                              onClick={handleRemove}
-                            >
-                              Hapus
-                            </Button>
-                          </Pane>
-                      </Pane>
+
                     </Pane>
 
-
-                        <Button
-                          className="float-right"
-                          appearance="primary"
-                          intent="success"
-                          type="button"
-                          onClick={handleUpdate}
-                        >
-                          Kemaskini
-                        </Button>
+                      <Pane  display="flex" padding={3} marginTop="10px">
+                        <Pane flex={1} alignItems="center" display="flex">
+                          <Button
+                            className=""
+                            appearance="primary"
+                            intent="danger"
+                            type="button"
+                            onClick={handleRemove}
+                          >
+                            Hapus
+                          </Button>
+                        </Pane>
+                        <Pane marginRight={0}>
+                          <Button
+                            className=""
+                            appearance="primary"
+                            intent="success"
+                            type="button"
+                            onClick={handleUpdate}
+                          >
+                            Tetapkan Semula Kata Laluan
+                          </Button>
+                          </Pane>
+                      </Pane>
 
                 </div>
               </div>
