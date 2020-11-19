@@ -93,6 +93,7 @@ export default function BillList() {
   const bills = dataset.data.length ? (
     dataset.data.map((bill) => {
       return (
+          <div>
         <div
           className="px-4 md:px-2 mx-auto w-full"
           onClick={
@@ -165,6 +166,7 @@ export default function BillList() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       );
     })

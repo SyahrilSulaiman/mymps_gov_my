@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
-import Footer from "./components/Footers/Footer";
-import swal from "sweetalert";
-import { Pane, Heading, Text, Button, Icon, AddIcon, ArrowLeftIcon } from "evergreen-ui";
+import { Pane, Heading, Text, Button, Icon, AddIcon, ArrowLeftIcon, SortNumericalIcon } from "evergreen-ui";
 // import SenaraiBil from './SenaraiBil';
 // import Carian from './Carian';
 import BillList from './BillList';
@@ -14,15 +12,6 @@ function Bill(props) {
 	const token = getToken();
 	const user = getUser();
 	const nokp = getNOKP();
-
-	const [include, isInclude] = useState(false);
-	const [dataset, setDataSet] = useState({
-		jenis: 'Cukai Taksiran',
-		akaun: 'A929181',
-		amaun: 'RM 30.00',
-		tempoh: 'Januari - Jun 2020',
-		status: 'Telah dibayar'
-	});
 
 	const handleReceipt = (e) => {
 		// let url = 
@@ -72,11 +61,20 @@ function Bill(props) {
 							>
 								Tambah Bil
 							</Button>
+							<Button
+								appearance="primary"
+								iconBefore={SortNumericalIcon}
+								className="xs:ml-5 ml-1"
+								onClick={handleAddBill}
+							>
+								Bayar Semua
+							</Button>
 						</Pane>
 						<div className="w-full">
-                                <div className="flex-auto mt-6 " style={{height:"80vh"}}>
-									<BillList />
-								</div>
+							{/* <Pane background="gray" className="p-3">Header</Pane> */}
+                            <div className="flex-auto mt-6 overflow-y-scroll px-3" style={{height:"65vh"}}>
+								<BillList />
+							</div>
 						</div>
 						{/* 
 						<div className="w-full">

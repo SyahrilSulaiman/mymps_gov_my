@@ -85,10 +85,13 @@ export default function SenaraiBil(props) {
         return (
             <div>
                 <Sidebar />
-                <div className="relative bg-gray-500 md:ml-64" style={{ height: "100vh" }}>
+                <div className="relative bg-gray-400 md:ml-64" style={{ height: "100vh" }}>
                     <Navbar />
                     <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
                         <div className="flex flex-wrap">
+                        <Pane background="#2c3e50" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
+                            <Heading size={400} color="white"><Icon icon={ArrowLeftIcon} size={12} onClick={() => window.history.back()} /> Bil / Maklumat Bil</Heading>
+                        </Pane>
                             <div className="w-full px-4 mt-3">
                                 <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">
                                     <div className="flex-auto p-4 mt-6">
