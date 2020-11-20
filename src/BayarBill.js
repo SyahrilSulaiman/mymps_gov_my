@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
-import { Pane, Heading, Text, Button, Icon, AddIcon, ArrowLeftIcon, SortNumericalIcon } from "evergreen-ui";
+import { Pane, Heading, Text,toaster, Button, Icon, AddIcon, ArrowLeftIcon, SortNumericalIcon } from "evergreen-ui";
 import BillList from './BillList';
 import swal from "sweetalert2";
 import Swal from "sweetalert2";
@@ -65,26 +65,14 @@ function Bill(props) {
 								appearance="primary"
 								iconBefore={SortNumericalIcon}
 								className="xs:ml-5 ml-1"
-								onClick=
-								{() => 
-									Swal.fire({
-									icon:'question',
-									title: 'Anda pasti untuk membuat pembayaran keseluruhan bil anda?',
-									showCancelButton: true,
-									confirmButtonText: '<i class="fa fa-check"></i> Pasti',
-								  }).then((result) => {
-									if (result.isConfirmed) {
-									  Swal.fire('Page Bayar', '', 'success')
-									} 
-								  })
-								}
+								onClick={() => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" }) }
 							>
 								Bayar Semua
 							</Button>
 						</Pane>
 						<div className="w-full">
 							{/* <Pane background="gray" className="p-3">Header</Pane> */}
-                            <div className="flex-auto mt-6 overflow-y-scroll" style={{height:"45vh"}}>
+                            <div className="flex-auto mt-6 overflow-y-scroll" style={{height:"60vh"}}>
 								<BillList />
 							</div>
 						</div>

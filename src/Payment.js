@@ -23,26 +23,16 @@ function Pay() {
     const [amount, setAmount] = useState(sessionStorage.getItem(10));
     const [invoiceNo, setInvoiceNo] = useState("MYM" + Date.now())
 
-    var All = [];
-
     useEffect(async () => {
         await fetch('https://dev.toyyibpay.com/api/getBankFPX')
             .then(response => response.json())
             .then(result => {
-                console.log(result);
                 setData(result);
             })
     }, [])
 
-    const handleClick = (bankcode) => {
-        console.log(bankcode);
-        setBankCode(bankcode);
-        document.getElementById("inputBank").value = bankcode;
-    }
-
     const handleBayar = () => {
 
-        console.log(bankCode);
         setDialog(false);
 
         if (payorname == "") {
@@ -87,14 +77,6 @@ function Pay() {
 
     }
 
-    //console.log("Data : " + (data[0].NAME));
-    // if(data){
-    //     for(var i = 0; i < data.length; i++){
-    //         All.push(<div type="button" key={i} className="bg-gray-200 text-gray-700 text-center mx-center focus:bg-gray-400" style={{padding:"4px", margin:"2px"}} value={data[i].CODE} onClick={ (e) => setBankCode(e.target.value)}>
-    //             <img className="mx-auto" style={{height:"40px", width:"40px"}} src={"https://dev1.toyyibpay.com/asset/img/logobank/"+data[i].CODE+".png"} /> <br /> <Heading size={200}>{data[i].NAME}</Heading></div>);
-    //     }
-    // }
-
     return (
         <div className="">
             <Topbar
@@ -102,50 +84,7 @@ function Pay() {
                 leftButtonIcon={ArrowLeftIcon}
                 onClickLeftButton={() => window.history.back()}
             />
-            {/* <div className="bg-white shadow overflow-hidden" style={{paddingTop:"50px"}}>
-                <Pane background="tint1" padding={10}>
-                    <Pane>
-                        <Heading size={500}>Maklumat Cukai Taksiran</Heading>
-                    </Pane>
-                    <Pane>
-                        <Text>Berikut merupakan maklumat cukai taksiran yang ingin dibayar</Text>
-                    </Pane>
-                </Pane>
-                <div>
-                    <dl>
-                        <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm leading-5 font-medium text-gray-500">
-                                No. Cukai
-                        </dt>
-                            <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                            </dd>
-                        </div>
-                        <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm leading-5 font-medium text-gray-500">
-                                Penama Cukai
-                        </dt>
-                            <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                                {sessionStorage.getItem('username')}
-                            </dd>
-                        </div>
-                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm leading-5 font-medium text-gray-500">
-                                Jumlah Tunggakan (RM)
-                        </dt>
-                            <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                            </dd>
-                        </div>
-                        <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm leading-5 font-medium text-gray-500">
-                                Status Cukai
-                        </dt>
-                            <dd className="mt-1 text-sm leading-5 text-red-500 sm:mt-0 sm:col-span-2">
-                                Tertunggak
-                        </dd>
-                        </div>
-                    </dl>
-                </div>
-            </div> */}
+
             <div className="bg-white shadow overflow-hidden" style={{ paddingTop: "50px" }}>
                 <Pane background="tint1" padding={10}>
                     <Pane>
@@ -265,20 +204,6 @@ function Pay() {
                                         )
                                         }
                                     </Pane>
-                                    {/* <Pane display="flex" width="100%" className="mt-16 px-5 mb-16">
-                                        <Button
-                                            type="button"
-                                            padding={3}
-                                            width="100%"
-                                            appearance="primary"
-                                            intent="success"
-                                            alignContent="center"
-                                            justifyContent="center"
-                                            onClick={() => setDialog(true)}
-                                        >
-                                            Teruskan
-                                            </Button>
-                                    </Pane> */}
                                 </Pane>
                             )}
                         </Pane>
@@ -299,55 +224,51 @@ function Pay() {
                         <Checkbox checked label="Dengan ini saya mengesahkan untuk membuat pembayaran ke atas cukai taksiran." />
                     </Dialog>
                 </Pane>
-                { method &&
-                <Pane
-                    position="fixed"
-                    bottom={0}
-                    left={0}
-                    right={0}
-                    height={50}
-                    background={1 ? "#009432" : "#9a0b0b"}
-                    display="grid"
-                    gridTemplateColumns="1fr"
-                    columnGap={10}
-                    userSelect="none"
-                    paddingX={15}
-                >
+                {method &&
                     <Pane
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                        flexDirection="column"
-                        overflow="hidden"
+                        position="fixed"
+                        bottom={0}
+                        left={0}
+                        right={0}
+                        height={50}
+                        background={1 ? "#009432" : "#9a0b0b"}
+                        display="grid"
+                        gridTemplateColumns="1fr"
+                        columnGap={10}
+                        userSelect="none"
+                        paddingX={15}
                     >
-                        {/* <Paragraph color="#fff" fontWeight="bold" lineHeight={1.2} fontSize={12}>
-                    Langkah 2 :
-                    </Paragraph> */}
-
-                        <Paragraph
-                            color="#fff"
-                            fontWeight="bold"
-                            fontSize={15}
-                            whiteSpace="nowrap"
+                        <Pane
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            flexDirection="column"
                             overflow="hidden"
-                            textOverflow="ellipsis"
                         >
-                        </Paragraph>
+
+                            <Paragraph
+                                color="#fff"
+                                fontWeight="bold"
+                                fontSize={15}
+                                whiteSpace="nowrap"
+                                overflow="hidden"
+                                textOverflow="ellipsis"
+                            >
+                            </Paragraph>
+                        </Pane>
+                        <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center" onClick={() => {
+                            if (method == "CARD") {
+                                toaster.danger("Harap maaf, kaedah pembayaran ini sedang dinaik taraf..", { id: "forbidden-action" });
+                            }
+                            else if (bankCode && method === "FPX") {
+                                setDialog(true)
+                            } else if (bankCode == "" && method === "FPX") {
+                                toaster.danger("Harap maaf, Sila membuat pilihan bank sebelum membuat pembayaran.", { id: "forbidden-action" });
+                            }
+                        }}>
+                            <Heading size={500} color="white">Teruskan Pembayaran</Heading>
+                        </Pane>
                     </Pane>
-                    <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center" onClick={() => {
-                        if(method == "CARD"){
-                            toaster.danger("Harap maaf, kaedah pembayaran ini sedang dinaik taraf..", { id: "forbidden-action" });
-                        }
-                        else if(bankCode && method === "FPX"){
-                            setDialog(true)
-                        }else if(bankCode == "" && method === "FPX")
-                        {
-                            toaster.danger("Harap maaf, Sila membuat pilihan bank sebelum membuat pembayaran.", { id: "forbidden-action" });
-                        }
-                    }}>
-                        <Heading size={500} color="white">Teruskan Pembayaran</Heading>
-                    </Pane>
-                </Pane>
                 }
 
                 <div>
@@ -364,8 +285,6 @@ function Pay() {
                     </form>
                 </div>
             </div>
-
-            {/* <Footer className="p-0 mt-2"/> */}
         </div>
     );
 }
