@@ -6,9 +6,6 @@ import { Pane, Heading, Icon, ArrowLeftIcon, SelectField } from "evergreen-ui";
 
 export default function Add({ props }) {
     const [type, setType] = useState('');
-    const handleBack = () => {
-        window.location.href = "/bill";
-    }
 
     return (
         <div>

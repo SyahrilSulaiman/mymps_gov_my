@@ -279,8 +279,8 @@ function Pay() {
                         <input type="hidden" name="channel" id="channel" value="01" />
                         <input type="hidden" name="web_return_address" value="https://mymps.corrad.my" />
                         <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
-                        {/* <input type="hidden" name="payment_amount" id="payment_amount" value={atob(atob(sessionStorage.getItem("amaun")))}/> */}
-                        {/* <input type="hidden" name="payment_description" value={"Cukai Taksiran " + atob(atob(sessionStorage.getItem("cukai")))}/> */}
+                        <input type="hidden" name="payment_amount" id="payment_amount" value={atob(atob(sessionStorage.getItem("amaun")))}/>
+                        <input type="hidden" name="payment_description" value={"Cukai Taksiran " + atob(atob(sessionStorage.getItem("cukai")))}/>
                         <input type="hidden" name="email" value={sessionStorage.getItem("email")} />
                     </form>
                 </div>

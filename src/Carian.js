@@ -64,7 +64,7 @@ export default function Carian({bill,type, display}){
         // return (<div></div>)
         if( bill.length === 1 || type === 'akaun' ){
             return (<div>
-                        <div key={bill[0].NOAKAUN} className="px-4 md:px-2 mx-auto w-full">
+                        <div key={bill[0].NOAKAUN} className="mx-auto w-full">
                         <div className="flex flex-wrap">
                             <div className="w-full px-4">
                                 <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg">
@@ -125,9 +125,9 @@ export default function Carian({bill,type, display}){
 
             {
                 bill.map(bills => (
-                    <div key={bills.NOAKAUN} className="px-4 md:px-2 mx-auto w-full">
+                    <div key={bills.NOAKAUN} className="mx-auto w-full">
                     <div className="flex flex-wrap">
-                        <div className="w-full px-4">
+                        <div className="w-full">
                             <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg">
                                 <div className="flex-auto p-4">
                                     <div className="flex flex-row pt-4">

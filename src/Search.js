@@ -1,20 +1,20 @@
-import React,{useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import swal from 'sweetalert';
 import Carian from './Carian';
-import {Pane, TextInputField, Button, SearchIcon, ArrowLeftIcon} from "evergreen-ui";
+import { Pane, TextInputField, Button, SearchIcon, ArrowLeftIcon, Paragraph, Heading } from "evergreen-ui";
 
-export default function Search({type}){
+export default function Search({ type }) {
 
-    const [search,setSearch] = useState('');
-    const [loading,setLoading] = useState(false);
-    const [display,setDisplay] = useState(false);
-    const [bill,setBill] = useState([]);
+    const [search, setSearch] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [display, setDisplay] = useState(false);
+    const [bill, setBill] = useState([]);
 
-    useEffect(() =>{
+    useEffect(() => {
         // console.log(type)
-    },[type]);
-    
+    }, [type]);
+
     const handleChange = (e) => {
         setSearch(e.target.value);
     }
@@ -23,148 +23,146 @@ export default function Search({type}){
     const handleSubmit = (e) => {
         setLoading(true);
         e.preventDefault();
-        axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=searchBill',{
+        axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=searchBill', {
             params: {
-                search:search.trim(),
-                type:type
+                search: search.trim(),
+                type: type
             }
         })
-        .then(res => {
-            if(type === 'nokp'){
-                searchType = 'No Kad Pengenalan';
+            .then(res => {
+                if (type === 'nokp') {
+                    searchType = 'No Kad Pengenalan';
 
-                if(res.data.status === 'FAILED'){
-                    setDisplay(false);
-                    swal('Tidak ditemui',searchType+' tidak ditemui','error');
+                    if (res.data.status === 'FAILED') {
+                        setDisplay(false);
+                        swal('Tidak ditemui', searchType + ' tidak ditemui', 'error');
+                    }
+                    else {
+                        setBill(res.data);
+                        // console.log('Search NOKP',res.data);
+                        setDisplay(true);
+                    }
                 }
-                else{
-                    setBill(res.data);
-                    // console.log('Search NOKP',res.data);
-                    setDisplay(true);
-                }
-            }
 
-            if(type === 'akaun'){
-                searchType = 'Akaun';
-                // res = res.data;
-                // console.log('Search Response : ',res.data[0]);
+                if (type === 'akaun') {
+                    searchType = 'Akaun';
+                    // res = res.data;
+                    // console.log('Search Response : ',res.data[0]);
 
-                if(res.data.status === 'FAILED'){
-                    setDisplay(false);
-                    swal('Tidak ditemui',searchType+' tidak ditemui','error');
+                    if (res.data.status === 'FAILED') {
+                        setDisplay(false);
+                        swal('Tidak ditemui', searchType + ' tidak ditemui', 'error');
+                    }
+                    else {
+                        setBill(res.data[0]);
+                        // console.log('Search Account ',res.data);
+                        // console.log('Bill Akaun',bill);
+                        setDisplay(true);
+                    }
                 }
-                else{
-                    setBill(res.data[0]);
-                    // console.log('Search Account ',res.data);
-                    // console.log('Bill Akaun',bill);
-                    setDisplay(true);
-                }
-            }
 
-            if(type === 'ssm'){
-                searchType = 'No SSM';
-                res = res.data;
-                // console.log(res);
-                
-                if(res.status === 'FAILED'){
-                    setDisplay(false);
-                    swal('Tidak ditemui',searchType+' tidak ditemui','error');
+                if (type === 'ssm') {
+                    searchType = 'No SSM';
+                    res = res.data;
+                    // console.log(res);
+
+                    if (res.status === 'FAILED') {
+                        setDisplay(false);
+                        swal('Tidak ditemui', searchType + ' tidak ditemui', 'error');
+                    }
+                    else {
+                        // console.log('Search SSM: ',res)
+                        setBill(res);
+                        setDisplay(true);
+                    }
                 }
-                else{
-                    // console.log('Search SSM: ',res)
-                    setBill(res);
-                    setDisplay(true);
-                }
-            }
-            setLoading(false);
-        })
-        
+                setLoading(false);
+            })
+
     }
 
-    if(type === '' || type === null || type == 'tiada') {
+    if (type === '' || type === null || type == 'tiada') {
         return (
             <div></div>
         );
     }
-    else{
+    else {
 
-    return (
-        <div>
+        return (
+            <div>
                 {/* Header */}
-            <div className="relative pb-4">
-                <form onSubmit= {(e) => handleSubmit(e)}>
+                <div className="relative pb-4 ">
+                    <form onSubmit={(e) => handleSubmit(e)}>
                         <div className="flex flex-wrap">
                             <div className="w-full">
                                 <Pane display="flex">
-                                <TextInputField
-                                    width="100%"
-                                    required
-                                    onChange={(e) => handleChange(e)}
-                                    label={
-                                            type === 'akaun' ? ('Nombor Akaun') 
-                                        :   type === 'ssm' ? ('Nombor ROC/ROB Syarikat') 
-                                        :   type === 'nokp' ? ('Nombor Kad Pengenalan') 
-                                        : ('Carian...')
-                                    }
-                                    description={
-                                            type === 'akaun' ? ('Lengkapkan maklumat nombor akaun dibawah.') 
-                                        :   type === 'ssm' ? ('Lengkapkan nombor ROC/ROB syarikat dibawah.') 
-                                        :   type === 'nokp' ? ('Lengkapkan nombor kad pengenalan dibawah') 
-                                        : ('Carian...')
-                                    } 
-                                    placeholder={
-                                            type === 'akaun' ? ('Sila isi nombor akaun') 
-                                        :   type === 'ssm' ? ('Sila isi nombor ROC/ROB Syarikat') 
-                                        :   type === 'nokp' ? ('Sila isi nombor kad pengenalan') 
-                                        : ('Carian...')
-                                    }
-                                />
+                                    <TextInputField
+                                        width="100%"
+                                        required
+                                        onChange={(e) => handleChange(e)}
+                                        label={
+                                            type === 'akaun' ? ('Nombor Akaun')
+                                                : type === 'ssm' ? ('Nombor ROC/ROB Syarikat')
+                                                    : type === 'nokp' ? ('Nombor Kad Pengenalan')
+                                                        : ('Carian...')
+                                        }
+                                        description={
+                                            type === 'akaun' ? ('Lengkapkan maklumat nombor akaun dibawah.')
+                                                : type === 'ssm' ? ('Lengkapkan nombor ROC/ROB syarikat dibawah.')
+                                                    : type === 'nokp' ? ('Lengkapkan nombor kad pengenalan dibawah')
+                                                        : ('Carian...')
+                                        }
+                                        placeholder={
+                                            type === 'akaun' ? ('Sila isi nombor akaun')
+                                                : type === 'ssm' ? ('Sila isi nombor ROC/ROB Syarikat')
+                                                    : type === 'nokp' ? ('Sila isi nombor kad pengenalan')
+                                                        : ('Carian...')
+                                        }
+                                    />
                                 </Pane>
                                 <Pane>
                                     <Button
-                                    type="submit"
-                                    iconBefore={SearchIcon}
-                                    appearance="primary"
-                                    intent="success"
-                                    className="float-right"
+                                        type="submit"
+                                        iconBefore={SearchIcon}
+                                        appearance="primary"
+                                        intent="success"
+                                        className="float-right"
                                     >
-                                        {loading?'Mencari..':'Cari'}
+                                        {loading ? 'Mencari..' : 'Cari'}
                                     </Button>
 
                                     <Button
-                                    type="button"
-                                    iconBefore={ArrowLeftIcon}
-                                    appearance="primary"
-                                    intent="danger"
-                                    onClick={() => window.history.back()}
+                                        type="button"
+                                        iconBefore={ArrowLeftIcon}
+                                        appearance="primary"
+                                        intent="danger"
+                                        onClick={() => window.history.back()}
                                     >
                                         Kembali
                                     </Button>
                                 </Pane>
-                                {/* <div className="relative flex flex-col min-w-0 break-words rounded mb-6">
-                                        <div>
-                                            <input aria-label="search" id="search" name="search" onChange={(e) => handleChange(e)} type="text" required className="mb-2 bg-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" 
-                                            placeholder= {
-                                                    type === 'akaun' ? ('No Akaun') 
-                                                :   type === 'ssm' ? ('No ROC / ROB Syarikat') 
-                                                :   type === 'nokp' ? ('No Kad Pengenalan') 
-                                                : ('Carian...')
-                                            } />
-                                        </div>
-                                </div> */}
+                                <Pane marginTop={32} padding={10} background="#2d3436">
+                                    <Heading size={400} textAlign="center" color="white">Senarai bil akan dipaparkan dibawah</Heading>
+                                </Pane>
                             </div>
                         </div>
-                        {/* <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                            <button id="type" type="submit" className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
-                                        {loading?'Mencari..':'Cari'}
-                            </button>
-                        </div> */}
-                </form>
-                {
+                    </form>
+                    {/* {
                     <Carian bill={bill} type={type} display={display}/>
-                }
+                } */}
+                </div>
+                <div className="relative pb-4 overflow-y-scroll" style={{height:"422px"}}>
+                    <div className="flex flex-wrap">
+                        <div className="w-full">
+                            <Pane background="tint1">
+                                {
+                                    <Carian className="bg-gray-100" bill={bill} type={type} display={display} />
+                                }
+                            </Pane>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    );
-}
+        );
+    }
 }
