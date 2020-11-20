@@ -19,8 +19,8 @@ function Pay() {
     const [payoremail, setPayorEmail] = useState(sessionStorage.getItem("email"));
     const [payorphone, setPayorPhone] = useState(sessionStorage.getItem("notel"));
 
-    const [accountNo, setAccountNo] = useState(sessionStorage.getItem("A929739"));
-    const [amount, setAmount] = useState(sessionStorage.getItem(10));
+    const [accountNo, setAccountNo] = useState("A929739");
+    const [amount, setAmount] = useState(10);
     const [invoiceNo, setInvoiceNo] = useState("MYM" + Date.now())
 
     useEffect(async () => {
@@ -215,7 +215,7 @@ function Pay() {
                         title="Pengesahan Pembayar"
                         onConfirm={() => handleBayar()}
                         onCancel={() => setDialog(false)}
-                        cancelLabel="tidak"
+                        cancelLabel="batal"
                         intent="danger"
                         confirmLabel="betul"
                         intent="success"
@@ -274,13 +274,13 @@ function Pay() {
                 <div>
                     <form action="https://epstaging.mps.gov.my/fpx/sd.php" method="post" id="bayar">
                         <input type="hidden" name="account_no" id="account_no" value="A929739" />
-                        <input type="hidden" name="payment_ref_no" id="payment_ref_no" value={"MYM" + Date.now()} />
-                        <input type="hidden" name="bank" id="inputBank" />
+                        <input type="hidden" name="payment_ref_no" id="payment_ref_no" value={invoiceNo} />
+                        <input type="hidden" name="bank" id="inputBank" value={bankCode}/>
                         <input type="hidden" name="channel" id="channel" value="01" />
                         <input type="hidden" name="web_return_address" value="https://mymps.corrad.my" />
                         <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
-                        <input type="hidden" name="payment_amount" id="payment_amount" value={atob(atob(sessionStorage.getItem("amaun")))}/>
-                        <input type="hidden" name="payment_description" value={"Cukai Taksiran " + atob(atob(sessionStorage.getItem("cukai")))}/>
+                        <input type="hidden" name="payment_amount" id="payment_amount" value={amount}/>
+                        <input type="hidden" name="payment_description" value={"Cukai Taksiran " + accountNo}/>
                         <input type="hidden" name="email" value={sessionStorage.getItem("email")} />
                     </form>
                 </div>

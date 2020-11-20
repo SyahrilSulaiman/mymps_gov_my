@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import Search from './Search';
-import { Pane, Heading, Icon, ArrowLeftIcon, SelectField } from "evergreen-ui";
+import { Pane, Button, Heading, Icon, ArrowLeftIcon, SelectField } from "evergreen-ui";
 
 export default function Add({ props }) {
     const [type, setType] = useState('');
@@ -15,7 +15,9 @@ export default function Add({ props }) {
                 <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
                     <div className="flex flex-wrap ">
                         <Pane background="#2c3e50" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
-                            <Heading size={400} color="white"><Icon icon={ArrowLeftIcon} size={12} onClick={() => window.history.back()} /> Bil / Tambah Bil</Heading>
+                            <Heading size={400} color="white">
+                                <Icon icon={ArrowLeftIcon} size={12}/> Bil / Tambah Bil
+                            </Heading>
                         </Pane>
                     </div>
                     <div className="flex flex-wrap xl:pt-2">

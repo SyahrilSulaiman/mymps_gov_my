@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import swal from 'sweetalert'
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
+import {Heading, Text, Paragraph, Button, toaster} from "evergreen-ui";
 
 export default function Carian({bill,type, display}){
 
@@ -24,30 +25,29 @@ export default function Carian({bill,type, display}){
             const formData = new FormData();
             formData.append('nokp',nokp);
             formData.append('account',e);
-            // console.log(nokp);
-            // console.log(bill.noakaun);
+
             Axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill',formData)
             .then(res => {
 
                 console.log('Response : ',res.data)
-                if(res.data.status === "success"){
-                    // console.log(res);
-                    swal('Berjaya Tambah','Berjaya tambah akaun untuk pembayaran','success');
+                if(res.data.status === "success")
+                {
+                    toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"});
                     window.location.href = '/bill';
                 }
-                else if(res.data.status === "failure"){
-                    swal("Tidak Berjaya",accountType+" ini telah didaftarkan ke akaun anda.","error");
+                else if(res.data.status === "failure")
+                {
+                    toaster.danger("Akaun ini telah didaftarkan ke senarai bayaran anda.",{id:"forbidden-action"});
                 }
-                else{
-                    console.log(res.status);
-                    swal('Ralat','Operasi tidak dapat diselesaikan','error');
+                else
+                {
+                    toaster.danger('Maaf. Sila hubungi bahagian pihak pentadbiran.',{id:"forbidden-action"});
                 }
 
                 setLoading(false);
             })
             .catch(err =>{
-                console.log('error',err)
-                swal('Ralat','Sila hubungi pentadbir sistem!','error');
+                toaster.danger('Ralat! Sila hubungi pentadbir sistem.',{id:"forbidden-action"});
             });
         }
     
@@ -58,16 +58,13 @@ export default function Carian({bill,type, display}){
         );
     }
     else{
-        // Loop array mapping
-        // console.log('Carian',bill.length);
-        // console.log('Carian Bill',bill);
-        // return (<div></div>)
-        if( bill.length === 1 || type === 'akaun' ){
+        if( bill.length === 1 || type === 'akaun' )
+        {
             return (<div>
                         <div key={bill[0].NOAKAUN} className="mx-auto w-full">
                         <div className="flex flex-wrap">
-                            <div className="w-full px-4">
-                                <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg">
+                            <div className="w-full">
+                                <div className="relative flex flex-col min-w-0 break-words bg-gray-100 border " onClick={() => handleAdd(bill[0].NOAKAUN)}>
                                     <div className="flex-auto p-4">
                                         <div className="flex flex-row pt-4">
                                             <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -107,11 +104,11 @@ export default function Carian({bill,type, display}){
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
+                                    {/* <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
                                         <button id="type" type="button" onClick={(e) => handleAdd(bill[0].NOAKAUN)} className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
                                                     {loading?'Menambah..':'Tambah'}
                                         </button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
@@ -128,7 +125,7 @@ export default function Carian({bill,type, display}){
                     <div key={bills.NOAKAUN} className="mx-auto w-full">
                     <div className="flex flex-wrap">
                         <div className="w-full">
-                            <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg">
+                            <div className="relative flex flex-col min-w-0 break-words bg-gray-100 border" onClick={() => handleAdd(bills.NOAKAUN)}>
                                 <div className="flex-auto p-4">
                                     <div className="flex flex-row pt-4">
                                         <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -168,11 +165,13 @@ export default function Carian({bill,type, display}){
                                         </div>
                                     </div>
                                 </div>
-                                <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                                    <button id="type" type="button" onClick={(e) => handleAdd(bills.NOAKAUN)} className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
-                                                {loading?'Menambah..':'Tambah'}
-                                    </button>
-                                </div>
+                                {/* <div className="flex px-4">
+                                    <Button 
+                                    type="button" 
+                                    appeareance="primary"
+                                    intent="success" 
+                                    onClick={(e) => handleAdd(bills.NOAKAUN)}>{loading?'Menambah..':'Tambah'}</Button>
+                                </div> */}
                             </div>
                         </div>
                     </div>

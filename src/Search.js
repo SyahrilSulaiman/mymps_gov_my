@@ -3,6 +3,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import Carian from './Carian';
 import { Pane, TextInputField, Button, SearchIcon, ArrowLeftIcon, Paragraph, Heading } from "evergreen-ui";
+import NoScroll from "no-scroll";
 
 export default function Search({ type }) {
 
@@ -37,26 +38,33 @@ export default function Search({ type }) {
                         setDisplay(false);
                         swal('Tidak ditemui', searchType + ' tidak ditemui', 'error');
                     }
-                    else {
+                    else 
+                    {
+                        if(res.data.length > 2){
+                            NoScroll.on();
+                        }else{
+                            NoScroll.off();
+                        }
                         setBill(res.data);
-                        // console.log('Search NOKP',res.data);
                         setDisplay(true);
                     }
                 }
 
-                if (type === 'akaun') {
+                if (type === 'akaun') 
+                {
                     searchType = 'Akaun';
-                    // res = res.data;
-                    // console.log('Search Response : ',res.data[0]);
 
                     if (res.data.status === 'FAILED') {
                         setDisplay(false);
                         swal('Tidak ditemui', searchType + ' tidak ditemui', 'error');
                     }
                     else {
+                        if(res.data.length > 2){
+                            NoScroll.on();
+                        }else{
+                            NoScroll.off();
+                        }
                         setBill(res.data[0]);
-                        // console.log('Search Account ',res.data);
-                        // console.log('Bill Akaun',bill);
                         setDisplay(true);
                     }
                 }
@@ -147,9 +155,6 @@ export default function Search({ type }) {
                             </div>
                         </div>
                     </form>
-                    {/* {
-                    <Carian bill={bill} type={type} display={display}/>
-                } */}
                 </div>
                 <div className="relative pb-4 overflow-y-scroll" style={{height:"422px"}}>
                     <div className="flex flex-wrap">
