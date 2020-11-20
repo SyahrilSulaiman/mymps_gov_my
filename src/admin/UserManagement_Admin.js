@@ -8,18 +8,34 @@ import Footer from "../components/Footers/Footer";
 import CardUser from "../components/Cards/CardUser";
 import Pagination from "../components/Pagination/Pagination"
 import UserDetail from "./UpdateUser_Admin";
-import { Button, Pane } from 'evergreen-ui'
+import { Button, Pane, SearchInput } from 'evergreen-ui'
 // import UserDetail from "../components/Cards/CardSettings"
 
 function Dashboard(props) {
   const token = getToken();
-  const user = getUser();
+  // const user = getUser();
   const nokp = getNOKP();
 
   const [users, setUser] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [userPerPage, setUserPerPage] = useState(5);
+  const [filter,setFilter] = useState([]);
+
+  const filterUser = (e) => {
+
+    setFilter(users);
+    const userJson = users.filter( json =>{
+        // console.log(json)
+        return json.U_USERIC.toUpperCase().includes(e.target.value.toUpperCase());
+    })
+    // let filteredUser = users.filter(filterUser => {
+    //     return filterUser.U_USERNAME === e
+    // })
+    console.log(userJson);
+    setUser(userJson);
+    setFilter(userJson);
+  }
 
   const [showDetail,setShowDetail] = useState(false);
   const [userDetail,setUserDetail] = useState([]);
@@ -29,6 +45,8 @@ function Dashboard(props) {
       setLoading(true);
       const res = await axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=user_list');
       setUser(JSON.parse(res.data.data));
+      // setFilter(users);
+      // console.log(users);
       setLoading(false);
     }
     fetchUsers();
@@ -63,7 +81,15 @@ function Dashboard(props) {
                 <div className="w-full px-4">
                   <div className="relative flex flex-col min-w-0 break-words bg-blue-100 border-b border-gray-400 shadow-lg rounded-lg">
                   <Pane padding={3}>
-                  <Button height={40} appearance="primary" intent="success" onClick={handleAdd}>Tambah Pengguna</Button>
+                    <Pane>
+                      <Button height={40} appearance="primary" intent="success" onClick={handleAdd}>Tambah Pengguna</Button>
+                    </Pane>
+                    <Pane paddingTop={10}>
+                      <SearchInput 
+                        placeholder="Kad Pengenalan / ROB ROC Pengguna"
+                        onChange = {(e) => {filterUser(e)}}
+                      />
+                    </Pane>
                   </Pane>
                     <div className="flex-auto p-4">
                       <div className="flex flex-row border-b border-gray-600">
