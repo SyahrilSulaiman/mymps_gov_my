@@ -36,6 +36,7 @@ import Admin_Setting from "./admin/Setting_Admin";
 import Admin_UserManagement from "./admin/UserManagement_Admin";
 import Admin_Report from "./admin/Report_Admin";
 import UserDetail from "./admin/UpdateUser_Admin";
+import AddUser from "./admin/AddUser_Admin";
 
 import { useLoading, Audio } from "@agney/react-loading";
 
@@ -138,6 +139,10 @@ function App() {
                 <PrivateRoute
                   path="/admin/update_user"
                   component={UserDetail}
+                />
+                <PrivateRoute
+                  path="/admin/add_user"
+                  component={AddUser}
                 />
                 <Route path="*" component={NotFound} />
               </Switch>
