@@ -1,23 +1,37 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "./components/Footers/Footer";
 import axios from 'axios';
 import swal from "sweetalert";
+import { toaster, Heading, Pane, Icon, ArrowLeftIcon, TextInputField, Strong, Dialog, Checkbox, Text, Button, SegmentedControl, Paragraph } from "evergreen-ui";
+import Topbar from "./Topbar";
+import Bank from "./ListBank";
 
+const FPX = "FPX";
+const CARD = "CARD";
 
-function Pay(){
+function Pay() {
 
-    const [data, setData] = useState([{"CODE":"BIMB1234","NAME":"BANK ISLAM"}]);
+    const [method, setMethod] = useState("");
+    const [data, setData] = useState(null);
     const [bankCode, setBankCode] = useState("");
+    const [dialog, setDialog] = useState(false);
+    const [payorname, setPayorName] = useState(sessionStorage.getItem("username"));
+    const [payoremail, setPayorEmail] = useState(sessionStorage.getItem("email"));
+    const [payorphone, setPayorPhone] = useState(sessionStorage.getItem("notel"));
+
+    const [accountNo, setAccountNo] = useState(sessionStorage.getItem("A929739"));
+    const [amount, setAmount] = useState(sessionStorage.getItem(10));
+    const [invoiceNo, setInvoiceNo] = useState("MYM" + Date.now())
 
     var All = [];
 
     useEffect(async () => {
-
         await fetch('https://dev.toyyibpay.com/api/getBankFPX')
-        .then(response => response.json())
-        .then(result => {
-            setData(result);
-        })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+                setData(result);
+            })
     }, [])
 
     const handleClick = (bankcode) => {
@@ -27,25 +41,28 @@ function Pay(){
     }
 
     const handleBayar = () => {
-        var name = document.getElementById("nama").value;
-        var email = document.getElementById("email").value;
-        var phone = document.getElementById("phone").value;
-        var bank = document.getElementById("inputBank").value;
 
-        if(name == ""){
-            swal("Ralat!", "Sila lengkapkan maklumat nama pembayar sebelum membuat pembayaran.","error");
-        }else if(email == ""){
-            swal("Ralat!", "Sila lengkapkan maklumat emel pembayar sebelum membuat pembayaran.","error");
-        }else if(phone == ""){
-            swal("Ralat!", "Sila lengkapkan maklumat nombor telefon pembayar sebelum membuat pembayaran.","error");
-        }else if(bank == ""){
-            swal("Ralat!", "Sila membuat pilihan bank sebelum membuat pembayaran.","error");
-        }else{
+        console.log(bankCode);
+        setDialog(false);
+
+        if (payorname == "") {
+            toaster.danger("Harap maaf, Sila lengkapkan maklumat nama pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+        }
+        else if (payoremail == "") {
+            toaster.danger("Harap maaf, Sila lengkapkan maklumat emel pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+        }
+        else if (payorphone == "") {
+            toaster.danger("Harap maaf, Sila lengkapkan maklumat nombor telefon pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+        }
+        else if (bankCode == "") {
+            toaster.danger("Harap maaf, Sila membuat pilihan bank sebelum membuat pembayaran.", { id: "forbidden-action" });
+        }
+        else {
 
             var formdata = new FormData();
-            formdata.append("accountId", document.getElementById("account_no").value);
-            formdata.append("amount", document.getElementById("payment_amount").value);
-            formdata.append("invoiceNo", document.getElementById("payment_ref_no").value);
+            formdata.append("accountId", accountNo);
+            formdata.append("amount", amount);
+            formdata.append("invoiceNo", invoiceNo);
 
             var requestOptions = {
                 method: 'POST',
@@ -55,177 +72,300 @@ function Pay(){
 
             var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=register_payment';
 
-            fetch(urlAPI1 , requestOptions)
-            .then(response => response.json())
-            .then(result => {
-                if(result.status == "success"){
-                    document.getElementById("bayar").submit();
-                }else{
-                    swal("Ralat", "Sila lengkapkan maklumat pembayar dan pastikan maklumat adalah benar dah sah sebelum mebuat pembayaran cukai.","error");
-                }
-            })
-                
+            fetch(urlAPI1, requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status == "success") {
+                        document.getElementById("bayar").submit();
+                    }
+                    else {
+                        toaster.danger("Harap maaf, tidak boleh membuat sebarang pembayaran pada masa kini.", { id: "forbidden-action" });
+                    }
+                })
+
         }
-        
+
     }
 
     //console.log("Data : " + (data[0].NAME));
-    for(var i = 0; i < data.length; i++){
-        All.push(<button type="button" key={i} className="bg-gray-300 text-gray-700 text-center mx-center" style={{padding:"4px", margin:"2px"}} value={data[i].CODE} onClick={ e => handleClick(e.target.value)}>
-            <img className="mx-auto" style={{height:"40px", width:"40px"}} src={"https://dev1.toyyibpay.com/asset/img/logobank/"+data[i].CODE+".png"} /> <br /> {data[i].NAME}</button>);
-    }
+    // if(data){
+    //     for(var i = 0; i < data.length; i++){
+    //         All.push(<div type="button" key={i} className="bg-gray-200 text-gray-700 text-center mx-center focus:bg-gray-400" style={{padding:"4px", margin:"2px"}} value={data[i].CODE} onClick={ (e) => setBankCode(e.target.value)}>
+    //             <img className="mx-auto" style={{height:"40px", width:"40px"}} src={"https://dev1.toyyibpay.com/asset/img/logobank/"+data[i].CODE+".png"} /> <br /> <Heading size={200}>{data[i].NAME}</Heading></div>);
+    //     }
+    // }
 
     return (
-        <div className="p-4">
-            <div className="bg-gray-300 rounded-lg">
-                <div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-                    <h2 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
-                    Portal MyMPS
-                    <br />
-                    <span className="text-blue-600">Laman Pembayaran Bil</span>
-                    </h2>
-                    <div className="mt-8 flex lg:flex-shrink-0 lg:mt-0">
-                    <div className="inline-flex rounded-md shadow">
-                        <a href="/bill" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
-                        Kembali
-                        </a>
-                    </div>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-                <div className="px-4 py-5 border-b border-gray-200 bg-gray-500 sm:px-6">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900">
-                    Maklumat Cukai Taksiran
-                    </h3>
-                    <p className="mt-1 max-w-2xl text-sm leading-5 text-white">
-                    Berikut dibawah merupakan maklumay cukai taksiran yang ingin dibayar.
-                    </p>
-                </div>
+        <div className="">
+            <Topbar
+                title="Pembayaran Cukai"
+                leftButtonIcon={ArrowLeftIcon}
+                onClickLeftButton={() => window.history.back()}
+            />
+            {/* <div className="bg-white shadow overflow-hidden" style={{paddingTop:"50px"}}>
+                <Pane background="tint1" padding={10}>
+                    <Pane>
+                        <Heading size={500}>Maklumat Cukai Taksiran</Heading>
+                    </Pane>
+                    <Pane>
+                        <Text>Berikut merupakan maklumat cukai taksiran yang ingin dibayar</Text>
+                    </Pane>
+                </Pane>
                 <div>
                     <dl>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt className="text-sm leading-5 font-medium text-gray-500">
-                        No. Cukai
+                        <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm leading-5 font-medium text-gray-500">
+                                No. Cukai
                         </dt>
-                        <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                        {atob(atob(sessionStorage.getItem("cukai")))}
-                        </dd>
-                    </div>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt className="text-sm leading-5 font-medium text-gray-500">
-                        Penama Cukai
+                            <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                            </dd>
+                        </div>
+                        <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm leading-5 font-medium text-gray-500">
+                                Penama Cukai
                         </dt>
-                        <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                        {sessionStorage.getItem('username')}
-                        </dd>
-                    </div>
-                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt className="text-sm leading-5 font-medium text-gray-500">
-                        Jumlah Tunggakan (RM)
+                            <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                                {sessionStorage.getItem('username')}
+                            </dd>
+                        </div>
+                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm leading-5 font-medium text-gray-500">
+                                Jumlah Tunggakan (RM)
                         </dt>
-                        <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                        {atob(atob(sessionStorage.getItem("amaun")))}
-                        </dd>
-                    </div>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt className="text-sm leading-5 font-medium text-gray-500">
-                        Status Cukai
+                            <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                            </dd>
+                        </div>
+                        <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm leading-5 font-medium text-gray-500">
+                                Status Cukai
                         </dt>
-                        <dd className="mt-1 text-sm leading-5 text-red-500 sm:mt-0 sm:col-span-2">
-                        Tertunggak
+                            <dd className="mt-1 text-sm leading-5 text-red-500 sm:mt-0 sm:col-span-2">
+                                Tertunggak
                         </dd>
-                    </div>
+                        </div>
                     </dl>
                 </div>
-            </div>
-            <div className="bg-white shadow overflow-hidden sm:rounded-lg mt-5 mb-3">
-                <div className="px-4 py-5 border-b border-gray-200 bg-gray-500 sm:px-6">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900">
-                    Maklumat Pembayaran
-                    </h3>
-                    <p className="mt-1 max-w-2xl text-sm leading-5 text-white">
-                    Anda diminta untuk mengisi maklumat dibawah sebagai pembayar.
-                    </p>
-                </div>
+            </div> */}
+            <div className="bg-white shadow overflow-hidden" style={{ paddingTop: "50px" }}>
+                <Pane background="tint1" padding={10}>
+                    <Pane>
+                        <Heading size={500}>Maklumat Pembayaran</Heading>
+                    </Pane>
+                    <Pane>
+                        <Text>Sila lengkapkan maklumat pembayar dan pilih kaedah pembayaran</Text>
+                    </Pane>
+                </Pane>
                 <div>
                     <form action="" method="post">
-                    <dl>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt className="text-sm leading-5 font-medium text-gray-500">
-                        Nama Pembayar
-                        </dt>
-                        <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                        <div>
-                            <input value={sessionStorage.getItem("username")} aria-label="nama" name="nama" id="nama" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: Kassim" />
-                        </div>
-                        </dd>
-                    </div>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt className="text-sm leading-5 font-medium text-gray-500">
-                        Emel Pembayar
-                        </dt>
-                        <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                        <div>
-                            <input value={sessionStorage.getItem("email")} aria-label="emel"  name="email" id="email" type="email" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: admin@gmail.com" />
-                        </div>
-                        </dd>
-                    </div>
-                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt className="text-sm leading-5 font-medium text-gray-500">
-                        No. Telefon Bimbit
-                        </dt>
-                        <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                        <div>
-                            <input value={sessionStorage.getItem("notel")} aria-label="phone" name="phone" id="phone" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="cth: 0123456789" />
-                        </div>
-                        </dd>
-                    </div>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
-                        <dt className="text-sm leading-5 font-medium text-gray-500 ">
-                        Senarai Bank
-                        </dt>
-                        <dd className="flex flex-wrap mt-1 text-sm leading-5 text-gray-500 sm:col-span-2">
-                            <div className="grid gap-1 grid-cols-2 xl:grid-cols-5">
-                                {All}
-                            </div>
-                        </dd>
-                        <dt className="text-sm leading-5 font-medium text-gray-500">
-                        
-                        </dt>
+                        <Pane display="flex" width="100%" className="pt-5" paddingX={20}>
+                            <TextInputField
+                                width="100%"
+                                label="NAMA PEMBAYAR"
+                                description="Sila isi nama pembayar"
+                                placeholder="cth: Suriati"
+                                value={payorname}
+                                onChange={(e) => setPayorName(e.target.value)}
+                            />
+                        </Pane>
+                        <Pane display="flex" width="100%" paddingX={20}>
+                            <TextInputField
+                                width="100%"
+                                label="ALAMAT EMEL"
+                                description="Sila isi alamat emel pembayar"
+                                placeholder="cth: kiminawa@gmail.com"
+                                value={payoremail}
+                                onChange={(e) => setPayorEmail(e.target.value)}
+                            />
+                        </Pane>
+                        <Pane display="flex" width="100%" paddingX={20}>
+                            <TextInputField
+                                width="100%"
+                                label="NOMBOR TELEFON"
+                                description="Sila isi nombor telefon pembayar"
+                                placeholder="cth: 0123456789"
+                                value={payorphone}
+                                onChange={(e) => setPayorPhone(e.target.value)}
+                            />
+                        </Pane>
+                        <Pane marginY={15} paddingX={20}>
+                            <Paragraph fontWeight="bold" fontSize={15}>
+                                Kaedah Pembayaran
+                            </Paragraph>
+                            <SegmentedControl
+                                value={method}
+                                onChange={(value) => {
+                                    setMethod(value);
+                                }}
+                                height={30}
+                                options={[
+                                    {
+                                        label: "Online Banking (FPX)",
+                                        value: "FPX",
+                                    },
+                                    {
+                                        label: "Debit / Credit Card",
+                                        value: "CARD",
+                                    },
+                                ]}
+                            ></SegmentedControl>
+                        </Pane>
+                        <Pane paddingX={20} style={{ height: "150vh" }}>
+                            {method === "CARD" && (
+                                <Pane marginY={15} style={{ height: "50vh" }}>
+                                    <Paragraph fontWeight="bold" fontSize={13}>
+                                        Kad Kredit & Kad Debit
+                                </Paragraph>
+                                    <Paragraph>
+                                        Harap maaf, pembayaran melalui kad debit / kredit tidak dapat dilaksanakan buat masa
+                                        sekarang.
+                                </Paragraph>
+                                </Pane>
+                            )}
+                            {method === "FPX" && (
+                                <Pane marginY={15}>
+                                    <Paragraph fontWeight="bold" fontSize={13}>
+                                        Perbankan Online
+                                    </Paragraph>
+                                    <Paragraph>
+                                        Tekan pada mana-mana logo bank untuk pilih :
+                                    </Paragraph>
+                                    <Pane display="grid" gridTemplateColumns="1fr 1fr" marginX={1} columnGap={1}>
+                                        {data && data.map((bankk, index) => {
 
-                        <dd className="flex flex-wrap mt-1 text-sm leading-5 text-gray-500 sm:col-span-2">
-                            <p className="flex flex-wrap mt-5 text-md text-red-500">*Sila pastikan semua maklumat lengkap dan betul sebelum membuat pembayaran. Anda akan diubah hala ke halaman bank untuk membuat pembayaran.</p>
-                        </dd>
-                        <dt className="text-sm leading-5 font-medium text-gray-500">
-                        
-                        </dt>
-
-                        <dd className="flex flex-wrap mt-1 text-sm leading-5 text-gray-500 sm:col-span-2">
-                            <button type="button" className="text-white bg-green-500 py-3 px-5 rounded-lg w-full inline-block mt-5" onClick={() => handleBayar()}>Bayar</button>
-                        </dd>
-                    </div>
-                    </dl>
+                                            let isOffline = bankk.NAME.includes("Offline");
+                                            return (
+                                                <Pane
+                                                    userSelect="none"
+                                                    opacity={isOffline ? 0.4 : 1}
+                                                    key={index}
+                                                    backgroundColor="#fff"
+                                                    paddingX={15}
+                                                    paddingY={10}
+                                                    marginBottom={1}
+                                                    alignItems="center"
+                                                    textAlign="center"
+                                                    borderRadius={3}
+                                                    borderWidth={2}
+                                                    borderColor={bankCode === bankk.CODE ? "#2f3640" : "#ebebeb"}
+                                                    boxShadow={bankCode === bankk.CODE ? "0px 2px 2px #c49b9b" : "none"}
+                                                    borderBottomWidth={bankCode === bankk.CODE ? 5 : 2}
+                                                    borderStyle="solid"
+                                                    position="relative"
+                                                    onClick={() => {
+                                                        if (isOffline) {
+                                                            toaster.danger("Harap maaf, pilihan bank tidak boleh membuat pembayaran untuk waktu sekarang.", { id: "forbidden-action" });
+                                                            return;
+                                                        } else {
+                                                            setBankCode(bankk.CODE)
+                                                        }
+                                                    }}
+                                                >
+                                                    <img className="mx-auto" style={{ height: "40px", width: "40px" }} src={"https://dev1.toyyibpay.com/asset/img/logobank/" + bankk.CODE + ".png"} /><Heading size={200}>{bankk.NAME}</Heading></Pane>)
+                                        }
+                                        )
+                                        }
+                                    </Pane>
+                                    {/* <Pane display="flex" width="100%" className="mt-16 px-5 mb-16">
+                                        <Button
+                                            type="button"
+                                            padding={3}
+                                            width="100%"
+                                            appearance="primary"
+                                            intent="success"
+                                            alignContent="center"
+                                            justifyContent="center"
+                                            onClick={() => setDialog(true)}
+                                        >
+                                            Teruskan
+                                            </Button>
+                                    </Pane> */}
+                                </Pane>
+                            )}
+                        </Pane>
                     </form>
                 </div>
-                
+                <Pane>
+                    <Dialog
+                        isShown={dialog}
+                        title="Pengesahan Pembayar"
+                        onConfirm={() => handleBayar()}
+                        onCancel={() => setDialog(false)}
+                        cancelLabel="tidak"
+                        intent="danger"
+                        confirmLabel="betul"
+                        intent="success"
+                        shouldCloseOnOverlayClick={false}
+                    >
+                        <Checkbox checked label="Dengan ini saya mengesahkan untuk membuat pembayaran ke atas cukai taksiran." />
+                    </Dialog>
+                </Pane>
+                { method &&
+                <Pane
+                    position="fixed"
+                    bottom={0}
+                    left={0}
+                    right={0}
+                    height={50}
+                    background={1 ? "#009432" : "#9a0b0b"}
+                    display="grid"
+                    gridTemplateColumns="1fr"
+                    columnGap={10}
+                    userSelect="none"
+                    paddingX={15}
+                >
+                    <Pane
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        flexDirection="column"
+                        overflow="hidden"
+                    >
+                        {/* <Paragraph color="#fff" fontWeight="bold" lineHeight={1.2} fontSize={12}>
+                    Langkah 2 :
+                    </Paragraph> */}
+
+                        <Paragraph
+                            color="#fff"
+                            fontWeight="bold"
+                            fontSize={15}
+                            whiteSpace="nowrap"
+                            overflow="hidden"
+                            textOverflow="ellipsis"
+                        >
+                        </Paragraph>
+                    </Pane>
+                    <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center" onClick={() => {
+                        if(method == "CARD"){
+                            toaster.danger("Harap maaf, kaedah pembayaran ini sedang dinaik taraf..", { id: "forbidden-action" });
+                        }
+                        else if(bankCode && method === "FPX"){
+                            setDialog(true)
+                        }else if(bankCode == "" && method === "FPX")
+                        {
+                            toaster.danger("Harap maaf, Sila membuat pilihan bank sebelum membuat pembayaran.", { id: "forbidden-action" });
+                        }
+                    }}>
+                        <Heading size={500} color="white">Teruskan Pembayaran</Heading>
+                    </Pane>
+                </Pane>
+                }
+
                 <div>
                     <form action="https://epstaging.mps.gov.my/fpx/sd.php" method="post" id="bayar">
                         <input type="hidden" name="account_no" id="account_no" value="A929739" />
-                        <input type="hidden" name="payment_ref_no" id="payment_ref_no" value={"MYM"+Date.now()}/>
-                        <input type="hidden" name="bank" id="inputBank"/>
-                        <input type="hidden" name="channel" id="channel" value="01"/>
-                        <input type="hidden" name="web_return_address" value="https://mymps.corrad.my"/>
-                        <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php"/>
-                        <input type="hidden" name="payment_amount" id="payment_amount" value={atob(atob(sessionStorage.getItem("amaun")))}/>
-                        <input type="hidden" name="payment_description" value={"Cukai Taksiran " + atob(atob(sessionStorage.getItem("cukai")))}/>
-                        <input type="hidden" name="email" value={sessionStorage.getItem("email")}/>
+                        <input type="hidden" name="payment_ref_no" id="payment_ref_no" value={"MYM" + Date.now()} />
+                        <input type="hidden" name="bank" id="inputBank" />
+                        <input type="hidden" name="channel" id="channel" value="01" />
+                        <input type="hidden" name="web_return_address" value="https://mymps.corrad.my" />
+                        <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
+                        {/* <input type="hidden" name="payment_amount" id="payment_amount" value={atob(atob(sessionStorage.getItem("amaun")))}/> */}
+                        {/* <input type="hidden" name="payment_description" value={"Cukai Taksiran " + atob(atob(sessionStorage.getItem("cukai")))}/> */}
+                        <input type="hidden" name="email" value={sessionStorage.getItem("email")} />
                     </form>
                 </div>
             </div>
 
-            <Footer className="p-0 mt-2"/>
+            {/* <Footer className="p-0 mt-2"/> */}
         </div>
     );
 }
