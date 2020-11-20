@@ -5,6 +5,8 @@ import Sidebar from "./Sidebar_Admin";
 import Navbar from "../components/Navbars/AdminNavbar";
 import Footer from "../components/Footers/Footer";
 
+import PieChart from "./report/Pie"
+
 function Dashboard(props) {
   const token = getToken();
   const user = getUser();
@@ -29,7 +31,9 @@ function Dashboard(props) {
           </div>
         </div>
         <div className="px-4 md:px-10 mx-auto w-full m-24">
-          
+            {
+              // <PieChart />
+            }
         </div>
         <Footer />
       </div>
