@@ -9,33 +9,29 @@ import CardUser from "../components/Cards/CardUser";
 import Pagination from "../components/Pagination/Pagination"
 import UserDetail from "./UpdateUser_Admin";
 import { Button, Pane, SearchInput } from 'evergreen-ui'
+import { searchBegin } from "@syncfusion/ej2-react-grids";
 // import UserDetail from "../components/Cards/CardSettings"
 
 function Dashboard(props) {
   const token = getToken();
-  // const user = getUser();
   const nokp = getNOKP();
 
   const [users, setUser] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [userPerPage, setUserPerPage] = useState(5);
-  const [filter,setFilter] = useState([]);
+  const [searchResult,setSearchResult] = useState([]);
+  const [search,setSearch] = useState('');
 
-  const filterUser = (e) => {
-
-    setFilter(users);
-    const userJson = users.filter( json =>{
-        // console.log(json)
-        return json.U_USERIC.toUpperCase().includes(e.target.value.toUpperCase());
-    })
-    // let filteredUser = users.filter(filterUser => {
-    //     return filterUser.U_USERNAME === e
-    // })
-    console.log(userJson);
-    setUser(userJson);
-    setFilter(userJson);
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
   }
+
+  useEffect(() =>{
+
+    const results = users.filter( json => json.U_USERIC.toUpperCase().includes(search))
+    setSearchResult(results);    
+  },[search]);
 
   const [showDetail,setShowDetail] = useState(false);
   const [userDetail,setUserDetail] = useState([]);
@@ -43,18 +39,19 @@ function Dashboard(props) {
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
-      const res = await axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=user_list');
-      setUser(JSON.parse(res.data.data));
-      // setFilter(users);
-      // console.log(users);
-      setLoading(false);
+      const res = await axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=user_list')
+      .then( res => {
+        setUser(JSON.parse(res.data.data));
+        setLoading(false);
+      })
+
     }
     fetchUsers();
   }, []);
 
   const indexOfLastUser = currentPage * userPerPage;
   const indexOfFirstUser = indexOfLastUser - userPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  const currentUsers = searchResult.slice(indexOfFirstUser, indexOfLastUser);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const showUser = (user) => setUserDetail(user);
@@ -87,7 +84,8 @@ function Dashboard(props) {
                     <Pane paddingTop={10}>
                       <SearchInput 
                         placeholder="Kad Pengenalan / ROB ROC Pengguna"
-                        onChange = {(e) => {filterUser(e)}}
+                        onChange = {handleSearch}
+                        value={search}
                       />
                     </Pane>
                   </Pane>
@@ -144,7 +142,7 @@ function Dashboard(props) {
                       </div>
                     </div>
                     <CardUser users={currentUsers} loading={loading} currentPage={currentPage} userPerPage={userPerPage} showUser={showUser} display={setShowDetail}/>
-                    <Pagination usersPerPage={userPerPage} totalUsers={users.length} paginate={paginate} />
+                    <Pagination usersPerPage={userPerPage} totalUsers={searchResult.length} paginate={paginate} />
                   </div>
                 </div>
               </div>
