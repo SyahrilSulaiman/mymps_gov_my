@@ -4,7 +4,7 @@ import { getNOKP } from "./Utils/Common";
 import swal from "sweetalert";
 import NoScroll from "no-scroll";
 import BayarCukai from "./BayarCukai";
-import { Pane, Spinner, Heading, Strong, Icon, ArrowLeftIcon } from "evergreen-ui";
+import { Pane, Spinner, Heading, Strong, Icon, ArrowLeftIcon, DocumentIcon } from "evergreen-ui";
 import iconBill from "./assets/img/bill.png";
 
 export default function BillList() {
@@ -24,12 +24,17 @@ export default function BillList() {
     window.location.href = "/bill_cukai_taksiran";
   };
 
-  const handleBayar = (cukai, amount, penama) => {
-    console.log("Bayar");
-    sessionStorage.setItem("cukai", btoa(btoa(cukai)));
-    sessionStorage.setItem("amaun", btoa(btoa(amount)));
-    sessionStorage.setItem("penama", btoa(btoa(penama)));
-    window.location.href = "/payment?Cukai=" + cukai;
+  const handleBayar = (cukai, amount, penama, akaun) => {
+
+    var array = [];
+    array["CUKAI"]      = cukai;
+    array["TUNGGAKAN"]  = amount;
+    array["PEMILIK"]    = penama;
+    array["AKAUN"]      = akaun;
+
+    sessionStorage.setItem("INFO", btoa(btoa(btoa(JSON.stringify(array)))));
+    sessionStorage.setItem("noakaun", btoa(btoa(akaun)));
+    window.location.href = "/PengesahanPembayaran?Cukai=" + btoa(cukai);
   };
 
   const [dataset, setDataSet] = useState({
@@ -100,7 +105,7 @@ export default function BillList() {
           className=" w-full"
           onClick={
             //betulkan status***
-            bill.STATUS !== "PAID" ? () => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK) : () => handleViewBill(bill.NOAKAUN)
+            bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN)
           }
           key={bill.NOAKAUN}
         >
@@ -108,96 +113,40 @@ export default function BillList() {
             <div className="w-full px-2 border-white">
               <Pane
               borderColor="white"
-              display="flex"
               width="100%"
               background="#dfe6e9"
-              className="p-2 border">
+              className="p-2 border"
+              display="grid"
+              gridTemplateColumns="1px 1fr 10px"
+              >
                 <Pane>
-                  <img src={iconBill} style={{width:"50px", height:"50px"}}/>
+                  {/* <Icon icon={DocumentIcon}></Icon>
+                  <img src={iconBill} style={{width:"50px", height:"50px"}}/> */}
                 </Pane>
                 <Pane>
-                  <table className="text-left overflow-x-scroll">
+                  <table border="1" cellPadding="0" className="text-left overflow-x:auto">
                     <tr>
                       <th><Heading size={200}>No. Kad Pengenalan </Heading></th>
-                      <td><Strong size={400}> : {bill.NOKP === null ? "-" : bill.NOKP}</Strong ></td>
+                      <td><Strong size={300}> : {bill.NOKP === null ? "-" : bill.NOKP}</Strong ></td>
                     </tr>
                     <tr>
                       <th><Heading size={200}>No. Akaun </Heading></th>
-                      <td><Strong size={400}> : {bill.NOAKAUN === null ? "-" : bill.NOAKAUN}</Strong></td>
+                      <td><Strong size={300}> : {bill.NOAKAUN === null ? "-" : bill.NOAKAUN}</Strong></td>
                     </tr>
                     <tr>
                       <th><Heading size={200}>Nama Pemilik </Heading></th>
-                      <td><Strong size={400}> : {bill.NAMA_PEMILIK === null ? "-" : bill.NAMA_PEMILIK.slice(0, 10).trim()}{bill.NAMA_PEMILIK.length>10?'...':''}</Strong></td>
+                      <td><Strong size={300}> : {bill.NAMA_PEMILIK === null ? "-" : bill.NAMA_PEMILIK}</Strong></td>
                     </tr>
                     <tr>
                       <th><Heading size={200}>Status </Heading></th>
-                      <td><Strong size={400} color={bill.STATUS === "PAID" ? "#47B881" : "#EC4C47"}> : {bill.NAMA_PEMILIK === null ? "-" : bill.STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK"}</Strong></td>
+                      <td><Strong size={300} color={bill.STATUS === "PAID" ? "#47B881" : "#EC4C47"}> : {bill.NAMA_PEMILIK === null ? "-" : bill.STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK"}</Strong></td>
                     </tr>
                   </table>
                 </Pane>
+                <Pane color="gray" alignContent="right" justifyContent="center">
+                  <i className="pt-12 fas fa-chevron-right"></i>
+                </Pane>
               </Pane>
-              {/* <div className="relative flex flex-col min-w-0 break-words bg-white shadow-md border">
-                <div className="flex-auto p-3">
-
-                  <div className="flex flex-row pt-4">
-                    <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                      <h5 className="uppercase font-medium text-xs text-gray-600">
-                        No Kad Pengenalan:{" "}
-                        <span className="font-semibold text-sm text-gray-800">
-                          {bill.NOKP === null ? "-" : bill.NOKP}
-                        </span>
-                      </h5>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row pb-4">
-                    <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                      <h5 className="uppercase font-medium text-xs text-gray-600">
-                        No Akaun:{" "}
-                        <span className="font-semibold text-sm text-gray-800">
-                          {bill.NOAKAUN}
-                        </span>
-                      </h5>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row pb-4">
-                    <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                      <h5 className="uppercase font-medium text-xs text-gray-600">
-                        Nama Pemilik:{" "}
-                        <span className="font-semibold text-sm text-gray-800">
-                          {bill.NAMA_PEMILIK}
-                        </span>
-                      </h5>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row pb-4">
-                    <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                      <h5 className="uppercase font-medium text-xs text-gray-600">
-                        Alamat Harta
-                      </h5>
-                      <span className="font-semibold text-xs text-gray-800">
-                        {bill.ADDRHARTA}
-                      </span>
-                    </div>
-                    <div className="relative w-auto pl-4 flex-initial">
-                      <h5
-                        className={
-                          "uppercase font-medium text-xs" +
-                          (bill.STATUS === "TERTUNGGAK"
-                            ? " text-red-600"
-                            : " text-green-600")
-                        }
-                      >
-                        {bill.STATUS === "PAID"
-                          ? "Telah dibayar"
-                          : "tertunggak"}
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

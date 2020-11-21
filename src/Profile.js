@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import Information from "./components/Cards/CardSettings";
 import { Pane, Heading, Icon, ArrowLeftIcon } from "evergreen-ui";
+import Topbaer from "./Topbar2";
 
 function Profile(props) {
   const token = getToken();
@@ -22,8 +23,8 @@ function Profile(props) {
         <Navbar />
         <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
           <div className="flex flex-wrap">
-            <Pane background="#2c3e50" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
-              <Heading size={400} color="white"><Icon icon={ArrowLeftIcon} size={12} onClick={() => window.history.back()} /> Akaun / Kemaskini Profil</Heading>
+            <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
+              <Topbaer title="Akaun / Kemaskini Akaun" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
             </Pane>
             <div className="w-full">
               <div className="flex-auto mt-6 px-3">

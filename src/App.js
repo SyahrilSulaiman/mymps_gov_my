@@ -28,8 +28,10 @@ import ForgotPassword from "./ForgotPassword";
 import GoogleLogin from "./GoogleLogin";
 import NotFound from "./NotFound";
 import SenaraiBil from "./SenaraiBil";
+import BeforeBayar from "./BeforeBayar";
 import Payment from "./Payment";
 import Add from "./Add";
+import UserReport from "./UserReport";
 
 import Admin_Dashboard from "./admin/Dashboard_Admin";
 import Admin_Setting from "./admin/Setting_Admin";
@@ -173,7 +175,9 @@ function App() {
                 <PrivateRoute path="/bill" component={Bill} />
                 <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
+                <PrivateRoute path="/laporan-pengguna" component={UserReport} />
                 <PrivateRoute path="/add_cukai_taksiran" component={Add} />
+                <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar}/>
                 <Route path="*" component={NotFound} />
               </Switch>
             </div>
@@ -197,6 +201,8 @@ function App() {
                 <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
                 <PrivateRoute path="/add_cukai_taksiran" component={Add} />
+                <PrivateRoute path="/laporan-pengguna" component={UserReport} />
+                <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar}/>
                 <PublicRoute
                   path="/forgotpassword"
                   component={ForgotPassword}

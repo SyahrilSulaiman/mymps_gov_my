@@ -259,7 +259,7 @@ export default function CardSettings({
                         placeholder="Sila isi alamat emel anda"
                         required={true}
                         defaultValue={emel}
-                        onChange={(e) => setEmail(e.target.value)}
+                        disabled
                       />
 
                       <TextInputField
@@ -289,13 +289,14 @@ export default function CardSettings({
                   <p>
                   <Pane display="flex" padding={10} background="#dfe6e9" borderRadius={5}>
                     <Pane flex={1} alignItems="center" display="flex">
-                      <Text size={600}>Set Kata Laluan</Text>
+                      <Text size={600}>Kemaskini Kata Laluan</Text>
                     </Pane>
                   </Pane>
 
                   <Pane padding={3} background="tint3" borderRadius={3} marginTop="30px">
                       <TextInputField
-                        label="KATA LALUAN TERKINI"
+                        type="password"
+                        label="KATA LALUAN SEMASA"
                         width="100%"
                         placeholder="Sila isi kata laluan terkini"
                         required={true}
@@ -303,7 +304,8 @@ export default function CardSettings({
                       />
 
                       <TextInputField
-                        label="KATA LALUAN BARU"
+                        type="password"
+                        label="KATA LALUAN BAHARU"
                         width="100%"
                         placeholder="Sila isi kata laluan baru"
                         required={true}
@@ -311,7 +313,8 @@ export default function CardSettings({
                       />
 
                       <TextInputField
-                        label="SAH KATA LALUAN BARU"
+                        type="password"
+                        label="SAH KATA LALUAN BAHARU"
                         width="100%"
                         placeholder="Sila sahkan kata laluan baru"
                         required={true}

@@ -5,6 +5,7 @@ import Navbar from "./components/Navbars/AdminNavbar";
 import axios from 'axios';
 import swal from 'sweetalert';
 import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, UnorderedList, ListItem, Icon, ArrowLeftIcon } from 'evergreen-ui';
+import Topbaer from "./Topbar2";
 
 
 export default function SenaraiBil(props) {
@@ -27,7 +28,8 @@ export default function SenaraiBil(props) {
 
                 if (res.data.status === 'success') {
                     console.log('success');
-                    window.open('https://mymps.corrad.my/rp/bil_cukai_taksiran.php?token=' + res.data.token);
+                    //window.open('https://mymps.corrad.my/rp/bil_cukai_taksiran.php?token=' + res.data.token);
+                    window.location.href = 'https://mymps.corrad.my/rp/bil_cukai_taksiran.php?token=' + res.data.token;
                 }
                 else {
                     swal('Resit tak dijumpai', 'Sila hubungi pentadbir system', 'error');
@@ -40,8 +42,9 @@ export default function SenaraiBil(props) {
     }
 
     const handleReceipt = () => {
-        console.log('Receipt');
-        window.open('https://mymps.corrad.my/rp/resit.php');
+        //console.log('Receipt');
+        //window.open('https://mymps.corrad.my/rp/resit.php');
+        window.location.href = 'https://mymps.corrad.my/rp/resit.php';
     }
 
     useEffect(() => {
@@ -69,8 +72,8 @@ export default function SenaraiBil(props) {
                     <Navbar />
                     <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
                         <div className="flex flex-wrap">
-                            <Pane background="#2c3e50" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
-                                <Heading size={400} color="white"><Icon icon={ArrowLeftIcon} size={12} onClick={() => window.history.back()} /> Bil / Maklumat Bil</Heading>
+                            <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
+                                <Topbaer title="Bil / Maklumat Bil" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
                             </Pane>
                             <div className="w-full px-4 mt-3">
                                 <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">
@@ -103,12 +106,12 @@ export default function SenaraiBil(props) {
     return (
         <div>
             <Sidebar />
-            <div className="relative bg-gray-400 md:ml-64" style={{ height: "100vh" }}>
+            <div className="relative bg-gray-400 md:ml-64" style={{ height: "115vh" }}>
                 <Navbar />
                 <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
                     <div className="flex flex-wrap">
-                        <Pane background="#2c3e50" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
-                            <Heading size={400} color="white"><Icon icon={ArrowLeftIcon} size={12} onClick={() => window.history.back()} /> Bil / Maklumat Bil</Heading>
+                        <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
+                            <Topbaer title="Bil / Maklumat Bil" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
                         </Pane>
                         <div className="w-full px-4 mt-3">
                             <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">
@@ -124,12 +127,12 @@ export default function SenaraiBil(props) {
                                         display="flex"
                                         alignItems="center"
                                     >
-                                        MAKLUMAT PEMBAYARAN BIL
+                                        MAKLUMAT BIL CUKAI TAKSIRAN
                                     </Heading>
 
                                     <Pane background="#c7ecee" marginBottom={majorScale(2)}>
-                                        <Paragraph padding={majorScale(2)} size={500}>
-                                            Berikut merupakan maklumat mengenai bil dan bukti pembayaran untuk bil anda.
+                                        <Paragraph padding={majorScale(2)} size={400}>
+                                            Berikut merupakan maklumat mengenai bil dan bukti pembayaran untuk bil akaun <b>{bills.bill.data[0][0].NOAKAUN}</b>.
                                         </Paragraph>
                                     </Pane>
 
@@ -138,55 +141,74 @@ export default function SenaraiBil(props) {
                                         marginBottom={majorScale(2)}
                                         padding={minorScale(2)}
                                     >
-                                        <UnorderedList>
-                                            <ListItem icon="person">
-                                                <Text fontWeight={700}>Jenis:</Text> Cukai Taksiran
-                                            </ListItem>
-                                            <ListItem icon="heart">
-                                                <Text fontWeight={700}>No Akaun:</Text> {bills.bill.data[0][0].NOAKAUN ? bills.bill.data[0][0].NOAKAUN : "Tiada"}
-                                            </ListItem>
-                                            <ListItem icon="predictive-analysis">
-                                                <Text fontWeight={700}>Nama Pemilik:</Text> {bills.bill.data[0][0].NAMA_PEMILIK ? bills.bill.data[0][0].NAMA_PEMILIK : "Tiada"}
-                                            </ListItem>
-                                            <ListItem icon="tint">
-                                                <Text fontWeight={700}>Alamat Harta:</Text> {bills.bill.data[0][0].ADDRHARTA ? bills.bill.data[0][0].ADDRHARTA : "Tiada"}
-                                            </ListItem>
-                                            <ListItem icon="tint">
-                                                <Text fontWeight={700}>Mukim:</Text> {bills.bill.data[0][0].MUKIM ? bills.bill.data[0][0].MUKIM : "Tiada"}
-                                            </ListItem>
-                                            <ListItem icon="tint">
-                                                <Text fontWeight={700}>Tempoh Cukai:</Text> {bills.bill.data[0][0].TEMPOH_CUKAI ? bills.bill.data[0][0].TEMPOH_CUKAI : "Tiada"}
-                                            </ListItem>
-                                            <ListItem icon="tint">
-                                                <Text fontWeight={700}>Tempoh Bayaran:</Text> {bills.bill.data[0][0].TEMPOH_BAYARAN ? bills.bill.data[0][0].TEMPOH_BAYARAN : "Tiada"}
-                                            </ListItem>
-                                        </UnorderedList>
+                                        <Pane>
+                                            <Text fontWeight={600}>Jenis Bil</Text>
+                                            <Heading size={100}>Cukai</Heading>
+                                        </Pane>
+                                        <Pane>
+                                            <Text fontWeight={600}>Nombor Akaun</Text>
+                                            <Heading size={100}>{bills.bill.data[0][0].NOAKAUN ? bills.bill.data[0][0].NOAKAUN : "Tiada"}</Heading>
+                                        </Pane>
+                                        <Pane>
+                                            <Text fontWeight={600}>Nama Pemilik</Text>
+                                            <Heading size={100}>{bills.bill.data[0][0].NAMA_PEMILIK ? bills.bill.data[0][0].NAMA_PEMILIK : "Tiada"}</Heading>
+                                        </Pane>
+                                        <Pane>
+                                            <Text fontWeight={600}>Alamat Harta</Text>
+                                            <Heading size={100}>{bills.bill.data[0][0].ADDRHARTA ? bills.bill.data[0][0].ADDRHARTA : "Tiada"}</Heading>
+                                        </Pane>
+                                        <Pane>
+                                            <Text fontWeight={600}>Mukim</Text>
+                                            <Heading size={100}>{bills.bill.data[0][0].MUKIM ? bills.bill.data[0][0].MUKIM : "Tiada"}</Heading>
+                                        </Pane>
+                                        <Pane>
+                                            <Text fontWeight={600}>Tempoh Cukai</Text>
+                                            <Heading size={100}>{bills.bill.data[0][0].TEMPOH_CUKAI ? bills.bill.data[0][0].TEMPOH_CUKAI : "Tiada"}</Heading>
+                                        </Pane>
+                                        <Pane>
+                                            <Text fontWeight={600}>Tempoh Bayaran</Text>
+                                            <Heading size={100}>{bills.bill.data[0][0].TEMPOH_BAYARAN ? bills.bill.data[0][0].TEMPOH_BAYARAN : "Tiada"}</Heading>
+                                        </Pane>
                                     </Card>
-                                    <div className="flex flex-col pt-4">
-                                        <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                            <span className="font-semibold text-sm text-gray-800">
-                                                Status Bayaran : {bills.bill.data[0][0].STATUS == "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>)}
-                                            </span>
-                                            <h5 className="uppercase font-medium text-xs text-gray-600">
-                                                <button onClick={handleBill} className="hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
-                                                    <i className="fas fa-receipt"></i> Lihat Bil
-                                                </button>
-                                            </h5>
-                                            <h5 className="uppercase font-medium text-xs text-gray-600">
-                                                <button onClick={handleReceipt} className="hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
-                                                    <i className="fas fa-receipt"></i> Lihat Resit
-                                                </button>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-wrap px-3 py-3 w-full mt-16 rounded-md">
+                                    <Card
+                                        background="tint2"
+                                        marginBottom={majorScale(2)}
+                                        padding={minorScale(2)}
+                                    >
+                                        <Pane>
+                                            <Heading size={200}>Status Bayaran</Heading>
+                                            <Heading size={200}>{bills.bill.data[0][0].STATUS == "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>)}</Heading>
+                                        </Pane>
+                                    </Card>
+                                    <Card
+                                        onClick={() => handleBill()}
+                                        background="tint2"
+                                        marginBottom={majorScale(1)}
+                                        padding={minorScale(2)}
+                                    >
+                                        <Pane>
+                                            <Heading size={200}><i className="fas fa-receipt"></i> Bil PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
+                                        </Pane>
+                                    </Card>
+                                    <Card
+                                        onClick={() => handleReceipt()}
+                                        background="tint2"
+                                        marginBottom={majorScale(2)}
+                                        padding={minorScale(2)}
+                                    >
+                                        <Pane>
+                                            <Heading size={200}><i className="fas fa-receipt"></i> Resit PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
+                                        </Pane>
+                                    </Card>
+                                    <div className="flex flex-wrap py-3 w-full rounded-md">
                                         <Pane width="100%" >
                                             <Button
                                                 display="flex"
                                                 appearance="primary"
+                                                intent="danger"
                                                 type="button"
                                                 onClick={handleBack}
-                                                className="float-right"
+                                                iconBefore={ArrowLeftIcon}
                                             >
                                                 Kembali
                                                 </Button>

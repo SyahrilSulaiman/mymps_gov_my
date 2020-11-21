@@ -277,7 +277,7 @@ function Pay() {
                         <input type="hidden" name="payment_ref_no" id="payment_ref_no" value={invoiceNo} />
                         <input type="hidden" name="bank" id="inputBank" value={bankCode}/>
                         <input type="hidden" name="channel" id="channel" value="01" />
-                        <input type="hidden" name="web_return_address" value="https://mymps.corrad.my" />
+                        <input type="hidden" name="web_return_address" value="https://mymps.corrad.my/rp/resit.php" />
                         <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
                         <input type="hidden" name="payment_amount" id="payment_amount" value={amount}/>
                         <input type="hidden" name="payment_description" value={"Cukai Taksiran " + accountNo}/>

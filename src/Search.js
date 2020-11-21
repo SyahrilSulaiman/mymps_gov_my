@@ -121,9 +121,9 @@ export default function Search({ type }) {
                                                         : ('Carian...')
                                         }
                                         placeholder={
-                                            type === 'akaun' ? ('Sila isi nombor akaun')
-                                                : type === 'ssm' ? ('Sila isi nombor ROC/ROB Syarikat')
-                                                    : type === 'nokp' ? ('Sila isi nombor kad pengenalan')
+                                            type === 'akaun' ? ('cth: 123456')
+                                                : type === 'ssm' ? ('cth A-12345X')
+                                                    : type === 'nokp' ? ('cth: 901212059876')
                                                         : ('Carian...')
                                         }
                                     />

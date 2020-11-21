@@ -33,6 +33,7 @@
     "react-data-table-component": "^6.11.5",
     "react-datepicker": "^3.3.0",
     "react-dom": "^17.0.1",
+    "react-floating-action-button": "^1.0.5",
     "react-google-login": "^5.1.22",
     "react-google-recaptcha": "^2.1.0",
     "react-loading-screen": "0.0.17",
