@@ -65,6 +65,18 @@ export default function BillList() {
     // return () => {
     //     mounted = false;
     // }
+    const formData2 = new FormData();
+    formData2.append("userSecret", nokp)
+    axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=user_notification', formData2)
+    .then((res) => {
+      if(res.data.status === "inactive"){
+        swal("Tahniah!","Terima kasih kerana mendaftar sebagai pengguna mymps, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan.","success");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
+    });
 
     const formData = new FormData();
     formData.append("nokp", nokp);
@@ -92,6 +104,8 @@ export default function BillList() {
         console.log(err);
         swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
       });
+
+
   }, []);
 
   const emptyHandler = () => {

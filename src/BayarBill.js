@@ -2,43 +2,21 @@ import React, { useState, useEffect } from "react";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
-import { Pane, toaster, Button, AddIcon, ArrowLeftIcon, SortNumericalIcon, Tablist, Tab } from "evergreen-ui";
+import { Pane, toaster, Button, AddIcon, ArrowLeftIcon, Dialog, SortNumericalIcon, Tablist, Tab, Heading } from "evergreen-ui";
 import BillList from './BillList';
 import Topbaer from "./Topbar2";
+import swal from "sweetalert";
 
 function Bill(props) {
 
-	const token = getToken();
-	const user = getUser();
-	const nokp = getNOKP();
-
-	const handleReceipt = (e) => {
-		// let url = 
-		console.log(user);
-		console.log(token);
-		console.log(nokp);
-		let id = '1';
-
-		let url = btoa('nokp=' + nokp + '&code=receipt' + '&id=' + id);
-		window.open('https://mymps.corrad.my/rp/receipt.php?' + url);
-	}
-
-	const handleReceipt2 = (e) => {
-		let id = '2';
-		let url = btoa('nokp=' + nokp + '&code=receipt' + '&id=' + id);
-		window.open('https://mymps.corrad.my/rp/receipt.php?' + url);
-	}
+	const token 	= getToken();
+	const user 		= getUser();
+	const nokp 		= getNOKP();
+	const [dialog, setDialog ] = useState(false)
 
 	const handleAddBill = () => {
-		console.log('Add Bil');
 		window.location.href = '/add_cukai_taksiran';
-	}
-
-	const handleBayar = () => {
-		console.log('Bayar');
-		window.location.href = '/payment';
-	}
-
+	}	
 
 	return (
 		<div>
