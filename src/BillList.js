@@ -64,6 +64,7 @@ export default function BillList() {
         formData
       )
       .then((res) => {
+        console.log(res.data);
         if (res.data.status === "success") {
           setDataSet({
             data: res.data.data,
