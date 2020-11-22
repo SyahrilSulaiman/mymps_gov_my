@@ -16,6 +16,7 @@ function Pay() {
     const [data, setData]               = useState(null);
     const [bankCode, setBankCode]       = useState("");
     const [block, setBlock]             = useState(false);
+    const [noBill, setNoBill]           = useState(true);
     const [payorname, setPayorName]     = useState(sessionStorage.getItem("username"));
     const [payoremail, setPayorEmail]   = useState(sessionStorage.getItem("email"));
     const [payorphone, setPayorPhone]   = useState(sessionStorage.getItem("notel"));
@@ -26,13 +27,13 @@ function Pay() {
     const [invoiceNo, setInvoiceNo] = useState("MYM" + Date.now())  
 
     useEffect(() => {
-        axios.get('https://dev.toyyibpay.com/api/getBankFPX')
+        axios.get('https://toyyibpay.com/api/getBankFPX')
         .then(response => response.json())
         .then(result => {
             setData(result);
         })
         .catch(err => {
-            toaster.danger("Sistem Ralat.", { description: "Tiada pembayaran buat masa kini. Sila hubungi pentadbir sistem untuk berurusan lebih lanjut." })
+            toaster.danger("Sistem Ralat.", { description: "Tiada pembayaran yang boleh dibuat pada masa ini. Sila hubungi pentadbir sistem untuk berurusan dengan lebih lanjut." })
         })
 
         const formData = new FormData();
@@ -55,13 +56,15 @@ function Pay() {
         formData2.append('type', 'akaun');
         axios.post(urlAPI, formData2)
         .then((res) => {
+            setNoBill(false);
             setAccountNo(res.data[0][0].NOAKAUN);;
             setAmount(res.data[2][0].BAKI);
             setPenama(res.data[0][0].NAMA_PEMILIK);
         })
         .catch((err) => {
             console.log(err);
-            swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
+            setNoBill(true);
+            toaster.danger("Tiada Bil.", {description:"Harap maaf. Bil yang ingin dibayar tidak dijumpai. Sila kembali ke paparan bil untuk membuat sebarang pembayaran bil anda."});
         });
 
     }, [])
@@ -112,7 +115,7 @@ function Pay() {
 
     }
 
-    if (block == false) {
+    if (block == false && noBill == false) {
         return (
             <div className="">
                 <Topbar
