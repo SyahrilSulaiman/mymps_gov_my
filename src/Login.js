@@ -5,7 +5,7 @@ import noScroll from "no-scroll";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
 import swal from "sweetalert";
-import { Button, Heading, Pane, ArrowLeftIcon, LogInIcon } from "evergreen-ui";
+import { Button, Heading, Pane, ArrowLeftIcon, LogInIcon, Icon, CloudDownloadIcon } from "evergreen-ui";
 // import SimpleModal from './components/Modal/Install_v2';
 // import Modal from './components/Modal/Install'
 import Modal from './components/Modal/Install_Modal'
@@ -154,7 +154,9 @@ function Login(props) {
                                 </div>
                             </div>
                             <div className="items-center text-center text-indigo-100">
-                                <a href="#" onClick={handleShow} className="text-center">Install aplikasi ini di telefon anda</a>
+
+                                <Heading size={400} color="white" onClick={handleShow} style={{cursor:"pointer"}}> Muat turun aplikasi ini di telefon anda sekarang</Heading>
+                                {/* <a href="#" onClick={handleShow} className="text-center">Install aplikasi ini di telefon anda</a> */}
                             </div>
 {                            
     // <SimpleModal />
