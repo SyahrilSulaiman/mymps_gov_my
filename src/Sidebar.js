@@ -12,7 +12,7 @@ export default function Sidebar() {
 
   const handleLogout = () => {
     removeUserSession();
-    window.location.href = "/";
+    window.location.href = "/login";
   }
 
   return (
