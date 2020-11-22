@@ -21,7 +21,7 @@ export default function Sidebar() {
           {/* Brand */}
           <Link
             className="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
-            to="/admin/dashboard"
+            to="/admin/usermanagement"
           >
             Portal MyMPS
           </Link>
@@ -38,13 +38,13 @@ export default function Sidebar() {
               collapseShow
             }
           >
-            {/* Collapse header */}
+            {/* Collapse header */
             <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-gray-300">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
                   <Link
                     className="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
-                    to="/admin/dashboard"
+                    to="/admin/usermanagement"
                   >
                     Portal MyMPS
                   </Link>
@@ -60,7 +60,7 @@ export default function Sidebar() {
                 </div>
               </div>
             </div>
-            {/* Form */}
+            /* Form */}
             <form className="mt-6 mb-4 md:hidden">
               <div className="mb-3 pt-0">
                 <input
@@ -80,27 +80,29 @@ export default function Sidebar() {
             {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/dashboard") !== -1
-                      ? "text-blue-500 hover:text-blue-600"
-                      : "text-gray-800 hover:text-gray-600")
-                  }
-                  to="/admin/dashboard"
-                >
-                  <i
-                    className={
-                      "fas fa-tv mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/dashboard") !== -1
-                        ? "opacity-75"
-                        : "text-gray-400")
-                    }
-                  ></i>{" "}
-                  Utama
-                </Link>
-              </li>
+            {              
+              // <li className="items-center">
+              //   <Link
+              //     className={
+              //       "text-xs uppercase py-3 font-bold block " +
+              //       (window.location.href.indexOf("/admin/dashboard") !== -1
+              //         ? "text-blue-500 hover:text-blue-600"
+              //         : "text-gray-800 hover:text-gray-600")
+              //     }
+              //     to="/admin/dashboard"
+              //   >
+              //     <i
+              //       className={
+              //         "fas fa-tv mr-2 text-sm " +
+              //         (window.location.href.indexOf("/admin/dashboard") !== -1
+              //           ? "opacity-75"
+              //           : "text-gray-400")
+              //       }
+              //     ></i>{" "}
+              //     Utama
+              //   </Link>
+              // </li>
+            }
 
               <li className="items-center">
                 <Link
