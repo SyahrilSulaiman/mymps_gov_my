@@ -11,7 +11,6 @@ export default function Navbar() {
           {/* Brand */}
           <a
             className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-            href="#pablo"
             onClick={(e) => e.preventDefault()}
           >
             Selamat Datang, {getUser()}

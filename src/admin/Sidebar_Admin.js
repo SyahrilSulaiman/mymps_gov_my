@@ -203,7 +203,7 @@ export default function Sidebar() {
 
         <Dialog
           isShown={dialog}
-          title="Pengesahan Pembayar"
+          title="Notifikasi Log Keluar"
           onConfirm={() => handleLogout()}
           onCancel={() => setDialog(false)}
           cancelLabel="batal"
