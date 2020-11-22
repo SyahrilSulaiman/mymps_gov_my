@@ -6,6 +6,9 @@ import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
 import swal from "sweetalert";
 import { Button, Heading, Pane, ArrowLeftIcon, LogInIcon } from "evergreen-ui";
+// import SimpleModal from './components/Modal/Install_v2';
+// import Modal from './components/Modal/Install'
+import Modal from './components/Modal/Install_Modal'
 
 function Login(props) {
 
@@ -19,6 +22,16 @@ function Login(props) {
     const password = useFormInput("");
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    const [showModal,setShowModal] = useState(false);
+
+    const handleShow = (e) =>{
+        setShowModal(true)
+    }
+
+    const handleHide = (e) => {
+        setShowModal(false)
+    }
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -80,8 +93,6 @@ function Login(props) {
 
                 });
         }
-
-
     }
 
     return (
@@ -142,8 +153,14 @@ function Login(props) {
                                     </div>
                                 </div>
                             </div>
-
-                            {/* <div className="mt-6 flex flex-wrap p-2">
+                            <div className="items-center text-center text-indigo-100">
+                                <a href="#" onClick={handleShow} className="text-center">Install aplikasi ini di telefon anda</a>
+                            </div>
+{                            
+    // <SimpleModal />
+    showModal ? <Modal Close={handleHide}/> : ''
+}                        
+                             {/* <div className="mt-6 flex flex-wrap p-2">
 
                                 <button onClick={() => window.location.href = "/"} type="button" className="group relative w-1/2 flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                                     Kembali
