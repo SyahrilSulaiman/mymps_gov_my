@@ -148,6 +148,7 @@ export default function Sidebar() {
                     "text-xs uppercase py-3 font-bold block text-gray-800 hover:text-gray-600"
                   }
                   onClick={() => handleLogout()}
+                  to="#"
                 >
                   <i className="fas fa-sign-out-alt mr-2 text-sm text-gray-400"></i>{" "}
                   Log Keluar

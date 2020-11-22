@@ -55,7 +55,6 @@ function Pay() {
         formData2.append('type', 'akaun');
         axios.post(urlAPI, formData2)
         .then((res) => {
-            console.log(res.data);
             setAccountNo(res.data[0][0].NOAKAUN);;
             setAmount(res.data[2][0].BAKI);
             setPenama(res.data[0][0].NAMA_PEMILIK);
@@ -119,7 +118,7 @@ function Pay() {
                 <Topbar
                     title="Pembayaran Cukai"
                     leftButtonIcon={ArrowLeftIcon}
-                    onClickLeftButton={() => window.history.back()}
+                    onClickLeftButton={() => window.location.href = '/bill'}
                 />
 
                 <div className="bg-white shadow overflow-hidden" style={{ paddingTop: "50px" }}>

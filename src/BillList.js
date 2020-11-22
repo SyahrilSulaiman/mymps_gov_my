@@ -64,9 +64,7 @@ export default function BillList() {
         formData
       )
       .then((res) => {
-        console.log(res.data);
         if (res.data.status === "success") {
-          // swal('jadi','x','success');
           setDataSet({
             data: res.data.data,
           });
@@ -113,6 +111,7 @@ export default function BillList() {
                 </Pane>
                 <Pane>
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
+                  <tbody>
                     <tr>
                       <th><Heading size={200}>No. Kad Pengenalan </Heading></th>
                       <td><Strong size={300}> : {bill.NOKP === null ? "-" : bill.NOKP}</Strong ></td>
@@ -129,6 +128,7 @@ export default function BillList() {
                       <th><Heading size={200}>Status </Heading></th>
                       <td><Strong size={300} color={bill.STATUS === "PAID" ? "#47B881" : "#EC4C47"}> : {bill.NAMA_PEMILIK === null ? "-" : bill.STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK"}</Strong></td>
                     </tr>
+                    </tbody>
                   </table>
                 </Pane>
                 <Pane color="gray" alignContent="right" justifyContent="center">
