@@ -162,7 +162,7 @@ function Pay() {
                                     onChange={(e) => setPayorPhone(e.target.value)}
                                 />
                             </Pane>
-                            <Pane paddingX={20}>
+                            <Pane paddingX={20} className="flex flex-wrap">
                                 <Pane display="grid" width="100%" padding={10} background="tint2" >
                                     <Pane display="grid" gridTemplateColumns="1fr 200px">
                                         <Heading size={400}>Pemilik Cukai</Heading>
