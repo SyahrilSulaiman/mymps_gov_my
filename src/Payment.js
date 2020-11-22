@@ -14,7 +14,7 @@ function Pay() {
     const [method, setMethod]           = useState("");
     const [dialog, setDialog]           = useState(false);
     const [data, setData]               = useState(null);
-    const [bankCode, setBankCode]       = useState("TEST0021");
+    const [bankCode, setBankCode]       = useState("");
     const [block, setBlock]             = useState(false);
     const [payorname, setPayorName]     = useState(sessionStorage.getItem("username"));
     const [payoremail, setPayorEmail]   = useState(sessionStorage.getItem("email"));
