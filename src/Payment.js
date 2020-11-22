@@ -328,7 +328,7 @@ function Pay() {
                     }
 
                     <div>
-                        <form action="https://epstaging.mps.gov.my/fpx/sd.php" method="post" id="bayar">
+                        <form action="https://epstaging.mps.gov.my/fpx/payment.php" method="post" id="bayar">
                             <input type="hidden" name="account_no" id="account_no" value={accountNo} />
                             <input type="hidden" name="payment_ref_no" id="payment_ref_no" value={invoiceNo} />
                             <input type="hidden" name="bank" id="inputBank" value={bankCode ? bankCode : 'TEST0021'} />
