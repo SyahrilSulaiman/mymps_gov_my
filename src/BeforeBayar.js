@@ -13,39 +13,31 @@ export default function SenaraiBil(props) {
 
     const [isLoading, setLoading] = useState(true);
     const [bills, setBill] = useState(null);
+    const [disabled, setDisabled] = useState(false);
     const nokp = getNOKP();
 
     const handlePayment = () => {
-        window.location.href = "/Payment?Cukai="+btoa(sessionStorage.noakaun);
-    }
 
-    const handleBill = () => {
-        console.log('Bil');
-        const formData = new FormData;
-        formData.append('noakaun', atob(atob(sessionStorage.noakaun)));
-        // formData.append('noakaun',1001);
-        formData.append('nokp', nokp);
-        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=export_pdf', formData)
-            .then(res => {
-                console.log(res);
+        setDisabled(true);
 
-                if (res.data.status === 'success') {
-                    console.log('success');
-                    window.open('https://mymps.corrad.my/rp/bil_cukai_taksiran.php?token=' + res.data.token);
-                }
-                else {
-                    swal('Resit tak dijumpai', 'Sila hubungi pentadbir system', 'error');
+        const formData = new FormData();
+        formData.append('userSecret', nokp)
+
+        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status', formData)
+            .then((res) => {
+                console.log(res.data);
+                if (res.data.status === "Pending") {
+                    toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."})
+                }else{
+                    sessionStorage.setItem("noakaun", bills.bill.data[0][0].NOAKAUN);
+                    sessionStorage.setItem("jumlah",bills.bill.data[2][0].BAKI)
+                    window.location.href = "/Payment?Cukai=" + sessionStorage.noakaun;
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
-                swal('Ralat', 'Sila hubungi pentadbir system', 'error');
-            })
-    }
-
-    const handleReceipt = () => {
-        console.log('Receipt');
-        window.open('https://mymps.corrad.my/rp/resit.php');
+                swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
+            });
     }
 
     useEffect(() => {
@@ -180,7 +172,7 @@ export default function SenaraiBil(props) {
                                         >
                                             <Pane>
                                                 <Heading size={200}>Status Bayaran</Heading>
-                                                <Heading size={200}>{bills.bill.data[0][0].STATUS == "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>)}</Heading>
+                                                <Heading size={200} fontWeight={400}>{bills.bill.data[0][0].STATUS == "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>)}</Heading>
                                             </Pane>
                                         </Card>
                                         {bills.bill.data[0][0].STATUS !== "PAID" &&
@@ -191,7 +183,7 @@ export default function SenaraiBil(props) {
                                             >
                                                 <Pane>
                                                     <Heading size={200}>Jumlah Tunggakan</Heading>
-                                                    <Heading size={200} className="text-red-400" size={500}>RM {bills.bill.data[2][0].BAKI}</Heading>
+                                                    <Heading size={200} size={500}>RM {bills.bill.data[2][0].BAKI}</Heading>
                                                 </Pane>
                                             </Card>
                                         }
@@ -207,6 +199,7 @@ export default function SenaraiBil(props) {
                                                     Kembali
                                                 </Button>
                                                 <Button
+                                                    disabled={disabled}
                                                     appearance="primary"
                                                     intent="success"
                                                     type="button"

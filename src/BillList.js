@@ -4,7 +4,7 @@ import { getNOKP } from "./Utils/Common";
 import swal from "sweetalert";
 import NoScroll from "no-scroll";
 import BayarCukai from "./BayarCukai";
-import { Pane, Spinner, Heading, Strong, Icon, ArrowLeftIcon, DocumentIcon } from "evergreen-ui";
+import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon } from "evergreen-ui";
 import iconBill from "./assets/img/bill.png";
 
 export default function BillList() {
@@ -42,35 +42,13 @@ export default function BillList() {
   });
 
   useEffect(() => {
-    // let mounted = true;
-    // const formData = new FormData();
-    // formData.append('nokp',nokp);
 
-    // const loadData = async () =>{
-    //     const res = await axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=showBill',formData);
-    //     if(mounted){
-    //         console.log(res.data)
-    //         if(res.data.status === 'success'){
-    //             // swal('jadi','x','success');
-    //             setDataSet({
-    //                 data:res.data.data
-    //             })
-    //         }
-    //         else{
-    //             swal('Tiada Akaun Didaftarkan','Sila menambah akaun untuk dibayar','info');
-    //         }
-    //     }
-    // }
-    // loadData();
-    // return () => {
-    //     mounted = false;
-    // }
     const formData2 = new FormData();
     formData2.append("userSecret", nokp)
     axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=user_notification', formData2)
     .then((res) => {
       if(res.data.status === "inactive"){
-        swal("Tahniah!","Terima kasih kerana mendaftar sebagai pengguna mymps, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan.","success");
+        swal("Tahniah!","Terima kasih kerana mendaftar sebagai pengguna mymps, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan.","success")
       }
     })
     .catch((err) => {
@@ -93,11 +71,7 @@ export default function BillList() {
             data: res.data.data,
           });
         } else {
-          swal(
-            "Tiada bil didaftarkan",
-            "Sila tambah bil anda dengan klik pada + Tambah",
-            "info"
-          );
+          
         }
       })
       .catch((err) => {
@@ -167,9 +141,9 @@ export default function BillList() {
       );
     })
   ) : (
-      <div className="w-full bg-white">
-          <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
-            <Spinner />
+      <div className="w-full bg-transparent px-3">
+          <Pane display="flex" alignItems="center" justifyContent="center" background="white" paddingY={100}>
+            <Heading size={200}>Tekan pada butang <Button type="button" appearance="primary" intent="success">Tambah Bil</Button> untuk menambah bil.</Heading>
           </Pane>
       </div>
     );

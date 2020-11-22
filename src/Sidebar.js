@@ -1,12 +1,20 @@
 /*eslint-disable*/
 import React from "react";
 import { Link } from "react-router-dom";
+import {removeUserSession} from "./Utils/Common";
 
 import NotificationDropdown from "./components/Dropdowns/NotificationDropdown.js";
 import UserDropdown from "./components/Dropdowns/UserDropdown.js";
 
 export default function Sidebar() {
+
   const [collapseShow, setCollapseShow] = React.useState("hidden");
+
+  const handleLogout = () => {
+    removeUserSession();
+    window.location.href = "/";
+  }
+
   return (
     <>
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-1 px-4">
@@ -133,7 +141,18 @@ export default function Sidebar() {
                   Laporan
                 </Link>
               </li>
-
+              
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block text-gray-800 hover:text-gray-600"
+                  }
+                  onClick={() => handleLogout()}
+                >
+                  <i className="fas fa-sign-out-alt mr-2 text-sm text-gray-400"></i>{" "}
+                  Log Keluar
+                </Link>
+              </li>
 
             </ul>
           </div>

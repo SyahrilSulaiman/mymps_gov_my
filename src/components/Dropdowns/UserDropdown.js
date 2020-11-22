@@ -2,11 +2,6 @@ import React from "react";
 import { getUser, getNOKP, getToken, removeUserSession } from "../../Utils/Common";
 import { createPopper } from "@popperjs/core";
 
-const handleLogout = () => {
-  removeUserSession();
-  window.location.href = "/login";
-};
-
 const UserDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
@@ -18,9 +13,16 @@ const UserDropdown = () => {
     });
     setDropdownPopoverShow(true);
   };
+  
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+
+  const handleLogout = () => {
+    removeUserSession();
+    window.location.href = "/login";
+  };
+
   return (
     <>
       <a
@@ -61,11 +63,10 @@ const UserDropdown = () => {
         </a>
         <div className="h-0 my-2 border border-solid border-gray-200" />
         <a
-          href="#"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
           }
-          onClick={handleLogout}
+          onClick={() => handleLogout()}
         >
           Log Keluar
         </a>
