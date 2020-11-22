@@ -75,7 +75,7 @@ function Login(props) {
                         sessionStorage.setItem("notel", result.data[0]["U_USERPHONE"]);
 
                         if (result.data[0]['U_USERROLE'] == "Admin") {
-                            props.history.push('/admin/dashboard');
+                            props.history.push('/admin/usermanagement');
                         } else {
                             props.history.push('/bill');
                         }
