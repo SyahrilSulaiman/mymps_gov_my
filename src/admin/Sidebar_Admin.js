@@ -1,10 +1,13 @@
 /*eslint-disable*/
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import {removeUserSession} from "../Utils/Common";
 import UserDropdown from "../components/Dropdowns/UserDropdown.js";
+import { Dialog, Heading } from "evergreen-ui";
 
 export default function Sidebar() {
+
+  const [dialog, setDialog] = useState(false);
 
   const handleLogout = () => {
     removeUserSession();
@@ -183,7 +186,7 @@ export default function Sidebar() {
                     "text-xs uppercase py-3 font-bold block text-gray-800 hover:text-gray-600"
                   }
                   to="#"
-                  onClick={() => handleLogout()}
+                  onClick={() => setDialog(true)}
                 >
                   <i
                     className={
@@ -197,6 +200,20 @@ export default function Sidebar() {
             </ul>
           </div>
         </div>
+
+        <Dialog
+          isShown={dialog}
+          title="Pengesahan Pembayar"
+          onConfirm={() => handleLogout()}
+          onCancel={() => setDialog(false)}
+          cancelLabel="batal"
+          intent="danger"
+          confirmLabel="betul"
+          intent="success"
+          shouldCloseOnOverlayClick={false}
+        >
+          <Heading size={200}>Anda pasti untuk log keluar?</Heading>
+        </Dialog>
       </nav>
     </>
   );

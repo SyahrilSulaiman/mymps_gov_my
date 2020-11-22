@@ -1,14 +1,17 @@
 /*eslint-disable*/
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {removeUserSession} from "./Utils/Common";
+import { removeUserSession } from "./Utils/Common";
 
 import NotificationDropdown from "./components/Dropdowns/NotificationDropdown.js";
 import UserDropdown from "./components/Dropdowns/UserDropdown.js";
 
+import { Dialog, Heading } from "evergreen-ui";
+
 export default function Sidebar() {
 
   const [collapseShow, setCollapseShow] = React.useState("hidden");
+  const [dialog, setDialog] = useState(false);
 
   const handleLogout = () => {
     removeUserSession();
@@ -36,7 +39,7 @@ export default function Sidebar() {
           </Link>
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
-          <i className="fas fa-user"></i>
+            <i className="fas fa-user"></i>
             <li className="inline-block relative">
               <UserDropdown />
             </li>
@@ -141,13 +144,13 @@ export default function Sidebar() {
                   Laporan
                 </Link>
               </li>
-              
+
               <li className="items-center">
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block text-gray-800 hover:text-gray-600"
                   }
-                  onClick={() => handleLogout()}
+                  onClick={() => setDialog(true)}
                   to="#"
                 >
                   <i className="fas fa-sign-out-alt mr-2 text-sm text-gray-400"></i>{" "}
@@ -158,6 +161,19 @@ export default function Sidebar() {
             </ul>
           </div>
         </div>
+        <Dialog
+          isShown={dialog}
+          title="Pengesahan Pembayar"
+          onConfirm={() => handleLogout()}
+          onCancel={() => setDialog(false)}
+          cancelLabel="batal"
+          intent="danger"
+          confirmLabel="betul"
+          intent="success"
+          shouldCloseOnOverlayClick={false}
+        >
+          <Heading size={200}>Anda pasti untuk log keluar?</Heading>
+        </Dialog>
       </nav>
     </>
   );
