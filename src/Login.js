@@ -128,8 +128,8 @@ function Login(props) {
                             </div>
 
                             <div className="mt-6 flex items-center justify-between">
-                                <div className="flex items-center">
-                                    <a href="/register" className="text-sm text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
+                                <div className="text-sm leading-5">
+                                    <a href="/register" className="font-medium text-gray-100 hover:text-gray-200 focus:outline-none focus:underline transition ease-in-out duration-150">
                                         <i className="fas fa-user"></i> Daftar Pengguna
                                     </a>
                                 </div>
