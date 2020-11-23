@@ -13,8 +13,27 @@ export default function SenaraiCukai({result,type}){
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     // const showResult = (result) => setResultDetail(user);
+    const [isSort,setSorting] = useState(false);
+    const [sort,setSort] = useState('desc');
 
-    console.log('Result ',result);
+    const handleSort = (e) => {
+        setSorting(true);
+        if(isSort === true){
+            if(sort === 'desc'){
+                setSort('asc');
+                // console.log('asc')
+                // result.invoice_no.sort();
+
+            }
+            else{
+                setSort('desc')
+                console.log('desc')
+                // result.invoice_no.sort();
+                // result.invoice_no.reverse();
+            }
+        }
+    }
+
     return(
         <div>
             <table className="table-fixed w-full shadow-lg bg-white">
@@ -29,7 +48,11 @@ export default function SenaraiCukai({result,type}){
                     </th>
 
                     <th className="w-4/6 bg-blue-100 border text-left px-8 py-4">No Invois</th>
-                    <th className="w-4/6 bg-blue-100 border text-left px-8 py-4">Tarikh Pembayaran</th>
+                    <th className="w-4/6 bg-blue-100 border text-left px-8 py-4" onClick={handleSort}>Tarikh Pembayaran&nbsp;
+                        {
+                            // !isSort?<i className="fas fa-sort"></i>:(sort === 'desc' ? (<i className="fas fa-caret-down"></i>) : sort === 'asc' ? (<i className="fas fa-caret-up"></i>) : '')
+                        }
+                    </th>
                     <th className="w-2/6 bg-blue-100 border text-left px-8 py-4">Amaun</th>
                 </tr>
                 </thead>
