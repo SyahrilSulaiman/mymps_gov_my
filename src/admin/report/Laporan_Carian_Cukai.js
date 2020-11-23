@@ -1,0 +1,47 @@
+import React,{ useEffect, useState} from 'react';
+import SenaraiCarianCukai from './Senarai_Carian_Cukai';
+import Pagination from './Pagination';
+// import {Table} from 'evergreen-ui';
+
+export default function SenaraiCukai({result,type}){
+    const [currentPage, setCurrentPage] = useState(1);
+    const [resultPerPage, setResultPerPage] = useState(5);
+
+    const indexOfLastResult = currentPage * resultPerPage;
+    const indexOfFirstResult = indexOfLastResult - resultPerPage;
+    const currentResults = result.slice(indexOfFirstResult, indexOfLastResult);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    // const showResult = (result) => setResultDetail(user);
+
+    console.log('Result ',result);
+    return(
+        <div>
+            <table className="table-fixed w-full shadow-lg bg-white">
+                <thead>
+                <tr>
+                    <th className="w-2/12 bg-blue-100 border text-left px-8 py-4">Bil</th>
+                    <th className="w-4/12 bg-blue-100 border text-left px-8 py-4">
+                        {
+                            type === 'akaun' ? 'No Akaun':
+                            type === 'nokp' ? 'No kad Pengenalan': 'No ROB ROC'
+                        }
+                    </th>
+
+                    <th className="w-4/6 bg-blue-100 border text-left px-8 py-4">No Invois</th>
+                    <th className="w-4/6 bg-blue-100 border text-left px-8 py-4">Tarikh Pembayaran</th>
+                    <th className="w-2/6 bg-blue-100 border text-left px-8 py-4">Amaun</th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                    <SenaraiCarianCukai result={currentResults} currentPage={currentPage} resultPerPage={resultPerPage}/>
+                }
+                </tbody>
+            </table>
+            {
+                <Pagination resultPerPage={resultPerPage} totalResult={result.length} paginate={paginate} />
+            }
+        </div>
+    )
+}
