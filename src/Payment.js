@@ -27,13 +27,15 @@ function Pay() {
     const [invoiceNo, setInvoiceNo] = useState("MYM" + Date.now())  
 
     useEffect(() => {
-        axios.get('https://toyyibpay.com/api/getBankFPX')
+        fetch('https://toyyibpay.com/api/getBankFPX')
         .then(response => response.json())
         .then(result => {
+            console.log(result);
             setData(result);
         })
         .catch(err => {
-            toaster.danger("Sistem Ralat.", { description: "Tiada pembayaran yang boleh dibuat pada masa ini. Sila hubungi pentadbir sistem untuk berurusan dengan lebih lanjut." })
+            console.log(err);
+            toaster.danger("Sistem Ralat.", { id: "forbidden-action", description: "Tiada pembayaran yang boleh dibuat pada masa ini. Sila hubungi pentadbir sistem untuk berurusan dengan lebih lanjut." })
         })
 
         const formData = new FormData();
@@ -63,7 +65,7 @@ function Pay() {
         })
         .catch((err) => {
             console.log(err);
-            setNoBill(true);
+            setNoBill(false);
             toaster.danger("Tiada Bil.", {description:"Harap maaf. Bil yang ingin dibayar tidak dijumpai. Sila kembali ke paparan bil untuk membuat sebarang pembayaran bil anda."});
         });
 
@@ -73,17 +75,25 @@ function Pay() {
 
         setDialog(false);
 
-        if (payorname == "") {
+        if(amount == 0.00 || amount == "") {
+            toaster.danger("Harap maaf, Pembayaran batal kerana maklumat pembayaran tidak lengkap.", { id: "forbidden-action" });
+            return false;
+        }
+        else if (payorname == "") {
             toaster.danger("Harap maaf, Sila lengkapkan maklumat nama pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+            return false;
         }
         else if (payoremail == "") {
             toaster.danger("Harap maaf, Sila lengkapkan maklumat emel pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+            return false;
         }
         else if (payorphone == "") {
             toaster.danger("Harap maaf, Sila lengkapkan maklumat nombor telefon pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+            return false;
         }
         else if (bankCode == "") {
             toaster.danger("Harap maaf, Sila membuat pilihan bank sebelum membuat pembayaran.", { id: "forbidden-action" });
+            return false;
         }
         else {
 
