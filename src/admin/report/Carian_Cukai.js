@@ -3,20 +3,41 @@ import { Pane, TextInputField, Button, SearchIcon, ArrowLeftIcon, Heading } from
 import NoScroll from "no-scroll";
 import swal from 'sweetalert2';
 import axios from 'axios';
+import SenaraiCukai from './Laporan_Carian_Cukai'
 
 
 
-export default function Carian_Cuaki({type}){
+export default function Carian_Cuaki({type, startDate}){
     const [loading, setLoading] = useState(false);
+    const [account,setAccount] = useState('');
+    const [result,setResult] = useState('');
+    // console.log(result);
     const handleChange = (e) => {
-        // setSearch(e.target.value);
-        console.log('Search');
+        setAccount(e.target.value);
     }
 
     const handleSubmit = (e) => {
-        console.log('Submit');
+        e.preventDefault();
+            const formData = new FormData();
+            formData.append('account',account);
+            formData.append('type',type);
+            formData.append('date',startDate);
+            axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=laporan_cukai_taksiran',formData)
+            .then(res => {
+                // console.log(res.data);
+                // console.log(JSON.parse(res.data.result))
+                setLoading(true);
+                if(res.data.status === 'success'){
+                    setResult(JSON.parse(res.data.result))
+                }
+                else if(res.data.status === 'failure'){
+                    setResult('');
+                }
+                else{
+                    swal.fire('Ralat','Sila hubungi pentadbir system','error');
+                }
+            })
     }
-
 
     return (
         <div>
@@ -29,7 +50,7 @@ export default function Carian_Cuaki({type}){
                                 <TextInputField
                                     width="100%"
                                     required
-                                    onChange={(e) => handleChange(e)}
+                                    onChange={handleChange}
                                     label={
                                         type === 'akaun' ? ('Nombor Akaun')
                                             : type === 'ssm' ? ('Nombor ROC/ROB Syarikat')
@@ -57,8 +78,10 @@ export default function Carian_Cuaki({type}){
                                     appearance="primary"
                                     intent="success"
                                     className="float-right"
+                                    // onClick={handleSearch}
                                 >
                                     {loading ? 'Mencari..' : 'Cari'}
+                                    
                                 </Button>
     
                                 <Button
@@ -72,7 +95,7 @@ export default function Carian_Cuaki({type}){
                                 </Button>
                             </Pane>
                             <Pane marginTop={32} padding={10} background="#2d3436">
-                                <Heading size={400} textAlign="center" color="white">Senarai bil akan dipaparkan dibawah</Heading>
+                                <Heading size={400} textAlign="center" color="white">Senarai laporan bayaran akan dipaparkan dibawah</Heading>
                             </Pane>
                         </div>
                     </div>
@@ -84,6 +107,9 @@ export default function Carian_Cuaki({type}){
                         <Pane background="tint1">
                             {
                                 // <Carian className="bg-gray-100" bill={bill} type={type} display={display} />
+                                loading? (
+                                    result === '' ? 'Maklumat laporan bayaran tidak ditemui' : <SenaraiCukai result={result} type={type}/> ):  ''
+                                // <SenaraiCukai result={result} type={type}/>
                             }
                         </Pane>
                     </div>
