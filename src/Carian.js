@@ -133,7 +133,7 @@ export default function Carian({bill,type, display}){
                                             {
                                             // dataset.jenis
                                             // bill.type
-                                                bills.NOKP
+                                                bills.VMI_INEWIC
                                             }
                                             </span>	
                                         </div>
@@ -159,7 +159,7 @@ export default function Carian({bill,type, display}){
                                             {
                                             // dataset.tempoh
                                             // bill.description
-                                            bills.ADDRHARTA
+                                            bills.ADDRHARTA 
                                             }
                                             </h5>
                                         </div>

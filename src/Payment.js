@@ -27,7 +27,7 @@ function Pay() {
     const [invoiceNo, setInvoiceNo] = useState("MYM" + Date.now())  
 
     useEffect(() => {
-        fetch('https://toyyibpay.com/api/getBankFPX')
+        fetch('https://dev.toyyibpay.com/api/getBankFPX')
         .then(response => response.json())
         .then(result => {
             console.log(result);
@@ -342,13 +342,13 @@ function Pay() {
 
                     <div>
                         <form action="https://epstaging.mps.gov.my/fpx/payment.php" method="post" id="bayar">
-                            <input type="hidden" name="account_no" id="account_no" value={accountNo} />
-                            <input type="hidden" name="payment_ref_no" id="payment_ref_no" value={invoiceNo} />
-                            <input type="hidden" name="bank" id="inputBank" value={bankCode ? bankCode : 'TEST0021'} />
-                            <input type="hidden" name="channel" id="channel" value="01" />
+                            <input type="hidden" name="account_no" value={accountNo} />
+                            <input type="hidden" name="payment_ref_no" value={invoiceNo} />
+                            <input type="hidden" name="bank" value={bankCode ? bankCode : 'TEST0021'} />
+                            <input type="hidden" name="channel" value="01" />
                             <input type="hidden" name="web_return_address" value="https://mymps.corrad.my/rp/resit.php" />
                             <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
-                            <input type="hidden" name="payment_amount" id="payment_amount" value={amount} />
+                            <input type="hidden" name="payment_amount" value={amount} />
                             <input type="hidden" name="payment_description" value={"Cukai Taksiran " + accountNo} />
                             <input type="hidden" name="email" value={payoremail} />
                         </form>
