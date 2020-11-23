@@ -114,8 +114,8 @@ export default function BillList() {
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
                   <tbody>
                     <tr>
-                      <th><Heading size={200}>No. Kad Pengenalan </Heading></th>
-                      <td><Strong size={300}> : {bill.NOKP === null ? "-" : bill.NOKP}</Strong ></td>
+                      <th width="110px"><Heading size={200}>{bill.NOKP === null ? "No. SSM Syarikat" : "No. Kad Pengenalan"}</Heading></th>
+                      <td><Strong size={300}> : {bill.NOKP === null ? bill.NOSSM : bill.NOKP}</Strong ></td>
                     </tr>
                     <tr>
                       <th><Heading size={200}>No. Akaun </Heading></th>

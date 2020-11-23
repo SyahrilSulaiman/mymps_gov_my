@@ -53,7 +53,9 @@ export default function SenaraiBil(props) {
             .catch(err => {
                 console.log(err);
                 toaster.danger('Sistem Ralat. Sila hubungi pihak pentadbir sistem anda.');
-                window.history.back();
+                setTimeout(() => {
+                    //window.history.back();
+                }, 3000); 
             })
     }, [])
 

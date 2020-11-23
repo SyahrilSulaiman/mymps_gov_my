@@ -14,7 +14,7 @@ function Pay() {
     const [method, setMethod]           = useState("");
     const [dialog, setDialog]           = useState(false);
     const [data, setData]               = useState(null);
-    const [bankCode, setBankCode]       = useState("");
+    const [bankCode, setBankCode]       = useState("TEST0021");
     const [block, setBlock]             = useState(false);
     const [noBill, setNoBill]           = useState(true);
     const [payorname, setPayorName]     = useState(sessionStorage.getItem("username"));
@@ -24,10 +24,11 @@ function Pay() {
     const [penama, setPenama]       = useState("");
     const [accountNo, setAccountNo] = useState(sessionStorage.noakaun);
     const [amount, setAmount]       = useState(0.00);
-    const [invoiceNo, setInvoiceNo] = useState("MYM" + Date.now())  
+    const [invoiceNo, setInvoiceNo] = useState("MYM" + Date.now());  
+    const [receiptno, setReceiptNo] = useState("");
 
     useEffect(() => {
-        fetch('https://toyyibpay.com/api/getBankFPX')
+        fetch('https://dev.toyyibpay.com/api/getBankFPX')
         .then(response => response.json())
         .then(result => {
             console.log(result);
@@ -101,6 +102,9 @@ function Pay() {
             formdata.append("accountId", accountNo);
             formdata.append("amount", amount);
             formdata.append("invoiceNo", invoiceNo);
+            formdata.append("payorname", payorname);
+            formdata.append("payoremail", payoremail);
+            formdata.append("payorphone", payorphone);
 
             var requestOptions = {
                 method: 'POST',
@@ -114,6 +118,7 @@ function Pay() {
                 .then(response => response.json())
                 .then(result => {
                     if (result.status == "success") {
+                        setReceiptNo(result.receiptNo);
                         document.getElementById("bayar").submit();
                     }
                     else {
@@ -341,14 +346,15 @@ function Pay() {
                     }
 
                     <div>
-                        <form action="https://epstaging.mps.gov.my/fpx/payment.php" method="post" id="bayar">
-                            <input type="hidden" name="account_no" id="account_no" value={accountNo} />
-                            <input type="hidden" name="payment_ref_no" id="payment_ref_no" value={invoiceNo} />
-                            <input type="hidden" name="bank" id="inputBank" value={bankCode ? bankCode : 'TEST0021'} />
-                            <input type="hidden" name="channel" id="channel" value="01" />
-                            <input type="hidden" name="web_return_address" value="https://mymps.corrad.my/rp/resit.php" />
+                        <form action="https://epstaging.mps.gov.my/fpx/sd.php" method="post" id="bayar">
+                            <input type="hidden" name="account_no" value={accountNo} />
+                            <input type="hidden" name="receipt_no" value={receiptno} />
+                            <input type="hidden" name="payment_ref_no" value={invoiceNo} />
+                            <input type="hidden" name="bank" value={bankCode ? bankCode : 'TEST0021'} />
+                            <input type="hidden" name="channel" value="01" />
+                            <input type="hidden" name="web_return_address" value="https://mymps.corrad.my/int/resitpembayaran.php" />
                             <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
-                            <input type="hidden" name="payment_amount" id="payment_amount" value={amount} />
+                            <input type="hidden" name="payment_amount" value={amount} />
                             <input type="hidden" name="payment_description" value={"Cukai Taksiran " + accountNo} />
                             <input type="hidden" name="email" value={payoremail} />
                         </form>

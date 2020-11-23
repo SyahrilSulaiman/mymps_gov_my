@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  NavLink,
 } from "react-router-dom";
 
 import PrivateRoute from "./Utils/PrivateRoute";
@@ -32,6 +31,7 @@ import BeforeBayar from "./BeforeBayar";
 import Payment from "./Payment";
 import Add from "./Add";
 import UserReport from "./UserReport";
+import Pdf from "./ReactPDF";
 
 import Admin_Dashboard from "./admin/Dashboard_Admin";
 import Admin_Setting from "./admin/Setting_Admin";
@@ -178,6 +178,7 @@ function App() {
                 <PrivateRoute path="/laporan-pengguna" component={UserReport} />
                 <PrivateRoute path="/add_cukai_taksiran" component={Add} />
                 <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar}/>
+                <Route path="/receipt.php" component={Pdf} />
                 <Route path="*" component={NotFound} />
               </Switch>
             </div>
@@ -203,6 +204,7 @@ function App() {
                 <PrivateRoute path="/add_cukai_taksiran" component={Add} />
                 <PrivateRoute path="/laporan-pengguna" component={UserReport} />
                 <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar}/>
+                <Route path="/receipt.php" component={Pdf} />
                 <PublicRoute
                   path="/forgotpassword"
                   component={ForgotPassword}
