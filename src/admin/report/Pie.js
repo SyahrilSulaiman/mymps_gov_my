@@ -37,6 +37,7 @@ export default function LaporanPengguna({report}) {
     })
   })
     return (
+      <>
       <PieChart width={400} height={350}>
         <Pie
           data={data2}
@@ -57,5 +58,6 @@ export default function LaporanPengguna({report}) {
         <Legend verticalAlign="bottom" align="center"/>
 
       </PieChart>
+      </>
     );
 }

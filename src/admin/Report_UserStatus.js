@@ -42,9 +42,31 @@ if(loading){
         </div>
 
             <div className="flex flex-wrap xl:pt-2">
-              <Pane background="white" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
+              <Pane background="white" className="p-3 xl:mx-4 xl:rounded-md flex" position="relative" width="100%">
                 {
                     <PieChart report={report}/>
+                }
+              </Pane>
+              <Pane background="white" className="p-3 py-5 xl:mx-4 xl:rounded-md flex" position="relative" width="100%">
+                {
+                    <table className="table-auto">
+                      <thead>
+                        <tr>
+                          <th>Jenis Pengguna</th>
+                          <th>Bilangan</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          report.map((res,index) =>{
+                            <tr key={index}>
+                              <td>{res.name}</td>
+                              <td>{res.value}</td>
+                            </tr>
+                          })
+                        }
+                      </tbody>
+                    </table>
                 }
               </Pane>
             </div>
