@@ -93,16 +93,6 @@ function App() {
   }, []);
 
   if (authLoading && getToken()) {
-
-    // Loading indicator
-    // return (
-    //   <section
-    //     {...containerProps}
-    //     style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
-    //   >
-    //     {indicatorEl} {/* renders only while loading */}
-    //   </section>
-    // );
     return(
       <div></div>
     );

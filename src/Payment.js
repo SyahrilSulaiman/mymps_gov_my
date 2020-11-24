@@ -13,8 +13,9 @@ function Pay() {
 
     const [method, setMethod]           = useState("");
     const [dialog, setDialog]           = useState(false);
+    const [dialogcc, setDialogCC]       = useState(false);
     const [data, setData]               = useState(null);
-    const [bankCode, setBankCode]       = useState("TEST0021");
+    const [bankCode, setBankCode]       = useState("");
     const [block, setBlock]             = useState(false);
     const [noBill, setNoBill]           = useState(true);
     const [payorname, setPayorName]     = useState(sessionStorage.getItem("username"));
@@ -74,6 +75,7 @@ function Pay() {
 
     const handleBayar = () => {
 
+        setDialogCC(false);
         setDialog(false);
 
         if(amount == 0.00 || amount == "") {
@@ -105,6 +107,7 @@ function Pay() {
             formdata.append("payorname", payorname);
             formdata.append("payoremail", payoremail);
             formdata.append("payorphone", payorphone);
+            formdata.append("method", 0);
 
             var requestOptions = {
                 method: 'POST',
@@ -120,6 +123,62 @@ function Pay() {
                     if (result.status == "success") {
                         setReceiptNo(result.receiptNo);
                         document.getElementById("bayar").submit();
+                    }
+                    else {
+                        toaster.danger("Harap maaf, tidak boleh membuat sebarang pembayaran pada masa kini.", { id: "forbidden-action" });
+                    }
+                })
+
+        }
+
+    }
+
+    const handleBayar2 = () => {
+
+        setDialogCC(false);
+        setDialog(false);
+
+        if(amount == 0.00 || amount == "") {
+            toaster.danger("Harap maaf, Pembayaran batal kerana maklumat jumlah pembayaran tidak lengkap.", { id: "forbidden-action" });
+            return false;
+        }
+        else if (payorname == "") {
+            toaster.danger("Harap maaf, Sila lengkapkan maklumat nama pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+            return false;
+        }
+        else if (payoremail == "") {
+            toaster.danger("Harap maaf, Sila lengkapkan maklumat emel pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+            return false;
+        }
+        else if (payorphone == "") {
+            toaster.danger("Harap maaf, Sila lengkapkan maklumat nombor telefon pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+            return false;
+        }
+        else {
+
+            var formdata = new FormData();
+            formdata.append("accountId", accountNo);
+            formdata.append("amount", amount);
+            formdata.append("invoiceNo", invoiceNo);
+            formdata.append("payorname", payorname);
+            formdata.append("payoremail", payoremail);
+            formdata.append("payorphone", payorphone);
+            formdata.append("method", 1);
+
+            var requestOptions = {
+                method: 'POST',
+                body: formdata,
+                redirect: 'follow'
+            };
+
+            var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=register_payment';
+
+            fetch(urlAPI1, requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status == "success") {
+                        setReceiptNo(result.receiptNo);
+                        document.getElementById("bayarCC").submit();
                     }
                     else {
                         toaster.danger("Harap maaf, tidak boleh membuat sebarang pembayaran pada masa kini.", { id: "forbidden-action" });
@@ -229,8 +288,7 @@ function Pay() {
                                             Kad Kredit & Kad Debit
                                     </Paragraph>
                                         <Paragraph>
-                                            Harap maaf, pembayaran melalui kad debit / kredit tidak dapat dilaksanakan buat masa
-                                            sekarang.
+                                            Jika anda ingin meneruskan pembayaran dengan menggunakan kredit atau debit kad, sila tekan butang pembayaran di bawah.
                                     </Paragraph>
                                     </Pane>
                                 )}
@@ -297,8 +355,22 @@ function Pay() {
                         >
                             <Checkbox checked label="Dengan ini saya mengesahkan untuk membuat pembayaran ke atas cukai taksiran." />
                         </Dialog>
+
+                        <Dialog
+                            isShown={dialogcc}
+                            title="Pengesahan Pembayar"
+                            onConfirm={() => handleBayar2()}
+                            onCancel={() => setDialogCC(false)}
+                            cancelLabel="batal"
+                            intent="danger"
+                            confirmLabel="betul"
+                            intent="success"
+                            shouldCloseOnOverlayClick={false}
+                        >
+                            <Checkbox checked label="Dengan ini saya mengesahkan untuk membuat pembayaran ke atas cukai taksiran." />
+                        </Dialog>
                     </Pane>
-                    {method &&
+                    {method === "FPX" &&
                         <Pane
                             position="fixed"
                             bottom={0}
@@ -331,19 +403,58 @@ function Pay() {
                                 </Paragraph>
                             </Pane>
                             <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center" onClick={() => {
-                                if (method == "CARD") {
-                                    toaster.danger("Harap maaf, kaedah pembayaran ini sedang dinaik taraf..", { id: "forbidden-action" });
-                                }
-                                else if (bankCode && method === "FPX") {
+                                if (bankCode && method === "FPX") {
                                     setDialog(true)
                                 } else if (bankCode == "" && method === "FPX") {
                                     toaster.danger("Harap maaf, Sila membuat pilihan bank sebelum membuat pembayaran.", { id: "forbidden-action" });
                                 }
                             }}>
-                                <Heading size={500} color="white">Teruskan Pembayaran</Heading>
+                                <Heading size={500} color="white">Teruskan Pembayaran (FPX)</Heading>
                             </Pane>
                         </Pane>
                     }
+
+                    {method === "CARD" && (
+                        <Pane
+                        position="fixed"
+                        bottom={0}
+                        left={0}
+                        right={0}
+                        height={50}
+                        background={1 ? "#009432" : "#9a0b0b"}
+                        display="grid"
+                        gridTemplateColumns="1fr"
+                        columnGap={10}
+                        userSelect="none"
+                        paddingX={15}
+                    >
+                        <Pane
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            flexDirection="column"
+                            overflow="hidden"
+                        >
+
+                            <Paragraph
+                                color="#fff"
+                                fontWeight="bold"
+                                fontSize={15}
+                                whiteSpace="nowrap"
+                                overflow="hidden"
+                                textOverflow="ellipsis"
+                            >
+                            </Paragraph>
+                        </Pane>
+                        <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center" onClick={() => {
+                            if (method === "CARD") {
+                                setDialogCC(true);
+                            }
+                        }}>
+                            <Heading size={400} color="white">Teruskan Pembayaran (Credit Card)</Heading>
+                        </Pane>
+                    </Pane>
+                    )}
 
                     <div>
                         <form action="https://epstaging.mps.gov.my/fpx/sd.php" method="post" id="bayar">
@@ -352,6 +463,17 @@ function Pay() {
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
                             <input type="hidden" name="bank" value={bankCode ? bankCode : 'TEST0021'} />
                             <input type="hidden" name="channel" value="01" />
+                            <input type="hidden" name="web_return_address" value="https://mymps.corrad.my/int/resitpembayaran.php" />
+                            <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
+                            <input type="hidden" name="payment_amount" value={amount} />
+                            <input type="hidden" name="payment_description" value={"Cukai Taksiran " + accountNo} />
+                            <input type="hidden" name="email" value={payoremail} />
+                        </form>
+
+                        <form action="https://epstaging.mps.gov.my/MiGS/payment.php" method="post" id="bayarCC">
+                            <input type="hidden" name="account_no" value={accountNo} />
+                            <input type="hidden" name="receipt_no" value={receiptno} />
+                            <input type="hidden" name="payment_ref_no" value={invoiceNo} />
                             <input type="hidden" name="web_return_address" value="https://mymps.corrad.my/int/resitpembayaran.php" />
                             <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
                             <input type="hidden" name="payment_amount" value={amount} />
