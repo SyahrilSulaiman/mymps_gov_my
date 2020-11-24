@@ -1,6 +1,7 @@
 import { Height } from '@material-ui/icons';
 import React,{ useState, useEffect } from 'react';
 import ios_out from './icon_safari_out.png'
+import { Pane, Text } from 'evergreen-ui';
 
 export default function Modal({Close}){
     const height = 22;
@@ -17,69 +18,47 @@ export default function Modal({Close}){
                 <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                     <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div className="sm:flex sm:items-start">
-                            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h2 className="text-2xl leading-6 font-medium text-gray-900" id="modal-headline">
-                                    Cara Install
-                                </h2>
-                            </div>
-                            <hr />
-                            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 className="text-xl leading-6 font-medium text-gray-900 text-left" id="modal-headline">
-                                    Android
-                                </h3>
-                                <div className="mt-2 ml-2">
-                                    <div className="flex">
-                                        <div className="flex-row full-width">
-                                            <span className="mt-2 text-base text-right">
-                                                1. Buka applikasi ini melalui Chrome
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="flex">
-                                        <div className="flex-row full-width">
-                                            <span className="mt-2 text-base text-right">
-                                                2. Tekan ikon menu <i className="fas fa-ellipsis-v text-red-700"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="flex">
-                                        <div className="flex-row full-width">
-                                            <span className="mt-2 text-base text-right">
-                                                3. Pilih <strong>Add to homescreen</strong>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr />
-                            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 className="text-base leading-6 font-medium text-gray-900 text-left" id="modal-headline">
-                                    IOS
-                                </h3>
-                                <div className="mt-2 ml-2">
-                                    <div className="flex">
-                                        <div className="flex-row full-width">
-                                            <span className="mt-2 text-base text-right">
-                                                1. Buka applikasi ini melalui Safari
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="flex">
-                                        <div className="flex-row full-width">
-                                            <span className="mt-2 text-base text-right">
-                                                2. Tekan ikon menu <img className="inline h-5" src={ios_out} alt=""/>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="flex">
-                                        <div className="flex-row full-width">
-                                            <span className="mt-2 text-base text-right">
-                                                3. Pilih <strong>Add to homescreen</strong>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <Pane className="inset-0 items-center">
+    <Pane display="block" className="bg-white">
+        <Pane paddingLeft={10}>
+            <Text size={600} className="font-bold">Cara Install</Text>
+        </Pane>
+    </Pane>
+    <hr className="divide-y"/>
+    <Pane display="block" className="bg-white">
+        <Pane paddingLeft={10}>
+            <Text size={500} className="font-bold">Android</Text>
+        </Pane>
+        <Pane paddingLeft={25}>
+            <Pane>
+                <Text size={400} className="font-semibold">1. Buka applikasi ini melalui Chrome</Text>
+            </Pane>
+            <Pane>
+                <Text size={400} className="font-semibold">2. Tekan ikon menu <i className="fas fa-ellipsis-v text-red-700"></i></Text>
+            </Pane>
+            <Pane>
+                <Text size={400} className="font-semibold">3. Pilih <strong>Add to homescreen</strong></Text>
+            </Pane>
+        </Pane>
+    </Pane>
+    <hr className="divide-y"/>
+    <Pane display="block" className="items-center bg-white">
+        <Pane paddingLeft={10}>
+            <Text size={500} className="font-bold">IOS</Text>
+        </Pane>
+        <Pane paddingLeft={25}>
+            <Pane>
+                <Text size={400} className="font-semibold">1. Buka applikasi ini melalui Safari</Text>
+            </Pane>
+            <Pane>
+                <Text size={400} className="font-semibold">2. Tekan ikon menu <img className="inline h-5" src={ios_out} alt=""/></Text>
+            </Pane>
+            <Pane>
+                <Text size={400} className="font-semibold">3. Pilih <strong>Add to homescreen</strong></Text>
+            </Pane>
+        </Pane>
+    </Pane>
+</Pane>
                         </div>
                     </div>
                     <hr />
