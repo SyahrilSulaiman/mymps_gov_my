@@ -16,6 +16,10 @@ export default function SenaraiBil(props) {
     const [disabled, setDisabled] = useState(false);
     const nokp = getNOKP();
 
+    const viewBill = (e) => {
+        window.location.href = "https://mymps.corrad.my/rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
+    }
+
     const handlePayment = () => {
 
         setDisabled(true);
@@ -175,6 +179,17 @@ export default function SenaraiBil(props) {
                                             <Pane>
                                                 <Heading size={200}>Status Bayaran</Heading>
                                                 <Heading size={200} fontWeight={400}>{bills.bill.data[0][0].STATUS == "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>)}</Heading>
+                                            </Pane>
+                                        </Card>
+                                        <Card
+                                            background="tint2"
+                                            marginBottom={majorScale(2)}
+                                            padding={minorScale(2)}
+                                            onClick={() => viewBill(btoa(bills.bill.data[0][0].NOAKAUN))}
+                                        >
+                                            <Pane display="grid" gridTemplateColumns="1fr 10px">
+                                                <Heading size={200}>Bil</Heading>
+                                                <Pane><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></Pane>
                                             </Pane>
                                         </Card>
                                         {bills.bill.data[0][0].STATUS !== "PAID" &&

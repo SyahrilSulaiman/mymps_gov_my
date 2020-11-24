@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
-import { Pane, toaster, Button, AddIcon, ArrowLeftIcon, Dialog, SortNumericalIcon, Tablist, Tab, Heading } from "evergreen-ui";
+import { Pane, toaster, Button, AddIcon, ArrowLeftIcon, Icon, SortNumericalIcon, Tablist, Tab, Heading, ArrowRightIcon } from "evergreen-ui";
 import BillList from './BillList';
 import Topbaer from "./Topbar2";
 import swal from "sweetalert";
+import noscroll from "no-scroll";
 
 function Bill(props) {
+
+	noscroll.on();
 
 	const token 	= getToken();
 	const user 		= getUser();
@@ -57,9 +60,23 @@ function Bill(props) {
 								</Tab>
 							</Tablist>
 						</Pane>
-						<div className="w-full">
-							<div className="flex-auto overflow-y-scroll" style={{ height: "60vh" }}>
+						<div className="w-full mx-4">
+							<div className="flex-auto overflow-y-scroll" style={{ height: "100vh" }}>
 								{/* <BillList /> */}
+								<Pane width="100%">
+									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542" onClick={() => window.location.href = "/cukaitaksiran"}>
+										<Pane><Heading color="#f1f2f6"> Cukai Taksiran </Heading><small className="text-gray-500">Senarai bil cukai taksiran</small></Pane>
+										<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
+									</Pane>
+									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542" color="#f1f2f6" onClick={() => window.location.href = "/kompaun"}>
+										<Pane><Heading color="#f1f2f6"> Kompaun </Heading><small className="text-gray-500">Senarai bil kompaun</small></Pane>
+										<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
+									</Pane>
+									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542" color="#f1f2f6" onClick={() => window.location.href = "/lesen"}>
+										<Pane><Heading color="#f1f2f6"> Lesen </Heading><small className="text-gray-500">Senarai bil lesen</small></Pane>
+										<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
+									</Pane>
+								</Pane>
 							</div>
 						</div>
 					</div>

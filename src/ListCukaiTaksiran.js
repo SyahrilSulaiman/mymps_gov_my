@@ -25,7 +25,7 @@ function Bill(props) {
 				<div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
 					<div className="flex flex-wrap ">
 						<Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-							<Topbaer title="Bil / Senarai Bil" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
+							<Topbaer title="Bil / Cukai Taksiran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
 						</Pane>
 						<Pane className="py-5 xl:mx-4 xl:rounded-md" position="relative" width="100%">
 							<Tablist display="grid" gridTemplateColumns="1fr 1fr">
