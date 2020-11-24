@@ -28,7 +28,7 @@ function Pay() {
     const [receiptno, setReceiptNo] = useState("");
 
     useEffect(() => {
-        fetch('https://dev.toyyibpay.com/api/getBankFPX')
+        fetch('https://epstaging.mps.gov.my/fpx/bankList.php')
         .then(response => response.json())
         .then(result => {
             console.log(result);
