@@ -15,50 +15,50 @@ export default function Modal({Close}){
 
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-                <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                <div className="inline-block align-top bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                     <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <div className="sm:flex sm:items-start">
-                        <Pane className="inset-0 items-center">
-    <Pane display="block" className="bg-white">
-        <Pane paddingLeft={10}>
-            <Text size={600} className="font-bold">Cara Install</Text>
-        </Pane>
-    </Pane>
-    <hr className="divide-y"/>
-    <Pane display="block" className="bg-white">
-        <Pane paddingLeft={10}>
-            <Text size={500} className="font-bold">Android</Text>
-        </Pane>
-        <Pane paddingLeft={25}>
-            <Pane>
-                <Text size={400} className="font-semibold">1. Buka applikasi ini melalui Chrome</Text>
-            </Pane>
-            <Pane>
-                <Text size={400} className="font-semibold">2. Tekan ikon menu <i className="fas fa-ellipsis-v text-red-700"></i></Text>
-            </Pane>
-            <Pane>
-                <Text size={400} className="font-semibold">3. Pilih <strong>Add to homescreen</strong></Text>
-            </Pane>
-        </Pane>
-    </Pane>
-    <hr className="divide-y"/>
-    <Pane display="block" className="items-center bg-white">
-        <Pane paddingLeft={10}>
-            <Text size={500} className="font-bold">IOS</Text>
-        </Pane>
-        <Pane paddingLeft={25}>
-            <Pane>
-                <Text size={400} className="font-semibold">1. Buka applikasi ini melalui Safari</Text>
-            </Pane>
-            <Pane>
-                <Text size={400} className="font-semibold">2. Tekan ikon menu <img className="inline h-5" src={ios_out} alt=""/></Text>
-            </Pane>
-            <Pane>
-                <Text size={400} className="font-semibold">3. Pilih <strong>Add to homescreen</strong></Text>
-            </Pane>
-        </Pane>
-    </Pane>
-</Pane>
+                        <div>
+                            <Pane className=" items-center">
+                                <Pane display="block" className="bg-white mb-3">
+                                    <Pane paddingLeft={10}>
+                                        <Text size={600} className="font-bold">Cara Install</Text>
+                                    </Pane>
+                                </Pane>
+                                <hr className="divide-y"/>
+                                <Pane display="block" className="bg-white my-3">
+                                    <Pane paddingLeft={10}>
+                                        <Text size={500} className="font-bold">Android</Text>
+                                    </Pane>
+                                    <Pane paddingLeft={25}>
+                                        <Pane>
+                                            <Text size={400} className="font-semibold">1. Buka applikasi ini melalui Chrome</Text>
+                                        </Pane>
+                                        <Pane>
+                                            <Text size={400} className="font-semibold">2. Tekan ikon menu <i className="fas fa-ellipsis-v text-red-700"></i></Text>
+                                        </Pane>
+                                        <Pane>
+                                            <Text size={400} className="font-semibold">3. Pilih <strong>Add to homescreen</strong></Text>
+                                        </Pane>
+                                    </Pane>
+                                </Pane>
+                                <hr className="divide-y"/>
+                                <Pane display="block" className="items-center bg-white mt-3">
+                                    <Pane paddingLeft={10}>
+                                        <Text size={500} className="font-bold">IOS</Text>
+                                    </Pane>
+                                    <Pane paddingLeft={25}>
+                                        <Pane>
+                                            <Text size={400} className="font-semibold">1. Buka applikasi ini melalui Safari</Text>
+                                        </Pane>
+                                        <Pane>
+                                            <Text size={400} className="font-semibold">2. Tekan ikon menu <img className="inline h-5" src={ios_out} alt=""/></Text>
+                                        </Pane>
+                                        <Pane>
+                                            <Text size={400} className="font-semibold">3. Pilih <strong>Add to homescreen</strong></Text>
+                                        </Pane>
+                                    </Pane>
+                                </Pane>
+                            </Pane>
                         </div>
                     </div>
                     <hr />
