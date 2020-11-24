@@ -41,6 +41,7 @@ import Admin_Dashboard from "./admin/Dashboard_Admin";
 import Admin_Setting from "./admin/Setting_Admin";
 import Admin_UserManagement from "./admin/UserManagement_Admin";
 import Admin_Report from "./admin/Report_Admin";
+import Admin_UserStatus from "./admin/Report_UserStatus";
 import UserDetail from "./admin/UpdateUser_Admin";
 import AddUser from "./admin/AddUser_Admin";
 
@@ -131,6 +132,10 @@ function App() {
                 <PrivateRoute
                   path="/admin/report"
                   component={Admin_Report}
+                />
+                <PrivateRoute
+                  path="/admin/laporan_pengguna"
+                  component={Admin_UserStatus}
                 />
                 <PrivateRoute
                   path="/admin/update_user"
@@ -224,6 +229,10 @@ function App() {
                 <PrivateRoute
                   path="/admin/report"
                   component={Admin_Report}
+                />
+                <PrivateRoute
+                  path="/admin/laporan_pengguna"
+                  component={Admin_UserStatus}
                 />
                 <Route path="*" component={NotFound} />
               </Switch>
