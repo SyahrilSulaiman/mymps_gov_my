@@ -5,7 +5,6 @@ import swal from "sweetalert";
 import NoScroll from "no-scroll";
 import BayarCukai from "./BayarCukai";
 import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon } from "evergreen-ui";
-import iconBill from "./assets/img/bill.png";
 
 export default function BillList() {
 

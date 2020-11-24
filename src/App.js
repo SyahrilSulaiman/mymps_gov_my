@@ -33,6 +33,10 @@ import Add from "./Add";
 import UserReport from "./UserReport";
 import Pdf from "./ReactPDF";
 
+import cukaitaksiran from "./ListCukaiTaksiran";
+import kompaun from "./ListKompaun";
+import lesen from "./ListLesen";
+
 import Admin_Dashboard from "./admin/Dashboard_Admin";
 import Admin_Setting from "./admin/Setting_Admin";
 import Admin_UserManagement from "./admin/UserManagement_Admin";
@@ -163,6 +167,9 @@ function App() {
                 }
                 <PrivateRoute path="/setting" component={Setting} />
                 <PrivateRoute path="/bill" component={Bill} />
+                <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran}/>
+                <PrivateRoute path="/kompaun" component={kompaun}/>
+                <PrivateRoute path="/lesen" component={lesen}/>
                 <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
                 <PrivateRoute path="/laporan-pengguna" component={UserReport} />
@@ -189,6 +196,9 @@ function App() {
                 <PrivateRoute path="/home" component={Dashboard} />
                 <PrivateRoute path="/setting" component={Setting} />
                 <PrivateRoute path="/bill" component={Bill} />
+                <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran}/>
+                <PrivateRoute path="/kompaun" component={kompaun}/>
+                <PrivateRoute path="/lesen" component={lesen}/>
                 <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
                 <PrivateRoute path="/add_cukai_taksiran" component={Add} />
