@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PieChart, Pie, Sector, Cell, Legend, Line, Bar, Area} from 'recharts';
+import { PieChart, Pie, Sector, Cell, Legend, Line, Bar, Area, LabelList} from 'recharts';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -51,7 +51,9 @@ export default function LaporanPengguna({report}) {
           {
             data2.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
           }
-        </Pie>
+{       
+  //  <LabelList dataKey="name" position="top" />
+}        </Pie>
         <Legend verticalAlign="bottom" align="center"/>
 
       </PieChart>
