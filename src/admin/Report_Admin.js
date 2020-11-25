@@ -42,7 +42,7 @@ function Dashboard(props) {
 
             <div className="flex flex-wrap xl:pt-2">
               <Pane background="white" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
-                <Heading size={500}>Tarikh : &nbsp;<DatePicker selected={startDate} onChange={date => setStartDate(date)} dateFormat="yyyy/MM/dd" isClearable placeholderText="Sila pilih tarikh" /></Heading>
+                <Heading size={500}>Tarikh : &nbsp;<DatePicker selected={startDate} onChange={date => setStartDate(date)} dateFormat="yyyy-MM-dd" isClearable placeholderText="Sila pilih tarikh" /></Heading>
               </Pane>
             </div>
             <div className="flex flex-wrap xl:pt-2">
@@ -58,10 +58,9 @@ function Dashboard(props) {
                       <option value="akaun">Nombor Akaun</option>
                   </SelectField>
                   {
-                    type === '' ? '' :
+                    // type === '' ? '' :
                     <CukaiTaksiran type={type} startDate={startDate}/>
                   }
-                  
               </Pane>
             </div>
 

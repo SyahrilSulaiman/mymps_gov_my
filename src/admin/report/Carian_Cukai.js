@@ -49,7 +49,9 @@ export default function Carian_Cuaki({type, startDate}){
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="flex flex-wrap">
                         <div className="w-full">
-                            <Pane display="flex">
+                            {
+                                type === '' ? '' :
+                                <Pane display="flex">
                                 <TextInputField
                                     width="100%"
                                     required
@@ -74,6 +76,8 @@ export default function Carian_Cuaki({type, startDate}){
                                     }
                                 />
                             </Pane>
+                            }
+
                             <Pane>
                                 <Button
                                     type="submit"
