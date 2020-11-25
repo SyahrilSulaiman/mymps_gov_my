@@ -49,7 +49,7 @@ function Dashboard(props) {
               <Pane background="white" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
                   <SelectField
                       label="Jenis Carian"
-                      description="Sila buat pilihan jenis carian bil yang ingin dibayar"
+                      description="Sila buat pilihan jenis carian bil"
                       onChange={(e) => setType(e.target.value)}
                   >
                       <option value='tiada'>-- Sila Pilih --</option>
