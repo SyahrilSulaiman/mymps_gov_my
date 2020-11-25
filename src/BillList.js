@@ -142,9 +142,9 @@ export default function BillList() {
     })
   ) : (
       <div className="w-full bg-transparent px-3">
-          {/* <Pane display="flex" alignItems="center" justifyContent="center" background="white" paddingY={100}>
+          <Pane display="flex" alignItems="center" justifyContent="center" background="white" paddingY={100}>
             <Heading size={200}>Tekan pada butang <Button type="button" appearance="primary" intent="success">Tambah Bil</Button> untuk menambah bil.</Heading>
-          </Pane> */}
+          </Pane>
       </div>
     );
 
