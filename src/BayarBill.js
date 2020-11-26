@@ -75,11 +75,11 @@ function Bill(props) {
 										<Pane><Heading color="#f1f2f6"> Cukai Taksiran </Heading><small className="text-gray-500">Senarai bil cukai taksiran</small></Pane>
 										<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
 									</Pane>
-									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542"  opacity={0.3} color="#f1f2f6" >
+									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542"  opacity={0.3} color="#f1f2f6" cursor="not-allowed">
 										<Pane><Heading color="#f1f2f6"> Kompaun </Heading><small className="text-gray-500">Senarai bil kompaun</small></Pane>
 										<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
 									</Pane>
-									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542"  opacity={0.3} color="#f1f2f6" >
+									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542"  opacity={0.3} color="#f1f2f6" cursor="not-allowed">
 										<Pane><Heading color="#f1f2f6"> Lesen </Heading><small className="text-gray-500">Senarai bil lesen</small></Pane>
 										<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
 									</Pane>
