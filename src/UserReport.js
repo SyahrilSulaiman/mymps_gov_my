@@ -61,6 +61,11 @@ function Bill(props) {
       });
   }, []);
 
+
+  const viewPenyata = (e) => {
+    window.location.href = "https://mymps.corrad.my/rp/penyata_semasa.php?noakaun=" + btoa(btoa(e))
+  }
+
   if (loading == true) {
     return (
       <div>
@@ -153,7 +158,7 @@ function Bill(props) {
                             <td><Heading size={200}>{data.AP_INVOICE_NO}</Heading></td>
 							<td><Heading size={200}>{data.AP_FPX_TRANSACTION_ID !== null ? data.AP_FPX_TRANSACTION_ID : "--"}</Heading></td>
 							<td><Heading size={200} color={data.AP_STATUS == '1' ? "green" : "red"}>{data.AP_STATUS == '1' ? "Berjaya" : "Tidak Berjaya"}</Heading></td>
-							<td><Button>PDF</Button></td>
+							<td><Button onClick={(e) =>viewPenyata(data.A_NO)}>PDF</Button></td>
                           </tr>
                         );
                       })}
