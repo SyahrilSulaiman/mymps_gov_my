@@ -3,7 +3,7 @@ import axios from 'axios'
 import Sidebar from "./Sidebar_Admin";
 import Navbar from "../components/Navbars/AdminNavbar";
 import PieChart from "./report/Pie"
-import GraphChart from "./report/Graph"
+// import GraphChart from "./report/Graph"
 import { Pane, Button, SelectField, ArrowLeftIcon , Icon, Heading} from 'evergreen-ui'
 
 function Report_UserStatus(props) {
@@ -99,7 +99,7 @@ if(loading){
               <Pane background="white" className="p-3 xl:mx-4 xl:rounded-md flex" position="relative" width="100%">
                 {
                     // <PieChart report={report}/>
-                    <GraphChart />
+                    // <GraphChart />
                 }
               </Pane>
             </div>

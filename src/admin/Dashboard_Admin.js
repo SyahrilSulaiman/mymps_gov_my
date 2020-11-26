@@ -1,19 +1,41 @@
-import React from "react";
+import React,{ useState, useEffect } from "react";
 import { getUser, getNOKP, getToken, removeUserSession } from "../Utils/Common";
+import axios from 'axios'
 
 import Sidebar from "./Sidebar_Admin";
 import Navbar from "../components/Navbars/AdminNavbar";
 import LineChart from "../components/Cards/CardLineChart";
 import BarChart from "../components/Cards/CardBarChart";
 import {Pane, Text} from 'evergreen-ui';
-import GraphChart from "./report/Graph"
+import JumlahPembayaran from './report/Dashboard_Page/JumlahPembayaran'
+import LineGraph from './report/Dashboard_Page/LineGraph'
+import Axios from "axios";
 
 function Dashboard(props) {
 
-  const token = getToken();
-  const user = getUser();
-  const nokp = getNOKP();
+  // const token = getToken();
+  // const user = getUser();
+  // const nokp = getNOKP();
 
+  const [jumlah,setJumlah] = useState([]);
+  const [pengguna,setPengguna] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=laporan_jumlah_pembayaran')
+    .then( res => {
+      setJumlah(res.data.result);
+    })
+  },[]);
+
+  useEffect(() => {
+    console.log('aaaa');
+    axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=laporan_pengguna')
+    .then( res => {
+      setPengguna(res.data.result);
+      console.log(pengguna)
+      console.log(res.data.result)
+    })
+  },[]);
   
   const handleLogout = () => {
     removeUserSession();
@@ -31,76 +53,10 @@ function Dashboard(props) {
               <div className="flex flex-wrap">
                 {
                   // Bayaran -- 
-
-                  <Pane clearfix background="white" className={'rounded-md w-full flex'}>
-                    <Pane
-                      elevation={1}
-                      float="left"
-                      // width={200}
-                      // height={120}
-                      margin={24}
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      flexDirection="column"
-                      className={'rounded-md w-full flex-1'}
-                    >
-                      <Text>Keseluruhan</Text>
-                      <Text size={300}>RM {/*res.total*/}</Text>
-                    </Pane>
-                    <Pane
-                      elevation={1}
-                      float="left"
-                      // width={200}
-                      // height={120}
-                      margin={24}
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      flexDirection="column"
-                      className={'rounded-md w-full flex-1'}
-
-                    >
-                      <Text>Tahun Ini</Text>
-                      <Text size={300}>RM {/*res.yearly*/}</Text>
-                    </Pane>
-                    <Pane
-                      elevation={1}
-                      float="left"
-                      // width={200}
-                      // height={120}
-                      margin={24}
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      flexDirection="column"
-                      className={'rounded-md w-full flex-1'}
-
-                    >
-                      <Text>Bulan Ini</Text>
-                      <Text size={300}>RM {/*res.monthly*/}</Text>
-                    </Pane>
-                    <Pane
-                      elevation={1}
-                      float="left"
-                      // width={200}
-                      // height={120}
-                      margin={24}
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      flexDirection="column"
-                      className={'rounded-md w-full flex-1'}
-
-                    >
-                      <Text>Hari Ini</Text>
-                      <Text size={300}>RM {/*(res.daily === 0 || res.daily === null )? 0 : res.daily */}
-                      </Text>
-                    </Pane>
-                  </Pane>
+                  <JumlahPembayaran value={jumlah} user={pengguna}/>
                 }
-                <Pane clearfix background="white" className={'rounded-md w-full flex'}>
-                  <GraphChart />
+                <Pane clearfix background="white" className={'rounded-md w-full flex pt-4'}>
+                  <LineGraph />
                 </Pane>
               </div>
             </div>
