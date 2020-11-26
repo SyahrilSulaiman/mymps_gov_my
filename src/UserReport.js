@@ -31,9 +31,7 @@ function Bill(props) {
   const [loading, setLoading] = useState(true);
 
   $(document).ready(function () {
-    $("#example").DataTable({
-		responsive: true
-	})
+    $("#example").DataTable()
   });
 
   useEffect(() => {
@@ -55,7 +53,6 @@ function Bill(props) {
       .then((result) => {
         setLoading(true);
         if (result.status == "success") {
-          console.log(result.data);
           setData(result.data);
           setLoading(false);
         } else {
