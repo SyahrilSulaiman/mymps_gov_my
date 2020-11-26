@@ -16,29 +16,8 @@ export default function SenaraiBil(props) {
         window.location.href = "/bill";
     }
 
-    const handleBill = () => {
-        console.log('Bil');
-        const formData = new FormData;
-        formData.append('noakaun', atob(atob(sessionStorage.noakaun)));
-        // formData.append('noakaun',1001);
-        formData.append('nokp', nokp);
-        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=export_pdf', formData)
-            .then(res => {
-                console.log(res);
-
-                if (res.data.status === 'success') {
-                    console.log('success');
-                    //window.open('https://mymps.corrad.my/rp/bil_cukai_taksiran.php?token=' + res.data.token);
-                    window.location.href = 'https://mymps.corrad.my/rp/bil_cukai_taksiran.php?token=' + res.data.token;
-                }
-                else {
-                    swal('Resit tak dijumpai', 'Sila hubungi pentadbir system', 'error');
-                }
-            })
-            .catch(err => {
-                console.log(err);
-                swal('Ralat', 'Sila hubungi pentadbir system', 'error');
-            })
+    const handleBill = (e) => {
+        window.location.href = "https://mymps.corrad.my/rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
     }
 
     const handleReceipt = () => {
@@ -50,7 +29,7 @@ export default function SenaraiBil(props) {
     useEffect(() => {
         axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun=' + sessionStorage.getItem('noakaun'))
             .then(res => {
-                console.log(res.data.data[0])
+                // console.log(res.data.data[0])
                 if (res.data.status == 'success') {
                     setBill({
                         bill: res.data
@@ -181,7 +160,7 @@ export default function SenaraiBil(props) {
                                         </Pane>
                                     </Card>
                                     <Card
-                                        onClick={() => handleBill()}
+                                        onClick={() => handleBill(btoa(bills.bill.data[0][0].NOAKAUN))}
                                         background="tint2"
                                         marginBottom={majorScale(1)}
                                         padding={minorScale(2)}

@@ -242,7 +242,7 @@ function Pay() {
                             <Pane paddingX={20} className="flex flex-wrap">
                                 <Pane display="grid" width="100%" padding={10} background="tint2" >
                                     <Pane display="grid" gridTemplateColumns="1fr 200px">
-                                        <Heading size={400}>Pemilik Cukai</Heading>
+                                        <Heading size={400}>Pemilik</Heading>
                                         <Heading size={100} textAlign="right">{penama ? penama : "-"}</Heading>
                                     </Pane>
                                 </Pane>
@@ -254,7 +254,7 @@ function Pay() {
                                 </Pane>
                                 <Pane display="grid" width="100%" padding={10} background="tint2">
                                     <Pane display="grid" gridTemplateColumns="1fr 1fr">
-                                        <Heading size={400}>Jumlah Tunggakan</Heading>
+                                        <Heading size={400}>Jumlah Bayaran</Heading>
                                         <Heading size={100} textAlign="right">RM {amount ? amount.toFixed(2) : "0.00"}</Heading>
                                     </Pane>
                                 </Pane>
