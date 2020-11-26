@@ -18,7 +18,7 @@ export default function Index() {
                 Selamat Datang ke mymps
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                MyMPS merupakan sebuah gerbang pembayaran pelbagai bil <br></br><span className="text-bold text-gray-700">Majlis Perbandaran Selayang.</span>
+                mymps merupakan sebuah gerbang pembayaran pelbagai bil <br></br><span className="text-bold text-gray-700">Majlis Perbandaran Selayang.</span>
               </p>
               <div className="mt-12">
                 <a

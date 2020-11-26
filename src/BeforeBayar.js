@@ -200,7 +200,7 @@ export default function SenaraiBil(props) {
                                             >
                                                 <Pane>
                                                     <Heading size={200}>Jumlah Tunggakan</Heading>
-                                                    <Heading size={200} size={500}>RM {bills.bill.data[2][0].BAKI}</Heading>
+                                                    <Heading size={200} size={500}>RM {bills.bill.data[2][0].BAKI.toFixed(2)}</Heading>
                                                 </Pane>
                                             </Card>
                                         }
