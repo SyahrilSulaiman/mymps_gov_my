@@ -35,38 +35,6 @@ function Bill(props) {
 						<Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
 							<Topbaer title="Bil / Senarai Bil" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={handleLogout} />
 						</Pane>
-						{
-							// Button
-						// <Pane className="py-5 xl:mx-4 xl:rounded-md" position="relative" width="100%">
-						// 	<Tablist display="grid" gridTemplateColumns="1fr 1fr">
-						// 		<Tab onSelect={() => handleAddBill()}>
-						// 			<Button
-						// 			width="100%"
-						// 			justifyContent="center"
-						// 			appearance="primary"
-						// 			intent="success"
-						// 			iconBefore={AddIcon}
-						// 			className="xs:ml-5"
-						// 			onClick={handleAddBill}
-						// 			>
-						// 			Tambah Bil
-						// 			</Button>
-						// 		</Tab>
-						// 		<Tab onSelect={() => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })}>
-						// 			<Button
-						// 			width="100%"
-						// 			justifyContent="center"
-						// 			appearance="primary"
-						// 			iconBefore={SortNumericalIcon}
-						// 			className="xs:ml-5 ml-1"
-						// 			onClick={() => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })}
-						// 			>
-						// 			Bayar Semua
-						// 			</Button>
-						// 		</Tab>
-						// 	</Tablist>
-						// </Pane>
-						}
 						<div className="w-full mx-4">
 							<div className="flex-auto overflow-y-scroll" style={{ height: "100vh" }}>
 								{/* <BillList /> */}
