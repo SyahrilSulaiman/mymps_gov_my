@@ -93,6 +93,69 @@ function Dashboard(props) {
                   </div>
                 </div> */}
 
+                {
+                  // Bayaran -- 
+
+                  // <Pane clearfix>
+                  // <Pane
+                  //   elevation={1}
+                  //   float="left"
+                  //   width={200}
+                  //   height={120}
+                  //   margin={24}
+                  //   display="flex"
+                  //   justifyContent="center"
+                  //   alignItems="center"
+                  //   flexDirection="column"
+                  // >
+                  //   <Text>Keseluruhan</Text>
+                  //   <Text size={300}>RM {res.total}</Text>
+                  // </Pane>
+                  // <Pane
+                  //   elevation={1}
+                  //   float="left"
+                  //   width={200}
+                  //   height={120}
+                  //   margin={24}
+                  //   display="flex"
+                  //   justifyContent="center"
+                  //   alignItems="center"
+                  //   flexDirection="column"
+                  // >
+                  //   <Text>Tahun Ini</Text>
+                  //   <Text size={300}>RM {res.yearly}</Text>
+                  // </Pane>
+                  // <Pane
+                  //   elevation={1}
+                  //   float="left"
+                  //   width={200}
+                  //   height={120}
+                  //   margin={24}
+                  //   display="flex"
+                  //   justifyContent="center"
+                  //   alignItems="center"
+                  //   flexDirection="column"
+                  // >
+                  //   <Text>Bulan Ini</Text>
+                  //   <Text size={300}>RM {res.monthly}</Text>
+                  // </Pane>
+                  // <Pane
+                  //   elevation={1}
+                  //   float="left"
+                  //   width={200}
+                  //   height={120}
+                  //   margin={24}
+                  //   display="flex"
+                  //   justifyContent="center"
+                  //   alignItems="center"
+                  //   flexDirection="column"
+                  // >
+                  //   <Text>Hari Ini</Text>
+                  //   <Text size={300}>RM {(res.daily === 0 || res.daily === null )? 0 : res.daily }</Text>
+                  // </Pane>
+                  // </Pane>
+                }
+
               </div>
             </div>
         </div>
