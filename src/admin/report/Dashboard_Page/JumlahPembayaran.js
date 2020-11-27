@@ -19,7 +19,7 @@ export default function JumlahPembayaran({value, user}){
             justifyContent="center"
             alignItems="center"
             flexDirection="column"
-            className={'rounded-md w-full bg-white  lg:flex-1 cursor-pointer hover:bg-gray-300'}
+            className={'rounded-md bg-white  lg:flex-1 cursor-pointer hover:bg-gray-300'}
             >
             <Link to ="./usermanagement" className="leading-none">
                 <Text>Jumlah Pengguna</Text>

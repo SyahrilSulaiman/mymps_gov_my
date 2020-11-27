@@ -22,9 +22,11 @@ import Topbaer from "./Topbar2";
 
 function Bill(props) {
   const [userid, setUserId] = useState(sessionStorage.nokp);
-  const [search, setSearch] = useState("");
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [searchResult,setSearchResult] = useState([]);
+  const [search,setSearch] = useState('');
 
   useEffect(() => {
     var apiUrl =
@@ -46,12 +48,22 @@ function Bill(props) {
         setLoading(true);
         if (result.status == "success") {
           setData(result.data);
+          setSearchResult(result.data);
           setLoading(false);
         } else {
           setLoading(false);
         }
       });
   }, []);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  }
+
+  useEffect(() =>{
+    const results = data.filter( json => json.A_NO.toUpperCase().includes(search))
+    setSearchResult(results);    
+  },[search]);
 
   const searching = (paramSearch) => {
     console.log(paramSearch);
@@ -173,18 +185,20 @@ function Bill(props) {
                 <TextInput
                   width="100%"
                   placeholder="carian..."
-                  onKeyPress={event => {
-                    if(event.key == "Enter"){
-                      searching(event.target.value)
-                    }
-                  }}
+                  // onKeyPress={event => {
+                  //   if(event.key == "Enter"){
+                  //     searching(event.target.value)
+                  //   }
+                  // }}
+                  value={search}
+                  onChange = {handleSearch}
                 />
               </Pane>
 
               <Pane className="p-3 xl:mx-4 xl:rounded-md bg-white" width="100%">
-                {data && data.map((data, index) => {
+                {searchResult && searchResult.map((data, index) => {
                   return(
-                    <Pane onClick={(e) =>viewPenyata(data.A_NO)} display="grid" gridTemplateColumns="50px 1fr 20px" background="tint1" className={"cursor-pointer hover:bg-gray-300 "+(index !== 0 ? "py-2" : "")}>
+                    <Pane onClick={(e) =>viewPenyata(data.A_NO)} key={data.A_NO} display="grid" gridTemplateColumns="50px 1fr 20px" background="tint1" className={"cursor-pointer hover:bg-gray-300 "+(index !== 0 ? "py-2" : "")}>
                       <Heading size={100} className="py-8 mx-auto">{index + 1}</Heading>
                       <Pane className="p-4">
                         <Heading size={200}>Akaun : {data.A_NO}</Heading>
@@ -195,7 +209,7 @@ function Bill(props) {
                     </Pane>
                   )
                 })}
-                {!data && (() => {
+                {!searchResult && (() => {
                   return(
                     <Pane display="grid" gridTemplateColumns="50px 1fr 20px">
                       <Heading size={100}></Heading>
