@@ -32,6 +32,7 @@ export default function SenaraiBil(props) {
                     setBill({
                         bill: res.data
                     });
+                    console.log(res.data);
                     setLoading(false);
                 }
             })
@@ -167,6 +168,8 @@ export default function SenaraiBil(props) {
                                             <Heading size={200}><i className="fas fa-receipt"></i> Bil PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
                                         </Pane>
                                     </Card>
+                                {
+                                    bills.bill.status_bil === '1' ? (
                                     <Card
                                         onClick={() => handleReceipt(btoa(bills.bill.data[0][0].NOAKAUN))}
                                         background="tint2"
@@ -177,6 +180,8 @@ export default function SenaraiBil(props) {
                                             <Heading size={200}><i className="fas fa-receipt"></i> Resit PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
                                         </Pane>
                                     </Card>
+                                     ) : ''
+                                }
                                     <div className="flex flex-wrap py-3 w-full rounded-md">
                                         <Pane width="100%" >
                                             <Button
