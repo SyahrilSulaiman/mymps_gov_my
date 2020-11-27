@@ -19,21 +19,26 @@ function Dashboard(props) {
 
   const [jumlah,setJumlah] = useState([]);
   const [pengguna,setPengguna] = useState([]);
+  const [loading,setLoading] = useState(false);
+  const [loading2,setLoading2] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=laporan_jumlah_pembayaran')
     .then( res => {
       setJumlah(res.data.result);
+      console.log('Jumlah :',jumlah);
+      setLoading(false);
     })
   },[]);
 
   useEffect(() => {
-    console.log('aaaa');
+    setLoading2(false);
     axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=laporan_pengguna')
     .then( res => {
       setPengguna(res.data.result);
-      console.log(pengguna)
-      console.log(res.data.result)
+      console.log('Pengguna :',pengguna);
+      setLoading2(false);
     })
   },[]);
   
@@ -41,7 +46,7 @@ function Dashboard(props) {
     removeUserSession();
     props.history.push("/login");
   };
-
+if(!loading && !loading2)
   return (
     <div>
       <Sidebar />
@@ -50,20 +55,29 @@ function Dashboard(props) {
         {/* Header */}
         <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12">
           <div className="px-4 md:px-10 mx-auto w-full">
-              <div className="flex flex-wrap">
+              <JumlahPembayaran value={jumlah} user={pengguna}/>
+              <div className="flex bg-white flex-wrap">
                 {
                   // Bayaran -- 
-                  <JumlahPembayaran value={jumlah} user={pengguna}/>
+                  
                 }
-                <Pane clearfix background="white" className={'rounded-md w-full flex pt-4'}>
+                {
+                // <Pane clearfix background="white" className={'rounded-md w-full flex pt-4'}>
                   <LineGraph />
-                </Pane>
+                // </Pane>
+                }
               </div>
             </div>
         </div>
       </div>
     </div>
   );
+  else{
+    return(
+    <div>
+      Loading...
+    </div>
+  )}
 }
 
 export default Dashboard;

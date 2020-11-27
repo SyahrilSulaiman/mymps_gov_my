@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import {Pane, Text, Heading} from 'evergreen-ui'
+import {Link} from 'react-router-dom';
 
-export default function JumlahPembayaran({value, pengguna}){
+export default function JumlahPembayaran({value, user}){
+    console.log('Jumlah : ',user);
     return (
         
-        <Pane clearfix background="white" className={'rounded-md w-full flex'}>
+        <Pane clearfix className={'rounded-md w-full flex flex-wrap min-height-screen'}>
+            
+        
             <Pane
             elevation={1}
             float="left"
@@ -15,14 +19,47 @@ export default function JumlahPembayaran({value, pengguna}){
             justifyContent="center"
             alignItems="center"
             flexDirection="column"
-            className={'rounded-md w-full flex-1'}
+            className={'rounded-md w-full bg-white  lg:flex-1 cursor-pointer hover:bg-gray-300'}
             >
+            <Link to ="./usermanagement" className="leading-none">
                 <Text>Jumlah Pengguna</Text>
                 {
                     // pengguna.map((res,index) => {
                     //     <Text size={300}>{res.name} {res.value}</Text>
                     // })
+
                 }
+                {
+                    user.map((data,index) => {
+                        return(
+                        <div key={index}>
+                            <Text size={300}>{data.name}: {data.value}</Text>
+                        </div>
+                        )
+                    })
+                }
+                    <div>
+                        <Heading size={100}>Maklumat Lanjut </Heading>
+                    </div>
+                </Link>
+            </Pane>
+
+
+            <Pane
+            elevation={1}
+            float="left"
+            // width={200}
+            // height={120}
+            margin={24}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            className={'rounded-md bg-white w-full lg:flex-1'}
+
+            >
+                <Text>Jumlah Bayaran Tahunan</Text>
+                <Text size={300}>RM 1000{ /*value[0].yearly*/}</Text>
             </Pane>
             <Pane
             elevation={1}
@@ -34,11 +71,11 @@ export default function JumlahPembayaran({value, pengguna}){
             justifyContent="center"
             alignItems="center"
             flexDirection="column"
-            className={'rounded-md w-full flex-1'}
+            className={'rounded-md bg-white w-full lg:flex-1'}
 
             >
-                <Text>Tahunan</Text>
-                <Text size={300}>RM { /*value[0].yearly*/}</Text>
+                <Text>Jumlah Bayaran Bulanan</Text>
+                <Text size={300}>RM 600{/*value[0].monthly*/}</Text>
             </Pane>
             <Pane
             elevation={1}
@@ -50,27 +87,11 @@ export default function JumlahPembayaran({value, pengguna}){
             justifyContent="center"
             alignItems="center"
             flexDirection="column"
-            className={'rounded-md w-full flex-1'}
+            className={'rounded-md bg-white w-full lg:flex-1'}
 
             >
-                <Text>Bulanan</Text>
-                <Text size={300}>RM {/*value[0].monthly*/}</Text>
-            </Pane>
-            <Pane
-            elevation={1}
-            float="left"
-            // width={200}
-            // height={120}
-            margin={24}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            flexDirection="column"
-            className={'rounded-md w-full flex-1'}
-
-            >
-                <Text>Harian</Text>
-                <Text size={300}>RM {/*(value[0].daily === 0 || value[0].daily === null )? 0 : value[0].daily */}
+                <Text>Jumlah Bayaran Harian</Text>
+                <Text size={300}>RM 50{/*(value[0].daily === 0 || value[0].daily === null )? 0 : value[0].daily */}
             </Text>
             </Pane>
         </Pane>
