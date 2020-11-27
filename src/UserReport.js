@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { ListGroup, ListGroupItem } from "reactstrap";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import {
@@ -14,25 +13,16 @@ import {
   Tab,
   TextInput,
   Heading,
+  Table
 } from "evergreen-ui";
 import BillList from "./BillList";
 import Topbaer from "./Topbar2";
-//Bootstrap and jQuery libraries
-import "jquery/dist/jquery.min.js";
-//Datatable Modules
-import "datatables.net-dt/js/dataTables.dataTables";
-import "datatables.net-dt/css/jquery.dataTables.min.css";
-import $ from "jquery";
 
 function Bill(props) {
   const [userid, setUserId] = useState(sessionStorage.nokp);
   const [search, setSearch] = useState("");
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
-
-  $(document).ready(function () {
-    $("#example").DataTable()
-  });
 
   useEffect(() => {
     var apiUrl =
@@ -60,6 +50,22 @@ function Bill(props) {
         }
       });
   }, []);
+
+  const dataa = {
+    columns: [
+      {
+        label: "Akaun",
+        field: "A_NO",
+        sort: "asc",
+        width: 500,
+      },
+      {
+        label: "No. Invois",
+        field: "AP_INVOICE_NO",
+      },
+    ],
+    rows: data,
+  };
 
   if (loading == true) {
     return (
@@ -129,17 +135,59 @@ function Bill(props) {
                 justifyContent="right"
                 alignContent="right"
               ></Pane>
-              <Pane className="p-3 xl:mx-4 xl:rounded-md my-1 bg-white" width="100%">
-                <table id="example" className="display">
+
+              <Table className="p-3 xl:mx-4 xl:rounded-md my-1 bg-white"
+                width="100%"
+				>
+                <Table.Head>
+                  <Table.SearchHeaderCell />
+                  <Table.TextHeaderCell>Last Activity</Table.TextHeaderCell>
+                  <Table.TextHeaderCell>ltv</Table.TextHeaderCell>
+                </Table.Head>
+                <Table.Body height={240}>
+                  {data.map((data) => (
+                    <Table.Row
+                      key={data.A_NO}
+                      isSelectable
+                      onSelect={() => alert(data.A_NO)}
+                    >
+                      <Table.TextCell>{data.AP_STATUS}</Table.TextCell>
+                      <Table.TextCell>{data.AP_AMOUNT}</Table.TextCell>
+                      <Table.TextCell isNumber>{data.AP_INVOICE_NO}</Table.TextCell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table>
+
+              <Pane
+                className="p-3 xl:mx-4 xl:rounded-md my-1 bg-white"
+                width="100%"
+              >
+                {/* <MDBDataTable table-bordered class="table-auto" bordered data={dataa}/> */}
+                <table id="example" className="display" border="0">
                   <thead>
                     <tr>
-					  <th><Heading size={200}>No</Heading></th>
-                      <th><Heading size={200}>Nombor Akaun</Heading></th>
-                      <th><Heading size={200}>Jumlah Bayaran (RM)</Heading></th>
-                      <th><Heading size={200}>No. Invois</Heading></th>
-					  <th><Heading size={200}>No. Rujukan FPX</Heading></th>
-					  <th><Heading size={200}>Status Pembayaran</Heading></th>
-					  <th><Heading size={200}>Penyata Akaun</Heading></th>
+                      <th>
+                        <Heading size={200}>No</Heading>
+                      </th>
+                      <th>
+                        <Heading size={200}>Nombor Akaun</Heading>
+                      </th>
+                      <th>
+                        <Heading size={200}>Jumlah Bayaran (RM)</Heading>
+                      </th>
+                      <th>
+                        <Heading size={200}>No. Invois</Heading>
+                      </th>
+                      <th>
+                        <Heading size={200}>No. Rujukan FPX</Heading>
+                      </th>
+                      <th>
+                        <Heading size={200}>Status Pembayaran</Heading>
+                      </th>
+                      <th>
+                        <Heading size={200}>Penyata Akaun</Heading>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -147,13 +195,40 @@ function Bill(props) {
                       data.map((data, key) => {
                         return (
                           <tr key={key}>
-							<td><Heading size={200}>{key + 1}</Heading></td>
-                            <td><Heading size={200}><b>{data.A_NO}</b></Heading></td>
-                            <td><Heading size={200}>{data.AP_AMOUNT}</Heading></td>
-                            <td><Heading size={200}>{data.AP_INVOICE_NO}</Heading></td>
-							<td><Heading size={200}>{data.AP_FPX_TRANSACTION_ID !== null ? data.AP_FPX_TRANSACTION_ID : "--"}</Heading></td>
-							<td><Heading size={200} color={data.AP_STATUS == '1' ? "green" : "red"}>{data.AP_STATUS == '1' ? "Berjaya" : "Tidak Berjaya"}</Heading></td>
-							<td><Button>PDF</Button></td>
+                            <td>
+                              <Heading size={200}>{key + 1}</Heading>
+                            </td>
+                            <td>
+                              <Heading size={200}>
+                                <b>{data.A_NO}</b>
+                              </Heading>
+                            </td>
+                            <td>
+                              <Heading size={200}>{data.AP_AMOUNT}</Heading>
+                            </td>
+                            <td>
+                              <Heading size={200}>{data.AP_INVOICE_NO}</Heading>
+                            </td>
+                            <td>
+                              <Heading size={200}>
+                                {data.AP_FPX_TRANSACTION_ID !== null
+                                  ? data.AP_FPX_TRANSACTION_ID
+                                  : "--"}
+                              </Heading>
+                            </td>
+                            <td>
+                              <Heading
+                                size={200}
+                                color={data.AP_STATUS == "1" ? "green" : "red"}
+                              >
+                                {data.AP_STATUS == "1"
+                                  ? "Berjaya"
+                                  : "Tidak Berjaya"}
+                              </Heading>
+                            </td>
+                            <td>
+                              <Button>PDF</Button>
+                            </td>
                           </tr>
                         );
                       })}
