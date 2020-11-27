@@ -13,7 +13,9 @@ import {
   Tab,
   TextInput,
   Heading,
-  Table
+  Table,
+  ChevronRightIcon,
+  Icon,
 } from "evergreen-ui";
 import BillList from "./BillList";
 import Topbaer from "./Topbar2";
@@ -50,6 +52,36 @@ function Bill(props) {
         }
       });
   }, []);
+
+  const searching = (paramSearch) => {
+    console.log(paramSearch);
+    if (paramSearch !== null) {
+      var apiUrl =
+        "https://mymps.corrad.my/int/api_generator.php?api_name=userReport";
+
+      var formData = new FormData();
+      formData.append("userid", userid);
+      formData.append("search", paramSearch);
+
+      var requestOptions = {
+        method: "POST",
+        body: formData,
+        redirect: "follow",
+      };
+
+      fetch(apiUrl, requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          setLoading(true);
+          if (result.status == "success") {
+            setData(result.data);
+            setLoading(false);
+          } else {
+            setLoading(false);
+          }
+        });
+    }
+  };
 
   const dataa = {
     columns: [
@@ -106,7 +138,7 @@ function Bill(props) {
         </div>
       </div>
     );
-  } else if (loading == false && data)
+  } else if (loading == false && data !== null)
     return (
       <div>
         <Sidebar />
@@ -128,43 +160,49 @@ function Bill(props) {
                   onClickLeftButton={() => window.history.back()}
                 />
               </Pane>
-              <Pane
-                className="p-2 my-5 xl:mx-4 xl:rounded-md"
-                width="100%"
-                display="flex"
-                justifyContent="right"
-                alignContent="right"
-              ></Pane>
-
-              <Table className="p-3 xl:mx-4 xl:rounded-md my-1 bg-white"
-                width="100%"
-				>
-                <Table.Head>
-                  <Table.SearchHeaderCell />
-                  <Table.TextHeaderCell>Last Activity</Table.TextHeaderCell>
-                  <Table.TextHeaderCell>ltv</Table.TextHeaderCell>
-                </Table.Head>
-                <Table.Body height={240}>
-                  {data.map((data) => (
-                    <Table.Row
-                      key={data.A_NO}
-                      isSelectable
-                      onSelect={() => alert(data.A_NO)}
-                    >
-                      <Table.TextCell>{data.AP_STATUS}</Table.TextCell>
-                      <Table.TextCell>{data.AP_AMOUNT}</Table.TextCell>
-                      <Table.TextCell isNumber>{data.AP_INVOICE_NO}</Table.TextCell>
-                    </Table.Row>
-                  ))}
-                </Table.Body>
-              </Table>
 
               <Pane
-                className="p-3 xl:mx-4 xl:rounded-md my-1 bg-white"
+                className="p-3 xl:mx-4 xl:rounded-md xl:my-2"
                 width="100%"
+                background="tint1"
               >
-                {/* <MDBDataTable table-bordered class="table-auto" bordered data={dataa}/> */}
-                <table id="example" className="display" border="0">
+                <TextInput
+                  width="100%"
+                  placeholder="carian..."
+                  onKeyPress={event => {
+                    if(event.key == "Enter"){
+                      searching(event.target.value)
+                    }
+                  }}
+                />
+              </Pane>
+
+              <Pane className="p-3 xl:mx-4 xl:rounded-md bg-white" width="100%">
+                {data && data.map((data, index) => {
+                  return(
+                    <Pane display="grid" gridTemplateColumns="50px 1fr 20px" background="tint1" className={index !== 0 ? "py-2" : ""}>
+                      <Heading size={100} className="py-8 mx-auto">{index + 1}</Heading>
+                      <Pane className="p-4">
+                        <Heading size={200}>Akaun : {data.A_NO}</Heading>
+                        <Heading size={200}>No Invois : {data.AP_INVOICE_NO}</Heading>
+                        <Heading size={200}>Status : {data.AP_STATUS == '1' ? "Berjaya" : "Tidak Berjaya"}</Heading>
+                      </Pane>
+                      <Heading className="py-8 mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
+                    </Pane>
+                  )
+                })}
+                {!data && (() => {
+                  return(
+                    <Pane display="grid" gridTemplateColumns="50px 1fr 20px">
+                      <Heading size={100}></Heading>
+                      <Pane>
+                        <Heading size={200}> -- Tiada Maklumat --</Heading>
+                      </Pane>
+                      <Heading></Heading>
+                    </Pane>
+                  )
+                })}
+                {/* <table id="example" className="display" border="0">
                   <thead>
                     <tr>
                       <th>
@@ -233,13 +271,54 @@ function Bill(props) {
                         );
                       })}
                   </tbody>
-                </table>
+                </table> */}
               </Pane>
             </div>
           </div>
         </div>
       </div>
     );
+
+  else {
+    return (
+      <div>
+        <Sidebar />
+        <div
+          className="relative md:ml-64 bg-gray-400"
+          style={{ height: "100vh" }}
+        >
+          <Navbar />
+          <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
+            <div className="flex flex-wrap ">
+              <Pane
+                background="#2c3e50"
+                className="xl:mx-4 xl:rounded-md"
+                width="100%"
+              >
+                <Topbaer
+                  title="Laporan / Laporan Transaksi"
+                  leftButtonIcon={ArrowLeftIcon}
+                  onClickLeftButton={() => window.history.back()}
+                />
+              </Pane>
+
+              <div className="w-full bg-transparent px-3">
+                <Pane
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  paddingY={100}
+                >
+                  <Heading size={200}>Tiada data dijumpai.</Heading>
+                  {/* <Spinner /> */}
+                </Pane>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Bill;
