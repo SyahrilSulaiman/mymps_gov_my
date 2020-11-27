@@ -38,12 +38,15 @@ export default function Sidebar() {
             Portal MyMPS
           </Link>
           {/* User */}
-          <ul className="md:hidden items-center flex flex-wrap list-none">
-            <i className="fas fa-user"></i>
-            <li className="inline-block relative">
-              <UserDropdown />
-            </li>
-          </ul>
+          
+            <ul className="md:hidden items-center flex flex-wrap list-none">
+              {// <i className="fas fa-user"></i>
+              // <li className="inline-block relative">
+              //   <UserDropdown />
+              // </li>
+              }
+            </ul>
+        
           {/* Collapse */}
           <div
             className={

@@ -11,12 +11,13 @@ function Register(props) {
   sessionStorage.removeItem('GoogleEmail');
   sessionStorage.removeItem('GoogleName');
 
+
   const username      = useFormInput("");
   const password      = useFormInput("");
   const confpassword  = useFormInput("");
   const email         = useFormInput("");
   const confemail     = useFormInput("");
-  const nokp          = useFormInput("");
+  const [nokp, setNOKP] = useState("");
   const ssm           = useFormInput("");
   const notel         = useFormInput("");
   const color         = "blue";
@@ -35,15 +36,15 @@ function Register(props) {
       swal("Opss!", "Sila masukkan kata nama anda.", "error");
       return false;
     }
-    else if (nokp.value == "") {
+    else if (nokp == "") {
       swal("Opss!", "Sila masukkan nombor kad pengenalan anda.", "error");
       return false;
     }
-    else if (nokp.value.length < 12 || nokp.value.length > 12) {
+    else if (nokp.length < 12 || nokp.length > 12) {
       swal("Opss!", "No kad pengenalan yang anda masuk tidak sah.", "error");
       return false;
     }
-    else if (!nokp.value.match(numbers)) {
+    else if (!nokp.match(numbers)) {
       swal("Opss!", "No kad pengenalan yang anda masuk tidak sah.", "error");
       return false;
     }
@@ -69,13 +70,13 @@ function Register(props) {
     }
     else {
 
-      if (nokp.value.match(numbers)) {
+      if (nokp.match(numbers)) {
 
         var formdata = new FormData();
         formdata.append("username", username.value);
         formdata.append("password", password.value);
         formdata.append("email", email.value);
-        formdata.append("nokp", nokp.value);
+        formdata.append("nokp", nokp);
         formdata.append("notel", notel.value);
         formdata.append("type", "individu");
 
@@ -96,9 +97,9 @@ function Register(props) {
               setLoading("false");
               swal("Tahniah!", "Pendaftaran sebagai pengguna MyMPS berjaya! Sila sahkan akaun anda sebagai pengguna melalui klik pada pautan di emel anda.", "success");
 
-              setUserSession(btoa(formdata), username.value, nokp.value, email.value);
+              setUserSession(btoa(formdata), username.value, nokp, email.value);
               sessionStorage.setItem("notel", notel.value);
-              props.history.push("/login");
+              props.history.push("/bill");
 
             } else {
               setLoading("false");
@@ -175,8 +176,9 @@ function Register(props) {
               setLoading("false");
               swal("Tahniah!", "Pendaftaran sebagai pengguna MyMPS berjaya! Sila sahkan akaun anda sebagai pengguna melalui klik pada pautan di emel anda.", "success");
 
-              //setUserSession(btoa(formdata), username.value, ssm.value, email.value);
-              props.history.push("/login");
+              setUserSession(btoa(formdata), username.value, ssm.value, email.value);
+              sessionStorage.setItem("notel", notel.value);
+              props.history.push("/bill");
 
             } else {
               setLoading("false");
@@ -269,7 +271,7 @@ function Register(props) {
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label for="last_name" className="block text-sm font-medium leading-5 text-gray-700">Nombor Kad Pengenalan</label>
-                              <input {...nokp} id="nokp" placeholder="cth: 923456061278" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <input onChange={(e) => setNOKP(e.target.value)} placeholder="cth: 923456061278" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">

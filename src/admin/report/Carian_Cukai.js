@@ -17,14 +17,17 @@ export default function Carian_Cuaki({type, startDate}){
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+            e.preventDefault();
+            console.log(account);
+            console.log(type);
+            console.log(startDate);
             const formData = new FormData();
             formData.append('account',account);
             formData.append('type',type);
             formData.append('date',startDate);
             axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=laporan_cukai_taksiran',formData)
             .then(res => {
-                // console.log(res.data);
+                console.log(res.data);
                 // console.log(JSON.parse(res.data.result))
                 setLoading(true);
                 if(res.data.status === 'success'){
@@ -46,7 +49,9 @@ export default function Carian_Cuaki({type, startDate}){
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="flex flex-wrap">
                         <div className="w-full">
-                            <Pane display="flex">
+                            {
+                                type === '' ? '' :
+                                <Pane display="flex">
                                 <TextInputField
                                     width="100%"
                                     required
@@ -71,6 +76,8 @@ export default function Carian_Cuaki({type, startDate}){
                                     }
                                 />
                             </Pane>
+                            }
+
                             <Pane>
                                 <Button
                                     type="submit"

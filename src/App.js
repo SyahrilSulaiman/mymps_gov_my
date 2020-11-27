@@ -33,10 +33,15 @@ import Add from "./Add";
 import UserReport from "./UserReport";
 import Pdf from "./ReactPDF";
 
+import cukaitaksiran from "./ListCukaiTaksiran";
+import kompaun from "./ListKompaun";
+import lesen from "./ListLesen";
+
 import Admin_Dashboard from "./admin/Dashboard_Admin";
 import Admin_Setting from "./admin/Setting_Admin";
 import Admin_UserManagement from "./admin/UserManagement_Admin";
 import Admin_Report from "./admin/Report_Admin";
+import Admin_UserStatus from "./admin/Report_UserStatus";
 import UserDetail from "./admin/UpdateUser_Admin";
 import AddUser from "./admin/AddUser_Admin";
 
@@ -93,16 +98,6 @@ function App() {
   }, []);
 
   if (authLoading && getToken()) {
-
-    // Loading indicator
-    // return (
-    //   <section
-    //     {...containerProps}
-    //     style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
-    //   >
-    //     {indicatorEl} {/* renders only while loading */}
-    //   </section>
-    // );
     return(
       <div></div>
     );
@@ -139,6 +134,10 @@ function App() {
                   component={Admin_Report}
                 />
                 <PrivateRoute
+                  path="/admin/laporan_pengguna"
+                  component={Admin_UserStatus}
+                />
+                <PrivateRoute
                   path="/admin/update_user"
                   component={UserDetail}
                 />
@@ -173,6 +172,9 @@ function App() {
                 }
                 <PrivateRoute path="/setting" component={Setting} />
                 <PrivateRoute path="/bill" component={Bill} />
+                <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran}/>
+                <PrivateRoute path="/kompaun" component={kompaun}/>
+                <PrivateRoute path="/lesen" component={lesen}/>
                 <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
                 <PrivateRoute path="/laporan-pengguna" component={UserReport} />
@@ -199,6 +201,9 @@ function App() {
                 <PrivateRoute path="/home" component={Dashboard} />
                 <PrivateRoute path="/setting" component={Setting} />
                 <PrivateRoute path="/bill" component={Bill} />
+                <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran}/>
+                <PrivateRoute path="/kompaun" component={kompaun}/>
+                <PrivateRoute path="/lesen" component={lesen}/>
                 <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
                 <PrivateRoute path="/add_cukai_taksiran" component={Add} />
@@ -224,6 +229,10 @@ function App() {
                 <PrivateRoute
                   path="/admin/report"
                   component={Admin_Report}
+                />
+                <PrivateRoute
+                  path="/admin/laporan_pengguna"
+                  component={Admin_UserStatus}
                 />
                 <Route path="*" component={NotFound} />
               </Switch>

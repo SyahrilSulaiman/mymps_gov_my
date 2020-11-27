@@ -2,7 +2,7 @@
 import React from "react";
 import Bckg1 from "../assets/img/pattern_react.png";
 import { Link } from "react-router-dom";
-
+import logo1 from "../assets/img/logo1.png";
 import IndexNavbar from "../components/Navbars/IndexNavbar.js";
 import Footer from "../components/Footers/Footer.js";
 
@@ -13,12 +13,13 @@ export default function Index() {
       <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
         <div className="container mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
-            <div className="pt-32 sm:pt-0">
+          <img src={logo1} className="pl-32 w-auto" style={{ height: "120px", marginBottom:"20px" }}></img>
+            <div className="pt-8 sm:pt-0">
               <h2 className="font-semibold text-4xl text-gray-700">
-                Selamat Datang ke myMPS
+                Selamat Datang ke mymps
               </h2>
-              <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                MyMPS merupakan sebuah gerbang pembayaran pelbagai bil <br></br><span className="text-bold text-gray-700">Majlis Perbandaran Selayang.</span>
+              <p className="mt-1 text-lg leading-relaxed text-gray-600">
+                mymps merupakan sebuah gerbang pembayaran pelbagai bil <br></br><span className="text-bold text-gray-700">Majlis Perbandaran Selayang.</span>
               </p>
               <div className="mt-12">
                 <a

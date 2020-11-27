@@ -16,41 +16,17 @@ export default function SenaraiBil(props) {
         window.location.href = "/bill";
     }
 
-    const handleBill = () => {
-        console.log('Bil');
-        const formData = new FormData;
-        formData.append('noakaun', atob(atob(sessionStorage.noakaun)));
-        // formData.append('noakaun',1001);
-        formData.append('nokp', nokp);
-        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=export_pdf', formData)
-            .then(res => {
-                console.log(res);
-
-                if (res.data.status === 'success') {
-                    console.log('success');
-                    //window.open('https://mymps.corrad.my/rp/bil_cukai_taksiran.php?token=' + res.data.token);
-                    window.location.href = 'https://mymps.corrad.my/rp/bil_cukai_taksiran.php?token=' + res.data.token;
-                }
-                else {
-                    swal('Resit tak dijumpai', 'Sila hubungi pentadbir system', 'error');
-                }
-            })
-            .catch(err => {
-                console.log(err);
-                swal('Ralat', 'Sila hubungi pentadbir system', 'error');
-            })
+    const handleBill = (e) => {
+        window.location.href = "https://mymps.corrad.my/rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
     }
 
-    const handleReceipt = () => {
-        //console.log('Receipt');
-        //window.open('https://mymps.corrad.my/rp/resit.php');
-        window.location.href = 'https://mymps.corrad.my/rp/resit.php';
+    const handleReceipt = (e) => {
+        window.location.href = 'https://mymps.corrad.my/rp/resit.php?account=' + btoa(e);
     }
 
     useEffect(() => {
         axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun=' + sessionStorage.getItem('noakaun'))
             .then(res => {
-                console.log(res.data.data[0])
                 if (res.data.status == 'success') {
                     setBill({
                         bill: res.data
@@ -181,7 +157,7 @@ export default function SenaraiBil(props) {
                                         </Pane>
                                     </Card>
                                     <Card
-                                        onClick={() => handleBill()}
+                                        onClick={() => handleBill(btoa(bills.bill.data[0][0].NOAKAUN))}
                                         background="tint2"
                                         marginBottom={majorScale(1)}
                                         padding={minorScale(2)}
@@ -190,8 +166,10 @@ export default function SenaraiBil(props) {
                                             <Heading size={200}><i className="fas fa-receipt"></i> Bil PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
                                         </Pane>
                                     </Card>
+                                {
+                                    bills.bill.status_bil === '1' ? (
                                     <Card
-                                        onClick={() => handleReceipt()}
+                                        onClick={() => handleReceipt(btoa(bills.bill.data[0][0].NOAKAUN))}
                                         background="tint2"
                                         marginBottom={majorScale(2)}
                                         padding={minorScale(2)}
@@ -200,6 +178,8 @@ export default function SenaraiBil(props) {
                                             <Heading size={200}><i className="fas fa-receipt"></i> Resit PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
                                         </Pane>
                                     </Card>
+                                     ) : ''
+                                }
                                     <div className="flex flex-wrap py-3 w-full rounded-md">
                                         <Pane width="100%" >
                                             <Button

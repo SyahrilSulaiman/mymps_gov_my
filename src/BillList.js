@@ -5,7 +5,6 @@ import swal from "sweetalert";
 import NoScroll from "no-scroll";
 import BayarCukai from "./BayarCukai";
 import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon } from "evergreen-ui";
-import iconBill from "./assets/img/bill.png";
 
 export default function BillList() {
 
@@ -40,6 +39,8 @@ export default function BillList() {
   const [dataset, setDataSet] = useState({
     data: [],
   });
+  const [loading, setLoading] = useState(false);
+  const [isNoData, setIsNoData] = useState(false);
 
   useEffect(() => {
 
@@ -64,13 +65,16 @@ export default function BillList() {
         formData
       )
       .then((res) => {
+        setLoading(true);
         console.log(res.data);
         if (res.data.status === "success") {
           setDataSet({
             data: res.data.data,
           });
+          setLoading(false);
         } else {
-          
+          setIsNoData(true);
+          setLoading(false);
         }
       })
       .catch((err) => {
@@ -142,12 +146,27 @@ export default function BillList() {
       );
     })
   ) : (
+      
       <div className="w-full bg-transparent px-3">
-          {/* <Pane display="flex" alignItems="center" justifyContent="center" background="white" paddingY={100}>
-            <Heading size={200}>Tekan pada butang <Button type="button" appearance="primary" intent="success">Tambah Bil</Button> untuk menambah bil.</Heading>
-          </Pane> */}
+          <Pane display="flex" alignItems="center" justifyContent="center" background="white" paddingY={100}>
+            {/* <Heading size={200}>Tekan pada butang <Button type="button" appearance="primary" intent="success">Tambah Bil</Button> untuk menambah bil.</Heading> */}
+            <Spinner />
+          </Pane>
       </div>
-    );
+    )
 
-  return <div className="">{bills}</div>;
+  if(isNoData){
+    return(
+    <div className="w-full bg-transparent px-3">
+        <Pane display="flex" alignItems="center" justifyContent="center" background="white" paddingY={100}>
+          <Heading size={200}>Tekan pada butang <Button type="button" appearance="primary" intent="success">Tambah Bil</Button> untuk menambah bil.</Heading>
+        </Pane>
+      </div>
+      )
+  }
+  else{
+    return (
+      <div className="">{bills}</div>
+      );
+}
 }

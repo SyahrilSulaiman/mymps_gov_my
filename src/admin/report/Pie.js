@@ -1,113 +1,63 @@
-import React,{useState, useEffect} from 'react'
-import {PieChart} from 'react-minimal-pie-chart'
+import React, { useState, useEffect } from 'react';
+import { PieChart, Pie, Sector, Cell, Legend, Line, Bar, Area, LabelList} from 'recharts';
 
-function Pie(props) {
-    const [show, setShow] = useState(true);
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-    let data = [];
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+  cx, cy, midAngle, innerRadius, outerRadius, percent, index,
+}) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    props.ages.map((obj) => {
-        var randomColor = "#000000".replace(/0/g, function () {
-        return (~~(Math.random() * 16)).toString(16);
-        });
+  return (
+    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
 
-        let insert = {
-        color: randomColor,
-        title: obj.key,
-        value: obj.votes,
-        };
+const data = [
+  { name: 'Group A', value: 400 },
+  { name: 'Group B', value: 300 },
+  { name: 'Group C', value: 300 },
+  { name: 'Group D', value: 200 },
+];
 
-        data.push(insert);
-    });
 
-    const renderRows = props.ages.map((obj) => {
-        return (
-        <tr key={`group-${obj.key}`}>
-            <td>{obj.key}</td>
-            <td>{obj.votes}</td>
-            <td>{obj.percentage >= 100 ? obj.percentage / 2 : obj.percentage}%</td>
-        </tr>
-        );
-    });
+export default function LaporanPengguna({report}) {
 
+  const data2 = [];
+  console.log(report);
+  report.map(res=>{
+    data2.push({
+      name:res.name,
+      value: parseInt(res.value)
+    })
+  })
     return (
-        <div onClick={(e) => setShow(!show)}>
-          <div className="inline-container">
-            <h4>Age Demographic</h4>
-            {/* {show ? <FaChevronDown /> : <FaChevronUp />} */}
-          </div>
-    
-          {show ? (
-            <> 
-              <div className="chart-container">
-                <PieChart
-                  animate
-                  animationDuration={500}
-                  animationEasing="ease-out"
-                  center={[50, 50]}
-                  data={data}
-                  lengthAngle={360}
-                  lineWidth={15}
-                  paddingAngle={0}
-                  radius={50}
-                  rounded
-                  startAngle={0}
-                  viewBoxSize={[100, 100]}
-                  label={(data) => data.dataEntry.title}
-                  labelPosition={65}
-                  labelStyle={{
-                    // fontSize: "10px",
-                    // fontColor: "FFFFFA",
-                    // fontWeight: "800",
-                  }}
-                />
-              </div>
-    
-              <table>
-                <thead>
-                  <tr>
-                    <th>Age Group</th>
-                    <th>Votes</th>
-                    <th>Percentage</th>
-                  </tr>
-                </thead>
-                <tbody>{renderRows}</tbody>
-              </table>
-            </>
-          ) : null}
-    
-          <style>{`
-            .chart-container {
-              height: 200px;
-              margin-left: auto;
-              margin-right: auto;
-              width: 200px;
-            }
-    
-            .inline-container {
-              align-items: center;
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-              width: 100%;
-            }
-    
-            table {
-              margin-left: auto;
-              margin-right: auto;
-              margin-top: 3em;
-              table-layout: fixed;
-              width: 90%;
-            }
-            table tr th {
-              text-align: left;
-              background: gray;
-              color: white;
-            }
-          `}</style>
-        </div>
-      );
-    };
+      <>
+      <PieChart width={400} height={350}>
+        <Pie
+          data={data2}
+          cx={200}
+          cy={200}
+          labelLine={false}
+          label={renderCustomizedLabel}
+          outerRadius={80}
+          fill="#8884d8"
+          dataKey="value"
+        >
+          {
+            data2.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+          }
+{       
+  //  <LabelList dataKey="name" position="top" />
+}        </Pie>
+        <Legend verticalAlign="bottom" align="center"/>
 
-export default Pie
-
+      </PieChart>
+      </>
+    );
+}
