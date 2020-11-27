@@ -31,6 +31,7 @@ export default function Search({ type }) {
             }
         })
             .then(res => {
+
                 if (type === 'nokp') {
                     searchType = 'No Kad Pengenalan';
 
@@ -139,6 +140,20 @@ export default function Search({ type }) {
                                         {loading ? 'Mencari..' : 'Cari'}
                                     </Button>
 
+                                    {
+                                        bill.length > 3 ?
+                                            
+                                                <Button
+                                                    type="button"
+                                                    appearance="primary"
+                                                    className="float-right mr-2"
+                                                >
+                                                    {loading ? 'Menambah..' : 'Tambah Semua'}
+                                                </Button>
+                                            :''
+                                        
+                                    }
+
                                     <Button
                                         type="button"
                                         iconBefore={ArrowLeftIcon}
@@ -156,7 +171,7 @@ export default function Search({ type }) {
                         </div>
                     </form>
                 </div>
-                <div className="relative pb-4 overflow-y-scroll" style={{height:"422px"}}>
+                <div className="relative pb-4 overflow-y-scroll" style={{height:"250px"}}>
                     <div className="flex flex-wrap">
                         <div className="w-full">
                             <Pane background="tint1">

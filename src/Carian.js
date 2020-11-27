@@ -11,7 +11,6 @@ export default function Carian({bill,type, display}){
     let accountType = "";
 
         useEffect(() =>{
-            console.log('bill ',bill);
             if(type === 'nokp')
             accountType = 'No Kad Pengenalan';
             if(type === 'akaun')
