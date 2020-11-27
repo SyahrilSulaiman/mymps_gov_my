@@ -27,12 +27,10 @@ export default function SenaraiBil(props) {
     useEffect(() => {
         axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun=' + sessionStorage.getItem('noakaun'))
             .then(res => {
-                // console.log(res.data.data[0])
                 if (res.data.status == 'success') {
                     setBill({
                         bill: res.data
                     });
-                    console.log(res.data);
                     setLoading(false);
                 }
             })
