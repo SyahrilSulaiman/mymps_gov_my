@@ -20,10 +20,8 @@ export default function SenaraiBil(props) {
         window.location.href = "https://mymps.corrad.my/rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
     }
 
-    const handleReceipt = () => {
-        //console.log('Receipt');
-        //window.open('https://mymps.corrad.my/rp/resit.php');
-        window.location.href = 'https://mymps.corrad.my/rp/resit.php';
+    const handleReceipt = (e) => {
+        window.location.href = 'https://mymps.corrad.my/rp/resit.php?account=' + btoa(e);
     }
 
     useEffect(() => {
@@ -170,7 +168,7 @@ export default function SenaraiBil(props) {
                                         </Pane>
                                     </Card>
                                     <Card
-                                        onClick={() => handleReceipt()}
+                                        onClick={() => handleReceipt(btoa(bills.bill.data[0][0].NOAKAUN))}
                                         background="tint2"
                                         marginBottom={majorScale(2)}
                                         padding={minorScale(2)}
