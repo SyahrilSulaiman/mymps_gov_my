@@ -194,8 +194,8 @@ function Bill(props) {
                   onChange = {handleSearch}
                 />
               </Pane>
-
-              <Pane className="p-3 xl:mx-4 xl:rounded-md bg-white" width="100%">
+              
+              <Pane className="p-3 xl:mx-4 xl:rounded-md bg-white overflow-y-scroll" style={{ height: "75vh" }} width="100%">
                 {searchResult && searchResult.map((data, index) => {
                   return(
                     <Pane onClick={(e) =>viewPenyata(data.A_NO)} key={data.A_NO} display="grid" gridTemplateColumns="50px 1fr 20px" background="tint1" className={"cursor-pointer hover:bg-gray-300 "+(index !== 0 ? "py-2" : "")}>

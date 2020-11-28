@@ -28,18 +28,19 @@ function Bill(props) {
 	return (
 		<div>
 			<Sidebar />
-			<div className="relative md:ml-64 bg-gray-400" style={{ height: "100vh" }}>
+			<div className="relative md:ml-64" style={{ height: "100vh" }} >
 				<Navbar />
 				<div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
 					<div className="flex flex-wrap ">
 						<Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-							<Topbaer title="Bil / Senarai Bil" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={handleLogout} />
+							<Topbaer title="Bil / Senarai Bil"/>
+							{/*<Topbaer title="Bil / Senarai Bil" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={handleLogout}/>*/}
 						</Pane>
 						<div className="w-full mx-4">
 							<div className="flex-auto overflow-y-scroll" style={{ height: "100vh" }}>
 								{/* <BillList /> */}
 								<Pane width="100%">
-									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542" onClick={() => window.location.href = "/cukaitaksiran"}>
+									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542" onClick={() => window.location.href = "/cukaitaksiran"} cursor="pointer">
 										<Pane><Heading color="#f1f2f6"> Cukai Taksiran </Heading><small className="text-gray-500">Senarai bil cukai taksiran</small></Pane>
 										<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
 									</Pane>

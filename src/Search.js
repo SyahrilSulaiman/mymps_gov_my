@@ -165,9 +165,9 @@ export default function Search({ type }) {
                     }
                     placeholder={
                       type === "akaun"
-                        ? "cth: 123456"
+                        ? "cth: 1234567"
                         : type === "ssm"
-                        ? "cth A-12345X"
+                        ? "cth 123456-X"
                         : type === "nokp"
                         ? "cth: 901212059876"
                         : "Carian..."
@@ -185,7 +185,7 @@ export default function Search({ type }) {
                     {loading ? "Mencari.." : "Cari"}
                   </Button>
 
-                  {bill.length > 3 ? (
+                  {bill.length > 1 ? (
                     <Button
                       type="button"
                       onClick={() => addAll()}
