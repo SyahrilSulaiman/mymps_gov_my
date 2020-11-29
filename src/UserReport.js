@@ -30,7 +30,7 @@ function Bill(props) {
 
   useEffect(() => {
     var apiUrl =
-      "https://mymps.corrad.my/int/api_generator.php?api_name=userReport";
+      "https://mymps.corrad.my/int/api_generator.php?api_name=laporan_penyata_akaun";
 
     var formData = new FormData();
     formData.append("userid", userid);
@@ -69,7 +69,7 @@ function Bill(props) {
     console.log(paramSearch);
     if (paramSearch !== null) {
       var apiUrl =
-        "https://mymps.corrad.my/int/api_generator.php?api_name=userReport";
+        "https://mymps.corrad.my/int/api_generator.php?api_name=laporan_penyata_akaun";
 
       var formData = new FormData();
       formData.append("userid", userid);
