@@ -37,7 +37,7 @@ function Bill(props) {
 							{/*<Topbaer title="Bil / Senarai Bil" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={handleLogout}/>*/}
 						</Pane>
 						<div className="w-full mx-4">
-							<div className="flex-auto overflow-y-scroll" style={{ height: "100vh" }}>
+							<div className="flex-auto" style={{ height: "100vh" }}>
 								{/* <BillList /> */}
 								<Pane width="100%">
 									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542" onClick={() => window.location.href = "/cukaitaksiran"} cursor="pointer">
