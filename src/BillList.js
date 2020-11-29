@@ -94,13 +94,13 @@ export default function BillList() {
           }
           key={bill.NOAKAUN}
         >
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap ">
             <div className="w-full px-2 border-white">
               <Pane
               borderColor="white"
               width="100%"
               background="#dfe6e9"
-              className="p-2 border"
+              className="p-2 border cursor-pointer hover:bg-gray-500"
               display="grid"
               gridTemplateColumns="1px 1fr 10px"
               >

@@ -66,9 +66,9 @@ export default function SenaraiBil(props) {
         return (
             <div>
                 <Sidebar />
-                <div className="relative bg-gray-400 md:ml-64" style={{ height: "150vh" }}>
+                <div className="relative bg-gray-400 md:ml-64" style={{ height: "100vh", background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
                     <Navbar />
-                    <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
+                    <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
                         <div className="flex flex-wrap">
                             <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
                                 <Topbaer title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
@@ -105,9 +105,9 @@ export default function SenaraiBil(props) {
         return (
             <div>
                 <Sidebar />
-                <div className="relative bg-gray-400 md:ml-64 " style={{ height: "150vh" }}>
+                <div className="relative bg-gray-400 md:ml-64 " style={{ height: "100vh", background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
                     <Navbar />
-                    <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
+                    <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
                         <div className="flex flex-wrap">
                             <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
                                 <Topbaer title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />

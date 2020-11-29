@@ -30,8 +30,8 @@ function Bill(props) {
 			<Sidebar />
 			<div className="relative md:ml-64" style={{ height: "100vh" }} >
 				<Navbar />
-				<div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
-					<div className="flex flex-wrap ">
+				<div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16"  style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
+					<div className="flex flex-wrap" >
 						<Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
 							<Topbaer title="Bil / Senarai Bil"/>
 							{/*<Topbaer title="Bil / Senarai Bil" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={handleLogout}/>*/}
@@ -44,11 +44,11 @@ function Bill(props) {
 										<Pane><Heading color="#f1f2f6"> Cukai Taksiran </Heading><small className="text-gray-500">Senarai bil cukai taksiran</small></Pane>
 										<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
 									</Pane>
-									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542"  opacity={0.3} color="#f1f2f6" cursor="not-allowed">
+									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542"  opacity={0.5} color="#f1f2f6" cursor="not-allowed">
 										<Pane><Heading color="#f1f2f6"> Kompaun </Heading><small className="text-gray-500">Senarai bil kompaun</small></Pane>
 										<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
 									</Pane>
-									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542"  opacity={0.3} color="#f1f2f6" cursor="not-allowed">
+									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542"  opacity={0.5} color="#f1f2f6" cursor="not-allowed">
 										<Pane><Heading color="#f1f2f6"> Lesen </Heading><small className="text-gray-500">Senarai bil lesen</small></Pane>
 										<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
 									</Pane>

@@ -120,10 +120,10 @@ function Bill(props) {
         <Sidebar />
         <div
           className="relative md:ml-64 bg-gray-400"
-          style={{ height: "100vh" }}
+          style={{ height: "120vh", background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}
         >
           <Navbar />
-          <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
+          <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
             <div className="flex flex-wrap ">
               <Pane
                 background="#2c3e50"
@@ -159,10 +159,10 @@ function Bill(props) {
         <Sidebar />
         <div
           className="relative md:ml-64 bg-gray-400"
-          style={{ height: "100vh" }}
+          style={{ height: "100vh", background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}
         >
           <Navbar />
-          <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
+          <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
             <div className="flex flex-wrap ">
               <Pane
                 background="#2c3e50"
@@ -194,7 +194,7 @@ function Bill(props) {
                 />
               </Pane>
               
-              <Pane className="p-3 xl:mx-4 xl:rounded-md bg-white overflow-y-scroll" style={{ height: "75vh" }} width="100%">
+              <Pane className="p-3 xl:mx-4 xl:rounded-md bg-white overflow-y-scroll" style={{ height: "68vh" }} width="100%">
                 {searchResult && searchResult.map((data, index) => {
                   return(
                     <Pane key={data.A_NO} display="grid" gridTemplateColumns="50px 1fr 20px" background="tint1" className={" hover:bg-gray-300 "+(index !== 0 ? "py-2" : "")}>
