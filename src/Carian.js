@@ -28,7 +28,6 @@ export default function Carian({bill,type, display}){
             Axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill',formData)
             .then(res => {
 
-                console.log('Response : ',res.data)
                 if(res.data.status === "success")
                 {
                     toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"});

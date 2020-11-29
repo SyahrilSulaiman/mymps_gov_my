@@ -18,7 +18,6 @@ export default function BillList() {
     // set=[e.target.id]
     // return (
     // 	 senarai = <Senarai />
-    console.log("View");
     sessionStorage.setItem("noakaun", btoa(btoa(e)));
     window.location.href = "/bill_cukai_taksiran";
   };
@@ -66,7 +65,6 @@ export default function BillList() {
       )
       .then((res) => {
         setLoading(true);
-        console.log(res.data);
         if (res.data.status === "success") {
           setDataSet({
             data: res.data.data,
@@ -85,10 +83,6 @@ export default function BillList() {
 
   }, []);
 
-  const emptyHandler = () => {
-    console.log("Test Handler");
-  };
-
   const bills = dataset.data.length ? (
     dataset.data.map((bill) => {
       return (
@@ -100,13 +94,13 @@ export default function BillList() {
           }
           key={bill.NOAKAUN}
         >
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap ">
             <div className="w-full px-2 border-white">
               <Pane
               borderColor="white"
               width="100%"
               background="#dfe6e9"
-              className="p-2 border"
+              className="p-2 border cursor-pointer hover:bg-gray-500"
               display="grid"
               gridTemplateColumns="1px 1fr 10px"
               >

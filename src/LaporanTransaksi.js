@@ -25,12 +25,12 @@ function Bill(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [searchResult, setSearchResult] = useState([]);
-  const [search, setSearch] = useState('');
+  const [searchResult,setSearchResult] = useState([]);
+  const [search,setSearch] = useState('');
 
   useEffect(() => {
     var apiUrl =
-      "https://mymps.corrad.my/int/api_generator.php?api_name=laporan_penyata_akaun";
+      "https://mymps.corrad.my/int/api_generator.php?api_name=userReport";
 
     var formData = new FormData();
     formData.append("userid", userid);
@@ -60,15 +60,15 @@ function Bill(props) {
     setSearch(e.target.value);
   }
 
-  useEffect(() => {
-    const results = data.filter(json => json.A_NO.toUpperCase().includes(search))
-    setSearchResult(results);
-  }, [search]);
+  useEffect(() =>{
+    const results = data.filter( json => json.A_NO.toUpperCase().includes(search))
+    setSearchResult(results);    
+  },[search]);
 
   const searching = (paramSearch) => {
     if (paramSearch !== null) {
       var apiUrl =
-        "https://mymps.corrad.my/int/api_generator.php?api_name=laporan_penyata_akaun";
+        "https://mymps.corrad.my/int/api_generator.php?api_name=userReport";
 
       var formData = new FormData();
       formData.append("userid", userid);
@@ -120,11 +120,11 @@ function Bill(props) {
         <Sidebar />
         <div
           className="relative md:ml-64 bg-gray-400"
-          style={{ height: "100vh", background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}
+          style={{ height: "120vh", background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}
         >
           <Navbar />
-          <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
-            <div className="flex flex-wrap " style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
+          <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
+            <div className="flex flex-wrap ">
               <Pane
                 background="#2c3e50"
                 className="xl:mx-4 xl:rounded-md"
@@ -170,7 +170,7 @@ function Bill(props) {
                 width="100%"
               >
                 <Topbaer
-                  title="Laporan Penyata Akaun"
+                  title="Laporan Transaksi"
                   // leftButtonIcon={ArrowLeftIcon}
                   // onClickLeftButton={() => window.history.back()}
                 />
@@ -190,26 +190,31 @@ function Bill(props) {
                   //   }
                   // }}
                   value={search}
-                  onChange={handleSearch}
+                  onChange = {handleSearch}
                 />
               </Pane>
               
               <Pane className="p-3 xl:mx-4 xl:rounded-md bg-white overflow-y-scroll" style={{ height: "68vh" }} width="100%">
                 {searchResult && searchResult.map((data, index) => {
-                  return (
-                    <Pane onClick={(e) => viewPenyata(data.A_NO)} key={data.A_NO} display="grid" gridTemplateColumns="50px 1fr 20px" background="tint1" className={"cursor-pointer hover:bg-gray-300 " + (index !== 0 ? "py-2" : "")}>
+                  return(
+                    <Pane key={data.A_NO} display="grid" gridTemplateColumns="50px 1fr 20px" background="tint1" className={" hover:bg-gray-300 "+(index !== 0 ? "py-2" : "")}>
                       <Heading size={100} className="py-8 mx-auto">{index + 1}</Heading>
                       <Pane className="p-4">
                         <Heading size={200}>Akaun : {data.A_NO}</Heading>
                         <Heading size={200}>No Invois : {data.AP_INVOICE_NO}</Heading>
-                        <Pane display="flex"><Heading size={200}>Status :</Heading><Heading size={200} color={data.AP_STATUS == '1' ? "green" : "red"}> {data.AP_STATUS == '1' ? "Berjaya" : "Tidak Berjaya"}</Heading></Pane>
+                        <Heading size={200}>No Resit : {(data.AP_RECEIPT_NO !== '' || data.AP_RECEIPT_NO !== null) ? data.AP_RECEIPT_NO : 'Tiada Maklumat'}</Heading>
+                        <Heading size={200}>Pembayar : {data.AP_PAYOR_NAME}</Heading>
+                        <Heading size={200}>Emel : {data.AP_PAYOR_EMAIL}</Heading>
+                        <Heading size={200}>No. Telefon : {data.AP_PAYOR_PHONE}</Heading>
+                        <Heading size={200}>Jumlah Pembayaran : RM {data.AP_AMOUNT}</Heading>
+                        <Heading size={200}>Tarikh : {data.AP_DATETIME_PAYMENT !== null ? data.AP_DATETIME_PAYMENT : 'Tiada Maklumat'}</Heading>
+                        <Heading size={200}>Status : {data.AP_STATUS == '1' ? "Berjaya" : "Tidak Berjaya"}</Heading>
                       </Pane>
-                      <Heading className="py-4 mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
                     </Pane>
                   )
                 })}
                 {!searchResult && (() => {
-                  return (
+                  return(
                     <Pane display="grid" gridTemplateColumns="50px 1fr 20px">
                       <Heading size={100}></Heading>
                       <Pane>

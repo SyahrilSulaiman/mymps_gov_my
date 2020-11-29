@@ -3,7 +3,9 @@ import {Pane, Text, Heading} from 'evergreen-ui'
 import {Link} from 'react-router-dom';
 
 export default function JumlahPembayaran({value, user}){
-    console.log('Jumlah : ',user);
+    // const viewUser = (e) => {
+    //     history.push("./admin/usermanagement");
+    // }
     return (
         
         <Pane clearfix className={'rounded-md w-full flex flex-wrap min-height-screen'}>
@@ -19,9 +21,9 @@ export default function JumlahPembayaran({value, user}){
             justifyContent="center"
             alignItems="center"
             flexDirection="column"
-            className={'rounded-md bg-white  lg:flex-1 cursor-pointer hover:bg-gray-300'}
+            className={'rounded-md bg-white  lg:flex-1 cursor-pointer text-white hover:bg-green-600 bg-gradient-to-tr from-green-300 to-green-400'}
+            // onClick={viewUser}
             >
-            <Link to ="./usermanagement" className="leading-none">
                 <Text>Jumlah Pengguna</Text>
                 {
                     // pengguna.map((res,index) => {
@@ -41,7 +43,6 @@ export default function JumlahPembayaran({value, user}){
                     <div>
                         <Heading size={100}>Maklumat Lanjut </Heading>
                     </div>
-                </Link>
             </Pane>
 
 

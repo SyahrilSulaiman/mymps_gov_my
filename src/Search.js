@@ -22,7 +22,6 @@ export default function Search({ type }) {
   const [array, setArray] = useState(null);
 
   useEffect(() => {
-    // console.log(type)
   }, [type]);
 
   const handleChange = (e) => {
@@ -84,13 +83,11 @@ export default function Search({ type }) {
         if (type === "ssm") {
           searchType = "No SSM";
           res = res.data;
-          // console.log(res);
 
           if (res.status === "FAILED") {
             setDisplay(false);
             swal("Tidak ditemui", searchType + " tidak ditemui", "error");
           } else {
-            // console.log('Search SSM: ',res)
             setBill(res);
             setArray(res);
             setDisplay(true);
@@ -102,7 +99,6 @@ export default function Search({ type }) {
 
   const addAll = () => {
 
-    console.log(bill);
 
     var formdata = new FormData();
     formdata.append("type", type);
@@ -121,7 +117,6 @@ export default function Search({ type }) {
     fetch(urlAPI1, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
 
         if(result.status == "success"){
             toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"});
@@ -165,9 +160,9 @@ export default function Search({ type }) {
                     }
                     placeholder={
                       type === "akaun"
-                        ? "cth: 123456"
+                        ? "cth: 1234567"
                         : type === "ssm"
-                        ? "cth A-12345X"
+                        ? "cth 123456-X"
                         : type === "nokp"
                         ? "cth: 901212059876"
                         : "Carian..."
@@ -185,7 +180,7 @@ export default function Search({ type }) {
                     {loading ? "Mencari.." : "Cari"}
                   </Button>
 
-                  {bill.length > 3 ? (
+                  {bill.length > 1 ? (
                     <Button
                       type="button"
                       onClick={() => addAll()}

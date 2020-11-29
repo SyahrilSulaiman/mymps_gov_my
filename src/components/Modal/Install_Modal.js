@@ -31,7 +31,7 @@ export default function Modal({Close}){
                                     </Pane>
                                     <Pane paddingLeft={25}>
                                         <Pane>
-                                            <Text size={400} className="font-semibold">1. Buka applikasi ini melalui Chrome</Text>
+                                            <Text size={400} className="font-semibold">1. Buka aplikasi ini melalui Chrome</Text>
                                         </Pane>
                                         <Pane>
                                             <Text size={400} className="font-semibold">2. Tekan ikon menu <i className="fas fa-ellipsis-v text-red-700"></i></Text>
@@ -48,7 +48,7 @@ export default function Modal({Close}){
                                     </Pane>
                                     <Pane paddingLeft={25}>
                                         <Pane>
-                                            <Text size={400} className="font-semibold">1. Buka applikasi ini melalui Safari</Text>
+                                            <Text size={400} className="font-semibold">1. Buka aplikasi ini melalui Safari</Text>
                                         </Pane>
                                         <Pane>
                                             <Text size={400} className="font-semibold">2. Tekan ikon menu <img className="inline h-5" src={ios_out} alt=""/></Text>
