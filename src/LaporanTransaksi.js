@@ -132,9 +132,9 @@ function Bill(props) {
                 width="100%"
               >
                 <Topbaer
-                  title="Laporan Transaksi"
-                  // leftButtonIcon={ArrowLeftIcon}
-                  // onClickLeftButton={() => window.history.back()}
+                  title="Laporan / Laporan Transaksi"
+                  leftButtonIcon={ArrowLeftIcon}
+                  onClickLeftButton={() => window.history.back()}
                 />
               </Pane>
 
@@ -171,9 +171,9 @@ function Bill(props) {
                 width="100%"
               >
                 <Topbaer
-                  title="Laporan Penyata Akaun"
-                  // leftButtonIcon={ArrowLeftIcon}
-                  // onClickLeftButton={() => window.history.back()}
+                  title="Laporan / Laporan Transaksi"
+                  leftButtonIcon={ArrowLeftIcon}
+                  onClickLeftButton={() => window.history.back()}
                 />
               </Pane>
 
@@ -198,16 +198,19 @@ function Bill(props) {
               <Pane className="p-3 xl:mx-4 xl:rounded-md bg-white overflow-y-scroll" style={{ height: "75vh" }} width="100%">
                 {searchResult && searchResult.map((data, index) => {
                   return(
-                    <Pane onClick={(e) =>viewPenyata(data.A_NO)} key={data.A_NO} display="grid" gridTemplateColumns="50px 1fr 20px" background="tint1" className={"cursor-pointer hover:bg-gray-300 "+(index !== 0 ? "py-2" : "")}>
-                      <Heading size={100} className="py-4 mx-auto">{index + 1}</Heading>
+                    <Pane key={data.A_NO} display="grid" gridTemplateColumns="50px 1fr 20px" background="tint1" className={" hover:bg-gray-300 "+(index !== 0 ? "py-2" : "")}>
+                      <Heading size={100} className="py-8 mx-auto">{index + 1}</Heading>
                       <Pane className="p-4">
                         <Heading size={200}>Akaun : {data.A_NO}</Heading>
-                      {
-                        // <Heading size={200}>No Invois : {data.AP_INVOICE_NO}</Heading>
-                        // <Heading size={200}>Status : {data.AP_STATUS == '1' ? "Berjaya" : "Tidak Berjaya"}</Heading>
-                      }
+                        <Heading size={200}>No Invois : {data.AP_INVOICE_NO}</Heading>
+                        <Heading size={200}>No Resit : {(data.AP_RECEIPT_NO !== '' || data.AP_RECEIPT_NO !== null) ? data.AP_RECEIPT_NO : 'Tiada Maklumat'}</Heading>
+                        <Heading size={200}>Pembayar : {data.AP_PAYOR_NAME}</Heading>
+                        <Heading size={200}>Emel : {data.AP_PAYOR_EMAIL}</Heading>
+                        <Heading size={200}>No. Telefon : {data.AP_PAYOR_PHONE}</Heading>
+                        <Heading size={200}>Jumlah Pembayaran : {data.AP_AMOUNT}</Heading>
+                        <Heading size={200}>Tarikh : {data.AP_DATETIME_PAYMENT !== null ? data.AP_DATETIME_PAYMENT : 'Tiada Maklumat'}</Heading>
+                        <Heading size={200}>Status : {data.AP_STATUS == '1' ? "Berjaya" : "Tidak Berjaya"}</Heading>
                       </Pane>
-                      <Heading className="py-4 mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
                     </Pane>
                   )
                 })}

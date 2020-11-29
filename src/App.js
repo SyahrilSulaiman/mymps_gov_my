@@ -31,6 +31,7 @@ import BeforeBayar from "./BeforeBayar";
 import Payment from "./Payment";
 import Add from "./Add";
 import UserReport from "./UserReport";
+import TransactionReport from "./LaporanTransaksi";
 import Pdf from "./ReactPDF";
 
 import cukaitaksiran from "./ListCukaiTaksiran";
@@ -177,7 +178,8 @@ function App() {
                 <PrivateRoute path="/lesen" component={lesen}/>
                 <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
-                <PrivateRoute path="/laporan-pengguna" component={UserReport} />
+                <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
+                <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
                 <PrivateRoute path="/add_cukai_taksiran" component={Add} />
                 <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar}/>
                 <Route path="/receipt.php" component={Pdf} />
@@ -207,7 +209,8 @@ function App() {
                 <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
                 <PrivateRoute path="/add_cukai_taksiran" component={Add} />
-                <PrivateRoute path="/laporan-pengguna" component={UserReport} />
+                <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
+                <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
                 <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar}/>
                 <Route path="/receipt.php" component={Pdf} />
                 <PublicRoute

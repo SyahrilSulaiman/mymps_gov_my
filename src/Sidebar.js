@@ -130,21 +130,42 @@ export default function Sidebar() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/laporan-pengguna") !== -1
+                    (window.location.href.indexOf("/laporan-transaksi") !== -1
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-800 hover:text-gray-600")
                   }
-                  to="/laporan-pengguna"
+                  to="/laporan-transaksi"
                 >
                   <i
                     className={
                       "fas fa-file mr-2 text-sm " +
-                      (window.location.href.indexOf("/laporan-pengguna") !== -1
+                      (window.location.href.indexOf("/laporan-transaksi") !== -1
                         ? "opacity-75"
                         : "text-gray-400")
                     }
                   ></i>{" "}
-                  Laporan
+                  Laporan Transaksi
+                </Link>
+              </li>
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/laporan-penyata-akaun") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/laporan-penyata-akaun"
+                >
+                  <i
+                    className={
+                      "fas fa-file mr-2 text-sm " +
+                      (window.location.href.indexOf("/laporan-penyata-akaun") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  Laporan Penyata Akaun
                 </Link>
               </li>
 
