@@ -66,7 +66,6 @@ function Bill(props) {
   },[search]);
 
   const searching = (paramSearch) => {
-    console.log(paramSearch);
     if (paramSearch !== null) {
       var apiUrl =
         "https://mymps.corrad.my/int/api_generator.php?api_name=userReport";
@@ -132,9 +131,9 @@ function Bill(props) {
                 width="100%"
               >
                 <Topbaer
-                  title="Laporan / Laporan Transaksi"
-                  leftButtonIcon={ArrowLeftIcon}
-                  onClickLeftButton={() => window.history.back()}
+                  title="Laporan Transaksi"
+                  // leftButtonIcon={ArrowLeftIcon}
+                  // onClickLeftButton={() => window.history.back()}
                 />
               </Pane>
 
@@ -171,9 +170,9 @@ function Bill(props) {
                 width="100%"
               >
                 <Topbaer
-                  title="Laporan / Laporan Transaksi"
-                  leftButtonIcon={ArrowLeftIcon}
-                  onClickLeftButton={() => window.history.back()}
+                  title="Laporan Transaksi"
+                  // leftButtonIcon={ArrowLeftIcon}
+                  // onClickLeftButton={() => window.history.back()}
                 />
               </Pane>
 
@@ -207,7 +206,7 @@ function Bill(props) {
                         <Heading size={200}>Pembayar : {data.AP_PAYOR_NAME}</Heading>
                         <Heading size={200}>Emel : {data.AP_PAYOR_EMAIL}</Heading>
                         <Heading size={200}>No. Telefon : {data.AP_PAYOR_PHONE}</Heading>
-                        <Heading size={200}>Jumlah Pembayaran : {data.AP_AMOUNT}</Heading>
+                        <Heading size={200}>Jumlah Pembayaran : RM {data.AP_AMOUNT}</Heading>
                         <Heading size={200}>Tarikh : {data.AP_DATETIME_PAYMENT !== null ? data.AP_DATETIME_PAYMENT : 'Tiada Maklumat'}</Heading>
                         <Heading size={200}>Status : {data.AP_STATUS == '1' ? "Berjaya" : "Tidak Berjaya"}</Heading>
                       </Pane>

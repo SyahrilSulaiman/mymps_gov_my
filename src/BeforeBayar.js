@@ -29,7 +29,6 @@ export default function SenaraiBil(props) {
 
         axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status', formData)
             .then((res) => {
-                console.log(res.data);
                 if (res.data.status === "Pending") {
                     toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."})
                 }else{

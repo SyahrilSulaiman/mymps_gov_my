@@ -3,9 +3,7 @@ import {Pane, Text, Heading} from 'evergreen-ui'
 import {Link} from 'react-router-dom';
 
 export default function JumlahPembayaran({value, user}){
-    console.log('Jumlah : ',user);
     // const viewUser = (e) => {
-    //     // console.log('LOLLL');
     //     history.push("./admin/usermanagement");
     // }
     return (

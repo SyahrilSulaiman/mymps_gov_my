@@ -66,7 +66,6 @@ function Bill(props) {
   },[search]);
 
   const searching = (paramSearch) => {
-    console.log(paramSearch);
     if (paramSearch !== null) {
       var apiUrl =
         "https://mymps.corrad.my/int/api_generator.php?api_name=laporan_penyata_akaun";

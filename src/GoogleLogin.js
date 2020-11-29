@@ -136,7 +136,7 @@ function Register(props) {
   };
 
   const handleNumber = () => {
-    console.log(username.value);
+    // console.log(username.value);
   };
 
   return (

@@ -18,7 +18,6 @@ export default function BillList() {
     // set=[e.target.id]
     // return (
     // 	 senarai = <Senarai />
-    console.log("View");
     sessionStorage.setItem("noakaun", btoa(btoa(e)));
     window.location.href = "/bill_cukai_taksiran";
   };
@@ -66,7 +65,6 @@ export default function BillList() {
       )
       .then((res) => {
         setLoading(true);
-        console.log(res.data);
         if (res.data.status === "success") {
           setDataSet({
             data: res.data.data,
@@ -84,10 +82,6 @@ export default function BillList() {
 
 
   }, []);
-
-  const emptyHandler = () => {
-    console.log("Test Handler");
-  };
 
   const bills = dataset.data.length ? (
     dataset.data.map((bill) => {

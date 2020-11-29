@@ -8,7 +8,6 @@ function ListBank(){
         await fetch('https://dev.toyyibpay.com/api/getBankFPX')
         .then(response => response.json())
         .then(result => {
-            console.log(result);
             setBank(result);
         })
     },[])

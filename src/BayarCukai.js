@@ -89,16 +89,10 @@ function Bayar() {
                 value += inputSemua[j].value;
             }
         }
-
-        console.log(parseInt(value));
-
         var urlAPI3 = 'https://apisim.mps.gov.my/api/mymps/akaunbyic?nokp=' + parseInt(value);
 
         fetch(urlAPI3)
         .then(response => response.json())
-        .then(result => {
-            console.log(result);
-        })
     });
 
     return (

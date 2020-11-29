@@ -32,7 +32,6 @@ function Pay() {
         fetch('https://epstaging.mps.gov.my/fpx/bankList.php')
         .then(response => response.json())
         .then(result => {
-            console.log(result);
             setData(result);
         })
         .catch(err => {
