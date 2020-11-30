@@ -3,8 +3,8 @@ import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import axios from 'axios';
-import swal from 'sweetalert';
-import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, UnorderedList, ListItem, Icon, ArrowLeftIcon } from 'evergreen-ui';
+import swal from 'sweetalert2';
+import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, UnorderedList, ListItem, Icon, ArrowLeftIcon, KeyDeleteIcon, DeleteIcon } from 'evergreen-ui';
 import Topbaer from "./Topbar2";
 
 
@@ -36,9 +36,51 @@ export default function SenaraiBil(props) {
             })
             .catch(err => {
                 console.log(err);
-                swal('Ralat', 'Sila hubungi pentadbir system', 'error');
+                swal.fire('Ralat', 'Sila hubungi pentadbir system', 'error');
             })
     }, [])
+
+    const handleDelete = (e) => {
+        swal.fire({
+            icon:'warning',
+            title:'Hapus Bil',
+            text:'Adakah anda pasti untuk memadam bil ini?',
+            showCancelButton:true,
+            focusConfirm:false,
+            confirmButtonText:'Ya',
+            confirmButtonColor:'#d33',
+            cancelButtonText:'Tidak',
+            cancelButtonColor:'#3a4',
+            reverseButtons: true
+        }).then( result => {
+            if(result.isConfirmed){
+                // console.log('Confirm Delete');
+                let formData = new FormData();
+                formData.append('user',btoa(nokp));
+                formData.append('noakaun',btoa(e));
+                axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=deleteBill',formData)
+                .then(res => {
+                    console.log(res);
+                    if (res.data.status === 'success'){
+                        swal.fire({
+                            icon: 'success',
+                            title: 'Berjaya',
+                            text: 'Bil telah dihapuskan'
+                        }).then(res => {
+                            window.location.href = "/cukaitaksiran";
+                        })
+                    }
+                    else{
+                        swal.fire({
+                            icon: 'error',
+                            title:'Ralat',
+                            text:'Sila hubungi pentadbir system'
+                        })
+                    }
+                })
+            }
+        })
+    }
 
     if (isLoading) {
         return (
@@ -161,6 +203,7 @@ export default function SenaraiBil(props) {
                                         background="tint2"
                                         marginBottom={majorScale(1)}
                                         padding={minorScale(2)}
+                                        className="cursor-pointer hover:bg-gray-300"
                                     >
                                         <Pane>
                                             <Heading size={200}><i className="fas fa-receipt"></i> Bil PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
@@ -173,6 +216,7 @@ export default function SenaraiBil(props) {
                                         background="tint2"
                                         marginBottom={majorScale(2)}
                                         padding={minorScale(2)}
+                                        className="cursor-pointer hover:bg-gray-300"
                                     >
                                         <Pane>
                                             <Heading size={200}><i className="fas fa-receipt"></i> Resit PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
@@ -180,20 +224,29 @@ export default function SenaraiBil(props) {
                                     </Card>
                                      ) : ''
                                 }
-                                    <div className="flex flex-wrap py-3 w-full rounded-md">
-                                        <Pane width="100%" >
-                                            <Button
-                                                display="flex"
-                                                appearance="primary"
-                                                intent="danger"
-                                                type="button"
-                                                onClick={handleBack}
-                                                iconBefore={ArrowLeftIcon}
-                                            >
-                                                Kembali
-                                                </Button>
-                                        </Pane>
-                                    </div>
+                                <div className="flex flex-wrap py-1 w-full mt-4 rounded-md">
+                                <Pane width="100%" >
+                                    <Button
+                                        appearance="primary"
+                                        intent="danger"
+                                        type="button"
+                                        onClick={() => window.history.back()}
+                                        iconBefore={ArrowLeftIcon}
+                                    >
+                                        Kembali
+                                    </Button>
+                                    <Button
+                                        appearance="primary"
+                                        intent="danger"
+                                        type="button"
+                                        className="float-right"
+                                        onClick={(e) => handleDelete(btoa(bills.bill.data[0][0].NOAKAUN))}
+                                        iconAfter={DeleteIcon}
+                                        >
+                                        Hapus
+                                    </Button>
+                                </Pane>
+                            </div>
                                 </div>
                             </div>
                         </div>
