@@ -6,9 +6,8 @@ import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
 import swal from "sweetalert";
 import { Button, Heading, Pane, ArrowLeftIcon, LogInIcon, Icon, CloudDownloadIcon } from "evergreen-ui";
-// import SimpleModal from './components/Modal/Install_v2';
-// import Modal from './components/Modal/Install'
-import Modal from './components/Modal/Install_Modal'
+import Modal from './components/Modal/Install_Modal';
+import {title, subtitle} from "./Constants";
 
 function Login(props) {
 
@@ -109,7 +108,7 @@ function Login(props) {
                             textAlign="center"
                             size={600}
                             color="#E4E7EB"
-                            >Log Masuk Akaun mymps
+                            >Log Masuk Akaun {title}
                             </Heading>
                             </Pane>
                             {/* <h2 className="mt-6 text-center text-xl leading-9 font-extrabold text-white">

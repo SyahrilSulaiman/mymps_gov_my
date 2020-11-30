@@ -4,6 +4,7 @@ import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
 import { Button, Heading, Strong, Link } from "evergreen-ui";
 import swal from "sweetalert";
+import {title, subtitle} from "./Constants";
 
 function Register(props) {
 
@@ -210,7 +211,7 @@ function Register(props) {
               top={20}
               size={600}
               >
-                Pendaftaran Pengguna myMPS
+                Pendaftaran Pengguna {title}
               </Heading>
               {/* <h1 class="mb-8 text-xl text-gray-700 text-center mt-6" style={{ marginTop: "30px" }}>Pendaftaran Pengguna MyMPS</h1> */}
 
@@ -407,7 +408,7 @@ function Register(props) {
               textAlign="center"
               size={400}
               >
-                Dengan mendaftar, anda bersetuju pada <a class="no-underline border-grey-dark text-grey-dark"> Terma dan Syarat </a> myMPS
+                Dengan mendaftar, anda bersetuju pada <a class="no-underline border-grey-dark text-grey-dark"> terma & syarat </a> {title}
               </Heading>
               </div>
 

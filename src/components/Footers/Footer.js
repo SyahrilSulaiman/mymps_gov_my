@@ -1,6 +1,9 @@
 import React from "react";
 
-export default function Footer() {
+export default function Footer({
+  title = "",
+  subtitle = ""
+}) {
   return (
     <>
       <footer className="relative bg-gray-300 pt-8 pb-6">
@@ -26,11 +29,18 @@ export default function Footer() {
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap text-center lg:text-left">
             <div className="w-full lg:w-6/12 px-4">
-              <h4 className="text-3xl font-semibold">Portal mymps</h4>
+              <h4 className="text-3xl font-semibold">Portal {title}</h4>
               <h5 className="text-lg mt-0 mb-2 text-gray-700">
               Kami sedia membantu anda untuk menguruskan dan memudahkan bayaran bil anda setiap hari.
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
+                <button
+                  className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  type="button"
+                  onClick={ () => window.location.href = "https://instagram.com/mpselayang"}
+                >
+                  <i className="fab fa-instagram"></i>
+                </button>
                 <button
                   className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
@@ -44,6 +54,13 @@ export default function Footer() {
                   onClick={() => window.location.href = "https://www.facebook.com/mpselayang"}
                 >
                   <i className="fab fa-facebook-square"></i>
+                </button>
+                <button
+                  className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  type="button"
+                  onClick={() => window.location.href = "https://mps.gov.my"}
+                >
+                  <i className="fab fa-telegram"></i>
                 </button>
               </div>
             </div>
@@ -59,14 +76,14 @@ export default function Footer() {
                       <a
                         className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
                       >
-                        Tentang mymps
+                        Tentang {title}
                       </a>
                     </li>
                     <li>
                       <a
                         className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
                       >
-                        Cara Penggunaan mymps
+                        Cara Penggunaan {title}
                       </a>
                     </li>
                     <li>
@@ -107,7 +124,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center md:justify-between justify-center">
             <div className="w-full md:w-6/12 px-4 mx-auto text-center">
               <div className="text-sm text-gray-600 font-semibold py-1">
-                Hak Cipta Terpelihara © {new Date().getFullYear()} Majlis Perbandaran Selayang
+                Hak Cipta Terpelihara © {new Date().getFullYear()} {subtitle}
               </div>
             </div>
           </div>
