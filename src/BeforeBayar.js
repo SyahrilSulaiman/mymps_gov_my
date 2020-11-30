@@ -63,7 +63,46 @@ export default function SenaraiBil(props) {
     }, [])
 
     const handleDelete = (e) => {
-        console.log('delete',e);
+        swal.fire({
+            icon:'warning',
+            title:'Hapus Bil',
+            text:'Adakah anda pasti untuk memadam bil ini?',
+            showCancelButton:true,
+            focusConfirm:false,
+            confirmButtonText:'Ya',
+            confirmButtonColor:'#d33',
+            cancelButtonText:'Tidak',
+            cancelButtonColor:'#3a4',
+            reverseButtons: true
+        }).then( result => {
+            if(result.isConfirmed){
+                console.log('e',btoa(e));
+                console.log('user',nokp);
+                let formData = new FormData();
+                formData.append('user',btoa(nokp));
+                formData.append('noakaun',btoa(e));
+                axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=deleteBill',formData)
+                .then(res => {
+                    console.log(res);
+                    if (res.data.status === 'success'){
+                        swal.fire({
+                            icon: 'success',
+                            title: 'Berjaya',
+                            text: 'Bil telah dihapuskan'
+                        }).then(res => {
+                            window.location.href = "/cukaitaksiran";
+                        })
+                    }
+                    else{
+                        swal.fire({
+                            icon: 'error',
+                            title:'Ralat',
+                            text:'Sila hubungi pentadbir system'
+                        })
+                    }
+                })
+            }
+        })
     }
 
     if (isLoading) {
