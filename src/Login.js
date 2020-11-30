@@ -143,12 +143,12 @@ function Login(props) {
                             <div className="flex flex-wrap" style={{marginTop:"30px"}}>
                                 <div className="w-full lg:w-6/12 px-1">
                                     <div className="relative w-full mb-3">
-                                    <Button iconBefore={ArrowLeftIcon} onClick={() => window.location.href = "/"} type="button" appearance="primary" intent="danger" display="flex" justifyContent="center" width="100%">Kembali</Button>
+                                    <Button iconBefore={LogInIcon} type="submit" appearance="primary" intent="success" display="flex" justifyContent="center" width="100%">{loading ? 'Memuatkan...' : 'Log Masuk'}</Button>
                                     </div>
                                 </div>
                                 <div className="w-full lg:w-6/12 px-1">
                                     <div className="relative w-full mb-3">
-                                    <Button iconBefore={LogInIcon} type="submit" appearance="primary" intent="success" display="flex" justifyContent="center" width="100%">{loading ? 'Memuatkan...' : 'Log Masuk'}</Button>
+                                    <Button iconBefore={ArrowLeftIcon} onClick={() => window.location.href = "/"} type="button" appearance="primary" intent="danger" display="flex" justifyContent="center" width="100%">Kembali</Button>
                                     </div>
                                 </div>
                             </div>
