@@ -15,6 +15,7 @@ export default function SenaraiBil(props) {
     const [bills, setBill] = useState(null);
     const [disabled, setDisabled] = useState(false);
     const nokp = getNOKP();
+    const currentYear = new Date();
 
     const viewBill = (e) => {
         window.location.href = "https://mymps.corrad.my/rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
@@ -206,11 +207,15 @@ export default function SenaraiBil(props) {
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Tempoh Cukai</Text>
-                                                <Heading size={100}>{bills.bill.data[0][0].TEMPOH_CUKAI ? bills.bill.data[0][0].TEMPOH_CUKAI : "Tiada"}</Heading>
+                                                <Heading size={100}>
+                                                    {  (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 < parseInt(6)) ? 'Jan-Jun '+(currentYear.getFullYear()+0) : 'Julai-Disember ' +(currentYear.getFullYear()+0)}
+                                                </Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Tempoh Bayaran</Text>
-                                                <Heading size={100}>{bills.bill.data[0][0].TEMPOH_BAYARAN ? bills.bill.data[0][0].TEMPOH_BAYARAN : "Tiada"}</Heading>
+                                                <Heading size={100}>
+                                                { (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 > parseInt(6)) ? '28-Feb-'+ (currentYear.getFullYear()+0) : '31-Aug-'+(currentYear.getFullYear()+0)}
+                                                </Heading>
                                             </Pane>
                                         </Card>
                                         <Card

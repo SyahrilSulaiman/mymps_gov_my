@@ -197,7 +197,7 @@ function Bill(props) {
               <Pane className="p-3 xl:mx-4 xl:rounded-md bg-white overflow-y-scroll" style={{ height: "68vh" }} width="100%">
                 {searchResult && searchResult.map((data, index) => {
                   return(
-                    <Pane key={data.A_NO} display="grid" gridTemplateColumns="50px 1fr 20px" background="tint1" className={" hover:bg-gray-300 "+(index !== 0 ? "py-2" : "")}>
+                    <Pane key={data.A_NO+index} display="grid" gridTemplateColumns="50px 1fr 20px" background="tint1" className={" hover:bg-gray-300 "+(index !== 0 ? "py-2" : "")}>
                       <Heading size={100} className="py-8 mx-auto">{index + 1}</Heading>
                       <Pane className="p-4">
                         <Heading size={200}>Akaun : {data.A_NO}</Heading>
