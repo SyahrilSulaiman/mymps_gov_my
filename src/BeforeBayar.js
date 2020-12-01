@@ -214,7 +214,7 @@ export default function SenaraiBil(props) {
                                             <Pane>
                                                 <Text fontWeight={600}>Tempoh Bayaran</Text>
                                                 <Heading size={100}>
-                                                { (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 > parseInt(6)) ? '28-Feb-'+ (currentYear.getFullYear()+0) : '31-Aug-'+(currentYear.getFullYear()+0)}
+                                                { (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 > parseInt(6)) ? '28-Feb-'+ (currentYear.getFullYear()+1) : '31-Aug-'+(currentYear.getFullYear()+0)}
                                                 </Heading>
                                             </Pane>
                                         </Card>
