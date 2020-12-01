@@ -3,10 +3,9 @@ import { Route, Redirect } from 'react-router-dom';
 import { getEmail, getNOKP, getToken } from './Common';
 
 // handle the private routes
-function PrivateRoute({ component: Component, ...rest }) {
+function PrivateRoute({ component: Component}) {
   return (
     <Route
-      {...rest}
       render={(props) => getToken() ? <Component {...props} /> : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />}
     />
   )

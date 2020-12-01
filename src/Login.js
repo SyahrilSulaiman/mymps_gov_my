@@ -6,9 +6,8 @@ import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
 import swal from "sweetalert";
 import { Button, Heading, Pane, ArrowLeftIcon, LogInIcon, Icon, CloudDownloadIcon } from "evergreen-ui";
-// import SimpleModal from './components/Modal/Install_v2';
-// import Modal from './components/Modal/Install'
-import Modal from './components/Modal/Install_Modal'
+import Modal from './components/Modal/Install_Modal';
+import {title, subtitle} from "./Constants";
 
 function Login(props) {
 
@@ -109,7 +108,7 @@ function Login(props) {
                             textAlign="center"
                             size={600}
                             color="#E4E7EB"
-                            >Log Masuk Akaun mymps
+                            >Log Masuk Akaun {title}
                             </Heading>
                             </Pane>
                             {/* <h2 className="mt-6 text-center text-xl leading-9 font-extrabold text-white">
@@ -144,12 +143,12 @@ function Login(props) {
                             <div className="flex flex-wrap" style={{marginTop:"30px"}}>
                                 <div className="w-full lg:w-6/12 px-1">
                                     <div className="relative w-full mb-3">
-                                    <Button iconBefore={ArrowLeftIcon} onClick={() => window.location.href = "/"} type="button" appearance="primary" intent="danger" display="flex" justifyContent="center" width="100%">Kembali</Button>
+                                    <Button iconBefore={LogInIcon} type="submit" appearance="primary" intent="success" display="flex" justifyContent="center" width="100%">{loading ? 'Memuatkan...' : 'Log Masuk'}</Button>
                                     </div>
                                 </div>
                                 <div className="w-full lg:w-6/12 px-1">
                                     <div className="relative w-full mb-3">
-                                    <Button iconBefore={LogInIcon} type="submit" appearance="primary" intent="success" display="flex" justifyContent="center" width="100%">{loading ? 'Memuatkan...' : 'Log Masuk'}</Button>
+                                    <Button iconBefore={ArrowLeftIcon} onClick={() => window.location.href = "/"} type="button" appearance="primary" intent="danger" display="flex" justifyContent="center" width="100%">Kembali</Button>
                                     </div>
                                 </div>
                             </div>

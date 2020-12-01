@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import logo1 from "../assets/img/logo1.png";
 import IndexNavbar from "../components/Navbars/IndexNavbar.js";
 import Footer from "../components/Footers/Footer.js";
+import {title, subtitle} from "../Constants";
 
 export default function Index() {
   return (
@@ -16,10 +17,10 @@ export default function Index() {
           <img src={logo1} className="pl-32 w-auto" style={{ height: "120px", marginBottom:"20px" }}></img>
             <div className="pt-8 sm:pt-0">
               <h2 className="font-semibold text-4xl text-gray-700">
-                Selamat Datang ke mymps
+                Selamat Datang ke {title}
               </h2>
               <p className="mt-1 text-lg leading-relaxed text-gray-600">
-                mymps merupakan sebuah gerbang pembayaran pelbagai bil <br></br><span className="text-bold text-gray-700">Majlis Perbandaran Selayang.</span>
+              {title} merupakan sebuah gerbang pembayaran pelbagai bil <br></br><span className="text-bold text-gray-700">{subtitle}</span>
               </p>
               <div className="mt-12">
                 <a
@@ -165,61 +166,7 @@ export default function Index() {
           </div>
         </div>
       </section>
-
-      {/* <section className="pb-16 bg-gray-300 relative pt-32">
-        <div
-          className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
-          style={{ transform: "translateZ(0)" }}
-        >
-          <svg
-            className="absolute bottom-0 overflow-hidden"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-            version="1.1"
-            viewBox="0 0 2560 100"
-            x="0"
-            y="0"
-          >
-            <polygon
-              className="text-gray-300 fill-current"
-              points="2560 0 2560 100 0 100"
-            ></polygon>
-          </svg>
-        </div>
-
-        <div className="container mx-auto">
-          <div className="flex flex-wrap justify-center bg-white shadow-xl rounded-lg -mt-64 py-16 px-12 relative z-10">
-            <div className="w-full text-center lg:w-8/12">
-              <h3 className="font-semibold text-3xl">
-                Pembayaran Lebih Pantas
-              </h3>
-              <p className="text-gray-600 text-lg leading-relaxed mt-4 mb-4">
-                Sistem MyMPS secara tidak langsung akan banyak memberi manfaat kepada pengguna 
-                untuk melunaskan cukai taksiran. Selain itu, dengan ada nya sistem ini, anda 
-                dapat melihat senarai cukai-cukai yang telah dibayar ataupun masih tertunggak.
-              </p>
-              <div className="sm:block flex flex-col mt-10">
-                <a
-                  href="/login"
-                  target="_blank"
-                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-blue-500 active:bg-blue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-                >
-                  Login
-                </a>
-                <a
-                  href="/register"
-                  target="_blank"
-                  className="github-star sm:ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg"
-                >
-                  <span>Daftar Pengguna</span>
-                </a>
-              </div>
-              <div className="text-center mt-16"></div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      <Footer />
+      <Footer title={title} subtitle={subtitle}/>
     </>
   );
 }

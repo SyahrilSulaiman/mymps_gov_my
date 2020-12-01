@@ -7,10 +7,28 @@ import BillList from './BillList';
 import Topbaer from "./Topbar2";
 import swal from "sweetalert";
 import noscroll from "no-scroll";
+import axios from "axios";
 
 function Bill(props) {
 
 	noscroll.on();
+
+	useEffect(() => {
+
+		const formData2 = new FormData();
+		formData2.append("userSecret", nokp)
+		axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=user_notification', formData2)
+		.then((res) => {
+		if(res.data.status === "inactive"){
+			swal("Tahniah!","Terima kasih kerana mendaftar sebagai pengguna mymps, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan.","success")
+		}
+		})
+		.catch((err) => {
+		console.log(err);
+		swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
+		});
+
+	});
 
 	const token 	= getToken();
 	const user 		= getUser();
@@ -36,7 +54,7 @@ function Bill(props) {
 							<Topbaer title="Bil / Senarai Bil"/>
 							{/*<Topbaer title="Bil / Senarai Bil" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={handleLogout}/>*/}
 						</Pane>
-						<div className="w-full mx-4">
+						<div className="w-full xl:mx-4">
 							<div className="flex-auto" style={{ height: "100vh" }}>
 								{/* <BillList /> */}
 								<Pane width="100%">
