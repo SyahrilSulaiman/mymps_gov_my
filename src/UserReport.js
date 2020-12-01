@@ -201,8 +201,6 @@ function Bill(props) {
                       <Heading size={100} className="py-8 mx-auto">{index + 1}</Heading>
                       <Pane className="p-4">
                         <Heading size={200}>Akaun : {data.A_NO}</Heading>
-                        <Heading size={200}>No Invois : {data.AP_INVOICE_NO}</Heading>
-                        <Pane display="flex"><Heading size={200}>Status :</Heading><Heading size={200} color={data.AP_STATUS == '1' ? "green" : "red"}> {data.AP_STATUS == '1' ? "Berjaya" : "Tidak Berjaya"}</Heading></Pane>
                       </Pane>
                       <Heading className="py-4 mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
                     </Pane>
