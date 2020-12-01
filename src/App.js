@@ -246,6 +246,10 @@ function App() {
                   path="/admin/laporan_pengguna"
                   component={Admin_UserStatus}
                 />
+                <PrivateRoute
+                  path="/admin/add_user"
+                  component={AddUser}
+                />
                 <Route path="*" component={NotFound} />
               </Switch>
             </div>

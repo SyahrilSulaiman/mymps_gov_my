@@ -63,7 +63,8 @@ function Dashboard(props) {
   };
 
   const handleAdd = () => {
-    window.location.href = "./add_user"
+    // window.location.href = "./add_user"
+    props.history.push("./add_user");
   }
 
   if(!showDetail){
