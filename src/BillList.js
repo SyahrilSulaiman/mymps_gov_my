@@ -12,12 +12,9 @@ export default function BillList() {
 
   sessionStorage.removeItem("cukai");
   const nokp = getNOKP();
-  const displayKP =
-    '<h5 className="uppercase font-medium text-xs text-gray-600">No Kad Pengenalan </h5>';
+  const displayKP = '<h5 className="uppercase font-medium text-xs text-gray-600">No Kad Pengenalan </h5>';
+
   const handleViewBill = (e) => {
-    // set=[e.target.id]
-    // return (
-    // 	 senarai = <Senarai />
     sessionStorage.setItem("noakaun", btoa(btoa(e)));
     window.location.href = "/bill_cukai_taksiran";
   };
@@ -25,10 +22,10 @@ export default function BillList() {
   const handleBayar = (cukai, amount, penama, akaun) => {
 
     var array = [];
-    array["CUKAI"]      = cukai;
-    array["TUNGGAKAN"]  = amount;
-    array["PEMILIK"]    = penama;
-    array["AKAUN"]      = akaun;
+    array["CUKAI"] = cukai;
+    array["TUNGGAKAN"] = amount;
+    array["PEMILIK"] = penama;
+    array["AKAUN"] = akaun;
 
     sessionStorage.setItem("INFO", btoa(btoa(btoa(JSON.stringify(array)))));
     sessionStorage.setItem("noakaun", btoa(btoa(akaun)));
@@ -42,19 +39,6 @@ export default function BillList() {
   const [isNoData, setIsNoData] = useState(false);
 
   useEffect(() => {
-
-    const formData2 = new FormData();
-    formData2.append("userSecret", nokp)
-    axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=user_notification', formData2)
-    .then((res) => {
-      if(res.data.status === "inactive"){
-        swal("Tahniah!","Terima kasih kerana mendaftar sebagai pengguna mymps, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan.","success")
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
-    });
 
     const formData = new FormData();
     formData.append("nokp", nokp);
@@ -97,12 +81,12 @@ export default function BillList() {
           <div className="flex flex-wrap ">
             <div className="w-full px-2 border-white">
               <Pane
-              borderColor="white"
-              width="100%"
-              background="#dfe6e9"
-              className="p-2 border cursor-pointer hover:bg-gray-500"
-              display="grid"
-              gridTemplateColumns="1px 1fr 10px"
+                borderColor="white"
+                width="100%"
+                background="#dfe6e9"
+                className="p-2 border cursor-pointer hover:bg-gray-500"
+                display="grid"
+                gridTemplateColumns="1px 1fr 10px"
               >
                 <Pane>
                   {/* <Icon icon={DocumentIcon}></Icon>
@@ -110,23 +94,23 @@ export default function BillList() {
                 </Pane>
                 <Pane>
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
-                  <tbody>
-                    <tr>
-                      <th width="110px"><Heading size={200}>{bill.NOKP === null ? "No. SSM Syarikat" : "No. Kad Pengenalan"}</Heading></th>
-                      <td><Strong size={300}> : {bill.NOKP === null ? bill.NOSSM : bill.NOKP}</Strong ></td>
-                    </tr>
-                    <tr>
-                      <th><Heading size={200}>No. Akaun </Heading></th>
-                      <td><Strong size={300}> : {bill.NOAKAUN === null ? "-" : bill.NOAKAUN}</Strong></td>
-                    </tr>
-                    <tr>
-                      <th><Heading size={200}>Nama Pemilik </Heading></th>
-                      <td><Strong size={300}> : {bill.NAMA_PEMILIK === null ? "-" : bill.NAMA_PEMILIK}</Strong></td>
-                    </tr>
-                    <tr>
-                      <th><Heading size={200}>Status </Heading></th>
-                      <td><Strong size={300} color={bill.STATUS === "PAID" ? "#47B881" : "#EC4C47"}> : {bill.NAMA_PEMILIK === null ? "-" : bill.STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK"}</Strong></td>
-                    </tr>
+                    <tbody>
+                      <tr>
+                        <th width="110px"><Heading size={200}>{bill.NOKP === null ? "No. SSM Syarikat" : "No. Kad Pengenalan"}</Heading></th>
+                        <td><Strong size={300}> : {bill.NOKP === null ? bill.NOSSM : bill.NOKP}</Strong ></td>
+                      </tr>
+                      <tr>
+                        <th><Heading size={200}>No. Akaun </Heading></th>
+                        <td><Strong size={300}> : {bill.NOAKAUN === null ? "-" : bill.NOAKAUN}</Strong></td>
+                      </tr>
+                      <tr>
+                        <th><Heading size={200}>Nama Pemilik </Heading></th>
+                        <td><Strong size={300}> : {bill.NAMA_PEMILIK === null ? "-" : bill.NAMA_PEMILIK}</Strong></td>
+                      </tr>
+                      <tr>
+                        <th><Heading size={200}>Status </Heading></th>
+                        <td><Strong size={300} color={bill.STATUS === "PAID" ? "#47B881" : "#EC4C47"}> : {bill.NAMA_PEMILIK === null ? "-" : bill.STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK"}</Strong></td>
+                      </tr>
                     </tbody>
                   </table>
                 </Pane>
@@ -140,27 +124,27 @@ export default function BillList() {
       );
     })
   ) : (
-      
+
       <div className="w-full bg-transparent px-3">
-          <Pane display="flex" alignItems="center" justifyContent="center" background="white" paddingY={100}>
-            {/* <Heading size={200}>Tekan pada butang <Button type="button" appearance="primary" intent="success">Tambah Bil</Button> untuk menambah bil.</Heading> */}
-            <Spinner />
-          </Pane>
+        <Pane display="flex" alignItems="center" justifyContent="center" background="white" paddingY={100}>
+          {/* <Heading size={200}>Tekan pada butang <Button type="button" appearance="primary" intent="success">Tambah Bil</Button> untuk menambah bil.</Heading> */}
+          <Spinner />
+        </Pane>
       </div>
     )
 
-  if(isNoData){
-    return(
-    <div className="w-full bg-transparent px-3">
+  if (isNoData) {
+    return (
+      <div className="w-full bg-transparent px-3">
         <Pane display="flex" alignItems="center" justifyContent="center" background="white" paddingY={100}>
           <Heading size={200}>Tekan pada butang <Button type="button" appearance="primary" intent="success">Tambah Bil</Button> untuk menambah bil.</Heading>
         </Pane>
       </div>
-      )
+    )
   }
-  else{
+  else {
     return (
       <div className="">{bills}</div>
-      );
-}
+    );
+  }
 }

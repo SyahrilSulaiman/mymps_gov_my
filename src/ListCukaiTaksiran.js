@@ -11,7 +11,7 @@ function Bill(props) {
 	const token 	= getToken();
 	const user 		= getUser();
 	const nokp 		= getNOKP();
-	const [dialog, setDialog ] = useState(false)
+	const [dialog, setDialog ] = useState(false);
 
 	const handleAddBill = () => {
 		window.location.href = '/add_cukai_taksiran';

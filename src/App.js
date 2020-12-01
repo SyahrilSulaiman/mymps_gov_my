@@ -16,6 +16,8 @@ import {
   removeUserSession,
   setUserSession,
 } from "./Utils/Common";
+import swal from "sweetalert";
+import axios from "axios";
 
 import Login from "./Login";
 import Dashboard from "./Dashboard";
@@ -51,11 +53,17 @@ import { useLoading, Audio } from "@agney/react-loading";
 //import "./main.css";
 
 function App() {
+
   const [authLoading, setAuthLoading] = useState(true);
   const { containerProps, indicatorEl } = useLoading({
     loading: true,
     indicator: <Audio width="50" />,
   });
+  const [dataset, setDataSet] = useState({
+    data: [],
+  });
+  const [loading, setLoading] = useState(false);
+  const [isNoData, setIsNoData] = useState(false);
 
   useEffect(() => {
     if (getEmail() && getEmail()) {
@@ -75,6 +83,7 @@ function App() {
       fetch(urlAPI, requestOptions)
         .then((response) => response.json())
         .then((result) => {
+
           setUserSession(
             btoa(result.data[0]),
             result.data[0]["U_USERNAME"],
@@ -83,7 +92,7 @@ function App() {
           );
           sessionStorage.setItem("role", result.data[0]["U_USERROLE"]);
           sessionStorage.setItem("notel", result.data[0]["U_USERPHONE"]);
-          
+
           if (result.data[0]["U_USERROLE"] == "Admin") {
             //window.location.href = "/admin/dashboard";
           }
@@ -99,7 +108,7 @@ function App() {
   }, []);
 
   if (authLoading && getToken()) {
-    return(
+    return (
       <div></div>
     );
   }
@@ -173,15 +182,15 @@ function App() {
                 }
                 <PrivateRoute path="/setting" component={Setting} />
                 <PrivateRoute path="/bill" component={Bill} />
-                <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran}/>
-                <PrivateRoute path="/kompaun" component={kompaun}/>
-                <PrivateRoute path="/lesen" component={lesen}/>
+                <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran} data="dataa" />
+                <PrivateRoute path="/kompaun" component={kompaun} />
+                <PrivateRoute path="/lesen" component={lesen} />
                 <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
                 <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
                 <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
                 <PrivateRoute path="/add_cukai_taksiran" component={Add} />
-                <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar}/>
+                <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar} />
                 <Route path="/receipt.php" component={Pdf} />
                 <Route path="*" component={NotFound} />
               </Switch>
@@ -203,15 +212,15 @@ function App() {
                 <PrivateRoute path="/home" component={Dashboard} />
                 <PrivateRoute path="/setting" component={Setting} />
                 <PrivateRoute path="/bill" component={Bill} />
-                <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran}/>
-                <PrivateRoute path="/kompaun" component={kompaun}/>
-                <PrivateRoute path="/lesen" component={lesen}/>
+                <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran} />
+                <PrivateRoute path="/kompaun" component={kompaun} />
+                <PrivateRoute path="/lesen" component={lesen} />
                 <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                 <PrivateRoute path="/payment" component={Payment} />
                 <PrivateRoute path="/add_cukai_taksiran" component={Add} />
                 <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
                 <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
-                <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar}/>
+                <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar} />
                 <Route path="/receipt.php" component={Pdf} />
                 <PublicRoute
                   path="/forgotpassword"
