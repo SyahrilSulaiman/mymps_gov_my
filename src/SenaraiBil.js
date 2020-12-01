@@ -152,7 +152,7 @@ export default function SenaraiBil(props) {
 
                                     <Pane background="#c7ecee" marginBottom={majorScale(2)}>
                                         <Paragraph padding={majorScale(2)} size={400}>
-                                            Berikutmaklumat bil cukai taksiran bagi akaun <b>{bills.bill.data[0][0].NOAKAUN}</b>.
+                                            Berikut maklumat bil cukai taksiran bagi akaun <b>{bills.bill.data[0][0].NOAKAUN}</b>.
                                         </Paragraph>
                                     </Pane>
 
