@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { setUserSession } from "./Utils/Common";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
-import { Button, Heading, Strong, Link } from "evergreen-ui";
+import { Button, Heading, Strong, Link, TextInput } from "evergreen-ui";
 import swal from "sweetalert";
-import {title, subtitle} from "./Constants";
+import { title, subtitle } from "./Constants";
+import { isNumber } from "@material-ui/data-grid";
 
 function Register(props) {
 
@@ -13,20 +14,29 @@ function Register(props) {
   sessionStorage.removeItem('GoogleName');
 
 
-  const username      = useFormInput("");
-  const password      = useFormInput("");
-  const confpassword  = useFormInput("");
-  const email         = useFormInput("");
-  const confemail     = useFormInput("");
+  const username = useFormInput("");
+  const password = useFormInput("");
+  const confpassword = useFormInput("");
+  const email = useFormInput("");
+  const confemail = useFormInput("");
   const [nokp, setNOKP] = useState("");
-  const ssm           = useFormInput("");
-  const notel         = useFormInput("");
-  const color         = "blue";
+  const ssm = useFormInput("");
+  const notel = useFormInput("");
+  const color = "blue";
 
   var numbers = /^[0-9]+$/;
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+
+  const isNumber = (id, value) => {
+    if(!value.match(numbers)){
+      document.getElementById(id).value = "";
+    }else{
+
+    }
+  }
 
   const handleRegisterIndividu = (e) => {
     e.preventDefault();
@@ -207,9 +217,9 @@ function Register(props) {
             <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
 
               <Heading
-              textAlign="center"
-              top={20}
-              size={600}
+                textAlign="center"
+                top={20}
+                size={600}
               >
                 Pendaftaran Pengguna {title}
               </Heading>
@@ -272,12 +282,12 @@ function Register(props) {
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label for="last_name" className="block text-sm font-medium leading-5 text-gray-700">Nombor Kad Pengenalan</label>
-                              <input onChange={(e) => setNOKP(e.target.value)} placeholder="cth: 923456061278" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <input onChange={(e) => setNOKP(e.target.value)} onKeyUp={(e) => isNumber("nokp", e.target.value)} id="nokp" minLength="12" maxLength="12" placeholder="cth: 923456061278" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label for="street_address" className="block text-sm font-medium leading-5 text-gray-700">Nombor Telefon</label>
-                              <input {...notel} id="notel" placeholder="cth: 0123456789" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <input {...notel} onKeyUp={(e) => isNumber("notel", e.target.value)} id="notel" placeholder="cth: 0123456789" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
@@ -301,30 +311,30 @@ function Register(props) {
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                            <Button
-                              type="submit"
-                              appearance="primary"
-                              intent="success"
-                              display="flex"
-                              top={20}
-                              justifyContent="center"
-                              width="100%"
-                            >
-                              Daftar Pengguna
+                              <Button
+                                type="submit"
+                                appearance="primary"
+                                intent="success"
+                                display="flex"
+                                top={20}
+                                justifyContent="center"
+                                width="100%"
+                              >
+                                Daftar Pengguna
                             </Button>
                             </div>
                             <div className="col-span-6 sm:col-span-3 p-2">
-                            <Button
-                              type="button"
-                              appearance="primary"
-                              intent="danger"
-                              display="flex"
-                              top={20}
-                              justifyContent="center"
-                              width="100%"
-                              onClick={() => window.location.href = "/"}
-                            >
-                              Kembali
+                              <Button
+                                type="button"
+                                appearance="primary"
+                                intent="danger"
+                                display="flex"
+                                top={20}
+                                justifyContent="center"
+                                width="100%"
+                                onClick={() => window.location.href = "/"}
+                              >
+                                Kembali
                             </Button>
                             </div>
                           </form>
@@ -343,7 +353,7 @@ function Register(props) {
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label for="street_address" className="block text-sm font-medium leading-5 text-gray-700">Nombor Telefon</label>
-                              <input {...notel} id="notel" placeholder="cth: 0123456789" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <input {...notel} onKeyUp={(e) => isNumber("notel2", e.target.value)} id="notel2" placeholder="cth: 0123456789" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
@@ -367,30 +377,30 @@ function Register(props) {
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                            <Button
-                              type="submit"
-                              appearance="primary"
-                              intent="success"
-                              display="flex"
-                              top={20}
-                              justifyContent="center"
-                              width="100%"
-                            >
-                              Daftar Pengguna
+                              <Button
+                                type="submit"
+                                appearance="primary"
+                                intent="success"
+                                display="flex"
+                                top={20}
+                                justifyContent="center"
+                                width="100%"
+                              >
+                                Daftar Pengguna
                             </Button>
                             </div>
                             <div className="col-span-6 sm:col-span-3 p-2">
-                            <Button
-                              type="button"
-                              appearance="primary"
-                              intent="danger"
-                              display="flex"
-                              top={20}
-                              justifyContent="center"
-                              width="100%"
-                              onClick={() => window.location.href = "/"}
-                            >
-                              Kembali
+                              <Button
+                                type="button"
+                                appearance="primary"
+                                intent="danger"
+                                display="flex"
+                                top={20}
+                                justifyContent="center"
+                                width="100%"
+                                onClick={() => window.location.href = "/"}
+                              >
+                                Kembali
                             </Button>
                             </div>
                           </form>
@@ -402,26 +412,26 @@ function Register(props) {
               </div>
 
               <div className="col-span-6 sm:col-span-3 p-2">
-              <Heading 
-              justifyContent="center"
-              alignContent="center"
-              textAlign="center"
-              size={400}
-              >
-                Dengan mendaftar, anda bersetuju pada <a class="no-underline border-grey-dark text-grey-dark"> terma & syarat </a> {title}
-              </Heading>
+                <Heading
+                  justifyContent="center"
+                  alignContent="center"
+                  textAlign="center"
+                  size={400}
+                >
+                  Dengan mendaftar, anda bersetuju pada <a class="no-underline border-grey-dark text-grey-dark"> terma & syarat </a> {title}
+                </Heading>
               </div>
 
               <div className="col-span-6 sm:col-span-3 p-2">
-              <Heading  
-              justifyContent="center"
-              alignContent="center"
-              textAlign="center"
-              top={100}
-              size={200}
-              >
-                Sudah mempunyai akaun? tekan <Link href="/login" style={{textDecoration:"none"}}><i className="fas fa-sign-in-alt"></i></Link> 
-              </Heading>
+                <Heading
+                  justifyContent="center"
+                  alignContent="center"
+                  textAlign="center"
+                  top={100}
+                  size={200}
+                >
+                  Sudah mempunyai akaun? tekan <Link href="/login" style={{ textDecoration: "none" }}><i className="fas fa-sign-in-alt"></i></Link>
+                </Heading>
               </div>
 
               {/* <div class="text-center text-grey-dark mt-6">
