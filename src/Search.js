@@ -13,6 +13,9 @@ import {
   toaster,
 } from "evergreen-ui";
 import NoScroll from "no-scroll";
+import Axios from 'axios';
+import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
+
 
 export default function Search({ type }) {
   const [search, setSearch] = useState("");
@@ -20,6 +23,7 @@ export default function Search({ type }) {
   const [display, setDisplay] = useState(false);
   const [bill, setBill] = useState([]);
   const [array, setArray] = useState(null);
+  const nokp    = getNOKP();
 
   useEffect(() => {
   }, [type]);
@@ -125,6 +129,36 @@ export default function Search({ type }) {
       });
   };
 
+  const handleAdd = (e) => {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append('nokp',nokp);
+    formData.append('account',e);
+
+    Axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill',formData)
+    .then(res => {
+
+        if(res.data.status === "success")
+        {
+            toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"});
+            window.location.href = '/bill';
+        }
+        else if(res.data.status === "failure")
+        {
+            toaster.danger("Akaun ini telah didaftarkan ke senarai bayaran anda.",{id:"forbidden-action"});
+        }
+        else
+        {
+            toaster.danger('Maaf. Sila hubungi bahagian pihak pentadbiran.',{id:"forbidden-action"});
+        }
+
+        setLoading(false);
+    })
+    .catch(err =>{
+        toaster.danger('Ralat! Sila hubungi pentadbir sistem.',{id:"forbidden-action"});
+    });
+}
+
   if (type === "" || type === null || type == "tiada") {
     return <div></div>;
   } else {
@@ -225,6 +259,7 @@ export default function Search({ type }) {
                     bill={bill}
                     type={type}
                     display={display}
+                    handleAdd={handleAdd}
                   />
                 }
               </Pane>

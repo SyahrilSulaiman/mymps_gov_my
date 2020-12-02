@@ -1,13 +1,11 @@
 import Axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import swal from 'sweetalert'
-import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 import {Heading, Text, Paragraph, Button, toaster} from "evergreen-ui";
 
-export default function Carian({bill,type, display}){
+export default function Carian({bill,type, display, handleAdd}){
 
     const [loading,setLoading] = useState(false);
-    const nokp    = getNOKP();
     let accountType = "";
 
         useEffect(() =>{
@@ -19,35 +17,7 @@ export default function Carian({bill,type, display}){
             accountType = 'No SSM';
         },[bill]);
 
-        const handleAdd = (e) => {
-            setLoading(true);
-            const formData = new FormData();
-            formData.append('nokp',nokp);
-            formData.append('account',e);
 
-            Axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill',formData)
-            .then(res => {
-
-                if(res.data.status === "success")
-                {
-                    toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"});
-                    window.location.href = '/bill';
-                }
-                else if(res.data.status === "failure")
-                {
-                    toaster.danger("Akaun ini telah didaftarkan ke senarai bayaran anda.",{id:"forbidden-action"});
-                }
-                else
-                {
-                    toaster.danger('Maaf. Sila hubungi bahagian pihak pentadbiran.',{id:"forbidden-action"});
-                }
-
-                setLoading(false);
-            })
-            .catch(err =>{
-                toaster.danger('Ralat! Sila hubungi pentadbir sistem.',{id:"forbidden-action"});
-            });
-        }
     
     if(!display){
         return (
