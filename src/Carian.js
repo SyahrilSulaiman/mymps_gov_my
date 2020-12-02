@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import swal from 'sweetalert'
-import {Heading, Text, Paragraph, Button, toaster, Pane} from "evergreen-ui";
+import {Heading, Text, Paragraph, Button, toaster, Pane, CrossIcon} from "evergreen-ui";
 
 export default function Carian({bill,type, display, handleAdd}){
     const [loading,setLoading] = useState(false);
@@ -37,51 +37,32 @@ export default function Carian({bill,type, display, handleAdd}){
                         <div className="flex flex-wrap">
                             <div className="w-full">
                                 <div className="relative flex flex-col min-w-0 break-words bg-gray-100 border " onClick={() => handleAdd(bill[0].NOAKAUN)}>
-                                    <div className="flex-auto p-4">
+                                    <div className="flex-auto p-2">
                                     <i className="fas fa-close"></i>
-                                        <div className="flex flex-row pt-4">
-                                            <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                                <span className="font-semibold uppercase text-lg text-gray-800">
+                                        <div className="flex flex-row pt-1">
+                                            <div className="relative w-auto flex-initial">
+                                                <span className="font-semibold uppercase text-md text-gray-800">Akaun :&nbsp;
                                                 {
-                                                // dataset.jenis
-                                                // bill.type
-                                                //    ( typeof bill[0].NOKP !== 'undefined' )? bill[0].NOKP : bill[0].NOSSM
-                                                }
-                                                </span>	
-                                            </div>
-                                            <div className="relative w-auto pl-4 flex-initial">
-                                                <span className="font-semibold uppercase text-lg text-gray-800">Akaun :&nbsp;
-                                                {
-                                                    //dataset.amaun
                                                     bill[0].NOAKAUN
                                                 }
                                                 </span>	
                                             </div>
                                         </div>
-                                        <div className="flex flex-row pb-4">
-                                            <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
+                                        <div className="flex flex-row pb-2">
+                                            <div className="relative w-full  max-w-full flex-grow flex-1">
                                                 <span className="font-semibold uppercase text-lg text-gray-800">
                                                 {
-                                                // dataset.akaun
-                                                // bill.code
                                                 bill[0].NAMA_PEMILIK
                                                 }
                                                 </span>	
                                                 <h5 className="uppercase font-medium text-xs text-gray-600">
                                                 {
-                                                // dataset.tempoh
-                                                // bill.description
                                                 bill[0].ADDRHARTA
                                                 }
                                                 </h5>
                                             </div>
                                         </div>
                                     </div>
-                                    {/* <div className="flex flex-initial flex-row-reverse pt-4 pb-4">
-                                        <button id="type" type="button" onClick={(e) => handleAdd(bill[0].NOAKAUN)} className="text-white text-center bg-green-500 flex-row-reverse rounded-full w-32 h-12">
-                                                    {loading?'Menambah..':'Tambah'}
-                                        </button>
-                                    </div> */}
                                 </div>
                             </div>
                         </div>
@@ -92,67 +73,66 @@ export default function Carian({bill,type, display, handleAdd}){
         else{
         return (
             <div>
-                <Pane marginTop={5} paddingLeft={5} background="#ffffff">
-                    <Heading size={200} textAlign="left" >
+                <Pane marginTop={5} background="#ffffff">
+                    <Heading size={200} textAlign="center" >
                       Sila pilih bil untuk ditambah
+                    </Heading>
+                </Pane>
+                <Pane marginTop={5}>
+                    <Heading size={200} textAlign="center" >
+                      
                     </Heading>
                 </Pane>
             {
                 bill.map(bills => (
                     <div key={bills.NOAKAUN} className="mx-auto w-full">
-                    <div className="flex flex-wrap">
+                        <Pane display="grid" gridTemplateColumns="40px 1fr 40px" marginBottom={10} className="hover:bg-gray-400">
+                            <Pane padding={20} justifyContent="center" marginTop={7}>
+                                <CrossIcon />
+                            </Pane>
+                            <Pane padding={10}>
+                                <Heading size={200}>{"AKAUN " + bills.NOAKAUN}</Heading>
+                                <Heading size={200}>{bills.NAMA_PEMILIK}</Heading>
+                                <Heading size={100}>{bills.ADDRHARTA}</Heading>
+                            </Pane>
+                            <Pane padding={20} justifyContent="center" marginTop={7}>
+                                <i className="fas fa-chevron-right"></i>
+                            </Pane>
+                        </Pane>
+                    {/* <div className="flex flex-wrap">
                         <div className="w-full">
-                            <div className="relative flex flex-col min-w-0 break-words bg-gray-100 border" onClick={() => handleAdd(bills.NOAKAUN)}>
-                                <div className="flex-auto p-4">
-                                    {/* <div><i className="fas fa-close text-red-600"></i></div> */}
-                                    <div className="flex flex-row pt-4">
-                                        <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                            <span className="font-semibold uppercase text-lg text-gray-800">
+                            <div className="relative min-w-0 break-words bg-gray-100 border" onClick={() => handleAdd(bills.NOAKAUN)}>
+                                <div className=" p-2">
+                                    <div className="">
+                                        <i className="fas fa-close"></i>
+                                    </div>
+                                    <div className="flex flex-row pt-1">
+                                        <div className="relative w-auto flex-initial">
+                                            <span className="font-semibold uppercase text-sm text-gray-800">
                                             {
-                                            // dataset.jenis
-                                            // bill.type
-                                                bills.VMI_INEWIC
-                                            }
-                                            </span>	
-                                        </div>
-                                        <div className="relative w-auto pl-4 flex-initial">
-                                            <span className="font-semibold uppercase text-lg text-gray-800">Akaun :&nbsp;
-                                            {
-                                                //dataset.amaun
                                                 bills.NOAKAUN
                                             }
                                             </span>	
                                         </div>
                                     </div>
-                                    <div className="flex flex-row pb-4">
-                                        <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                            <span className="font-semibold uppercase text-lg text-gray-800">
+                                    <div className="flex flex-row pb-2">
+                                        <div className="relative w-full max-w-full flex-grow flex-1">
+                                            <span className="font-semibold uppercase text-sm text-gray-800">
                                             {
-                                            // dataset.akaun
-                                            // bill.code
                                             bills.NAMA_PEMILIK
                                             }
                                             </span>	
                                             <h5 className="uppercase font-medium text-xs text-gray-600">
                                             {
-                                            // dataset.tempoh
-                                            // bill.description
                                             bills.ADDRHARTA 
                                             }
                                             </h5>
                                         </div>
                                     </div>
                                 </div>
-                                {/* <div className="flex px-4">
-                                    <Button 
-                                    type="button" 
-                                    appeareance="primary"
-                                    intent="success" 
-                                    onClick={(e) => handleAdd(bills.NOAKAUN)}>{loading?'Menambah..':'Tambah'}</Button>
-                                </div> */}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 )
             )
