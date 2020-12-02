@@ -15,6 +15,7 @@ import {
 import NoScroll from "no-scroll";
 import Axios from 'axios';
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
+import { setPageStateUpdate } from "@material-ui/data-grid";
 
 
 export default function Search({ type }) {
@@ -22,7 +23,7 @@ export default function Search({ type }) {
   const [loading, setLoading] = useState(false);
   const [display, setDisplay] = useState(false);
   const [bill, setBill] = useState([]);
-  const [array, setArray] = useState(null);
+  const [array, setArray] = useState([]);
   const nokp    = getNOKP();
 
   useEffect(() => {
@@ -61,7 +62,7 @@ export default function Search({ type }) {
               NoScroll.off();
             }
             setBill(res.data);
-            setArray(res.data);
+            // setArray(res.data);
             setDisplay(true);
           }
         }
@@ -79,7 +80,7 @@ export default function Search({ type }) {
               NoScroll.off();
             }
             setBill(res.data[0]);
-            setArray(res.data[0]);
+            // setArray(res.data[0]);
             setDisplay(true);
           }
         }
@@ -93,7 +94,7 @@ export default function Search({ type }) {
             swal("Tidak ditemui", searchType + " tidak ditemui", "error");
           } else {
             setBill(res);
-            setArray(res);
+            // setArray(res);
             setDisplay(true);
           }
         }
@@ -159,6 +160,32 @@ export default function Search({ type }) {
     });
 }
 
+const handleChoose = (e) => {
+  // console.log('akaun',e);
+  if(array.includes(e)){
+    let newArray = [...array];
+    let index = newArray.indexOf(e);
+    if(index !== -1){
+      newArray.splice(index,1);
+      setArray(newArray);
+    }
+    console.log(array);
+  }
+  else{
+    setArray( array => [...array,e])
+  }
+  
+  console.log(array);
+}
+
+const handleAddThis = (e) => {
+  console.log('add');
+}
+
+const resetArray = (e) => {
+  setArray([]);
+}
+
   if (type === "" || type === null || type == "tiada") {
     return <div></div>;
   } else {
@@ -214,19 +241,6 @@ export default function Search({ type }) {
                     {loading ? "Mencari.." : "Cari"}
                   </Button>
 
-                  {bill.length > 1 ? (
-                    <Button
-                      type="button"
-                      onClick={() => addAll()}
-                      appearance="primary"
-                      className="float-right mr-2"
-                    >
-                      {loading ? "Menambah.." : "Tambah Semua"}
-                    </Button>
-                  ) : (
-                    ""
-                  )}
-
                   <Button
                     type="button"
                     iconBefore={ArrowLeftIcon}
@@ -237,7 +251,41 @@ export default function Search({ type }) {
                     Kembali
                   </Button>
                 </Pane>
-                <Pane marginTop={32} padding={10} background="#2d3436">
+                <Pane marginTop={5}  background="#fff">
+                    {bill.length > 1 ? (
+                      <>
+                        <Button
+                          type="button"
+                          onClick={() => resetArray()}
+                          appearance="primary"
+                          intent="warning"
+                          className=""
+                        >
+                          Set Semula
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => addAll()}
+                          appearance="primary"
+                          className="float-right"
+                        >
+                          {loading ? "Menambah.." : "Tambah Semua"}
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => handleAddThis()}
+                          appearance="primary"
+                          className="float-right mr-2"
+                        >
+                          {loading ? "Menambah.." : "Tambah Bil"}
+                        </Button>
+                      </>
+                    ) : (
+                      ""
+                    )}
+                </Pane>
+
+                <Pane marginTop={10} padding={10} background="#2d3436">
                   <Heading size={400} textAlign="center" color="white">
                     Senarai bil akan dipaparkan dibawah
                   </Heading>
@@ -259,7 +307,7 @@ export default function Search({ type }) {
                     bill={bill}
                     type={type}
                     display={display}
-                    handleAdd={handleAdd}
+                    handleAdd={ bill.length > 1 ? handleChoose : handleAdd }
                   />
                 }
               </Pane>

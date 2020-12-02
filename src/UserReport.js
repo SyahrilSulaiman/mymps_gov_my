@@ -3,21 +3,13 @@ import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import {
   Pane,
-  toaster,
-  Button,
-  AddIcon,
   ArrowLeftIcon,
-  SortNumericalIcon,
   Spinner,
-  Tablist,
-  Tab,
   TextInput,
   Heading,
-  Table,
   ChevronRightIcon,
   Icon,
 } from "evergreen-ui";
-import BillList from "./BillList";
 import Topbaer from "./Topbar2";
 
 function Bill(props) {
@@ -64,35 +56,6 @@ function Bill(props) {
     const results = data.filter(json => json.A_NO.toUpperCase().includes(search))
     setSearchResult(results);
   }, [search]);
-
-  const searching = (paramSearch) => {
-    if (paramSearch !== null) {
-      var apiUrl =
-        "https://mymps.corrad.my/int/api_generator.php?api_name=laporan_penyata_akaun";
-
-      var formData = new FormData();
-      formData.append("userid", userid);
-      formData.append("search", paramSearch);
-
-      var requestOptions = {
-        method: "POST",
-        body: formData,
-        redirect: "follow",
-      };
-
-      fetch(apiUrl, requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          setLoading(true);
-          if (result.status == "success") {
-            setData(result.data);
-            setLoading(false);
-          } else {
-            setLoading(false);
-          }
-        });
-    }
-  };
 
   const viewPenyata = (e) => {
     window.location.href = "https://mymps.corrad.my/rp/penyata_semasa.php?noakaun=" + btoa(btoa(e))
