@@ -130,19 +130,21 @@ export default function Search({ type }) {
       });
   };
 
-  const handleAdd = (e) => {
+  const handleAdd = (status,account) => {
     setLoading(true);
     const formData = new FormData();
     formData.append('nokp',nokp);
-    formData.append('account',e);
+    formData.append('account',account);
+    formData.append('status',status);
 
     Axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill',formData)
     .then(res => {
 
         if(res.data.status === "success")
         {
-            toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"});
-            window.location.href = '/bill';
+            toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"})
+            setTimeout(function(){window.location.href = '/bill'; }, 1000);
+            
         }
         else if(res.data.status === "failure")
         {
@@ -160,26 +162,37 @@ export default function Search({ type }) {
     });
 }
 
-const handleChoose = (e) => {
-  // console.log('akaun',e);
-  if(array.includes(e)){
-    let newArray = [...array];
-    let index = newArray.indexOf(e);
-    if(index !== -1){
+useEffect(()=> {
+  console.log('Selected Bill : ',array)
+},[array])
+
+const handleChoose = (e,x) => {
+  
+  let newArray = [...array];
+  let index = newArray.findIndex(element => element.account === x);
+  if(index !== -1){
       newArray.splice(index,1);
       setArray(newArray);
-    }
-    console.log(array);
   }
   else{
-    setArray( array => [...array,e])
+    setArray( array => [...array,{'account':x,'status':e}])
   }
-  
-  console.log(array);
 }
 
+
 const handleAddThis = (e) => {
-  console.log('add');
+  let accountObj = JSON.stringify(array);
+  let formData = new FormData();
+  formData.append('nokp',nokp);
+  formData.append('account',accountObj);
+
+  Axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill&mode=many',formData)
+  .then(res => {
+    console.log(res)
+  })
+  .catch(err => {
+    console.log('Error :', err)
+  })
 }
 
 const resetArray = (e) => {

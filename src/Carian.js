@@ -36,7 +36,7 @@ export default function Carian({bill,type, display, handleAdd}){
                         <div key={bill[0].NOAKAUN} className="mx-auto w-full">
                         <div className="flex flex-wrap">
                             <div className="w-full">
-                                <div className="relative flex flex-col min-w-0 break-words bg-gray-100 border " onClick={() => handleAdd(bill[0].NOAKAUN)}>
+                                <div className="relative flex flex-col min-w-0 break-words bg-gray-100 border " onClick={() => handleAdd(bill[0].STATUS,bill[0].NOAKAUN)}>
                                     <div className="flex-auto p-4">
                                         <div className="flex flex-row pt-4">
                                             <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -101,7 +101,7 @@ export default function Carian({bill,type, display, handleAdd}){
                     <div key={bills.NOAKAUN} className="mx-auto w-full">
                     <div className="flex flex-wrap">
                         <div className="w-full">
-                            <div className="relative flex flex-col min-w-0 break-words bg-gray-100 border" onClick={() => handleAdd(bills.NOAKAUN)}>
+                            <div className="relative flex flex-col min-w-0 break-words bg-gray-100 border" onClick={() => handleAdd(bills.STATUS,bills.NOAKAUN)}>
                                 <div className="flex-auto p-4">
                                     {/* <div><i className="fas fa-close text-red-600"></i></div> */}
                                     <div className="flex flex-row pt-4">
