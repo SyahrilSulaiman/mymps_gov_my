@@ -71,11 +71,11 @@ export default function Carian({bill,type, display, handleAdd, array}){
             {
                 bill.map(bills => (
                     <div key={bills.NOAKAUN} className="mx-auto w-full" onClick={() => handleAdd(bills.STATUS,bills.NOAKAUN)}>
-                        <Pane display="grid" gridTemplateColumns="40px 1fr 40px" marginBottom={10} className={"hover:opacity-70 cursor-pointer "+ ((array.findIndex(element => element.account === bills.NOAKAUN) !== -1 )? 'bg-green-300' : 'bg-gray-300')}>
+                        <Pane display="grid" gridTemplateColumns="40px 1fr 40px" marginBottom={10} className={"cursor-pointer "+ ((array.findIndex(element => element.account === bills.NOAKAUN) !== -1 )? 'bg-green-300 hover:bg-green-400' : 'bg-gray-300 hover:bg-gray-400')}>
                             <Pane padding={20} justifyContent="center" marginTop={7}>
 
                                 {
-                                    (array.findIndex(element => element.account === bills.NOAKAUN) !== -1 )? <CrossIcon /> : ''
+                                    /* (array.findIndex(element => element.account === bills.NOAKAUN) !== -1 )? <CrossIcon /> : '' */
                                 }
                                 
                             </Pane>
@@ -85,7 +85,7 @@ export default function Carian({bill,type, display, handleAdd, array}){
                                 <Heading size={100}>{bills.ADDRHARTA}</Heading>
                             </Pane>
                             <Pane padding={20} justifyContent="center" marginTop={7}>
-                                <i className="fas fa-chevron-right"></i>
+                                {/* <i className="fas fa-chevron-right"></i> */}
                             </Pane>
                         </Pane>
                     </div>
