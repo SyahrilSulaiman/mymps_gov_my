@@ -311,10 +311,7 @@ const resetArray = (e) => {
                           appearance="primary"
                           className="float-right mr-2"
                         >
-                        {
-                          array.length
-                        }&nbsp;
-                          {loading ? "Menambah.." : "Tambah Bil"}
+                          {loading ? "Menambah.." : "Tambah "+array.length+" Bil"}
                         </Button>
                       </>
                     ) : (
