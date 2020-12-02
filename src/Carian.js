@@ -3,9 +3,12 @@ import React, {useState, useEffect} from 'react'
 import swal from 'sweetalert'
 import {Heading, Text, Paragraph, Button, toaster, Pane, CrossIcon} from "evergreen-ui";
 
-export default function Carian({bill,type, display, handleAdd}){
+export default function Carian({bill,type, display, handleAdd, array}){
     const [loading,setLoading] = useState(false);
     let accountType = "";
+    useEffect(()=>{
+        console.log('Selected Bill :', array);
+    },[array])
 
         useEffect(() =>{
             if(type === 'nokp')
@@ -37,7 +40,7 @@ export default function Carian({bill,type, display, handleAdd}){
                     <div key={bill[0].NOAKAUN} className="mx-auto w-full" onClick={() => handleAdd(bill[0].STATUS,bill[0].NOAKAUN)}>
                         <Pane display="grid" gridTemplateColumns="40px 1fr 40px" marginBottom={10} className="hover:bg-gray-400">
                             <Pane padding={20} justifyContent="center" marginTop={7}>
-                                <CrossIcon />
+                                {/* <CrossIcon /> */}
                             </Pane>
                             <Pane padding={10}>
                                 <Heading size={200}>{"AKAUN " + bill[0].NOAKAUN}</Heading>
@@ -68,9 +71,13 @@ export default function Carian({bill,type, display, handleAdd}){
             {
                 bill.map(bills => (
                     <div key={bills.NOAKAUN} className="mx-auto w-full" onClick={() => handleAdd(bills.STATUS,bills.NOAKAUN)}>
-                        <Pane display="grid" gridTemplateColumns="40px 1fr 40px" marginBottom={10} className="hover:bg-gray-400">
+                        <Pane display="grid" gridTemplateColumns="40px 1fr 40px" marginBottom={10} className={"hover:opacity-70 cursor-pointer "+ ((array.findIndex(element => element.account === bills.NOAKAUN) !== -1 )? 'bg-green-300' : 'bg-gray-300')}>
                             <Pane padding={20} justifyContent="center" marginTop={7}>
-                                <CrossIcon />
+
+                                {
+                                    (array.findIndex(element => element.account === bills.NOAKAUN) !== -1 )? <CrossIcon /> : ''
+                                }
+                                
                             </Pane>
                             <Pane padding={10}>
                                 <Heading size={200}>{"AKAUN " + bills.NOAKAUN}</Heading>

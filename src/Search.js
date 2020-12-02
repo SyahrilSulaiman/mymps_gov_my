@@ -162,9 +162,9 @@ export default function Search({ type }) {
     });
 }
 
-useEffect(()=> {
-  console.log('Selected Bill : ',array)
-},[array])
+// useEffect(()=> {
+//   console.log('Selected Bill : ',array)
+// },[array])
 
 const handleChoose = (e,x) => {
   
@@ -337,6 +337,7 @@ const resetArray = (e) => {
                     type={type}
                     display={display}
                     handleAdd={ bill.length > 1 ? handleChoose : handleAdd }
+                    array={array}
                   />
                 }
               </Pane>
