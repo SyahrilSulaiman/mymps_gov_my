@@ -188,11 +188,27 @@ const handleAddThis = (e) => {
 
   Axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill&mode=many',formData)
   .then(res => {
-    console.log(res)
-  })
-  .catch(err => {
-    console.log('Error :', err)
-  })
+
+    if(res.data.status === "success")
+    {
+        toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"})
+        setTimeout(function(){window.location.href = '/bill'; }, 1000);
+        
+    }
+    else if(res.data.status === "failure")
+    {
+        toaster.danger("Akaun ini telah didaftarkan ke senarai bayaran anda.",{id:"forbidden-action"});
+    }
+    else
+    {
+        toaster.danger('Maaf. Sila hubungi bahagian pihak pentadbiran.',{id:"forbidden-action"});
+    }
+
+    setLoading(false);
+})
+.catch(err =>{
+    toaster.danger('Ralat! Sila hubungi pentadbir sistem.',{id:"forbidden-action"});
+});
 }
 
 const resetArray = (e) => {
