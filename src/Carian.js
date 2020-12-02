@@ -1,10 +1,9 @@
 import Axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import swal from 'sweetalert'
-import {Heading, Text, Paragraph, Button, toaster} from "evergreen-ui";
+import {Heading, Text, Paragraph, Button, toaster, Pane} from "evergreen-ui";
 
 export default function Carian({bill,type, display, handleAdd}){
-
     const [loading,setLoading] = useState(false);
     let accountType = "";
 
@@ -29,6 +28,11 @@ export default function Carian({bill,type, display, handleAdd}){
         if( bill.length === 1 || type === 'akaun' )
         {
             return (<div>
+                        <Pane marginTop={5} paddingLeft={5} background="#ffffff">
+                            <Heading size={200} textAlign="left" >
+                                Tekan pada bil untuk ditambah
+                            </Heading>
+                        </Pane>
                         <div key={bill[0].NOAKAUN} className="mx-auto w-full">
                         <div className="flex flex-wrap">
                             <div className="w-full">
@@ -87,7 +91,11 @@ export default function Carian({bill,type, display, handleAdd}){
         else{
         return (
             <div>
-
+                <Pane marginTop={5} paddingLeft={5} background="#ffffff">
+                    <Heading size={200} textAlign="left" >
+                      Sila pilih bil untuk ditambah
+                    </Heading>
+                </Pane>
             {
                 bill.map(bills => (
                     <div key={bills.NOAKAUN} className="mx-auto w-full">
@@ -95,6 +103,7 @@ export default function Carian({bill,type, display, handleAdd}){
                         <div className="w-full">
                             <div className="relative flex flex-col min-w-0 break-words bg-gray-100 border" onClick={() => handleAdd(bills.NOAKAUN)}>
                                 <div className="flex-auto p-4">
+                                    {/* <div><i className="fas fa-close text-red-600"></i></div> */}
                                     <div className="flex flex-row pt-4">
                                         <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
                                             <span className="font-semibold uppercase text-lg text-gray-800">
