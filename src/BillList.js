@@ -8,7 +8,6 @@ import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIc
 import { SelectedBillContext } from "./contexts/SelectedBillContext";
 
 export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}) {
-
   NoScroll.on();
 
   sessionStorage.removeItem("cukai");
@@ -32,7 +31,7 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
     sessionStorage.setItem("noakaun", btoa(btoa(akaun)));
     window.location.href = "/PengesahanPembayaran?Cukai=" + btoa(cukai);
   };
-  
+
   const {addSelectedBill, resetSelectedBill} = useContext(SelectedBillContext);
   const handleAddBBayarBil = e =>{
     let newArray = [...selectedBil]
@@ -60,7 +59,7 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
             // bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN)
           
           // multiple bill
-          (e) => addSelectedBill(bill.NOAKAUN,2)
+          (e) => addSelectedBill(bill.NOAKAUN,bill.BAKI_TUNGGAK)
           }
           key={bill.NOAKAUN}
         >
