@@ -1,4 +1,5 @@
 import React from "react";
+import www_icon from '../../assets/img/www-icon.png'
 
 export default function Footer({
   title = "",
@@ -35,18 +36,11 @@ export default function Footer({
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
                 <button
-                  className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
-                  onClick={ () => window.location.href = "https://instagram.com/mpselayang"}
+                  onClick={() => window.location.href = "https://mps.gov.my"}
                 >
-                  <i className="fab fa-instagram"></i>
-                </button>
-                <button
-                  className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                  onClick={ () => window.location.href = "https://twitter.com/mpselayang"}
-                >
-                  <i className="fab fa-twitter"></i>
+                  <img className="inline h-5" src={www_icon} alt="world wide web icon"/>
                 </button>
                 <button
                   className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
@@ -56,11 +50,18 @@ export default function Footer({
                   <i className="fab fa-facebook-square"></i>
                 </button>
                 <button
-                  className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
-                  onClick={() => window.location.href = "https://mps.gov.my"}
+                  onClick={ () => window.location.href = "https://twitter.com/mpselayang"}
                 >
-                  <i className="fab fa-telegram"></i>
+                  <i className="fab fa-twitter"></i>
+                </button>
+                <button
+                  className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  type="button"
+                  onClick={ () => window.location.href = "https://instagram.com/mpselayang"}
+                >
+                  <i className="fab fa-instagram"></i>
                 </button>
               </div>
             </div>
