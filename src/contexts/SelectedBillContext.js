@@ -4,6 +4,7 @@ export const SelectedBillContext = createContext();
 
 const SelectedBillContextProvider = (props) => {
     const [selectedBil,setSelectedBil] = useState([]);
+    
     const addSelectedBill = (account,amount) => {
         let newArray = [...selectedBil]
         let index = newArray.findIndex(element => element.account === account)
