@@ -123,8 +123,11 @@ export default function Footer({
           <hr className="my-6 border-gray-400" />
           <div className="flex flex-wrap items-center md:justify-between justify-center">
             <div className="w-full md:w-6/12 px-4 mx-auto text-center">
-              <div className="text-sm text-gray-600 font-semibold py-1">
-                Hak Cipta Terpelihara © {new Date().getFullYear()} {subtitle}
+              <div className="text-sm text-gray-600 font-semibold pt-1">
+                Hak Cipta Terpelihara © {new Date().getFullYear()}
+              </div>
+              <div className="text-sm text-gray-600 font-semibold">
+                {subtitle}
               </div>
             </div>
           </div>
