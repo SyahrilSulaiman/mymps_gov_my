@@ -11,7 +11,7 @@ const CARD = "CARD";
 
 function Pay() {
 
-    const [method, setMethod]           = useState("");
+    const [method, setMethod]           = useState(FPX);
     const [dialog, setDialog]           = useState(false);
     const [dialogcc, setDialogCC]       = useState(false);
     const [data, setData]               = useState(null);
