@@ -56,10 +56,7 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
           className=" w-full"
           onClick={
           //   single bill
-            // bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN)
-          
-          // multiple bill
-          (e) => addSelectedBill(bill.NOAKAUN,bill.BAKI_TUNGGAK)
+            bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN)         
           }
           key={bill.NOAKAUN}
         >
@@ -71,12 +68,10 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
                 background="#dfe6e9"
                 className="p-2 border cursor-pointer hover:bg-gray-500"
                 display="grid"
-                gridTemplateColumns="1px 1fr 10px"
+                gridTemplateColumns="30px 1fr 10px"
               >
-                <Pane>
-                  {/* <Icon icon={DocumentIcon}></Icon>
-                  <img src={iconBill} style={{width:"50px", height:"50px"}}/> */}
-                  
+                <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(bill.NOAKAUN,bill.BAKI_TUNGGAK)}>
+                  <i className="pt-12 fas fa-chevron-right"></i>
                 </Pane>
                 <Pane>
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">

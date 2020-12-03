@@ -181,10 +181,8 @@ function App() {
                       path="/forgotpassword"
                       component={ForgotPassword}
                     />
-                    {
-                      //   <PrivateRoute path="/home" component={Dashboard} />
-                    }
                     <PrivateRoute path="/setting" component={Setting} />
+                    
                     <PrivateRoute path="/bill" component={Bill} />
                     <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran} data="dataa" />
                     <PrivateRoute path="/kompaun" component={kompaun} />
