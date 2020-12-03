@@ -13,7 +13,6 @@ function Login(props) {
     let url_string = window.location.href;
     const url = new URL(url_string);
     const c = url.searchParams.get('token');
-    console.log('token : ' ,c);
 
     if (url.searchParams.get('token')) {
 
