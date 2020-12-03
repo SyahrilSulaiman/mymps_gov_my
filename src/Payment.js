@@ -107,6 +107,7 @@ function Pay() {
             formdata.append("payoremail", payoremail);
             formdata.append("payorphone", payorphone);
             formdata.append("method", 0);
+            formdata.append("nokp", sessionStorage.nokp);
 
             var requestOptions = {
                 method: 'POST',
@@ -163,6 +164,7 @@ function Pay() {
             formdata.append("payoremail", payoremail);
             formdata.append("payorphone", payorphone);
             formdata.append("method", 1);
+            formdata.append("nokp", sessionStorage.nokp);
 
             var requestOptions = {
                 method: 'POST',
