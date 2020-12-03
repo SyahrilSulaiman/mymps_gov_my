@@ -125,8 +125,8 @@ export default function Search({ type }) {
 
         if(result.status == "success"){
             toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"});
-            window.location.href = '/bill';
-        }
+            setTimeout(function(){window.location.href = '/cukaitaksiran'; }, 1000);
+          }
       });
   };
 
@@ -143,7 +143,7 @@ export default function Search({ type }) {
         if(res.data.status === "success")
         {
             toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"})
-            setTimeout(function(){window.location.href = '/bill'; }, 1000);
+            setTimeout(function(){window.location.href = '/cukaitaksiran'; }, 1000);
             
         }
         else if(res.data.status === "failure")
@@ -193,7 +193,7 @@ const handleAddThis = (e) => {
       if(res.data.status === "success")
       {
           toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"})
-          setTimeout(function(){window.location.href = '/bill'; }, 1000);
+          setTimeout(function(){window.location.href = '/cukaitaksiran'; }, 1000);
           
       }
       else if(res.data.status === "failure")
