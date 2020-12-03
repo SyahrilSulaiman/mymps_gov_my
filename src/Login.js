@@ -10,6 +10,59 @@ import Modal from './components/Modal/Install_Modal';
 import {title, subtitle} from "./Constants";
 
 function Login(props) {
+    let url_string = window.location.href;
+    const url = new URL(url_string);
+    const c = url.searchParams.get('token');
+    console.log('token : ' ,c);
+
+    if (url.searchParams.get('token')) {
+
+        var formdata = new FormData();
+        formdata.append("emailToken", c);
+
+        var requestOptions = {
+            method: 'POST',
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=check_email_token';
+
+        fetch(urlAPI1, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+
+                setLoading(false);
+
+                if (result.status == "unsuccess") {
+                    console.log("Wrong credentials. Please try again!");
+                    swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah.", "error");
+                }
+                else if (result.status == "success") {
+                    setUserSession(btoa(result.data[0]), result.data[0]["U_USERNAME"], result.data[0]["U_USERIC"], result.data[0]["U_USEREMAIL"]);
+                    sessionStorage.setItem("role", result.data[0]["U_USERROLE"]);
+                    sessionStorage.setItem("notel", result.data[0]["U_USERPHONE"]);
+
+                    if (result.data[0]['U_USERROLE'] == "Admin") {
+                        props.history.push('/admin/usermanagement');
+                    } else {
+                        props.history.push('/bill');
+                    }
+
+                }
+
+            })
+            .catch(error => {
+
+                console.log(error);
+                swal("Opss!", "Something went wrong. Please contact your administrator!", "error")
+                    .then((value) => {
+                        //props.history.push('/');
+                    })
+
+            });
+    }
+
 
     noScroll.on();
 
@@ -42,7 +95,8 @@ function Login(props) {
             swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah", "error");
             setLoading(false);
 
-        } else {
+        } 
+        else {
 
             var sha256 = require('js-sha256');
 
