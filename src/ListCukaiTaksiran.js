@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
@@ -7,6 +7,7 @@ import BillList from './BillList';
 import Topbaer from "./Topbar2";
 import axios from 'axios'
 import swal from 'sweetalert'
+import { SelectedBillContext } from "./contexts/SelectedBillContext";
 
 function Bill(props) {
 
@@ -17,15 +18,12 @@ function Bill(props) {
 	const [dataset, setDataSet] = useState({data: []});
 	const [loading, setLoading] = useState(false);
 	const [isNoData, setIsNoData] = useState(false);
-	const [selectedBil, setSelectedBil] = useState([]);
+	// const [selectedBil,setSelectedBil] = useState([]);
+	const {selectedBil} = useContext(SelectedBillContext);
 
 	const handleAddBill = () => {
 		window.location.href = '/add_cukai_taksiran';
 	}
-
-	useEffect(() => {
-		console.log('Selected Bil :', selectedBil)
-	},[selectedBil])
 
 	useEffect(() => {
 
@@ -86,18 +84,18 @@ function Bill(props) {
 									width="100%"
 									justifyContent="center"
 									appearance="primary"
-									iconBefore={SortNumericalIcon}
+									// iconBefore={SortNumericalIcon}
 									className="xs:ml-5 ml-1"
 									onClick={() => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })}
 									>
-									Bayar Semua
+									Bayar {selectedBil.length} Bil
 									</Button>
 								</Tab>
 							</Tablist>
 						</Pane>
 						<div className="w-full">
 							<div className="flex-auto overflow-y-scroll" style={{ height: "60vh" }}>
-								<BillList dataset={dataset} isNoData={isNoData} selectedBil={selectedBil} setSelectedBil={setSelectedBil}/>
+								<BillList dataset={dataset} isNoData={isNoData}/>
 							</div>
 						</div>
 					</div>

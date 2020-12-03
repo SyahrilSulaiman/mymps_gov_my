@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -49,6 +49,8 @@ import UserDetail from "./admin/UpdateUser_Admin";
 import AddUser from "./admin/AddUser_Admin";
 
 import { useLoading, Audio } from "@agney/react-loading";
+
+import SelectedBillContextProvider from './contexts/SelectedBillContext';
 
 //import "./main.css";
 
@@ -115,6 +117,7 @@ function App() {
 
   if (sessionStorage.getItem("role") == "Admin") {
     return (
+      
       <div className="App">
         <Router>
           <div>
@@ -168,33 +171,35 @@ function App() {
         <Router>
           <div>
             <div className="content">
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <PublicRoute path="/login" component={Login} />
-                <PublicRoute path="/register" component={Register} />
-                <GoogleRoute path="/verifyuser" component={GoogleLogin} />
-                <PublicRoute
-                  path="/forgotpassword"
-                  component={ForgotPassword}
-                />
-                {
-                  //   <PrivateRoute path="/home" component={Dashboard} />
-                }
-                <PrivateRoute path="/setting" component={Setting} />
-                <PrivateRoute path="/bill" component={Bill} />
-                <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran} data="dataa" />
-                <PrivateRoute path="/kompaun" component={kompaun} />
-                <PrivateRoute path="/lesen" component={lesen} />
-                <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
-                <PrivateRoute path="/payment" component={Payment} />
-                <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
-                <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
-                <PrivateRoute path="/add_cukai_taksiran" component={Add} />
-                <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar} />
-                <Route path="/receipt.php" component={Pdf} />
-                <Route path="*" component={NotFound} />
-              </Switch>
-            </div>
+              <SelectedBillContextProvider>
+                  <Switch>
+                    <Route exact path="/" component={Home} />
+                    <PublicRoute path="/login" component={Login} />
+                    <PublicRoute path="/register" component={Register} />
+                    <GoogleRoute path="/verifyuser" component={GoogleLogin} />
+                    <PublicRoute
+                      path="/forgotpassword"
+                      component={ForgotPassword}
+                    />
+                    {
+                      //   <PrivateRoute path="/home" component={Dashboard} />
+                    }
+                    <PrivateRoute path="/setting" component={Setting} />
+                    <PrivateRoute path="/bill" component={Bill} />
+                    <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran} data="dataa" />
+                    <PrivateRoute path="/kompaun" component={kompaun} />
+                    <PrivateRoute path="/lesen" component={lesen} />
+                    <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
+                    <PrivateRoute path="/payment" component={Payment} />
+                    <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
+                    <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
+                    <PrivateRoute path="/add_cukai_taksiran" component={Add} />
+                    <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar} />
+                    <Route path="/receipt.php" component={Pdf} />
+                    <Route path="*" component={NotFound} />
+                  </Switch>
+                </SelectedBillContextProvider>
+              </div>
           </div>
         </Router>
       </div>
@@ -205,53 +210,55 @@ function App() {
         <Router>
           <div>
             <div className="content">
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <PublicRoute path="/login" component={Login} />
-                <PublicRoute path="/register" component={Register} />
-                <PrivateRoute path="/home" component={Dashboard} />
-                <PrivateRoute path="/setting" component={Setting} />
-                <PrivateRoute path="/bill" component={Bill} />
-                <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran} />
-                <PrivateRoute path="/kompaun" component={kompaun} />
-                <PrivateRoute path="/lesen" component={lesen} />
-                <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
-                <PrivateRoute path="/payment" component={Payment} />
-                <PrivateRoute path="/add_cukai_taksiran" component={Add} />
-                <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
-                <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
-                <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar} />
-                <Route path="/receipt.php" component={Pdf} />
-                <PublicRoute
-                  path="/forgotpassword"
-                  component={ForgotPassword}
-                />
-                <PrivateRoute
-                  path="/admin/dashboard"
-                  component={Admin_Dashboard}
-                />
-                <PrivateRoute
-                  path="/admin/setting"
-                  component={Admin_Setting}
-                />
-                <PrivateRoute
-                  path="/admin/usermanagement"
-                  component={Admin_UserManagement}
-                />
-                <PrivateRoute
-                  path="/admin/report"
-                  component={Admin_Report}
-                />
-                <PrivateRoute
-                  path="/admin/laporan_pengguna"
-                  component={Admin_UserStatus}
-                />
-                <PrivateRoute
-                  path="/admin/add_user"
-                  component={AddUser}
-                />
-                <Route path="*" component={NotFound} />
-              </Switch>
+            <SelectedBillContextProvider>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <PublicRoute path="/login" component={Login} />
+                  <PublicRoute path="/register" component={Register} />
+                  <PrivateRoute path="/home" component={Dashboard} />
+                  <PrivateRoute path="/setting" component={Setting} />
+                  <PrivateRoute path="/bill" component={Bill} />
+                  <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran} />
+                  <PrivateRoute path="/kompaun" component={kompaun} />
+                  <PrivateRoute path="/lesen" component={lesen} />
+                  <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
+                  <PrivateRoute path="/payment" component={Payment} />
+                  <PrivateRoute path="/add_cukai_taksiran" component={Add} />
+                  <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
+                  <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
+                  <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar} />
+                  <Route path="/receipt.php" component={Pdf} />
+                  <PublicRoute
+                    path="/forgotpassword"
+                    component={ForgotPassword}
+                  />
+                  <PrivateRoute
+                    path="/admin/dashboard"
+                    component={Admin_Dashboard}
+                  />
+                  <PrivateRoute
+                    path="/admin/setting"
+                    component={Admin_Setting}
+                  />
+                  <PrivateRoute
+                    path="/admin/usermanagement"
+                    component={Admin_UserManagement}
+                  />
+                  <PrivateRoute
+                    path="/admin/report"
+                    component={Admin_Report}
+                  />
+                  <PrivateRoute
+                    path="/admin/laporan_pengguna"
+                    component={Admin_UserStatus}
+                  />
+                  <PrivateRoute
+                    path="/admin/add_user"
+                    component={AddUser}
+                  />
+                  <Route path="*" component={NotFound} />
+                </Switch>
+              </SelectedBillContextProvider>
             </div>
           </div>
         </Router>

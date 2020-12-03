@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { getNOKP } from "./Utils/Common";
 import swal from "sweetalert";
 import NoScroll from "no-scroll";
 import BayarCukai from "./BayarCukai";
 import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon } from "evergreen-ui";
+import { SelectedBillContext } from "./contexts/SelectedBillContext";
 
 export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}) {
 
@@ -31,40 +32,8 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
     sessionStorage.setItem("noakaun", btoa(btoa(akaun)));
     window.location.href = "/PengesahanPembayaran?Cukai=" + btoa(cukai);
   };
-
-  // const [dataset, setDataSet] = useState({data: []});
-  // const [loading, setLoading] = useState(false);
-  // const [isNoData, setIsNoData] = useState(false);
-
-  // useEffect(() => {
-
-  //   const formData = new FormData();
-  //   formData.append("nokp", nokp);
-  //   axios
-  //     .post(
-  //       "https://mymps.corrad.my/int/api_generator.php?api_name=showBill",
-  //       formData
-  //     )
-  //     .then((res) => {
-  //       setLoading(true);
-  //       if (res.data.status === "success") {
-  //         setDataSet({
-  //           data: res.data.data,
-  //         });
-  //         setLoading(false);
-  //       } else {
-  //         setIsNoData(true);
-  //         setLoading(false);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
-  //     });
-
-
-  // }, []);
-
+  
+  const {addSelectedBill, resetSelectedBill} = useContext(SelectedBillContext);
   const handleAddBBayarBil = e =>{
     let newArray = [...selectedBil]
     let index = newArray.findIndex(element => element.account === e)
@@ -88,10 +57,10 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
           className=" w-full"
           onClick={
           //   single bill
-          //   bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN)
+            // bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN)
           
           // multiple bill
-          (e) => handleAddBBayarBil(bill.NOAKAUN)
+          (e) => addSelectedBill(bill.NOAKAUN,2)
           }
           key={bill.NOAKAUN}
         >
