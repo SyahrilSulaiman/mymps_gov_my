@@ -100,7 +100,7 @@ function Register(props) {
 
               setUserSession(btoa(formdata), username.value, nokp, email.value);
               sessionStorage.setItem("notel", notel.value);
-              props.history.push("/bill");
+              window.location.href = "/bill";
 
             } else {
               setLoading("false");
@@ -179,7 +179,7 @@ function Register(props) {
 
               setUserSession(btoa(formdata), username.value, ssm.value, email.value);
               sessionStorage.setItem("notel", notel.value);
-              props.history.push("/bill");
+              window.location.href = "/bill";
 
             } else {
               setLoading("false");

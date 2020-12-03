@@ -11,8 +11,6 @@ import axios from "axios";
 
 function Bill(props) {
 
-	noscroll.on();
-
 	useEffect(() => {
 
 		const formData2 = new FormData();
@@ -20,7 +18,9 @@ function Bill(props) {
 		axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=user_notification', formData2)
 		.then((res) => {
 		if(res.data.status === "inactive"){
-			swal("Tahniah!","Terima kasih kerana mendaftar sebagai pengguna mymps, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan.","success")
+			setTimeout(function(){ 
+				swal("Tahniah!","Terima kasih kerana mendaftar sebagai pengguna mymps, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan.","success"); 
+			}, 1000);
 		}
 		})
 		.catch((err) => {
