@@ -6,7 +6,7 @@ import NoScroll from "no-scroll";
 import BayarCukai from "./BayarCukai";
 import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon } from "evergreen-ui";
 
-export default function BillList() {
+export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}) {
 
   NoScroll.on();
 
@@ -32,40 +32,54 @@ export default function BillList() {
     window.location.href = "/PengesahanPembayaran?Cukai=" + btoa(cukai);
   };
 
-  const [dataset, setDataSet] = useState({
-    data: [],
-  });
-  const [loading, setLoading] = useState(false);
-  const [isNoData, setIsNoData] = useState(false);
+  // const [dataset, setDataSet] = useState({data: []});
+  // const [loading, setLoading] = useState(false);
+  // const [isNoData, setIsNoData] = useState(false);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const formData = new FormData();
-    formData.append("nokp", nokp);
-    axios
-      .post(
-        "https://mymps.corrad.my/int/api_generator.php?api_name=showBill",
-        formData
-      )
-      .then((res) => {
-        setLoading(true);
-        if (res.data.status === "success") {
-          setDataSet({
-            data: res.data.data,
-          });
-          setLoading(false);
-        } else {
-          setIsNoData(true);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
-      });
+  //   const formData = new FormData();
+  //   formData.append("nokp", nokp);
+  //   axios
+  //     .post(
+  //       "https://mymps.corrad.my/int/api_generator.php?api_name=showBill",
+  //       formData
+  //     )
+  //     .then((res) => {
+  //       setLoading(true);
+  //       if (res.data.status === "success") {
+  //         setDataSet({
+  //           data: res.data.data,
+  //         });
+  //         setLoading(false);
+  //       } else {
+  //         setIsNoData(true);
+  //         setLoading(false);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
+  //     });
 
 
-  }, []);
+  // }, []);
+
+  const handleAddBBayarBil = e =>{
+    let newArray = [...selectedBil]
+    let index = newArray.findIndex(element => element.account === e)
+    if(index !== -1){
+      newArray.splice(index,1);
+      setSelectedBil(newArray);
+    }
+    else{
+      setSelectedBil([...selectedBil,{'account':e}])
+    }
+  }
+
+  const handleResetBill = e => {
+    setSelectedBil([]);
+  }
 
   const bills = dataset.data.length ? (
     dataset.data.map((bill) => {
@@ -73,8 +87,11 @@ export default function BillList() {
         <div
           className=" w-full"
           onClick={
-            //betulkan status***
-            bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN)
+          //   single bill
+          //   bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN)
+          
+          // multiple bill
+          (e) => handleAddBBayarBil(bill.NOAKAUN)
           }
           key={bill.NOAKAUN}
         >
@@ -91,6 +108,7 @@ export default function BillList() {
                 <Pane>
                   {/* <Icon icon={DocumentIcon}></Icon>
                   <img src={iconBill} style={{width:"50px", height:"50px"}}/> */}
+                  
                 </Pane>
                 <Pane>
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">

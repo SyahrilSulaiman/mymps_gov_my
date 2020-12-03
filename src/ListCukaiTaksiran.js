@@ -5,6 +5,8 @@ import Navbar from "./components/Navbars/AdminNavbar";
 import { Pane, toaster, Button, AddIcon, ArrowLeftIcon, Dialog, SortNumericalIcon, Tablist, Tab, Heading } from "evergreen-ui";
 import BillList from './BillList';
 import Topbaer from "./Topbar2";
+import axios from 'axios'
+import swal from 'sweetalert'
 
 function Bill(props) {
 
@@ -12,10 +14,47 @@ function Bill(props) {
 	const user 		= getUser();
 	const nokp 		= getNOKP();
 	const [dialog, setDialog ] = useState(false);
+	const [dataset, setDataSet] = useState({data: []});
+	const [loading, setLoading] = useState(false);
+	const [isNoData, setIsNoData] = useState(false);
+	const [selectedBil, setSelectedBil] = useState([]);
 
 	const handleAddBill = () => {
 		window.location.href = '/add_cukai_taksiran';
-	}	
+	}
+
+	useEffect(() => {
+		console.log('Selected Bil :', selectedBil)
+	},[selectedBil])
+
+	useEffect(() => {
+
+		const formData = new FormData();
+		formData.append("nokp", nokp);
+		axios
+		  .post(
+			"https://mymps.corrad.my/int/api_generator.php?api_name=showBill",
+			formData
+		  )
+		  .then((res) => {
+			setLoading(true);
+			if (res.data.status === "success") {
+			  setDataSet({
+				data: res.data.data,
+			  });
+			  setLoading(false);
+			} else {
+			  setIsNoData(true);
+			  setLoading(false);
+			}
+		  })
+		  .catch((err) => {
+			console.log(err);
+			swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
+		  });
+	
+	
+	  }, []);
 
 	return (
 		<div>
@@ -58,7 +97,7 @@ function Bill(props) {
 						</Pane>
 						<div className="w-full">
 							<div className="flex-auto overflow-y-scroll" style={{ height: "60vh" }}>
-								<BillList />
+								<BillList dataset={dataset} isNoData={isNoData} selectedBil={selectedBil} setSelectedBil={setSelectedBil}/>
 							</div>
 						</div>
 					</div>
