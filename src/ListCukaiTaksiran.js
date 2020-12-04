@@ -95,7 +95,7 @@ function Bill(props) {
 										className="xs:ml-5 ml-1"
 										onClick={
 													// () => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })
-													handleBayarBill
+													handleBayarSemua
 												}
 										>
 										Bayar {selectedBil.length} Bil

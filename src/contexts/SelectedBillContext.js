@@ -18,19 +18,19 @@ const SelectedBillContextProvider = (props) => {
     
     const addSelectedBill = (account,amount) => {
         let newArray = [...selectedBil]
-        let index = newArray.findIndex(element => element.account === account)
+        let index = newArray.findIndex(element => element.NOAKAUN === account)
         if(index !== -1){
           newArray.splice(index,1);
           setSelectedBil(newArray);
         }
         else{
-          setSelectedBil([...selectedBil,{account,amount}])
+          setSelectedBil([...selectedBil,{NOAKAUN:account,BAKI_TUNGGAK:amount}])
         }
     }
 
     const handleSelectedBil = (account) => {
         let newArray = [...selectedBil]
-        let index = newArray.findIndex(element => element.account === account)
+        let index = newArray.findIndex(element => element.NOAKAUN === account)
         if(index !== -1){
           return <CrossIcon marginTop={40} marginLeft={10} color="danger"/>
         }

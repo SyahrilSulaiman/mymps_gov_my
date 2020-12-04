@@ -34,9 +34,7 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
 
   const {addSelectedBill, resetSelectedBill, handleSelectedBil} = useContext(SelectedBillContext);
 
-  const handleResetBill = e => {
-    setSelectedBil([]);
-  }
+  // Reset selected bill guna context 'resetSelectedBill' 
 
   const bills = dataset.data.length ? (
     dataset.data.map((bill) => {
@@ -55,8 +53,8 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
                 display="grid"
                 gridTemplateColumns="40px 1fr 10px"
               >
-                <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(btoa(btoa(bill.NOAKAUN)),bill.BAKI_TUNGGAK)}>
-                  {handleSelectedBil(btoa(btoa(bill.NOAKAUN)))}
+                <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(bill.NOAKAUN,bill.BAKI_TUNGGAK)}>
+                  {handleSelectedBil(bill.NOAKAUN)}
                 </Pane>
                 <Pane onClick={ bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN) }>
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
@@ -93,7 +91,6 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
 
       <div className="w-full bg-transparent px-3">
         <Pane display="flex" alignItems="center" justifyContent="center" background="white" paddingY={100}>
-          {/* <Heading size={200}>Tekan pada butang <Button type="button" appearance="primary" intent="success">Tambah Bil</Button> untuk menambah bil.</Heading> */}
           <Spinner />
         </Pane>
       </div>
