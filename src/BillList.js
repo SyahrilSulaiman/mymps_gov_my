@@ -4,7 +4,7 @@ import { getNOKP } from "./Utils/Common";
 import swal from "sweetalert";
 import NoScroll from "no-scroll";
 import BayarCukai from "./BayarCukai";
-import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon } from "evergreen-ui";
+import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon, AddIcon, CrossIcon } from "evergreen-ui";
 import { SelectedBillContext } from "./contexts/SelectedBillContext";
 
 export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}) {
@@ -71,7 +71,8 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
                 gridTemplateColumns="30px 1fr 10px"
               >
                 <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(bill.NOAKAUN,bill.BAKI_TUNGGAK)}>
-                  <i className="pt-12 fas fa-chevron-right"></i>
+                  <AddIcon />
+                  <CrossIcon />
                 </Pane>
                 <Pane>
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
