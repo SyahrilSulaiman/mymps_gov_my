@@ -378,8 +378,18 @@ function Pay() {
                             confirmLabel="betul"
                             intent="success"
                             shouldCloseOnOverlayClick={false}
+                            hasFooter={false}
                         >
                             <Checkbox checked label="Dengan ini saya mengesahkan untuk membuat pembayaran ke atas cukai taksiran." />
+                            <Pane paddingTop={30} display="float" className="float-right">
+                                <Button marginRight={16} intent="success" appearance="primary" onClick={() => handleBayar2()}
+>
+                                            Betul
+                                </Button>
+                                <Button marginRight={16} intent="none" onClick={() => setDialogCC(false)}>
+                                            Batal
+                                </Button>
+                            </Pane>
                         </Dialog>
                     </Pane>
                     {method === "FPX" &&
