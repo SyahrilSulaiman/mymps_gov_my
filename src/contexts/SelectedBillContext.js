@@ -5,6 +5,16 @@ export const SelectedBillContext = createContext();
 
 const SelectedBillContextProvider = (props) => {
     const [selectedBil,setSelectedBil] = useState([]);
+    const [unpaidBil, setUnpaidBil] = useState([]);
+
+    const handleUnpaidBil = (dataset) => {
+      const results = dataset.data.filter( json => json.STATUS.toUpperCase().includes('PENDING PAYMENT'))
+      setUnpaidBil(results); 
+    }
+
+    useEffect(() => {
+      // console.log('Unpaid : ', unpaidBil)
+    },[unpaidBil])
     
     const addSelectedBill = (account,amount) => {
         let newArray = [...selectedBil]
@@ -34,11 +44,11 @@ const SelectedBillContextProvider = (props) => {
     }
     
     useEffect(() => {
-		console.log('Selected Bil :', selectedBil)
+		// console.log('Selected Bil :', selectedBil)
     },[selectedBil])
     
     return ( 
-        <SelectedBillContext.Provider value={{selectedBil, addSelectedBill, resetSelectedBill, handleSelectedBil}}>
+        <SelectedBillContext.Provider value={{selectedBil, addSelectedBill, resetSelectedBill, handleSelectedBil, handleUnpaidBil, unpaidBil}}>
             {props.children}
         </SelectedBillContext.Provider>
      );

@@ -33,17 +33,6 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
   };
 
   const {addSelectedBill, resetSelectedBill, handleSelectedBil} = useContext(SelectedBillContext);
-  const handleAddBBayarBil = e =>{
-    let newArray = [...selectedBil]
-    let index = newArray.findIndex(element => element.account === e)
-    if(index !== -1){
-      newArray.splice(index,1);
-      setSelectedBil(newArray);
-    }
-    else{
-      setSelectedBil([...selectedBil,{'account':e}])
-    }
-  }
 
   const handleResetBill = e => {
     setSelectedBil([]);

@@ -18,15 +18,19 @@ function Bill(props) {
 	const [dataset, setDataSet] = useState({data: []});
 	const [loading, setLoading] = useState(false);
 	const [isNoData, setIsNoData] = useState(false);
-	const [unpaidBill,setUnpaidBill] = useState([]);
-	const {selectedBil} = useContext(SelectedBillContext);
+	const {selectedBil,handleUnpaidBil ,unpaidBil} = useContext(SelectedBillContext);
 
 	const handleAddBill = () => {
 		window.location.href = '/add_cukai_taksiran';
 	}
 
 	const handleBayarBill = () => {
-		console.log('Selected Bil :',selectedBil)
+		// Pay Bill
+		console.log('Pay Bill');
+	}
+
+	const handleBayarSemua = () => {
+		handleUnpaidBil(dataset);
 	}
 
 	useEffect(() => {
@@ -44,7 +48,6 @@ function Bill(props) {
 			  setDataSet({
 				data: res.data.data,
 			  });
-			//   console.log('res',res.data.data)
 			  setLoading(false);
 			} else {
 			  setIsNoData(true);
@@ -73,30 +76,29 @@ function Bill(props) {
 							<Tablist display="grid" gridTemplateColumns="1fr 1fr">
 								<Tab onSelect={() => handleAddBill()}>
 									<Button
-									width="100%"
-									justifyContent="center"
-									appearance="primary"
-									intent="success"
-									iconBefore={AddIcon}
-									className="xs:ml-5"
-									onClick={handleAddBill}
+										width="100%"
+										justifyContent="center"
+										appearance="primary"
+										intent="success"
+										iconBefore={AddIcon}
+										className="xs:ml-5"
+										onClick={handleAddBill}
 									>
-									Tambah Bil
+										Tambah Bil
 									</Button>
 								</Tab>
-								<Tab onSelect={() => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })}>
+								<Tab >
 									<Button
-									width="100%"
-									justifyContent="center"
-									appearance="primary"
-									// iconBefore={SortNumericalIcon}
-									className="xs:ml-5 ml-1"
-									onClick={
-												// () => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })
-												handleBayarBill
-											}
-									>
-									Bayar {selectedBil.length} Bil
+										width="100%"
+										justifyContent="center"
+										appearance="primary"
+										className="xs:ml-5 ml-1"
+										onClick={
+													// () => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })
+													handleBayarBill
+												}
+										>
+										Bayar {selectedBil.length} Bil
 									</Button>
 								</Tab>
 							</Tablist>
