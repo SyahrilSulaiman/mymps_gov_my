@@ -349,12 +349,23 @@ function Pay() {
                             onConfirm={() => handleBayar()}
                             onCancel={() => setDialog(false)}
                             cancelLabel="batal"
+                            // cancelBackground = "danger"
                             intent="danger"
                             confirmLabel="betul"
-                            intent="success"
+                            // intent="success"
                             shouldCloseOnOverlayClick={false}
+                            hasFooter={false}
                         >
                             <Checkbox checked label="Dengan ini saya mengesahkan untuk membuat pembayaran ke atas cukai taksiran." />
+                            <Pane paddingTop={30} display="float" className="float-right">
+                                <Button marginRight={16} intent="success" appearance="primary" onClick={() => handleBayar()}
+>
+                                            Betul
+                                </Button>
+                                <Button marginRight={16} intent="none" onClick={() => setDialog(false)}>
+                                            Batal
+                                </Button>
+                            </Pane>
                         </Dialog>
 
                         <Dialog
