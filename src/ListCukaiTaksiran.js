@@ -18,11 +18,15 @@ function Bill(props) {
 	const [dataset, setDataSet] = useState({data: []});
 	const [loading, setLoading] = useState(false);
 	const [isNoData, setIsNoData] = useState(false);
-	// const [selectedBil,setSelectedBil] = useState([]);
+	const [unpaidBill,setUnpaidBill] = useState([]);
 	const {selectedBil} = useContext(SelectedBillContext);
 
 	const handleAddBill = () => {
 		window.location.href = '/add_cukai_taksiran';
+	}
+
+	const handleBayarBill = () => {
+		console.log('Selected Bil :',selectedBil)
 	}
 
 	useEffect(() => {
@@ -40,6 +44,7 @@ function Bill(props) {
 			  setDataSet({
 				data: res.data.data,
 			  });
+			//   console.log('res',res.data.data)
 			  setLoading(false);
 			} else {
 			  setIsNoData(true);
@@ -86,7 +91,10 @@ function Bill(props) {
 									appearance="primary"
 									// iconBefore={SortNumericalIcon}
 									className="xs:ml-5 ml-1"
-									onClick={() => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })}
+									onClick={
+												// () => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })
+												handleBayarBill
+											}
 									>
 									Bayar {selectedBil.length} Bil
 									</Button>
@@ -95,7 +103,7 @@ function Bill(props) {
 						</Pane>
 						<div className="w-full">
 							<div className="flex-auto overflow-y-scroll" style={{ height: "60vh" }}>
-								<BillList dataset={dataset} isNoData={isNoData}/>
+								<BillList dataset={dataset} isNoData={isNoData} selectedBil={selectedBil}/>
 							</div>
 						</div>
 					</div>

@@ -32,7 +32,7 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
     window.location.href = "/PengesahanPembayaran?Cukai=" + btoa(cukai);
   };
 
-  const {addSelectedBill, resetSelectedBill} = useContext(SelectedBillContext);
+  const {addSelectedBill, resetSelectedBill, handleSelectedBil} = useContext(SelectedBillContext);
   const handleAddBBayarBil = e =>{
     let newArray = [...selectedBil]
     let index = newArray.findIndex(element => element.account === e)
@@ -54,10 +54,6 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
       return (
         <div
           className=" w-full"
-          onClick={
-          //   single bill
-            bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN)         
-          }
           key={bill.NOAKAUN}
         >
           <div className="flex flex-wrap ">
@@ -70,12 +66,10 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
                 display="grid"
                 gridTemplateColumns="40px 1fr 10px"
               >
-                <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(bill.NOAKAUN,bill.BAKI_TUNGGAK)}>
-                  <AddIcon marginTop={40} marginLeft={10} color="success"/>
-                  {/* <CrossIcon marginTop={40} marginLeft={10} color="danger" /> */}
-                  
+                <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(btoa(btoa(bill.NOAKAUN)),bill.BAKI_TUNGGAK)}>
+                  {handleSelectedBil(btoa(btoa(bill.NOAKAUN)))}
                 </Pane>
-                <Pane>
+                <Pane onClick={ bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN) }>
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
                     <tbody>
                       <tr>

@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { AddIcon, CrossIcon } from "evergreen-ui";
 
 export const SelectedBillContext = createContext();
 
@@ -17,6 +18,17 @@ const SelectedBillContextProvider = (props) => {
         }
     }
 
+    const handleSelectedBil = (account) => {
+        let newArray = [...selectedBil]
+        let index = newArray.findIndex(element => element.account === account)
+        if(index !== -1){
+          return <CrossIcon marginTop={40} marginLeft={10} color="danger"/>
+        }
+        else{
+          return <AddIcon marginTop={40} marginLeft={10} color="success"/>
+        }
+    }
+
     const resetSelectedBill = () => {
         setSelectedBil([]);
     }
@@ -26,7 +38,7 @@ const SelectedBillContextProvider = (props) => {
     },[selectedBil])
     
     return ( 
-        <SelectedBillContext.Provider value={{selectedBil, addSelectedBill, resetSelectedBill}}>
+        <SelectedBillContext.Provider value={{selectedBil, addSelectedBill, resetSelectedBill, handleSelectedBil}}>
             {props.children}
         </SelectedBillContext.Provider>
      );
