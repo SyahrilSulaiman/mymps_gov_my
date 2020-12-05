@@ -8,7 +8,6 @@ import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIc
 import { SelectedBillContext } from "./contexts/SelectedBillContext";
 
 export default function BillList({dataset,isNoData}) {
-  NoScroll.on();
 
   sessionStorage.removeItem("cukai");
   const nokp = getNOKP();

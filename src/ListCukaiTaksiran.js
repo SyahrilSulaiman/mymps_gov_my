@@ -91,10 +91,10 @@ function Bill(props) {
 				<Navbar />
 				<div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
 					<div className="flex flex-wrap ">
-						<Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md mb-5" width="100%">
+						<Pane background="#2c3e50" className="xl:mx-6 xl:rounded-md mb-5" width="100%">
 							<Topbaer title="Bil / Cukai Taksiran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
 						</Pane>
-						<div className="w-full lg:w-6/12 xl:w-4/12 px-2" onClick={handleAddBill}>
+						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={handleAddBill}>
 							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
 								<div className="flex-auto p-4">
 									<div className="flex flex-wrap">
@@ -115,7 +115,7 @@ function Bill(props) {
 								</div>
 							</div>
 						</div>
-						<div className="w-full lg:w-6/12 xl:w-4/12 px-2" onClick={handleBayarSelected}>
+						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={handleBayarSelected}>
 							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
 								<div className="flex-auto p-4">
 									<div className="flex flex-wrap">
@@ -124,7 +124,7 @@ function Bill(props) {
 												Pembayaran akaun terpilih
 											</h5>
 											<span className="font-semibold text-sm text-gray-800">
-												Membayar {selectedBil.length} akaun
+												Membayar {selectedBil.length} akaun yang terpilih
 											</span>
 										</div>
 										<div className="relative w-auto pl-4 flex-initial" onClick={handleBayarSelected}>
@@ -136,7 +136,7 @@ function Bill(props) {
 								</div>
 							</div>
 						</div>
-						<div className="w-full lg:w-6/12 xl:w-4/12 px-2" onClick={handleBayarSemua}>
+						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={handleBayarSemua}>
 							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
 								<div className="flex-auto p-4">
 									<div className="flex flex-wrap">
@@ -145,7 +145,7 @@ function Bill(props) {
 												Pembayaran semua bil
 											</h5>
 											<span className="font-semibold text-sm text-gray-800">
-												Membayar keseluruhan bil yang berstatus tunggak
+												Membayar keseluruhan bil yang tertunggak
 											</span>
 										</div>
 										<div className="relative w-auto pl-4 flex-initial" onClick={handleBayarSemua}>
@@ -197,7 +197,7 @@ function Bill(props) {
 							</Tablist> */}
 						</Pane>
 						<div className="w-full">
-							<div className="flex-auto overflow-y-scroll" style={{ height: "60vh" }}>
+							<div className="flex-auto" style={{ height: "120vh" }}>
 								<BillList dataset={dataset} isNoData={isNoData} />
 							</div>
 						</div>
