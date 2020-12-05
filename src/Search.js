@@ -13,13 +13,18 @@ import {
   toaster,
 } from "evergreen-ui";
 import NoScroll from "no-scroll";
+import Axios from 'axios';
+import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
+import { setPageStateUpdate } from "@material-ui/data-grid";
+
 
 export default function Search({ type }) {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [display, setDisplay] = useState(false);
   const [bill, setBill] = useState([]);
-  const [array, setArray] = useState(null);
+  const [array, setArray] = useState([]);
+  const nokp    = getNOKP();
 
   useEffect(() => {
   }, [type]);
@@ -57,7 +62,7 @@ export default function Search({ type }) {
               NoScroll.off();
             }
             setBill(res.data);
-            setArray(res.data);
+            // setArray(res.data);
             setDisplay(true);
           }
         }
@@ -75,7 +80,7 @@ export default function Search({ type }) {
               NoScroll.off();
             }
             setBill(res.data[0]);
-            setArray(res.data[0]);
+            // setArray(res.data[0]);
             setDisplay(true);
           }
         }
@@ -89,7 +94,7 @@ export default function Search({ type }) {
             swal("Tidak ditemui", searchType + " tidak ditemui", "error");
           } else {
             setBill(res);
-            setArray(res);
+            // setArray(res);
             setDisplay(true);
           }
         }
@@ -120,10 +125,100 @@ export default function Search({ type }) {
 
         if(result.status == "success"){
             toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"});
-            window.location.href = '/bill';
-        }
+            setTimeout(function(){window.location.href = '/cukaitaksiran'; }, 1000);
+          }
       });
   };
+
+  const handleAdd = (status,account) => {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append('nokp',nokp);
+    formData.append('account',account);
+    formData.append('status',status);
+
+    Axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill',formData)
+    .then(res => {
+
+        if(res.data.status === "success")
+        {
+            toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"})
+            setTimeout(function(){window.location.href = '/cukaitaksiran'; }, 1000);
+            
+        }
+        else if(res.data.status === "failure")
+        {
+            toaster.danger("Akaun ini telah didaftarkan ke senarai bayaran anda.",{id:"forbidden-action"});
+        }
+        else
+        {
+            toaster.danger('Maaf. Sila hubungi bahagian pihak pentadbiran.',{id:"forbidden-action"});
+        }
+
+        setLoading(false);
+    })
+    .catch(err =>{
+        toaster.danger('Ralat! Sila hubungi pentadbir sistem.',{id:"forbidden-action"});
+    });
+}
+
+// useEffect(()=> {
+//   console.log('Selected Bill : ',array)
+// },[array])
+
+const handleChoose = (e,x) => {
+  
+  let newArray = [...array];
+  let index = newArray.findIndex(element => element.account === x);
+  if(index !== -1){
+      newArray.splice(index,1);
+      setArray(newArray);
+  }
+  else{
+    setArray( array => [...array,{'account':x,'status':e}])
+  }
+}
+
+
+const handleAddThis = (e) => {
+  if(array.length > 0){
+    let accountObj = JSON.stringify(array);
+    let formData = new FormData();
+    formData.append('nokp',nokp);
+    formData.append('account',accountObj);
+
+    Axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill&mode=many',formData)
+    .then(res => {
+
+      if(res.data.status === "success")
+      {
+          toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"})
+          setTimeout(function(){window.location.href = '/cukaitaksiran'; }, 1000);
+          
+      }
+      else if(res.data.status === "failure")
+      {
+          toaster.danger("Akaun ini telah didaftarkan ke senarai bayaran anda.",{id:"forbidden-action"});
+      }
+      else
+      {
+          toaster.danger('Maaf. Sila hubungi bahagian pihak pentadbiran.',{id:"forbidden-action"});
+      }
+
+      setLoading(false);
+  })
+  .catch(err =>{
+      toaster.danger('Ralat! Sila hubungi pentadbir sistem.',{id:"forbidden-action"});
+  });
+  }
+  else{
+    toaster.danger('Tiada bil dipilih! Sila pilih bil terlebih dahulu.',{id:"forbidden-action"});
+  }
+}
+
+const resetArray = (e) => {
+  setArray([]);
+}
 
   if (type === "" || type === null || type == "tiada") {
     return <div></div>;
@@ -180,19 +275,6 @@ export default function Search({ type }) {
                     {loading ? "Mencari.." : "Cari"}
                   </Button>
 
-                  {bill.length > 1 ? (
-                    <Button
-                      type="button"
-                      onClick={() => addAll()}
-                      appearance="primary"
-                      className="float-right mr-2"
-                    >
-                      {loading ? "Menambah.." : "Tambah Semua"}
-                    </Button>
-                  ) : (
-                    ""
-                  )}
-
                   <Button
                     type="button"
                     iconBefore={ArrowLeftIcon}
@@ -203,7 +285,41 @@ export default function Search({ type }) {
                     Kembali
                   </Button>
                 </Pane>
-                <Pane marginTop={32} padding={10} background="#2d3436">
+                <Pane marginTop={5}  background="#fff">
+                    {bill.length > 1 ? (
+                      <>
+                        <Button
+                          type="button"
+                          onClick={() => resetArray()}
+                          appearance="primary"
+                          intent="warning"
+                          className=""
+                        >
+                          Set Semula
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => addAll()}
+                          appearance="primary"
+                          className="float-right"
+                        >
+                          {loading ? "Menambah.." : "Tambah Semua"}
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => handleAddThis()}
+                          appearance="primary"
+                          className="float-right mr-2"
+                        >
+                          {loading ? "Menambah.." : "Tambah "+array.length+" Bil"}
+                        </Button>
+                      </>
+                    ) : (
+                      ""
+                    )}
+                </Pane>
+
+                <Pane marginTop={10} padding={10} background="#2d3436">
                   <Heading size={400} textAlign="center" color="white">
                     Senarai bil akan dipaparkan dibawah
                   </Heading>
@@ -225,6 +341,8 @@ export default function Search({ type }) {
                     bill={bill}
                     type={type}
                     display={display}
+                    handleAdd={ bill.length > 1 ? handleChoose : handleAdd }
+                    array={array}
                   />
                 }
               </Pane>

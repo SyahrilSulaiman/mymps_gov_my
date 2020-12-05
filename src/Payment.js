@@ -11,7 +11,7 @@ const CARD = "CARD";
 
 function Pay() {
 
-    const [method, setMethod]           = useState("");
+    const [method, setMethod]           = useState(FPX);
     const [dialog, setDialog]           = useState(false);
     const [dialogcc, setDialogCC]       = useState(false);
     const [data, setData]               = useState(null);
@@ -107,6 +107,7 @@ function Pay() {
             formdata.append("payoremail", payoremail);
             formdata.append("payorphone", payorphone);
             formdata.append("method", 0);
+            formdata.append("nokp", sessionStorage.nokp);
 
             var requestOptions = {
                 method: 'POST',
@@ -163,6 +164,7 @@ function Pay() {
             formdata.append("payoremail", payoremail);
             formdata.append("payorphone", payorphone);
             formdata.append("method", 1);
+            formdata.append("nokp", sessionStorage.nokp);
 
             var requestOptions = {
                 method: 'POST',
@@ -347,12 +349,23 @@ function Pay() {
                             onConfirm={() => handleBayar()}
                             onCancel={() => setDialog(false)}
                             cancelLabel="batal"
+                            // cancelBackground = "danger"
                             intent="danger"
                             confirmLabel="betul"
-                            intent="success"
+                            // intent="success"
                             shouldCloseOnOverlayClick={false}
+                            hasFooter={false}
                         >
                             <Checkbox checked label="Dengan ini saya mengesahkan untuk membuat pembayaran ke atas cukai taksiran." />
+                            <Pane paddingTop={30} display="float" className="float-right">
+                                <Button marginRight={16} intent="success" appearance="primary" onClick={() => handleBayar()}
+>
+                                            Betul
+                                </Button>
+                                <Button marginRight={16} intent="none" onClick={() => setDialog(false)}>
+                                            Batal
+                                </Button>
+                            </Pane>
                         </Dialog>
 
                         <Dialog
@@ -365,8 +378,18 @@ function Pay() {
                             confirmLabel="betul"
                             intent="success"
                             shouldCloseOnOverlayClick={false}
+                            hasFooter={false}
                         >
                             <Checkbox checked label="Dengan ini saya mengesahkan untuk membuat pembayaran ke atas cukai taksiran." />
+                            <Pane paddingTop={30} display="float" className="float-right">
+                                <Button marginRight={16} intent="success" appearance="primary" onClick={() => handleBayar2()}
+>
+                                            Betul
+                                </Button>
+                                <Button marginRight={16} intent="none" onClick={() => setDialogCC(false)}>
+                                            Batal
+                                </Button>
+                            </Pane>
                         </Dialog>
                     </Pane>
                     {method === "FPX" &&

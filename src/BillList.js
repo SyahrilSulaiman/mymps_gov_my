@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { getNOKP } from "./Utils/Common";
 import swal from "sweetalert";
 import NoScroll from "no-scroll";
 import BayarCukai from "./BayarCukai";
-import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon } from "evergreen-ui";
+import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon, AddIcon, CrossIcon } from "evergreen-ui";
+import { SelectedBillContext } from "./contexts/SelectedBillContext";
 
-export default function BillList() {
-
+export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}) {
   NoScroll.on();
 
   sessionStorage.removeItem("cukai");
@@ -33,50 +32,15 @@ export default function BillList() {
     window.location.href = "/PengesahanPembayaran?Cukai=" + btoa(cukai);
   };
 
-  const [dataset, setDataSet] = useState({
-    data: [],
-  });
-  const [loading, setLoading] = useState(false);
-  const [isNoData, setIsNoData] = useState(false);
+  const {addSelectedBill, resetSelectedBill, handleSelectedBil} = useContext(SelectedBillContext);
 
-  useEffect(() => {
-
-    const formData = new FormData();
-    formData.append("nokp", nokp);
-    axios
-      .post(
-        "https://mymps.corrad.my/int/api_generator.php?api_name=showBill",
-        formData
-      )
-      .then((res) => {
-        setLoading(true);
-        if (res.data.status === "success") {
-          setDataSet({
-            data: res.data.data,
-          });
-          setLoading(false);
-        } else {
-          setIsNoData(true);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
-      });
-
-
-  }, []);
+  // Reset selected bill guna context 'resetSelectedBill' 
 
   const bills = dataset.data.length ? (
     dataset.data.map((bill) => {
       return (
         <div
           className=" w-full"
-          onClick={
-            //betulkan status***
-            bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN)
-          }
           key={bill.NOAKAUN}
         >
           <div className="flex flex-wrap ">
@@ -87,13 +51,12 @@ export default function BillList() {
                 background="#dfe6e9"
                 className="p-2 border cursor-pointer hover:bg-gray-500"
                 display="grid"
-                gridTemplateColumns="1px 1fr 10px"
+                gridTemplateColumns="40px 1fr 10px"
               >
-                <Pane>
-                  {/* <Icon icon={DocumentIcon}></Icon>
-                  <img src={iconBill} style={{width:"50px", height:"50px"}}/> */}
+                <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(bill.NOAKAUN,bill.BAKI_TUNGGAK)}>
+                  {handleSelectedBil(bill.NOAKAUN)}
                 </Pane>
-                <Pane>
+                <Pane onClick={ bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN) }>
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
                     <tbody>
                       <tr>
@@ -128,7 +91,6 @@ export default function BillList() {
 
       <div className="w-full bg-transparent px-3">
         <Pane display="flex" alignItems="center" justifyContent="center" background="white" paddingY={100}>
-          {/* <Heading size={200}>Tekan pada butang <Button type="button" appearance="primary" intent="success">Tambah Bil</Button> untuk menambah bil.</Heading> */}
           <Spinner />
         </Pane>
       </div>

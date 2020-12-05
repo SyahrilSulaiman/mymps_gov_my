@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import axios from 'axios';
 import swal from 'sweetalert2';
-import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, UnorderedList, ListItem, ArrowRightIcon, ArrowLeftIcon, toaster, KeyDeleteIcon, DeleteIcon } from 'evergreen-ui';
+import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, UnorderedList, ListItem, ArrowRightIcon,Icon , ChevronRightIcon, ArrowLeftIcon, toaster, KeyDeleteIcon, DeleteIcon } from 'evergreen-ui';
 import Topbaer from "./Topbar2";
 import NoScroll from "no-scroll";
 
@@ -236,8 +236,8 @@ export default function SenaraiBil(props) {
                                             className="cursor-pointer hover:bg-gray-300"
                                         >
                                             <Pane display="grid" gridTemplateColumns="1fr 10px">
-                                                <Heading size={200}>Bil</Heading>
-                                                <Pane><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></Pane>
+                                                <Heading size={200}>Bil - Lihat Bil</Heading>
+                                                <Heading className="mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
                                             </Pane>
                                         </Card>
                                         {bills.bill.data[0][0].STATUS !== "PAID" &&
@@ -248,7 +248,7 @@ export default function SenaraiBil(props) {
                                             >
                                                 <Pane>
                                                     <Heading size={200}>Jumlah Tunggakan</Heading>
-                                                    <Heading size={200} size={500}>RM {bills.bill.data[2][0].BAKI.toFixed(2)}</Heading>
+                                                    <Heading size={500}>RM {bills.bill.data[2][0].BAKI.toFixed(2)}</Heading>
                                                 </Pane>
                                             </Card>
                                         }

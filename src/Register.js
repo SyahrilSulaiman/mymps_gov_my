@@ -110,7 +110,7 @@ function Register(props) {
 
               setUserSession(btoa(formdata), username.value, nokp, email.value);
               sessionStorage.setItem("notel", notel.value);
-              props.history.push("/bill");
+              window.location.href = "/bill";
 
             } else {
               setLoading("false");
@@ -185,11 +185,11 @@ function Register(props) {
             if (result.status == "success") {
 
               setLoading("false");
-              swal("Tahniah!", "Pendaftaran sebagai pengguna MyMPS berjaya! Sila sahkan akaun anda sebagai pengguna melalui klik pada pautan di emel anda.", "success");
+              //swal("Tahniah!", "Pendaftaran sebagai pengguna MyMPS berjaya! Sila sahkan akaun anda sebagai pengguna melalui klik pada pautan di emel anda.", "success");
 
               setUserSession(btoa(formdata), username.value, ssm.value, email.value);
               sessionStorage.setItem("notel", notel.value);
-              props.history.push("/bill");
+              window.location.href = "/bill";
 
             } else {
               setLoading("false");

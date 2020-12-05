@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import { Pane, toaster, Button, AddIcon, ArrowLeftIcon, Dialog, SortNumericalIcon, Tablist, Tab, Heading } from "evergreen-ui";
 import BillList from './BillList';
 import Topbaer from "./Topbar2";
+import axios from 'axios'
+import swal from 'sweetalert'
+import { SelectedBillContext } from "./contexts/SelectedBillContext";
 
 function Bill(props) {
 
@@ -12,10 +15,52 @@ function Bill(props) {
 	const user 		= getUser();
 	const nokp 		= getNOKP();
 	const [dialog, setDialog ] = useState(false);
+	const [dataset, setDataSet] = useState({data: []});
+	const [loading, setLoading] = useState(false);
+	const [isNoData, setIsNoData] = useState(false);
+	const {selectedBil,handleUnpaidBil ,unpaidBil} = useContext(SelectedBillContext);
 
 	const handleAddBill = () => {
 		window.location.href = '/add_cukai_taksiran';
-	}	
+	}
+
+	const handleBayarBill = () => {
+		// Pay Bill
+		console.log('Pay Bill');
+	}
+
+	const handleBayarSemua = () => {
+		handleUnpaidBil(dataset);
+	}
+
+	useEffect(() => {
+
+		const formData = new FormData();
+		formData.append("nokp", nokp);
+		axios
+		  .post(
+			"https://mymps.corrad.my/int/api_generator.php?api_name=showBill",
+			formData
+		  )
+		  .then((res) => {
+			setLoading(true);
+			if (res.data.status === "success") {
+			  setDataSet({
+				data: res.data.data,
+			  });
+			  setLoading(false);
+			} else {
+			  setIsNoData(true);
+			  setLoading(false);
+			}
+		  })
+		  .catch((err) => {
+			console.log(err);
+			swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
+		  });
+	
+	
+	  }, []);
 
 	return (
 		<div>
@@ -31,34 +76,36 @@ function Bill(props) {
 							<Tablist display="grid" gridTemplateColumns="1fr 1fr">
 								<Tab onSelect={() => handleAddBill()}>
 									<Button
-									width="100%"
-									justifyContent="center"
-									appearance="primary"
-									intent="success"
-									iconBefore={AddIcon}
-									className="xs:ml-5"
-									onClick={handleAddBill}
+										width="100%"
+										justifyContent="center"
+										appearance="primary"
+										intent="success"
+										iconBefore={AddIcon}
+										className="xs:ml-5"
+										onClick={handleAddBill}
 									>
-									Tambah Bil
+										Tambah Bil
 									</Button>
 								</Tab>
-								<Tab onSelect={() => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })}>
+								<Tab >
 									<Button
-									width="100%"
-									justifyContent="center"
-									appearance="primary"
-									iconBefore={SortNumericalIcon}
-									className="xs:ml-5 ml-1"
-									onClick={() => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })}
-									>
-									Bayar Semua
+										width="100%"
+										justifyContent="center"
+										appearance="primary"
+										className="xs:ml-5 ml-1"
+										onClick={
+													// () => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })
+													handleBayarSemua
+												}
+										>
+										Bayar {selectedBil.length} Bil
 									</Button>
 								</Tab>
 							</Tablist>
 						</Pane>
 						<div className="w-full">
 							<div className="flex-auto overflow-y-scroll" style={{ height: "60vh" }}>
-								<BillList />
+								<BillList dataset={dataset} isNoData={isNoData} selectedBil={selectedBil}/>
 							</div>
 						</div>
 					</div>

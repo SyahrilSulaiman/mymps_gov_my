@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
@@ -12,24 +11,22 @@ import axios from "axios";
 
 function Bill(props) {
 
-	console.log(props);
-
-	noscroll.on();
-
 	useEffect(() => {
 
 		const formData2 = new FormData();
 		formData2.append("userSecret", nokp)
 		axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=user_notification', formData2)
-			.then((res) => {
-				if (res.data.status === "inactive") {
-					swal("Tahniah!", "Terima kasih kerana mendaftar sebagai pengguna mymps, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan.", "success")
-				}
-			})
-			.catch((err) => {
-				console.log(err);
-				swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
-			});
+		.then((res) => {
+		if(res.data.status === "inactive"){
+			setTimeout(function(){ 
+				swal("Tahniah!","Terima kasih kerana mendaftar sebagai pengguna mymps, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan.","success"); 
+			}, 1000);
+		}
+		})
+		.catch((err) => {
+		console.log(err);
+		swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
+		});
 
 	}, []);
 
@@ -61,19 +58,29 @@ function Bill(props) {
 							<div className="flex-auto" style={{ height: "100vh" }}>
 								{/* <BillList /> */}
 								<Pane width="100%">
-									<Link to={{ pathname: '/cukaitaksiran'}} >
-										<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542" cursor="pointer">
-											<Pane><Heading color="#f1f2f6"> Cukai Taksiran </Heading><small className="text-gray-500">Senarai bil cukai taksiran</small></Pane>
-											<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
+									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542" onClick={() => window.location.href = "/cukaitaksiran"} cursor="pointer">
+										<Pane>
+											<Heading color="#f1f2f6"> Cukai Taksiran </Heading><small className="text-gray-500">Senarai bil cukai taksiran</small>
 										</Pane>
-									</Link>
-									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542" opacity={0.5} color="#f1f2f6" cursor="not-allowed">
-										<Pane><Heading color="#f1f2f6"> Kompaun </Heading><small className="text-gray-500">Senarai bil kompaun</small></Pane>
-										<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
+										<Pane>
+											<Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon>
+										</Pane>
 									</Pane>
-									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542" opacity={0.5} color="#f1f2f6" cursor="not-allowed">
-										<Pane><Heading color="#f1f2f6"> Lesen </Heading><small className="text-gray-500">Senarai bil lesen</small></Pane>
-										<Pane><Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon></Pane>
+									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542"  opacity={0.5} color="#f1f2f6" cursor="not-allowed">
+										<Pane>
+											<Heading color="#f1f2f6"> Kompaun </Heading><small className="text-gray-500">Senarai bil kompaun</small>
+										</Pane>
+										<Pane>
+											<Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon>
+										</Pane>
+									</Pane>
+									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542"  opacity={0.5} color="#f1f2f6" cursor="not-allowed">
+										<Pane>
+											<Heading color="#f1f2f6"> Lesen </Heading><small className="text-gray-500">Senarai bil lesen</small>
+										</Pane>
+										<Pane>
+											<Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon>
+										</Pane>
 									</Pane>
 									{
 										// Replace later
