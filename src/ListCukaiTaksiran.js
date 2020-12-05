@@ -29,8 +29,8 @@ function Bill(props) {
 
 	const handleBayarSemua = () => {
 		handleUnpaidBil(dataset);
-		if (dataset.length < 1) {
-			toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", { id: "forbidden-action" });
+		if (unpaidBil.length < 1) {
+			toaster.danger("Tiada bil tertunggak buat masa sekarang.", { id: "forbidden-action" });
 		}
 		else {
 			history.push({
