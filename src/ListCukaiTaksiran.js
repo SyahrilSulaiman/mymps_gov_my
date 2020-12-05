@@ -26,14 +26,14 @@ function Bill(props) {
 
 	const handleBayarSemua = () => {
 		handleUnpaidBil(dataset);
-
+		
 		if(selectedBil.length < 1)
 		{
 			toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", {id:"forbidden-action"});
 		}
 		else
 		{
-			addSelectedBill(selectedBil);
+			console.log(selectedBil);
 			window.location.href = "/multiaccount-payment";
 		}
 	}
@@ -98,10 +98,7 @@ function Bill(props) {
 										justifyContent="center"
 										appearance="primary"
 										className="xs:ml-5 ml-1"
-										onClick={
-													// () => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })
-													handleBayarSemua
-												}
+										onClick={ () => handleBayarSemua()}
 										>
 										Bayar {selectedBil.length} Bil
 									</Button>
