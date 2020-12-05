@@ -18,19 +18,24 @@ function Bill(props) {
 	const [dataset, setDataSet] = useState({data: []});
 	const [loading, setLoading] = useState(false);
 	const [isNoData, setIsNoData] = useState(false);
-	const {selectedBil,handleUnpaidBil ,unpaidBil} = useContext(SelectedBillContext);
+	const {selectedBil,handleUnpaidBil ,unpaidBil, addSelectedBill} = useContext(SelectedBillContext);
 
 	const handleAddBill = () => {
 		window.location.href = '/add_cukai_taksiran';
 	}
 
-	const handleBayarBill = () => {
-		// Pay Bill
-		console.log('Pay Bill');
-	}
-
 	const handleBayarSemua = () => {
 		handleUnpaidBil(dataset);
+
+		if(selectedBil.length < 1)
+		{
+			toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", {id:"forbidden-action"});
+		}
+		else
+		{
+			addSelectedBill(selectedBil);
+			window.location.href = "/multiaccount-payment";
+		}
 	}
 
 	useEffect(() => {

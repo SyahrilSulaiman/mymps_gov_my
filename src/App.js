@@ -31,6 +31,7 @@ import NotFound from "./NotFound";
 import SenaraiBil from "./SenaraiBil";
 import BeforeBayar from "./BeforeBayar";
 import Payment from "./Payment";
+import MultiAccount from "./MultiAccountPayment";
 import Add from "./Add";
 import UserReport from "./UserReport";
 import TransactionReport from "./LaporanTransaksi";
@@ -189,6 +190,7 @@ function App() {
                     <PrivateRoute path="/lesen" component={lesen} />
                     <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                     <PrivateRoute path="/payment" component={Payment} />
+                    <PrivateRoute path="/multiaccount-payment" component={MultiAccount} />
                     <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
                     <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
                     <PrivateRoute path="/add_cukai_taksiran" component={Add} />
@@ -221,6 +223,7 @@ function App() {
                   <PrivateRoute path="/lesen" component={lesen} />
                   <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                   <PrivateRoute path="/payment" component={Payment} />
+                  <PrivateRoute path="/multiaccount-payment" component={MultiAccount} />
                   <PrivateRoute path="/add_cukai_taksiran" component={Add} />
                   <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
                   <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
