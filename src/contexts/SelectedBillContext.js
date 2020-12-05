@@ -28,6 +28,17 @@ const SelectedBillContextProvider = (props) => {
         }
     }
 
+    const handleBgChange = (account) => {
+      let newArray = [...selectedBil]
+      let index = newArray.findIndex(element => element.NOAKAUN === account)
+      if(index !== -1){
+        return "bg-gray-400"
+      }
+      else{
+        return "bg-gray-200"
+      }
+    }
+
     const handleSelectedBil = (account) => {
         let newArray = [...selectedBil]
         let index = newArray.findIndex(element => element.NOAKAUN === account)
@@ -48,7 +59,7 @@ const SelectedBillContextProvider = (props) => {
     },[selectedBil])
     
     return ( 
-        <SelectedBillContext.Provider value={{selectedBil, addSelectedBill, resetSelectedBill, handleSelectedBil, handleUnpaidBil, unpaidBil}}>
+        <SelectedBillContext.Provider value={{selectedBil, addSelectedBill, resetSelectedBill, handleSelectedBil, handleUnpaidBil, unpaidBil, handleBgChange}}>
             {props.children}
         </SelectedBillContext.Provider>
      );
