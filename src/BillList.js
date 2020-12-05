@@ -7,7 +7,7 @@ import BayarCukai from "./BayarCukai";
 import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon, AddIcon, CrossIcon } from "evergreen-ui";
 import { SelectedBillContext } from "./contexts/SelectedBillContext";
 
-export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}) {
+export default function BillList({dataset,isNoData}) {
   NoScroll.on();
 
   sessionStorage.removeItem("cukai");
@@ -32,7 +32,7 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
     window.location.href = "/PengesahanPembayaran?Cukai=" + btoa(cukai);
   };
 
-  const {addSelectedBill, resetSelectedBill, handleSelectedBil} = useContext(SelectedBillContext);
+  const {addSelectedBill, resetSelectedBill, handleSelectedBil, handleBgChange} = useContext(SelectedBillContext);
 
   // Reset selected bill guna context 'resetSelectedBill' 
 
@@ -48,8 +48,8 @@ export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}
               <Pane
                 borderColor="white"
                 width="100%"
-                background="#dfe6e9"
-                className="p-2 border cursor-pointer hover:bg-gray-500"
+                // background={}
+                className={"p-2 border cursor-pointer hover:bg-gray-500 "+handleBgChange(bill.NOAKAUN)}
                 display="grid"
                 gridTemplateColumns="40px 1fr 10px"
               >

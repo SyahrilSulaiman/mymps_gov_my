@@ -13,7 +13,7 @@ const SelectedBillContextProvider = (props) => {
     }
 
     useEffect(() => {
-      //console.log('Unpaid : ', unpaidBil)
+      // console.log('Unpaid : ', unpaidBil)
     },[unpaidBil])
     
     const addSelectedBill = (account,amount) => {
@@ -26,6 +26,17 @@ const SelectedBillContextProvider = (props) => {
         else{
           setSelectedBil([...selectedBil,{NOAKAUN:account,BAKI_TUNGGAK:amount}])
         }
+    }
+
+    const handleBgChange = (account) => {
+      let newArray = [...selectedBil]
+      let index = newArray.findIndex(element => element.NOAKAUN === account)
+      if(index !== -1){
+        return "bg-gray-400"
+      }
+      else{
+        return "bg-gray-200"
+      }
     }
 
     const handleSelectedBil = (account) => {
@@ -48,7 +59,7 @@ const SelectedBillContextProvider = (props) => {
     },[selectedBil])
     
     return ( 
-        <SelectedBillContext.Provider value={{selectedBil, addSelectedBill, resetSelectedBill, handleSelectedBil, handleUnpaidBil, unpaidBil}}>
+        <SelectedBillContext.Provider value={{selectedBil, addSelectedBill, resetSelectedBill, handleSelectedBil, handleUnpaidBil, unpaidBil, handleBgChange}}>
             {props.children}
         </SelectedBillContext.Provider>
      );
