@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useLocation} from 'react-router-dom';
 import Footer from "./components/Footers/Footer";
 import axios from 'axios';
 import swal from "sweetalert";
@@ -28,11 +29,10 @@ function Pay() {
     const [invoiceNo, setInvoiceNo] = useState("MYM" + Date.now());  
     const [receiptno, setReceiptNo] = useState("");
 
-    const {selectedBil} = useContext(SelectedBillContext);
+    const location = useLocation();
 
     useEffect(() => {
-
-        console.log(selectedBil);
+        console.log('Bil List:',location.state.payBill);
 
         fetch('https://epstaging.mps.gov.my/fpx/bankList.php')
         .then(response => response.json())

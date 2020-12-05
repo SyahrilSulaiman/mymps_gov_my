@@ -7,7 +7,7 @@ import BayarCukai from "./BayarCukai";
 import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon, AddIcon, CrossIcon } from "evergreen-ui";
 import { SelectedBillContext } from "./contexts/SelectedBillContext";
 
-export default function BillList({dataset,isNoData, selectedBil, setSelectedBil}) {
+export default function BillList({dataset,isNoData}) {
   NoScroll.on();
 
   sessionStorage.removeItem("cukai");

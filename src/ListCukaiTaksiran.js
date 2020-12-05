@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
+import { useHistory } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import { Pane, toaster, Button, AddIcon, ArrowLeftIcon, Dialog, SortNumericalIcon, Tablist, Tab, Heading } from "evergreen-ui";
@@ -18,7 +19,9 @@ function Bill(props) {
 	const [dataset, setDataSet] = useState({data: []});
 	const [loading, setLoading] = useState(false);
 	const [isNoData, setIsNoData] = useState(false);
-	const {selectedBil,handleUnpaidBil ,unpaidBil, addSelectedBill} = useContext(SelectedBillContext);
+	const {selectedBil,handleUnpaidBil ,unpaidBil} = useContext(SelectedBillContext);
+
+	const history = useHistory();
 
 	const handleAddBill = () => {
 		window.location.href = '/add_cukai_taksiran';
@@ -26,17 +29,35 @@ function Bill(props) {
 
 	const handleBayarSemua = () => {
 		handleUnpaidBil(dataset);
-
-		if(selectedBil.length < 1)
+		if(dataset.length < 1)
 		{
 			toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", {id:"forbidden-action"});
 		}
 		else
 		{
-			addSelectedBill(selectedBil);
-			window.location.href = "/multiaccount-payment";
+			history.push({
+				pathname: '/multiaccount-payment',
+				state:{payBill:unpaidBil}
+			})
 		}
 	}
+
+
+		
+		const handleBayarSelected = () => {
+			if(selectedBil.length < 1)
+			{
+				toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", {id:"forbidden-action"});
+			}
+			else
+			{
+				history.push({
+					pathname: '/multiaccount-payment',
+					state:{payBill:selectedBil}
+				})
+				// window.location.href = "/multiaccount-payment";
+			}
+		}
 
 	useEffect(() => {
 
@@ -50,9 +71,8 @@ function Bill(props) {
 		  .then((res) => {
 			setLoading(true);
 			if (res.data.status === "success") {
-			  setDataSet({
-				data: res.data.data,
-			  });
+			  setDataSet({ data: res.data.data, });
+			  handleUnpaidBil({ data: res.data.data });
 			  setLoading(false);
 			} else {
 			  setIsNoData(true);
@@ -67,6 +87,7 @@ function Bill(props) {
 	
 	  }, []);
 
+	
 	return (
 		<div>
 			<Sidebar />
@@ -98,19 +119,27 @@ function Bill(props) {
 										justifyContent="center"
 										appearance="primary"
 										className="xs:ml-5 ml-1"
-										onClick={
-													// () => toaster.danger("Harap maaf, tiada kaedah pembayaran secara menyeluruh buat masa ini.", { id: "forbidden-action" })
-													handleBayarSemua
-												}
+										onClick={handleBayarSelected}
 										>
 										Bayar {selectedBil.length} Bil
+									</Button>
+								</Tab>
+								<Tab >
+									<Button
+										width="100%"
+										justifyContent="center"
+										appearance="primary"
+										className="xs:ml-5 ml-1"
+										onClick={handleBayarSemua}
+										>
+										Bayar Semua Bil
 									</Button>
 								</Tab>
 							</Tablist>
 						</Pane>
 						<div className="w-full">
 							<div className="flex-auto overflow-y-scroll" style={{ height: "60vh" }}>
-								<BillList dataset={dataset} isNoData={isNoData} selectedBil={selectedBil}/>
+								<BillList dataset={dataset} isNoData={isNoData}/>
 							</div>
 						</div>
 					</div>

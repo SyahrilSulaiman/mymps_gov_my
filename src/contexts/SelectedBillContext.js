@@ -13,7 +13,7 @@ const SelectedBillContextProvider = (props) => {
     }
 
     useEffect(() => {
-      //console.log('Unpaid : ', unpaidBil)
+      // console.log('Unpaid : ', unpaidBil)
     },[unpaidBil])
     
     const addSelectedBill = (account,amount) => {
