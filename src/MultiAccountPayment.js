@@ -484,7 +484,7 @@ function Pay() {
                             <input type="hidden" name="web_return_address" value="https://mymps.corrad.my/int/resitpembayaran.php" />
                             <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
                             <input type="hidden" name="payment_amount" value={amount} />
-                            <input type="hidden" name="payment_description" value={"Cukai Taksiran " + invoiceNo} />
+                            <input type="hidden" name="payment_description" value={"Cukai " + invoiceNo} />
                             <input type="hidden" name="email" value={payoremail} />
                         </form>
 
@@ -494,7 +494,7 @@ function Pay() {
                             <input type="hidden" name="web_return_address" value="https://mymps.corrad.my/int/resitpembayaran.php" />
                             <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
                             <input type="hidden" name="payment_amount" value={amount} />
-                            <input type="hidden" name="payment_description" value={"Cukai Taksiran " + invoiceNo} />
+                            <input type="hidden" name="payment_description" value={"Cukai " + invoiceNo} />
                             <input type="hidden" name="email" value={payoremail} />
                         </form>
                     </div>
