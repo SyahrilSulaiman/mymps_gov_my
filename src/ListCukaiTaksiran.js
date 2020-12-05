@@ -12,14 +12,14 @@ import { SelectedBillContext } from "./contexts/SelectedBillContext";
 
 function Bill(props) {
 
-	const token 	= getToken();
-	const user 		= getUser();
-	const nokp 		= getNOKP();
-	const [dialog, setDialog ] = useState(false);
-	const [dataset, setDataSet] = useState({data: []});
+	const token = getToken();
+	const user = getUser();
+	const nokp = getNOKP();
+	const [dialog, setDialog] = useState(false);
+	const [dataset, setDataSet] = useState({ data: [] });
 	const [loading, setLoading] = useState(false);
 	const [isNoData, setIsNoData] = useState(false);
-	const {selectedBil,handleUnpaidBil ,unpaidBil} = useContext(SelectedBillContext);
+	const { selectedBil, handleUnpaidBil, unpaidBil } = useContext(SelectedBillContext);
 
 	const history = useHistory();
 
@@ -29,77 +29,136 @@ function Bill(props) {
 
 	const handleBayarSemua = () => {
 		handleUnpaidBil(dataset);
-		if(dataset.length < 1)
-		{
-			toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", {id:"forbidden-action"});
+		if (dataset.length < 1) {
+			toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", { id: "forbidden-action" });
 		}
-		else
-		{
+		else {
 			history.push({
 				pathname: '/multiaccount-payment',
-				state:{payBill:unpaidBil}
+				state: { payBill: unpaidBil }
 			})
 		}
 	}
 
 
-		
-		const handleBayarSelected = () => {
-			if(selectedBil.length < 1)
-			{
-				toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", {id:"forbidden-action"});
-			}
-			else
-			{
-				history.push({
-					pathname: '/multiaccount-payment',
-					state:{payBill:selectedBil}
-				})
-				// window.location.href = "/multiaccount-payment";
-			}
+
+	const handleBayarSelected = () => {
+		if (selectedBil.length < 1) {
+			toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", { id: "forbidden-action" });
 		}
+		else {
+			history.push({
+				pathname: '/multiaccount-payment',
+				state: { payBill: selectedBil }
+			})
+			// window.location.href = "/multiaccount-payment";
+		}
+	}
 
 	useEffect(() => {
 
 		const formData = new FormData();
 		formData.append("nokp", nokp);
 		axios
-		  .post(
-			"https://mymps.corrad.my/int/api_generator.php?api_name=showBill",
-			formData
-		  )
-		  .then((res) => {
-			setLoading(true);
-			if (res.data.status === "success") {
-			  setDataSet({ data: res.data.data, });
-			  handleUnpaidBil({ data: res.data.data });
-			  setLoading(false);
-			} else {
-			  setIsNoData(true);
-			  setLoading(false);
-			}
-		  })
-		  .catch((err) => {
-			console.log(err);
-			swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
-		  });
-	
-	
-	  }, []);
+			.post(
+				"https://mymps.corrad.my/int/api_generator.php?api_name=showBill",
+				formData
+			)
+			.then((res) => {
+				setLoading(true);
+				if (res.data.status === "success") {
+					setDataSet({ data: res.data.data, });
+					handleUnpaidBil({ data: res.data.data });
+					setLoading(false);
+				} else {
+					setIsNoData(true);
+					setLoading(false);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+				swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
+			});
 
-	
+
+	}, []);
+
+
 	return (
 		<div>
 			<Sidebar />
 			<div className="relative md:ml-64" style={{ height: "100vh", background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
 				<Navbar />
-				<div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
+				<div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
 					<div className="flex flex-wrap ">
-						<Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
+						<Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md mb-5" width="100%">
 							<Topbaer title="Bil / Cukai Taksiran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
 						</Pane>
-						<Pane className="py-5 xl:mx-4 xl:rounded-md" position="relative" width="100%">
-							<Tablist display="grid" gridTemplateColumns="1fr 1fr">
+						<div className="w-full lg:w-6/12 xl:w-4/12 px-2" onClick={handleAddBill}>
+							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+								<div className="flex-auto p-4">
+									<div className="flex flex-wrap">
+										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
+											<h5 className="text-gray-500 uppercase font-bold text-xs">
+												Tambah Bil
+											</h5>
+											<span className="font-semibold text-sm text-gray-800">
+												Tekan ini untuk menambah bil
+											</span>
+										</div>
+										<div className="relative w-auto pl-4 flex-initial" onClick={handleAddBill}>
+											<div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-green-500">
+												<i className="fas fa-plus"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className="w-full lg:w-6/12 xl:w-4/12 px-2" onClick={handleBayarSelected}>
+							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+								<div className="flex-auto p-4">
+									<div className="flex flex-wrap">
+										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
+											<h5 className="text-gray-500 uppercase font-bold text-xs">
+												Pembayaran akaun terpilih
+											</h5>
+											<span className="font-semibold text-sm text-gray-800">
+												Membayar {selectedBil.length} akaun
+											</span>
+										</div>
+										<div className="relative w-auto pl-4 flex-initial" onClick={handleBayarSelected}>
+											<div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-orange-500">
+												<Heading size={400} color="white">{selectedBil.length}</Heading>	
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className="w-full lg:w-6/12 xl:w-4/12 px-2" onClick={handleBayarSemua}>
+							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+								<div className="flex-auto p-4">
+									<div className="flex flex-wrap">
+										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
+											<h5 className="text-gray-500 uppercase font-bold text-xs">
+												Pembayaran semua bil
+											</h5>
+											<span className="font-semibold text-sm text-gray-800">
+												Membayar keseluruhan bil yang berstatus tunggak
+											</span>
+										</div>
+										<div className="relative w-auto pl-4 flex-initial" onClick={handleBayarSemua}>
+											<div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-blue-500">
+												<Heading size={400} color="white">{unpaidBil.length}</Heading>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<Pane className="py-2 xl:mx-4 xl:rounded-md" position="relative" width="100%">
+							{/* <Tablist display="grid" gridTemplateColumns="1fr 1fr 1fr">
 								<Tab onSelect={() => handleAddBill()}>
 									<Button
 										width="100%"
@@ -120,7 +179,7 @@ function Bill(props) {
 										appearance="primary"
 										className="xs:ml-5 ml-1"
 										onClick={handleBayarSelected}
-										>
+									>
 										Bayar {selectedBil.length} Bil
 									</Button>
 								</Tab>
@@ -131,15 +190,15 @@ function Bill(props) {
 										appearance="primary"
 										className="xs:ml-5 ml-1"
 										onClick={handleBayarSemua}
-										>
+									>
 										Bayar Semua Bil
 									</Button>
 								</Tab>
-							</Tablist>
+							</Tablist> */}
 						</Pane>
 						<div className="w-full">
 							<div className="flex-auto overflow-y-scroll" style={{ height: "60vh" }}>
-								<BillList dataset={dataset} isNoData={isNoData}/>
+								<BillList dataset={dataset} isNoData={isNoData} />
 							</div>
 						</div>
 					</div>

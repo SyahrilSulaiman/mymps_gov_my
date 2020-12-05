@@ -13,6 +13,9 @@ const CARD = "CARD";
 
 function Pay() {
 
+    const location = useLocation();
+
+    const [account, setAccount]         = useState(location.state.payBill);
     const [method, setMethod]           = useState(FPX);
     const [dialog, setDialog]           = useState(false);
     const [dialogcc, setDialogCC]       = useState(false);
@@ -25,16 +28,23 @@ function Pay() {
     const [payorphone, setPayorPhone]   = useState(sessionStorage.getItem("notel"));
 
     const [penama, setPenama]       = useState("");
-    const [amount, setAmount]       = useState(0.00);
+    const [amount, setAmount]       = useState(0);
     const [invoiceNo, setInvoiceNo] = useState("MYM" + Date.now());  
     const [receiptno, setReceiptNo] = useState("");
-
-    const location = useLocation();
 
     useEffect(() => {
         console.log('Bil List:',location.state.payBill);
 
-        fetch('https://epstaging.mps.gov.my/fpx/bankList.php')
+        if(account === null || account === ""){
+            window.location.href = "/cukaitaksiran";
+        }
+
+        let total = 0;
+        for(var i = 0; i < account.length; i++){
+            setAmount(total = total + account[i]["BAKI_TUNGGAK"]);
+        }
+
+        fetch('https://dev1.toyyibpay.com/api/getBankFPX')
         .then(response => response.json())
         .then(result => {
             setData(result);
@@ -88,7 +98,12 @@ function Pay() {
         else {
 
             var formdata = new FormData();
-            formdata.append("bill", '');
+            formdata.append("bill", JSON.stringify(account));
+            formdata.append("invoiceNo", invoiceNo);
+            formdata.append("payorname", payorname);
+            formdata.append("payoremail", payoremail);
+            formdata.append("payorphone", payorphone);
+            formdata.append("method", 0);
             formdata.append("nokp", sessionStorage.nokp);
 
             var requestOptions = {
@@ -139,7 +154,12 @@ function Pay() {
         else {
 
             var formdata = new FormData();
-            formdata.append("bill", '');
+            formdata.append("bill", JSON.stringify(account));
+            formdata.append("invoiceNo", invoiceNo);
+            formdata.append("payorname", payorname);
+            formdata.append("payoremail", payoremail);
+            formdata.append("payorphone", payorphone);
+            formdata.append("method", 1);
             formdata.append("nokp", sessionStorage.nokp);
 
             var requestOptions = {
@@ -166,7 +186,7 @@ function Pay() {
 
     }
 
-    if (1) {
+    if (account) {
         return (
             <div className="">
                 <Topbar
@@ -216,26 +236,27 @@ function Pay() {
                                     onChange={(e) => setPayorPhone(e.target.value)}
                                 />
                             </Pane>
-                            <Pane paddingX={20} className="flex flex-wrap">
-                                {/* <Pane display="grid" width="100%" padding={10} background="tint2" >
-                                    <Pane display="grid" gridTemplateColumns="1fr 200px">
-                                        <Heading size={400}>Pemilik</Heading>
-                                        <Heading size={100} textAlign="right">{penama ? penama : "-"}</Heading>
+                            <Pane paddingX={20} className="flex flex-wrap overflow-y-auto" style={{height:"100px"}}>
+                                {account && account.map((bill, index) => 
+                                    <Pane key={index} display="grid" width="100%" padding={10} background="tint2">
+                                        <Pane display="grid" gridTemplateColumns="1fr 1fr">
+                                            <Heading size={200}>AKAUN {index + 1}</Heading>
+                                            <Heading size={100} textAlign="right">{bill.NOAKAUN}</Heading>
+                                        </Pane>
                                     </Pane>
-                                </Pane>
-                                <Pane display="grid" width="100%" padding={10} background="tint2">
-                                    <Pane display="grid" gridTemplateColumns="1fr 1fr">
-                                        <Heading size={400}>Akaun</Heading>
-                                        <Heading size={100} textAlign="right">{accountNo ? accountNo : "-"}</Heading>
-                                    </Pane>
-                                </Pane>
-                                <Pane display="grid" width="100%" padding={10} background="tint2">
-                                    <Pane display="grid" gridTemplateColumns="1fr 1fr">
-                                        <Heading size={400}>Jumlah Bayaran</Heading>
-                                        <Heading size={100} textAlign="right">RM {amount ? amount.toFixed(2) : "0.00"}</Heading>
-                                    </Pane>
-                                </Pane> */}
+                                )}
                             </Pane>
+                            <Pane paddingX={20} className="flex flex-wrap">
+                                <Pane display="grid" width="100%" padding={10} className="bg-gray-200">
+                                    <Pane display="grid" gridTemplateColumns="1fr 1fr">
+                                        <Heading size={200}>JUMLAH</Heading>
+                                        <Heading size={100} textAlign="right">
+                                            {"RM" + amount.toFixed(2)}
+                                        </Heading>
+                                    </Pane>
+                                </Pane>
+                            </Pane>
+                            
                             <Pane marginY={15} paddingX={20}>
                                 <Paragraph fontWeight="bold" fontSize={15}>
                                     Kaedah Pembayaran

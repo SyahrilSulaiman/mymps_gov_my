@@ -49,7 +49,7 @@ export default function BillList({dataset,isNoData}) {
                 borderColor="white"
                 width="100%"
                 // background={}
-                className={"p-2 border cursor-pointer hover:bg-gray-500 "+handleBgChange(bill.NOAKAUN)}
+                className={"p-2 border cursor-pointer hover:bg-gray-500 " + handleBgChange(bill.NOAKAUN)}
                 display="grid"
                 gridTemplateColumns="40px 1fr 10px"
               >
