@@ -124,7 +124,7 @@ function Bill(props) {
 												<Pane display="flex"> Pembayaran akaun terpilih </Pane>
 											</h5>
 											<span className="font-semibold text-xs text-gray-800">
-												<Pane display="flex"> Sila tekan pada <TickCircleIcon color="success" marginLeft={5} marginRight={5}/> untuk pilih bil</Pane>
+												<Pane display="flex"> Sila tekan pada <TickCircleIcon color="success" marginLeft="2px" marginRight="2px"/> untuk pilih bil</Pane>
 											</span>
 										</div>
 										<div className="relative w-auto pl-4 flex-initial" onClick={handleBayarSelected}>
