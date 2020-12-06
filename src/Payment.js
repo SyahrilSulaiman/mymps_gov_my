@@ -485,8 +485,8 @@ function Pay() {
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
                             <input type="hidden" name="bank" value={bankCode ? bankCode : 'TEST0021'} />
                             <input type="hidden" name="channel" value="01" />
-                            <input type="hidden" name="web_return_address" value="https://mymps.corrad.my/int/resitpembayaran.php" />
-                            <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
+                            <input type="hidden" name="web_return_address" value="https://mymps.mps.gov.my/int/resitpembayaran.php" />
+                            <input type="hidden" name="web_service_return_address" value="https://mymps.mps.gov.my/int/callback.php" />
                             <input type="hidden" name="payment_amount" value={amount} />
                             <input type="hidden" name="payment_description" value={"Cukai Taksiran " + accountNo} />
                             <input type="hidden" name="email" value={payoremail} />
@@ -496,8 +496,8 @@ function Pay() {
                             <input type="hidden" name="account_no" value={accountNo} />
                             <input type="hidden" name="receipt_no" value={receiptno} />
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
-                            <input type="hidden" name="web_return_address" value="https://mymps.corrad.my/int/resitpembayaran.php" />
-                            <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
+                            <input type="hidden" name="web_return_address" value="https://mymps.mps.gov.my/int/resitpembayaran.php" />
+                            <input type="hidden" name="web_service_return_address" value="https://mymps.mps.gov.my/int/callback.php" />
                             <input type="hidden" name="payment_amount" value={amount} />
                             <input type="hidden" name="payment_description" value={"Cukai Taksiran " + accountNo} />
                             <input type="hidden" name="email" value={payoremail} />
