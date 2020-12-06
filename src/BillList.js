@@ -77,7 +77,7 @@ export default function BillList({dataset,isNoData}) {
                     </tbody>
                   </table>
                 </Pane>
-                <Pane color="gray" alignContent="right" justifyContent="center">
+                <Pane color="gray" alignContent="right" justifyContent="center" onClick={ bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN) }>
                   <i className="pt-12 fas fa-chevron-right"></i>
                 </Pane>
               </Pane>

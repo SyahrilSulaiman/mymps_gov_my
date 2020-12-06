@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { AddIcon, CrossIcon } from "evergreen-ui";
+import { TickCircleIcon, CrossIcon } from "evergreen-ui";
 
 export const SelectedBillContext = createContext();
 
@@ -46,7 +46,7 @@ const SelectedBillContextProvider = (props) => {
           return <CrossIcon marginTop={40} marginLeft={10} color="danger"/>
         }
         else{
-          return <AddIcon marginTop={40} marginLeft={10} color="success"/>
+          return <TickCircleIcon marginTop={40} marginLeft={10} color="success" />
         }
     }
 
