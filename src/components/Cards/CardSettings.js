@@ -249,7 +249,7 @@ export default function CardSettings({
                   <Pane display="flex" padding={3} background="tint3" borderRadius={3} marginTop="30px">
                     <Pane flex={1} alignItems="center">
                       <TextInputField
-                        label="NAMA PENUH"
+                        label="Nama Penuh"
                         width="100%"
                         placeholder="Sila isi nama penuh anda"
                         required={true}
@@ -258,7 +258,7 @@ export default function CardSettings({
                       />
 
                       <TextInputField
-                        label="NOMBOR KAD PENGENALAN"
+                        label="No Kad Pengenalan"
                         width="100%"
                         placeholder="Sila isi nombor kad pengenalan anda"
                         required={true}
@@ -267,7 +267,7 @@ export default function CardSettings({
                       />
 
                       <TextInputField
-                        label="ALAMAT EMEL"
+                        label="Alamat Emel"
                         width="100%"
                         placeholder="Sila isi alamat emel anda"
                         required={true}
@@ -276,7 +276,7 @@ export default function CardSettings({
                       />
 
                       <TextInputField
-                        label="NOMBOR TELEFON"
+                        label="Nombor Telefon"
                         width="100%"
                         placeholder="Sila isi nombor telefon anda"
                         required={true}
@@ -309,7 +309,7 @@ export default function CardSettings({
                   <Pane padding={3} background="tint3" borderRadius={3} marginTop="30px">
                     <TextInputField
                       type="password"
-                      label="KATA LALUAN SEMASA"
+                      label="Kata Laluan Semasa"
                       width="100%"
                       placeholder="Sila isi kata laluan terkini"
                       required={true}
@@ -318,7 +318,7 @@ export default function CardSettings({
 
                     <TextInputField
                       type="password"
-                      label="KATA LALUAN BAHARU"
+                      label="Kata Laluan Baharu"
                       width="100%"
                       placeholder="Sila isi kata laluan baru"
                       required={true}
@@ -327,7 +327,7 @@ export default function CardSettings({
 
                     <TextInputField
                       type="password"
-                      label="SAH KATA LALUAN BAHARU"
+                      label="Sah Kata Laluan Baharu"
                       width="100%"
                       placeholder="Sila sahkan kata laluan baru"
                       required={true}
