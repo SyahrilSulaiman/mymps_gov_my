@@ -33,7 +33,7 @@ function Profile(props) {
             </div>
           </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );
