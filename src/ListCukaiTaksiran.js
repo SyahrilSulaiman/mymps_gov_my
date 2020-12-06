@@ -103,12 +103,12 @@ function Bill(props) {
 												Tambah Bil
 											</h5>
 											<span className="font-semibold text-xs text-gray-800">
-												Tekan ini untuk menambah bil
+												<Pane display="flex">Tekan ini untuk menambah bil</Pane>
 											</span>
 										</div>
 										<div className="relative w-auto pl-4 flex-initial" onClick={handleAddBill}>
-											<div className="text-white p-3 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full bg-green-500">
-												<i className="fas fa-plus"></i>
+											<div className="text-white p-3 text-center inline-flex items-center justify-center w-15 h-8 shadow-lg rounded bg-green-500">
+												<i className="fas fa-plus"></i> <Heading size={200} className="pl-2 text-white">Bil</Heading>
 											</div>
 										</div>
 									</div>
@@ -145,7 +145,7 @@ function Bill(props) {
 												Pembayaran semua bil
 											</h5>
 											<span className="font-semibold text-xs text-gray-800">
-												Membayar keseluruhan bil yang tertunggak
+												<Pane>Membayar keseluruhan bil yang tertunggak</Pane>
 											</span>
 										</div>
 										<div className="relative w-auto pl-4 flex-initial" onClick={handleBayarSemua}>
