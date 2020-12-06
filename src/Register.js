@@ -75,7 +75,7 @@ function Register(props) {
       swal("Opss!", "Sila pastikan kataluan dan sah kata laluan sama.", "error");
       return false;
     }
-    else if (password.value.length < 6) {
+    else if (password.value.length < 8) {
       swal("Opss!", "Kata laluan anda tidak selamat. Sila cuba lagi.", "error");
       return false;
     }
@@ -154,7 +154,7 @@ function Register(props) {
       swal("Opss!", "Sila pastikan kataluan dan sah kata laluan sama.", "error");
       return false;
     }
-    else if (password.value.length < 6) {
+    else if (password.value.length < 8) {
       swal("Opss!", "Kata laluan anda tidak selamat. Sila cuba lagi.", "error");
       return false;
     }
