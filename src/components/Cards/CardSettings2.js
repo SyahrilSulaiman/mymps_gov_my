@@ -127,7 +127,7 @@ export default function CardSettings({notel=""}) {
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
                   <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                    className="block text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
                     Nama Penuh 
@@ -145,7 +145,7 @@ export default function CardSettings({notel=""}) {
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
                   <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                    className="block text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
                     Alamat Emel
@@ -163,10 +163,10 @@ export default function CardSettings({notel=""}) {
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
                   <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                    className="block  text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    NOMBOR KAD PENGENALAN
+                    Nombor Kad Pengenalan
                   </label>
                   <input
                     type="text"
@@ -181,10 +181,10 @@ export default function CardSettings({notel=""}) {
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
                   <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                    className="block text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    NOMBOR TELEFON
+                    Nombor Telefon
                   </label>
                   <input
                     type="text"
@@ -229,7 +229,7 @@ export default function CardSettings({notel=""}) {
               <div className="w-full px-4">
                 <div className="relative w-full mb-3">
                   <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                    className="block  text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
                     Kata Laluan Sekarang 
@@ -246,7 +246,7 @@ export default function CardSettings({notel=""}) {
               <div className="w-full px-4">
                 <div className="relative w-full mb-3">
                   <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                    className="block  text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
                     Kata Laluan Baru
@@ -263,7 +263,7 @@ export default function CardSettings({notel=""}) {
               <div className="w-full px-4">
                 <div className="relative w-full mb-3">
                   <label
-                    className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                    className="block  text-gray-700 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
                     Pengesahan Kata Laluan
