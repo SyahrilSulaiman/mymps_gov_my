@@ -25,6 +25,8 @@ function Register(props) {
   const color = "blue";
 
   var numbers = /^[0-9]+$/;
+  var character = /^[a-zA-Z].+$/;
+  var specialChar = /^[!@#$%^&*].+$/;
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -33,8 +35,6 @@ function Register(props) {
   const isNumber = (id, value) => {
     if(!value.match(numbers)){
       document.getElementById(id).value = "";
-    }else{
-
     }
   }
 
@@ -75,7 +75,10 @@ function Register(props) {
       swal("Opss!", "Sila pastikan kataluan dan sah kata laluan sama.", "error");
       return false;
     }
-    else if (password.value.length < 8) {
+    else if (!String(password).match(/[a-zA-z]/g) || !String(password).match(/\b/g) || password.value.length < 8) {
+      console.log(password);
+      console.log('Character : ',String(password).match(character));
+      console.log('Character : ',!String(password).match(numbers));
       swal("Opss!", "Kata laluan anda tidak selamat. Sila cuba lagi.", "error");
       return false;
     }
@@ -154,7 +157,7 @@ function Register(props) {
       swal("Opss!", "Sila pastikan kataluan dan sah kata laluan sama.", "error");
       return false;
     }
-    else if (password.value.length < 8) {
+    else if (!String(password).match(/[a-zA-z]/g) || !String(password).match(/\b/g) || password.value.length < 8) {
       swal("Opss!", "Kata laluan anda tidak selamat. Sila cuba lagi.", "error");
       return false;
     }
