@@ -108,7 +108,7 @@ function Bill(props) {
 										</div>
 										<div className="relative w-auto pl-4 flex-initial" onClick={handleAddBill}>
 											<div className="text-white p-3 text-center inline-flex items-center justify-center w-15 h-8 shadow-lg rounded bg-green-500">
-												<i className="fas fa-plus"></i> <Heading size={200} className="pl-2 text-white">Bil</Heading>
+												<i className="fas fa-plus"></i> <Heading size={200} className="pl-2" color="white">Bil</Heading>
 											</div>
 										</div>
 									</div>
@@ -121,7 +121,7 @@ function Bill(props) {
 									<div className="flex flex-wrap">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
 											<h5 className="text-gray-500 uppercase font-bold text-xs">
-												<Pane display="flex"> Pembayaran akaun terpilih {" "} <TickCircleIcon color="success" marginLeft={5}/></Pane>
+												<Pane display="flex"> Pembayaran akaun terpilih </Pane>
 											</h5>
 											<span className="font-semibold text-xs text-gray-800">
 												<Pane display="flex"> Sila tekan pada <TickCircleIcon color="success" marginLeft={5} marginRight={5}/> untuk pilih bil</Pane>
