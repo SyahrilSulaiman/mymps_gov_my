@@ -3,7 +3,7 @@ import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
 import { useHistory } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
-import { Pane, toaster, Button, AddIcon, ArrowLeftIcon, Dialog, SortNumericalIcon, Tablist, Tab, Heading } from "evergreen-ui";
+import { Pane, toaster, Button, AddIcon, ArrowLeftIcon, Dialog, SortNumericalIcon, Tablist, Tab, Heading, TickCircleIcon } from "evergreen-ui";
 import BillList from './BillList';
 import Topbaer from "./Topbar2";
 import axios from 'axios'
@@ -96,18 +96,18 @@ function Bill(props) {
 						</Pane>
 						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={handleAddBill}>
 							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-								<div className="flex-auto p-4">
+								<div className="flex-auto p-3">
 									<div className="flex flex-wrap">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
 											<h5 className="text-gray-500 uppercase font-bold text-xs">
 												Tambah Bil
 											</h5>
-											<span className="font-semibold text-sm text-gray-800">
+											<span className="font-semibold text-xs text-gray-800">
 												Tekan ini untuk menambah bil
 											</span>
 										</div>
 										<div className="relative w-auto pl-4 flex-initial" onClick={handleAddBill}>
-											<div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-green-500">
+											<div className="text-white p-3 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full bg-green-500">
 												<i className="fas fa-plus"></i>
 											</div>
 										</div>
@@ -117,18 +117,18 @@ function Bill(props) {
 						</div>
 						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={handleBayarSelected}>
 							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-								<div className="flex-auto p-4">
+								<div className="flex-auto p-3">
 									<div className="flex flex-wrap">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
 											<h5 className="text-gray-500 uppercase font-bold text-xs">
-												Pembayaran akaun terpilih
+												<Pane display="flex"> Pembayaran akaun terpilih {" "} <TickCircleIcon color="success" marginLeft={5}/></Pane>
 											</h5>
-											<span className="font-semibold text-sm text-gray-800">
-												Membayar {selectedBil.length} akaun yang terpilih
+											<span className="font-semibold text-xs text-gray-800">
+												<Pane display="flex"> Sila tekan pada <TickCircleIcon color="success" marginLeft={5} marginRight={5}/> untuk pilih bil</Pane>
 											</span>
 										</div>
 										<div className="relative w-auto pl-4 flex-initial" onClick={handleBayarSelected}>
-											<div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-orange-500">
+											<div className="text-white p-3 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full bg-orange-500">
 												<Heading size={400} color="white">{selectedBil.length}</Heading>	
 											</div>
 										</div>
@@ -138,18 +138,18 @@ function Bill(props) {
 						</div>
 						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={handleBayarSemua}>
 							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-								<div className="flex-auto p-4">
+								<div className="flex-auto p-3">
 									<div className="flex flex-wrap">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
 											<h5 className="text-gray-500 uppercase font-bold text-xs">
 												Pembayaran semua bil
 											</h5>
-											<span className="font-semibold text-sm text-gray-800">
+											<span className="font-semibold text-xs text-gray-800">
 												Membayar keseluruhan bil yang tertunggak
 											</span>
 										</div>
 										<div className="relative w-auto pl-4 flex-initial" onClick={handleBayarSemua}>
-											<div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-blue-500">
+											<div className="text-white p-3 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full bg-blue-500">
 												<Heading size={400} color="white">{unpaidBil.length}</Heading>
 											</div>
 										</div>
