@@ -188,7 +188,7 @@ function Pay() {
 
     if (account) {
         return (
-            <div className="">
+            <div className = "overflow-y-scroll">
                 <Topbar
                     title="Pembayaran Cukai"
                     leftButtonIcon={ArrowLeftIcon}
