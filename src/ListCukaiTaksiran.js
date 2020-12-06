@@ -95,7 +95,7 @@ function Bill(props) {
 							<Topbaer title="Bil / Cukai Taksiran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
 						</Pane>
 						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={handleAddBill}>
-							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg cursor-pointer">
 								<div className="flex-auto p-3">
 									<div className="flex flex-wrap">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -116,7 +116,7 @@ function Bill(props) {
 							</div>
 						</div>
 						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={handleBayarSelected}>
-							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg cursor-pointer">
 								<div className="flex-auto p-3">
 									<div className="flex flex-wrap">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -137,7 +137,7 @@ function Bill(props) {
 							</div>
 						</div>
 						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={handleBayarSemua}>
-							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg cursor-pointer">
 								<div className="flex-auto p-3">
 									<div className="flex flex-wrap">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">

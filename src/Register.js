@@ -33,8 +33,6 @@ function Register(props) {
   const isNumber = (id, value) => {
     if(!value.match(numbers)){
       document.getElementById(id).value = "";
-    }else{
-
     }
   }
 
@@ -75,7 +73,7 @@ function Register(props) {
       swal("Opss!", "Sila pastikan kataluan dan sah kata laluan sama.", "error");
       return false;
     }
-    else if (password.value.length < 6) {
+    else if (!String(password).match(/[a-zA-z]/g) || !String(password).match(/\b/g) || password.value.length < 8) {
       swal("Opss!", "Kata laluan anda tidak selamat. Sila cuba lagi.", "error");
       return false;
     }
@@ -154,7 +152,7 @@ function Register(props) {
       swal("Opss!", "Sila pastikan kataluan dan sah kata laluan sama.", "error");
       return false;
     }
-    else if (password.value.length < 6) {
+    else if (!String(password).match(/[a-zA-z]/g) || !String(password).match(/\b/g) || password.value.length < 8) {
       swal("Opss!", "Kata laluan anda tidak selamat. Sila cuba lagi.", "error");
       return false;
     }
