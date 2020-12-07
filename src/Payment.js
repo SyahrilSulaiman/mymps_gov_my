@@ -41,7 +41,7 @@ function Pay() {
 
         const formData = new FormData();
         formData.append('userSecret', sessionStorage.nokp)
-        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status', formData)
+        axios.post('https://mymps.mps.gov.my/int/api_generator.php?api_name=get_user_status', formData)
         .then((res) => {
             if (res.data.status === "Pending") {
                 toaster.warning("Pembayaran Dibatalkan.", { id: "forbidden-action", description: "Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun." });
@@ -53,7 +53,7 @@ function Pay() {
             swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
         });
 
-        var urlAPI = 'https://mymps.corrad.my/int/api_generator.php?api_name=searchBill';
+        var urlAPI = 'https://mymps.mps.gov.my/int/api_generator.php?api_name=searchBill';
         const formData2 = new FormData();
         formData2.append('search', accountNo);
         formData2.append('type', 'akaun');
@@ -115,7 +115,7 @@ function Pay() {
                 redirect: 'follow'
             };
 
-            var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=register_payment';
+            var urlAPI1 = 'https://mymps.mps.gov.my/int/api_generator.php?api_name=register_payment';
 
             fetch(urlAPI1, requestOptions)
                 .then(response => response.json())
@@ -172,7 +172,7 @@ function Pay() {
                 redirect: 'follow'
             };
 
-            var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=register_payment';
+            var urlAPI1 = 'https://mymps.mps.gov.my/int/api_generator.php?api_name=register_payment';
 
             fetch(urlAPI1, requestOptions)
                 .then(response => response.json())

@@ -30,7 +30,7 @@ function Bill(props) {
 
   useEffect(() => {
     var apiUrl =
-      "https://mymps.corrad.my/int/api_generator.php?api_name=userReport";
+      "https://mymps.mps.gov.my/int/api_generator.php?api_name=userReport";
 
     var formData = new FormData();
     formData.append("userid", userid);
@@ -68,7 +68,7 @@ function Bill(props) {
   const searching = (paramSearch) => {
     if (paramSearch !== null) {
       var apiUrl =
-        "https://mymps.corrad.my/int/api_generator.php?api_name=userReport";
+        "https://mymps.mps.gov.my/int/api_generator.php?api_name=userReport";
 
       var formData = new FormData();
       formData.append("userid", userid);
@@ -95,7 +95,7 @@ function Bill(props) {
   };
 
   const viewPenyata = (e) => {
-    window.location.href = "https://mymps.corrad.my/rp/penyata_semasa.php?noakaun=" + btoa(btoa(e))
+    window.location.href = "https://mymps.mps.gov.my/rp/penyata_semasa.php?noakaun=" + btoa(btoa(e))
   }
 
   const dataa = {

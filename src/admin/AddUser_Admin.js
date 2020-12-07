@@ -86,7 +86,7 @@ export default function AddUser(){
                 redirect: 'follow'
                 };
 
-                var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=add_user";
+                var urlAPI = "https://mymps.mps.gov.my/int/api_generator.php?api_name=add_user";
 
                 fetch(urlAPI, requestOptions)
                 .then(response => response.json())
@@ -143,7 +143,7 @@ export default function AddUser(){
                 redirect: 'follow'
                 };
 
-                var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=add_user";
+                var urlAPI = "https://mymps.mps.gov.my/int/api_generator.php?api_name=add_user";
 
                 fetch(urlAPI, requestOptions)
                 .then(response => response.json())

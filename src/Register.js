@@ -95,7 +95,7 @@ function Register(props) {
           redirect: 'follow'
         };
 
-        var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=daftar_pengguna";
+        var urlAPI = "https://mymps.mps.gov.my/int/api_generator.php?api_name=daftar_pengguna";
 
         fetch(urlAPI, requestOptions)
           .then(response => response.json())
@@ -174,7 +174,7 @@ function Register(props) {
           redirect: 'follow'
         };
 
-        var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=daftar_pengguna";
+        var urlAPI = "https://mymps.mps.gov.my/int/api_generator.php?api_name=daftar_pengguna";
 
         fetch(urlAPI, requestOptions)
           .then(response => response.json())

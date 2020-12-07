@@ -61,7 +61,7 @@ function Bill(props) {
 		formData.append("nokp", nokp);
 		axios
 			.post(
-				"https://mymps.corrad.my/int/api_generator.php?api_name=showBill",
+				"https://mymps.mps.gov.my/int/api_generator.php?api_name=showBill",
 				formData
 			)
 			.then((res) => {

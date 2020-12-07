@@ -80,7 +80,7 @@ function App() {
       };
 
       var urlAPI =
-        "https://mymps.corrad.my/int/api_generator.php?api_name=check_session";
+        "https://mymps.mps.gov.my/int/api_generator.php?api_name=check_session";
 
       fetch(urlAPI, requestOptions)
         .then((response) => response.json())

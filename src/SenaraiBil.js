@@ -19,15 +19,15 @@ export default function SenaraiBil(props) {
     }
 
     const handleBill = (e) => {
-        window.location.href = "https://mymps.corrad.my/rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
+        window.location.href = "https://mymps.mps.gov.my/rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
     }
 
     const handleReceipt = (e) => {
-        window.location.href = 'https://mymps.corrad.my/rp/resit.php?account=' + btoa(e);
+        window.location.href = 'https://mymps.mps.gov.my/rp/resit.php?account=' + btoa(e);
     }
 
     useEffect(() => {
-        axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun=' + sessionStorage.getItem('noakaun'))
+        axios.get('https://mymps.mps.gov.my/int/api_generator.php?api_name=getBill&noakaun=' + sessionStorage.getItem('noakaun'))
             .then(res => {
                 if (res.data.status == 'success') {
                     setBill({
@@ -60,7 +60,7 @@ export default function SenaraiBil(props) {
                 let formData = new FormData();
                 formData.append('user',btoa(nokp));
                 formData.append('noakaun',btoa(e));
-                axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=deleteBill',formData)
+                axios.post('https://mymps.mps.gov.my/int/api_generator.php?api_name=deleteBill',formData)
                 .then(res => {
                     console.log(res);
                     if (res.data.status === 'success'){

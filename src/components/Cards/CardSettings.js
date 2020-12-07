@@ -68,7 +68,7 @@ export default function CardSettings({
         redirect: 'follow'
       };
 
-      var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=update_profile";
+      var urlAPI = "https://mymps.mps.gov.my/int/api_generator.php?api_name=update_profile";
 
       fetch(urlAPI, requestOptions)
         .then(response => response.json())
@@ -150,7 +150,7 @@ export default function CardSettings({
                 redirect: 'follow'
               };
 
-              fetch("https://mymps.corrad.my/int/api_generator.php?api_name=update_password", requestOptions)
+              fetch("https://mymps.mps.gov.my/int/api_generator.php?api_name=update_password", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                   console.log(result);

@@ -62,7 +62,7 @@ export default function CardSettings({notel=""}) {
         redirect: 'follow'
         };
 
-        var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=update_profile";
+        var urlAPI = "https://mymps.mps.gov.my/int/api_generator.php?api_name=update_profile";
 
         fetch(urlAPI, requestOptions)
         .then(response => response.json())
