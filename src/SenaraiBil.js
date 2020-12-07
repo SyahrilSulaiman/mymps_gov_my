@@ -163,7 +163,7 @@ export default function SenaraiBil(props) {
                                     >
                                         <Pane>
                                             <Text fontWeight={600}>Jenis Bil</Text>
-                                            <Heading size={100}>Cukai</Heading>
+                                            <Heading size={100}>Cukai - Cukai Taksiran</Heading>
                                         </Pane>
                                         <Pane>
                                             <Text fontWeight={600}>Nombor Akaun</Text>
@@ -212,7 +212,7 @@ export default function SenaraiBil(props) {
                                         className="cursor-pointer hover:bg-gray-300"
                                     >
                                         <Pane>
-                                            <Heading size={200}><i className="fas fa-receipt"></i> Bil PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
+                                            <Heading size={200}><i className="fas fa-receipt"></i> Cetak Bil PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
                                         </Pane>
                                     </Card>
                                 {
@@ -225,7 +225,7 @@ export default function SenaraiBil(props) {
                                         className="cursor-pointer hover:bg-gray-300"
                                     >
                                         <Pane>
-                                            <Heading size={200}><i className="fas fa-receipt"></i> Resit PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
+                                            <Heading size={200}><i className="fas fa-receipt"></i> Cetak Resit PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
                                         </Pane>
                                     </Card>
                                      ) : ''
