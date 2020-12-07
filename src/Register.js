@@ -84,7 +84,7 @@ function Register(props) {
       return false;
     }
     else if (!String(password).match(/[a-zA-z]/g) || !String(password).match(/\b/g) || password.value.length < 8) {
-      swal("Opss!", "Kata laluan anda tidak selamat. Sila cuba lagi.", "error");
+      swal("Opss!", "Kata laluan anda tidak selamat. Sekurang-kurangnya mempunyai  lapan (8) akrasa, dan mesti terdiri daripada kombinasi huruf dan nombor", "error");
       return false;
     }
     else {
@@ -167,7 +167,7 @@ function Register(props) {
       return false;
     }
     else if (!String(password).match(/[a-zA-z]/g) || !String(password).match(/\b/g) || password.value.length < 8) {
-      swal("Opss!", "Kata laluan anda tidak selamat. Sila cuba lagi.", "error");
+      swal("Opss!", "Kata laluan anda tidak selamat. Sekurang-kurangnya mempunyai  lapan (8) akrasa, dan mesti terdiri daripada kombinasi huruf dan nombor", "error");
       return false;
     }
     else {
