@@ -28,31 +28,56 @@ function Bill(props) {
 	}
 
 	const handleBayarSemua = () => {
-		handleUnpaidBil(dataset);
-		if (unpaidBil.length < 1) {
-			toaster.danger("Tiada bil tertunggak buat masa sekarang.", { id: "forbidden-action" });
-		}
-		else {
-			history.push({
-				pathname: '/multiaccount-payment',
-				state: { payBill: unpaidBil }
-			})
-		}
+        setDisabled(true);
+        const formData = new FormData();
+        formData.append('userSecret', nokp)
+        axios.post('https://mymps.mps.gov.my/int/api_generator.php?api_name=get_user_status', formData)
+            .then((res) => {
+                if (res.data.status === "Pending") {
+                    toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."}, { id: "forbidden-action" })
+                }else{
+					handleUnpaidBil(dataset);
+					if (unpaidBil.length < 1) {
+						toaster.danger("Tiada bil tertunggak buat masa sekarang.", { id: "forbidden-action" });
+					}
+					else {
+						history.push({
+							pathname: '/multiaccount-payment',
+							state: { payBill: unpaidBil }
+						})
+					}
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                swal.fire("Ralat", "Sila hubungi pentadbir sistem!", "error");
+            });
 	}
 
-
-
 	const handleBayarSelected = () => {
-		if (selectedBil.length < 1) {
-			toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", { id: "forbidden-action" });
-		}
-		else {
-			history.push({
-				pathname: '/multiaccount-payment',
-				state: { payBill: selectedBil }
-			})
-			// window.location.href = "/multiaccount-payment";
-		}
+        setDisabled(true);
+        const formData = new FormData();
+        formData.append('userSecret', nokp)
+        axios.post('https://mymps.mps.gov.my/int/api_generator.php?api_name=get_user_status', formData)
+            .then((res) => {
+                if (res.data.status === "Pending") {
+                    toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."},{ id: "forbidden-action" })
+                }else{
+					if (selectedBil.length < 1) {
+						toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", { id: "forbidden-action" });
+					}
+					else {
+						history.push({
+							pathname: '/multiaccount-payment',
+							state: { payBill: selectedBil }
+						})
+					}
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                swal.fire("Ralat", "Sila hubungi pentadbir sistem!", "error");
+            });
 	}
 
 	useEffect(() => {
