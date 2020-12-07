@@ -430,6 +430,7 @@ function Register(props) {
                 sitekey={captchaToken}
                 onChange={onChange}
               />
+              <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
               <div className="col-span-6 sm:col-span-3 p-2">
                 <Heading
