@@ -321,7 +321,17 @@ function Register(props) {
                               <label for="street_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Kata Laluan</label>
                               <input {...confpassword} type="password" id="conf_password" placeholder="cth: 12345678" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
-
+                            <div className="col-span-6 sm:col-span-3 p-2">
+                              <Heading
+                                  justifyContent="center"
+                                  alignContent="center"
+                                  textAlign="left"
+                                  top={100}
+                                  size={200}
+                                >
+                                  Panjang kata laluan mestilah sekurang-kurangnya lapan (8) aksara, dan mesti terdiri daripada kombinasi huruf dan nombor, atau simbol khas.
+                                </Heading>
+                            </div>
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <Button
                                 type="submit"
@@ -387,7 +397,17 @@ function Register(props) {
                               <label for="street_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Kata Laluan</label>
                               <input {...confpassword} type="password" id="conf_password" placeholder="cth: 12345678" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
-
+                            <div className="col-span-6 sm:col-span-3 p-2">
+                              <Heading
+                                  justifyContent="center"
+                                  alignContent="center"
+                                  textAlign="left"
+                                  top={100}
+                                  size={200}
+                                >
+                                  Panjang kata laluan mestilah sekurang-kurangnya lapan (8) aksara, dan mesti terdiri daripada kombinasi huruf dan nombor, atau simbol khas.
+                                </Heading>
+                            </div>
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <Button
                                 type="submit"
