@@ -20,6 +20,7 @@ function Bill(props) {
 	const [loading, setLoading] = useState(false);
 	const [isNoData, setIsNoData] = useState(false);
 	const { selectedBil, handleUnpaidBil, unpaidBil } = useContext(SelectedBillContext);
+	const [disabled, setDisabled] = useState(false);
 
 	const history = useHistory();
 
