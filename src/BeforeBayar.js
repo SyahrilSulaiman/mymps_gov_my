@@ -187,7 +187,7 @@ export default function SenaraiBil(props) {
                                         >
                                             <Pane>
                                                 <Text fontWeight={600}>Jenis Bil</Text>
-                                                <Heading size={100}>Cukai</Heading>
+                                                <Heading size={100}>Cukai - Cukai Taksiran</Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Nombor Akaun</Text>
@@ -236,7 +236,7 @@ export default function SenaraiBil(props) {
                                             className="cursor-pointer hover:bg-gray-300"
                                         >
                                             <Pane display="grid" gridTemplateColumns="1fr 10px">
-                                                <Heading size={200}>Bil - Lihat Bil</Heading>
+                                                <Heading size={200}>Cetak Bil PDF</Heading>
                                                 <Heading className="mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
                                             </Pane>
                                         </Card>
